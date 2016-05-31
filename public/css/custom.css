@@ -1,4 +1,9 @@
-iframe-resposive {
-  width: 100%    !important;
-  height: auto   !important;
+.iframe-resp {
+  height: auto !important;
+  /* For modern browsers */
+  display: block;
+  min-height: 800px;
+  height: 800px; /*for IE*/
+  width: 100% !important;
+  border: none;
 }
