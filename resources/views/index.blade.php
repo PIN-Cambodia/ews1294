@@ -12,7 +12,7 @@
   </div><!--/.row-->
   <div class="row">
     <div class="col-xs-12 col-md-12 col-lg-12">
-      <iframe src="http://cambodiameteo.com/map?menu=3&lang=en" frameborder="0" allowfullscreen class="iframe-resp" scrolling="no"></iframe>
+      <iframe src="http://cambodiameteo.com/map?menu=3&lang=en" frameborder="0" allowfullscreen class="iframe-resp"></iframe>
     </div>
   </div><!--/.row-->
 

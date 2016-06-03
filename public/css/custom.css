@@ -7,3 +7,45 @@
   width: 100% !important;
   border: none;
 }
+
+.districts  {
+  border:2px;
+  solid #ccc;
+  width:300px;
+  height:500px;
+  overflow-y: scroll;
+}
+.communes {
+  display:block;
+  padding-left: 30px;
+}
+
+.phones  {
+  border:2px;
+  solid #ccc;
+  width:300px;
+  height:300px;
+  overflow-y: scroll;
+}
+
+.topspace {
+  margin-top: 20px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: 1px solid #000;
+  color: white;
+  padding: 8px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button:hover {
+    background-color: #30a5ff; /* Green */
+    color: black;
+}

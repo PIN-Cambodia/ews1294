@@ -4,9 +4,10 @@
       <input type="text" class="form-control" placeholder="Search">
     </div>
   </form> -->
+
   <ul class="nav menu">
-    <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
-    <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li>
+    <li class="<?php if (preg_match("/home/i", Request::url())) echo "active"; else echo "";?>"><a href="home"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
+    <li class="<?php if (preg_match("/soundFile/i", Request::url())) echo "active"; else echo "";?>"><a href="soundFile"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Upload Sound File</a></li>
     <li><a href=""><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> </a></li>
     <li><a href=""><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> </a></li>
     <li><a href=""><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> </a></li>

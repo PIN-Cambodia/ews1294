@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('index');
+});
+
+Route::get('/soundFile', function () {
+    return view('uploadSoundFile');
 });
