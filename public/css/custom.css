@@ -7,3 +7,25 @@
   width: 100% !important;
   border: none;
 }
+.padingtop
+{
+  margin-top: 5px;
+  padding-top: 100px;
+}
+input[type="text"], input[type="email"], input[type="password"]{
+	border: 1px solid #DADADA;
+	color: #000000;
+	height: 50px;
+	outline: 0 none;
+	margin: 2px 2px 2px 2px;
+	width: 100%;
+	font-size: 14px;
+}
+input:focus {
+border: 2px solid #3498DB;
+box-shadow: none;
+}
+select
+{
+	height:37px;
+}
