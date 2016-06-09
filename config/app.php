@@ -39,11 +39,7 @@ return [
     |
     */
 
-<<<<<<< HEAD
     'url' => env('APP_URL', 'http://localhost:8080/ews/public/'),
-=======
-    'url' => env('APP_URL', 'http://localhost:8080/ews/public'),
->>>>>>> f285e55afb1387ed36e8a9396ce878cbac14d4db
 
     /*
     |--------------------------------------------------------------------------

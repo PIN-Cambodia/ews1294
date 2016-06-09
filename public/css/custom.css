@@ -7,7 +7,7 @@
   width: 100% !important;
   border: none;
 }
-<<<<<<< HEAD
+
 .padingtop
 {
   margin-top: 5px;
@@ -29,7 +29,6 @@ box-shadow: none;
 select
 {
 	height:37px;
-=======
 
 .districts  {
   border:2px;
@@ -71,5 +70,4 @@ select
 .button:hover {
     background-color: #30a5ff; /* Green */
     color: black;
->>>>>>> f285e55afb1387ed36e8a9396ce878cbac14d4db
 }
