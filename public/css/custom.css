@@ -7,6 +7,7 @@
   width: 100% !important;
   border: none;
 }
+<<<<<<< HEAD
 .padingtop
 {
   margin-top: 5px;
@@ -28,4 +29,47 @@ box-shadow: none;
 select
 {
 	height:37px;
+=======
+
+.districts  {
+  border:2px;
+  solid #ccc;
+  width:300px;
+  height:500px;
+  overflow-y: scroll;
+}
+.communes {
+  display:block;
+  padding-left: 30px;
+}
+
+.phones  {
+  border:2px;
+  solid #ccc;
+  width:300px;
+  height:300px;
+  overflow-y: scroll;
+}
+
+.topspace {
+  margin-top: 20px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: 1px solid #000;
+  color: white;
+  padding: 8px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button:hover {
+    background-color: #30a5ff; /* Green */
+    color: black;
+>>>>>>> f285e55afb1387ed36e8a9396ce878cbac14d4db
 }
