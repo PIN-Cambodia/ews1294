@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+<!-- @extends('layouts.app') -->
+@extends('layouts.master')
 <!-- Main Content -->
 @section('content')
 <div class="container">

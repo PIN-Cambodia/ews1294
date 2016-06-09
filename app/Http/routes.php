@@ -11,21 +11,13 @@
 |
 */
 
-/*Route::get('/home', function () {
+Route::get('/home', function () {
     return view('index');
 });
-*/
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/register', function () {
-    return view('register');
-});
 
+/* Login, Regiser, Reset password, and Send confirm Email */
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
-
+// Route::get('/home', 'HomeController@index');
 
 Route::get('/soundFile', function () {
     return view('uploadSoundFile');
