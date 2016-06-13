@@ -15,9 +15,16 @@ Route::get('/home', function () {
     return view('index');
 });
 
+
 /* Login, Regiser, Reset password, and Send confirm Email */
-Route::auth();
+Route::get('/login', function () {
+    return view('auth/login');
+});
+// Route::auth();
 // Route::get('/home', 'HomeController@index');
+Route::post('/uauth', 'UserauthController@index');
+
+
 
 Route::get('/soundFile', function () {
     return view('uploadSoundFile');

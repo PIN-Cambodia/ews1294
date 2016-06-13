@@ -1,13 +1,13 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">
+  // Opening a form
+  {{ Form::open(array('route'=>'/uauth', 'method'=>'post'))}}
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-4 padingtop">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading"> Login </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
@@ -56,10 +56,11 @@
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
+    // closing form
+    {{ Form::close() }}
 </div>
 @endsection
