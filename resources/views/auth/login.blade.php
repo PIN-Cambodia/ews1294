@@ -1,28 +1,26 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">
-  // Opening a form
-  {{ Form::open(array('route'=>'/uauth', 'method'=>'post'))}}
+  <!-- Opening a form -->
+  {!! Form::open(array('route' =>'auth.login', 'method'=>'post')) !!}
     <div class="row">
         <div class="col-md-8 col-md-offset-4 padingtop">
             <div class="panel panel-default">
                 <div class="panel-heading"> Login </div>
                 <div class="panel-body">
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                            <label for="username" class="col-md-4 control-label">Username</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}">
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('username'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -60,7 +58,7 @@
             </div>
         </div>
     </div>
-    // closing form
-    {{ Form::close() }}
+    <!-- closing form -->
+    {!! Form::close() !!}
 </div>
 @endsection
