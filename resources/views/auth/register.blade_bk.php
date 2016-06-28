@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
-                        {{ old('name') }}
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -28,6 +28,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -37,7 +38,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">{{ trans('auth.password') }}</label>
+                            <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password">

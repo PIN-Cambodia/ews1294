@@ -16,6 +16,8 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
-    'username' => 'Username',
-    'password' => 'Password',
+    'username' => 'ឈ្មោះ​អ្នក​ប្រើ',
+    'password' => 'ពាក្យ​សម្ងាត់',
+    'email'   => 'អាស័យដ្ឋាន​អ៊ីមែល'
+
 ];

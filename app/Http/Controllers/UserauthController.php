@@ -14,4 +14,12 @@ class UserauthController extends Controller
     dd($request);
     //var_dump($request);
   }
+
+  public function register(Request $request)
+  {
+    // dump the given variable and end execution of the script
+    //dd($request->_token);
+    dd($request);
+    //var_dump($request);
+  }
 }

@@ -19,6 +19,9 @@ Route::get('/home', function () {
 Route::get('/login', function () {
     return view('auth/login');
 });
+Route::get('/register', function () {
+    return view('auth/register');
+});
 // Route::auth();
 // Route::get('/home', 'HomeController@index');
 
@@ -33,6 +36,7 @@ Route::get('/soundFile', function () {
 // Route::post('/uauth', 'UserauthController@loginauth');
 //Route::get('login', ['as' => 'auth.login', 'uses' => 'UserauthController@showLoginForm']);
 Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginauth']);
+Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@register']);
 //Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
 
 // Route::get('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
