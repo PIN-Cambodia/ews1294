@@ -24,9 +24,10 @@ input:focus {
 border: 2px solid #3498DB;
 box-shadow: none;
 }
-select {
+/*select {
 	height:37px;
-}
+  width:50px;
+}*/
 .districts {
   border:2px;
   solid #ccc;
@@ -63,4 +64,7 @@ select {
 .button:hover {
     background-color: #30a5ff; /* Green */
     color: black;
+}
+.form-control {
+    height: auto;
 }
