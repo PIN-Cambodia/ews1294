@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    //'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'development'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +27,8 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    // 'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +41,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:8080/ews/public'),
+    'url' => env('APP_URL', 'http://localhost:8080/ews/public/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +67,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    //'locale' => 'en',
+    'locale' => 'km',
 
     /*
     |--------------------------------------------------------------------------
@@ -156,6 +159,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+        * HTML DOM Elements
+        */
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -201,6 +209,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
