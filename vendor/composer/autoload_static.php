@@ -14,9 +14,9 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -277,6 +277,7 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\UserauthController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserauthController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -2592,6 +2593,7 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'Symfony\\Component\\HttpFoundation\\ApacheRequest' => __DIR__ . '/..' . '/symfony/http-foundation/ApacheRequest.php',
         'Symfony\\Component\\HttpFoundation\\BinaryFileResponse' => __DIR__ . '/..' . '/symfony/http-foundation/BinaryFileResponse.php',
         'Symfony\\Component\\HttpFoundation\\Cookie' => __DIR__ . '/..' . '/symfony/http-foundation/Cookie.php',
+        'Symfony\\Component\\HttpFoundation\\Exception\\ConflictingHeadersException' => __DIR__ . '/..' . '/symfony/http-foundation/Exception/ConflictingHeadersException.php',
         'Symfony\\Component\\HttpFoundation\\ExpressionRequestMatcher' => __DIR__ . '/..' . '/symfony/http-foundation/ExpressionRequestMatcher.php',
         'Symfony\\Component\\HttpFoundation\\FileBag' => __DIR__ . '/..' . '/symfony/http-foundation/FileBag.php',
         'Symfony\\Component\\HttpFoundation\\File\\Exception\\AccessDeniedException' => __DIR__ . '/..' . '/symfony/http-foundation/File/Exception/AccessDeniedException.php',
@@ -2698,6 +2700,7 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'Symfony\\Component\\HttpKernel\\EventListener\\SurrogateListener' => __DIR__ . '/..' . '/symfony/http-kernel/EventListener/SurrogateListener.php',
         'Symfony\\Component\\HttpKernel\\EventListener\\TestSessionListener' => __DIR__ . '/..' . '/symfony/http-kernel/EventListener/TestSessionListener.php',
         'Symfony\\Component\\HttpKernel\\EventListener\\TranslatorListener' => __DIR__ . '/..' . '/symfony/http-kernel/EventListener/TranslatorListener.php',
+        'Symfony\\Component\\HttpKernel\\EventListener\\ValidateRequestListener' => __DIR__ . '/..' . '/symfony/http-kernel/EventListener/ValidateRequestListener.php',
         'Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent' => __DIR__ . '/..' . '/symfony/http-kernel/Event/FilterControllerEvent.php',
         'Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent' => __DIR__ . '/..' . '/symfony/http-kernel/Event/FilterResponseEvent.php',
         'Symfony\\Component\\HttpKernel\\Event\\FinishRequestEvent' => __DIR__ . '/..' . '/symfony/http-kernel/Event/FinishRequestEvent.php',
@@ -2976,7 +2979,7 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'phpDocumentor\\Reflection\\Types\\Static_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Static_.php',
         'phpDocumentor\\Reflection\\Types\\String_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/String_.php',
         'phpDocumentor\\Reflection\\Types\\This' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/This.php',
-        'phpDocumentor\\Reflection\\Types\\Void' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Void.php',
+        'phpDocumentor\\Reflection\\Types\\Void_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Void_.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
