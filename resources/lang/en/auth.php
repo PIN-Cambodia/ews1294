@@ -28,5 +28,14 @@ return [
     'remember_me' => 'Remember Me',
     'forget_password' => 'Forgot Your Password?',
     '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+
 
 ];

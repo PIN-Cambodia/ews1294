@@ -12,29 +12,34 @@ use Illuminate\Http\Request;
 
 class UserauthController extends Controller
 {
+  /*
+  * Login function
+  * @param $resquest : store form value submitted from view
+  */
   public function loginauth(Request $request)
   {
     // dump the given variable and end execution of the script
     //dd($request->_token);
-    if(Auth::attempt(['name'=> $request->username, 'password' => $request->password]))
+    if(!empty($request->remember)) $remember = true;
+    else $remember = false;
+    if(Auth::attempt(['name'=> $request->username, 'password' => $request->password], $remember))
     {
-      echo "auth check <br>";
+      // Check user Role
+
       // redirect to upload sound file page
-      // return redirect()->intended('any url link');
+      return redirect()->intended('soundFile');
     }
     else {
-      echo "else auth check <br>";
       // redirct to the back to the login form
-
+      return redirect()->intended('login');
     }
-
-    //dd($request->username);
-    echo "username= " . $request->username;
-    echo "password= " . $request->password;
-    //var_dump($request);
   }
 
-  public function register(Request $request)
+  /*
+  * Register new user function
+  * @param $resquest : store form value submitted from view
+  */
+  public function registerauth(Request $request)
   {
     // dump the given variable and end execution of the script
     //dd($request->_token);
@@ -55,4 +60,26 @@ class UserauthController extends Controller
     //dd($request);
     //var_dump($request);
   }
+
+  /*
+  * Logout function
+  *
+  */
+  public function logoutauth()
+  {
+    Auth::logout();
+    return redirect()->intended('home');
+  }
+
+  /*
+  * Display users available in system based on user role
+  *
+  */
+  public function userlists()
+  {
+    echo "list of users";
+  }
+
+
+
 }
