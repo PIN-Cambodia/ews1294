@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><span> EWS </span>(Emergency Warning System)</a>
-      <!-- @if(Auth::user()) -->
+      <!-- or if(Auth::user()) -->
       @if(Auth::check())
       <ul class="user-menu">
         <li class="dropdown pull-right">
@@ -40,7 +40,7 @@
         </li>
       </ul>
       @endif
-    </div>
 
+    </div>
   </div><!-- /.container-fluid -->
 </nav>

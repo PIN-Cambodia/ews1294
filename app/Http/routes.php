@@ -26,13 +26,6 @@ Route::get('/extractTargetPhones', function () {
     //var_dump($provinces);
     return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 });
-/* Login, Regiser, Reset password, and Send confirm Email */
-Route::get('/login', function () {
-    return view('auth/login');
-});
-Route::get('/register', function () {
-    return view('auth/register');
-});
 
 Route::get('/soundFile', function () {
     $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
@@ -67,20 +60,36 @@ Route::get('/disNcom', function()
 });
 
 // Login
+Route::get('/login', function () {
+    return view('auth/login');
+});
 Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginauth']);
 
 // Register
+Route::get('/register', function () {
+    return view('auth/register');
+});
 Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerauth']);
 
 // Logout
 Route::get('logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutauth']);
 
-// Logout
-Route::get('allusers', ['as' => 'auth.allusers', 'uses' => 'UserauthController@userlists']);
+// list of userlists
+Route::get('/allusers', function () {
+    return view('users/userlists');
+});
+//Route::get('allusers', ['as' => 'auth.allusers', 'uses' => 'UserauthController@userlists']);
+
+
+
+// Route::get('/soundFile', function () {
+//     $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
+//     //var_dump($provinces);
+//     return view('uploadSoundFile',['provinces' => $provinces]);
+// });
 
 // Route::auth();
 // Route::get('/home', 'HomeController@index');
-
 // Route::get('/uauth', 'UserauthController@index');
 
 // Route::get('/uauth', 'UserauthController@index');
