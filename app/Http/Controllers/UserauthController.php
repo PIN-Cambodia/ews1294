@@ -7,6 +7,8 @@ use Auth;
 /* Calling user model to be used */
 use App\User;
 
+use App\Role;
+
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -45,6 +47,25 @@ class UserauthController extends Controller
     //dd($request->_token);
     //$user_info = User::all();
     //dd($user_info);
+
+    $admin = new Role();
+    $admin->name = 'admin';
+    $admin->display_name = "User Administrator";
+    $admin->description = "User is allowed to manage all functions in system";
+    $admin->save();
+
+    $ncdm = new Role();
+    $ncdm->name = 'NCDM';
+    $ncdm->display_name = "National Committee for Disaster Management";
+    $ncdm->description = "User is allowed to manage users, upload sound file and view report for nationwide provinces";
+    $ncdm->save();
+
+    $pcdm = new Role();
+    $pcdm->name = 'PCDM';
+    $pcdm->display_name = "Provincial Committee for Disaster Management";
+    $pcdm->description = "User is allowed to upload sound file and view report within his/her authorized province";
+    $pcdm->save();
+
 
     /* insert registration data into table users in databaase */
     $new_user = new User;
