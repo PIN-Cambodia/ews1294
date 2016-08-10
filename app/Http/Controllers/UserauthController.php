@@ -48,24 +48,52 @@ class UserauthController extends Controller
     //$user_info = User::all();
     //dd($user_info);
 
-    $admin = new Role();
-    $admin->name = 'admin';
-    $admin->display_name = "User Administrator";
-    $admin->description = "User is allowed to manage all functions in system";
-    $admin->save();
+    /* --- Adding roles --- */
+    // $admin = new Role();
+    // $admin->name = 'admin';
+    // $admin->display_name = "User Administrator";
+    // $admin->description = "User is allowed to manage all functions in system";
+    // $admin->save();
 
-    $ncdm = new Role();
-    $ncdm->name = 'NCDM';
-    $ncdm->display_name = "National Committee for Disaster Management";
-    $ncdm->description = "User is allowed to manage users, upload sound file and view report for nationwide provinces";
-    $ncdm->save();
+    // $ncdm = new Role();
+    // $ncdm->name = 'NCDM';
+    // $ncdm->display_name = "National Committee for Disaster Management";
+    // $ncdm->description = "User is allowed to manage users, upload sound file and view report for nationwide provinces";
+    // $ncdm->save();
 
-    $pcdm = new Role();
-    $pcdm->name = 'PCDM';
-    $pcdm->display_name = "Provincial Committee for Disaster Management";
-    $pcdm->description = "User is allowed to upload sound file and view report within his/her authorized province";
-    $pcdm->save();
+    // $pcdm = new Role();
+    // $pcdm->name = 'PCDM';
+    // $pcdm->display_name = "Provincial Committee for Disaster Management";
+    // $pcdm->description = "User is allowed to upload sound file and view report within his/her authorized province";
+    // $pcdm->save();
+    /* --- End of Adding roles ---  */
 
+    /* --- Adding Permission */
+    $manageAllUser = new Permission();
+    $manageAllUser->name = 'manage-all-users';
+    $manageAllUser->display_name = 'Manage All Users'; // optional
+    $manageAllUser->description  = 'This right is only for Admin User'; // optional
+    $manageAllUser->save();
+
+    $manageAllUser = new Permission();
+    $manageAllUser->name = '';
+    $manageAllUser->display_name = ''; // optional
+    $manageAllUser->description  = ''; // optional
+    $manageAllUser->save();
+
+    $manageAllUser = new Permission();
+    $manageAllUser->name = '';
+    $manageAllUser->display_name = ''; // optional
+    $manageAllUser->description  = ''; // optional
+    $manageAllUser->save();
+
+    $manageAllUser = new Permission();
+    $manageAllUser->name = '';
+    $manageAllUser->display_name = ''; // optional
+    $manageAllUser->description  = ''; // optional
+    $manageAllUser->save();
+
+    /* --- End of Adding Permission --- */
 
     /* insert registration data into table users in databaase */
     $new_user = new User;
