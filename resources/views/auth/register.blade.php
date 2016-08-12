@@ -66,10 +66,16 @@
                         <div class="form-group">
                             <label for="user_role_type" class="col-md-4 control-label">{{ trans('auth.type_of_user_role')}}</label>
                             <div class="col-md-6">
+
                                 <select name="user_role_type" class="form-control">
-                                  <option value="0">{{ trans('auth.select_user_role')}}</option>
-                                  <option value="1"> PCDM </option>
-                                  <option value="2"> NCDM </option>
+                                  @role('admin')
+                                    <option value="0">{{ trans('auth.select_user_role')}}</option>
+                                    <option value="1"> NCDM </option>
+                                    <option value="2"> PCDM </option>
+                                  @endrole
+                                  @role('NCDM')
+                                    <option value="2"> PCDM </option>
+                                  @endrole
                                 </select>
                             </div>
                         </div>

@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 
 use App\Role;
+use App\Permission;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -20,14 +21,10 @@ class UserauthController extends Controller
   */
   public function loginauth(Request $request)
   {
-    // dump the given variable and end execution of the script
-    //dd($request->_token);
     if(!empty($request->remember)) $remember = true;
     else $remember = false;
     if(Auth::attempt(['name'=> $request->username, 'password' => $request->password], $remember))
     {
-      // Check user Role
-
       // redirect to upload sound file page
       return redirect()->intended('soundFile');
     }
@@ -43,71 +40,40 @@ class UserauthController extends Controller
   */
   public function registerauth(Request $request)
   {
-    // dump the given variable and end execution of the script
-    //dd($request->_token);
-    //$user_info = User::all();
-    //dd($user_info);
-
-    /* --- Adding roles --- */
-    // $admin = new Role();
-    // $admin->name = 'admin';
-    // $admin->display_name = "User Administrator";
-    // $admin->description = "User is allowed to manage all functions in system";
-    // $admin->save();
-
-    // $ncdm = new Role();
-    // $ncdm->name = 'NCDM';
-    // $ncdm->display_name = "National Committee for Disaster Management";
-    // $ncdm->description = "User is allowed to manage users, upload sound file and view report for nationwide provinces";
-    // $ncdm->save();
-
-    // $pcdm = new Role();
-    // $pcdm->name = 'PCDM';
-    // $pcdm->display_name = "Provincial Committee for Disaster Management";
-    // $pcdm->description = "User is allowed to upload sound file and view report within his/her authorized province";
-    // $pcdm->save();
-    /* --- End of Adding roles ---  */
-
-    /* --- Adding Permission */
-    $manageAllUser = new Permission();
-    $manageAllUser->name = 'manage-all-users';
-    $manageAllUser->display_name = 'Manage All Users'; // optional
-    $manageAllUser->description  = 'This right is only for Admin User'; // optional
-    $manageAllUser->save();
-
-    $manageAllUser = new Permission();
-    $manageAllUser->name = '';
-    $manageAllUser->display_name = ''; // optional
-    $manageAllUser->description  = ''; // optional
-    $manageAllUser->save();
-
-    $manageAllUser = new Permission();
-    $manageAllUser->name = '';
-    $manageAllUser->display_name = ''; // optional
-    $manageAllUser->description  = ''; // optional
-    $manageAllUser->save();
-
-    $manageAllUser = new Permission();
-    $manageAllUser->name = '';
-    $manageAllUser->display_name = ''; // optional
-    $manageAllUser->description  = ''; // optional
-    $manageAllUser->save();
-
-    /* --- End of Adding Permission --- */
-
     /* insert registration data into table users in databaase */
     $new_user = new User;
     $new_user -> name = $request->name;
     $new_user -> email = $request->email;
     $new_user -> password = Hash::make($request -> password);
-    // $new_user -> created_at = date("Y-m-d H:i:s");
-    // $new_user -> updated_at = date("Y-m-d H:i:s");
     $new_user -> save();
     /* end of insertion */
 
-    dd($new_user);
-    //dd($request);
-    //var_dump($request);
+    /* adding role admin to this register user and
+        set permission to manage all user to this user
+        Role:
+        - NCDM can manage PCDM users and Upload sound file for whole province
+        - PCDM can upload sound file for only his/her authorized province
+    */
+    //$Permission_upload = Permission::where('name','upload-sound-files')->first();
+    $user_role_type = $request->user_role_type;
+    // In case of NCDM user role
+    if($user_role_type==1)
+    {
+      $role_ncdm =  Role::where('name', '=', 'NCDM')->first();
+      $permission_ncdm = Permission::where('name','manage-pcdm-users')->first();
+      $new_user->attachRole($role_ncdm->id);
+      //$role_ncdm->attachPermissions(array($permission_ncdm->id, $Permission_upload->id));
+    }
+    // In case of PCDM user role
+    if($user_role_type==2)
+    {
+      $role_pcdm =  Role::where('name', '=', 'PCDM')->first();
+      $new_user->attachRole($role_pcdm->id);
+    //  $role_pcdm->attachPermission($Permission_upload->id);
+    }
+    //return redirect()->intended('register');
+    //return redirect()->intended('register')->withErrors("Successful register new user");
+    return Redirect::to('register')->with('message', 'Successful register new user');
   }
 
   /*
@@ -126,9 +92,14 @@ class UserauthController extends Controller
   */
   public function userlists()
   {
-    echo "list of users";
+    // echo "list of users";
+    $test = "dsfsdfdsf";
+    // dd($test);
+    return view('usermgmt/userlists')->with('test',$test);
+    // return view('users/userlists', compact($test));
+    // return View::make("users/userlists")->with(array('test'=>$test));
+    // return View::make('users/userlists')->with('reminderGroups' => $test);
   }
-
 
 
 }

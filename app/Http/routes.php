@@ -75,9 +75,7 @@ Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@
 Route::get('logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutauth']);
 
 // list of userlists
-Route::get('/allusers', function () {
-    return view('users/userlists');
-});
+Route::get('allusers', ['as' => 'allusers', 'uses' => 'UserauthController@userlists']);
 //Route::get('allusers', ['as' => 'auth.allusers', 'uses' => 'UserauthController@userlists']);
 
 

@@ -3,6 +3,7 @@
 <div class="container">
   <!-- Opening a form -->
   {!! Form::open(array('route' =>'auth.login', 'method'=>'post')) !!}
+  
     <div class="row">
         <div class="col-md-8 col-md-offset-4 padingtop">
             <div class="panel panel-default">
