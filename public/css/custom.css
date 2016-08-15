@@ -68,3 +68,11 @@ box-shadow: none;
 .form-control {
     height: auto;
 }
+
+.table > thead {
+  border: 1px solid #000;
+}
+
+.table > thead > tr > th {
+  text-align: center;
+}

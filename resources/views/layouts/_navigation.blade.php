@@ -70,6 +70,7 @@
        </a>
     </li>
     @endrole
+    
     <!-- <li class="active"><a href=""><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
     <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li> -->
     <!-- <li><a href=""><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> </a></li> -->

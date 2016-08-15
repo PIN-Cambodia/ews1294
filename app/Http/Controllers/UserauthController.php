@@ -92,13 +92,12 @@ class UserauthController extends Controller
   */
   public function userlists()
   {
-    // echo "list of users";
-    $test = "dsfsdfdsf";
-    // dd($test);
-    return view('usermgmt/userlists')->with('test',$test);
+
+    $all_users = User::where('name', '!=', 'admin')->get();
+    // dd($all_users);
+    return view('usermgmt/userlists',['userlists' => $all_users]);
+    // return view('usermgmt/userlists')->with('all_users',$all_users);
     // return view('users/userlists', compact($test));
-    // return View::make("users/userlists")->with(array('test'=>$test));
-    // return View::make('users/userlists')->with('reminderGroups' => $test);
   }
 
 
