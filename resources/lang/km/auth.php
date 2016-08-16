@@ -15,7 +15,6 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
     'username' => 'ឈ្មោះ​អ្នក​ប្រើ',
     'password' => 'ពាក្យ​សម្ងាត់',
     'confirm_password' => 'បញ្ជាក់​ពាក្យ​សម្ងាត់',
@@ -27,6 +26,19 @@ return [
     'login' => 'ចូល',
     'remember_me' => 'ចងចាំ​ខ្ញុំ',
     'forget_password' => 'ភ្លេច​ពាក្យ​សម្ងាត់របស់​អ្នក?',
+    'loading_await' => 'កំពុងផ្ទុក។ សូមរង់ចាំ...',
+    'user_profile' => 'ប្រវត្តិរូប​​អ្នកប្រើ',
+    'edit' => 'កែប្រែ',
+    'save' => 'រក្សាទុក',
+    'close' => 'បិទ',
+    'delete' => 'លុប',
+    'cancel' => 'បោះបង់',
+    'disable' => 'បិទ',
+    'enable' => 'បើក',
+    'dialog_confirm' => 'ការបញ្ជាក់',
+    'action_confirmation_question' => 'តើអ្នកប្រាកដជាចង់អនុវត្តសកម្មភាពនេះឬ?',
+    'action_confirmation_yes' => 'ចុច "បាទ​/​ចាស" ដើម្បីអនុវត្តសកម្មភាពនេះ។',
+    'action_confirmation_no' => 'ចុច "ចាកចេញ" ដើម្បី​ចាកចេញ​។',
     '' => '',
     '' => '',
     '' => '',
@@ -40,5 +52,11 @@ return [
     '' => '',
     '' => '',
     '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+
 
 ];

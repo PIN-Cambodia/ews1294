@@ -95,7 +95,7 @@ class UserauthController extends Controller
 
     $all_users = User::where('name', '!=', 'admin')->get();
     // dd($all_users);
-    return view('usermgmt/userlists',['userlists' => $all_users]);
+    return view('auth/userlists',['userlists' => $all_users]);
     // return view('usermgmt/userlists')->with('all_users',$all_users);
     // return view('users/userlists', compact($test));
   }
