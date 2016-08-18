@@ -74,8 +74,19 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">{{ trans('auth.user_profile') }}</h4>
         </div>
-        <span id='profile_content'></span>
-
+        <div class="modal-body">
+          <span id='profile_content'></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+            {{ trans('auth.cancel') }}
+          </button>
+          <button type="button" class="btn btn-primary">
+            <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
+            {{ trans('auth.save') }}
+          </button>
+        </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
@@ -131,32 +142,7 @@
   	});
   	return false;
   });
-  /* Save Edited data of a user */
-  $(document).on('click', '#save_user_data', function()
-  {
-    var txt_user_name = $('#txt_user_name').val();
-    var txt_user_email = $('#txt_user_email').val();
-    var btn_val = $(this).attr('name');
-    //$('#modal_user_profile').modal('hide');
-    //alert('save= ' + btn_user_val + " name= " + txt_user_name + " email= " + txt_user_email);
-    $.ajax({
-  		type: "POST",
-  		url: "{{ url('/saveuserdata') }}",
-      data: {_token: token, uid: btn_val, uname: txt_user_name, uemail: txt_user_email},
-  		cache: false,
-  		success: function(result)
-  		{
-        // alert("success= " + result[0].id);
-  			$("#profile_content").html(result).show();
-  			//$('#modal_user_profile').modal('show');
-  		}
-      // error: function() {
-      //   alert('sorry, data cannot be fetch');
-      // }
-  	});
-  	return false;
 
-  });
   /* Enable or Disable a User */
   $(document).on('click', '#enable_disble_user', function()
   {

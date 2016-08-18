@@ -15,7 +15,7 @@
           <div class="panel-heading"> {{ trans('auth.login') }} </div>
           <div class="panel-body">
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                <!-- {{ csrf_field() }} -->
+                {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                     <label for="username" class="col-md-4 control-label">{{ trans('auth.username') }}</label>
                     <div class="col-md-6">

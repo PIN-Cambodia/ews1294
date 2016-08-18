@@ -69,10 +69,13 @@ box-shadow: none;
     height: auto;
 }
 
-.table > thead {
-  border: 1px solid #000;
-}
-
-.table > thead > tr > th {
-  text-align: center;
+.buttonAsLink
+{
+	color:#0CAAD8;
+	font-size: 12pt;
+	font-weight: bold;
+	background-color:transparent;
+	text-decoration: underline;
+	border:0;
+	cursor: pointer;
 }

@@ -63,45 +63,33 @@ Route::get('/disNcom', function()
 Route::get('/login', function () {
     return view('auth/login');
 });
-Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginauth']);
+Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginAuth']);
 
 // Register
 Route::get('/register', function () {
     return view('auth/register');
 });
-Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerauth']);
+Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
 
 // Logout
-Route::get('logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutauth']);
+Route::get('logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutAuth']);
 
-// list of userlists
-Route::get('allusers', ['as' => 'allusers', 'uses' => 'UserauthController@userlists']);
-//Route::get('allusers', ['as' => 'auth.allusers', 'uses' => 'UserauthController@userlists']);
+// list of users
+Route::get('allusers', ['as' => 'allusers', 'uses' => 'UserauthController@userLists']);
+
+// User Profile
+Route::post('userprofile', ['uses' => 'UserauthController@displayUserProfiles']);
+
+// Save Edited User data
+Route::post('saveuserdata', ['uses' => 'UserauthController@saveUserProfile']);
+
+// Enable/Disable User
+Route::post('enabledisable', ['uses' => 'UserauthController@enableDisable']);
+
+// Delete User
+Route::post('deleteuser', ['uses' => 'UserauthController@deleteUser']);
 
 
-
-// Route::get('/soundFile', function () {
-//     $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
-//     //var_dump($provinces);
-//     return view('uploadSoundFile',['provinces' => $provinces]);
-// });
-
-// Route::auth();
-// Route::get('/home', 'HomeController@index');
-// Route::get('/uauth', 'UserauthController@index');
-
-// Route::get('/uauth', 'UserauthController@index');
-// Route::post('/uauth', 'UserauthController@loginauth');
-// Route::get('login', ['as' => 'auth.login', 'uses' => 'UserauthController@showLoginForm']);
-// Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
-
-// Route::get('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
-// Route::post('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']);
-// Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
-
-// Registration Routes...
-// Route::get('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@showRegistrationForm']);
-// Route::post('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
 
 // Password Reset Routes...
 // Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);

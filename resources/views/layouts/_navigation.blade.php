@@ -42,6 +42,7 @@
          Target Phones
        </a>
     </li>
+    @role(['admin','NCDM'])
     <li role="presentation" class="divider"></li>
     <!-- User Management Menu -->
     <li class="<?php if (preg_match("/allusers/i", Request::url())) echo "active"; else echo "";?>">
@@ -50,6 +51,7 @@
          {{ trans('menus.users') }}
       </a>
     </li>
+    @endrole
 
     <li role="presentation" class="divider"></li>
     <!-- Login Menu -->
@@ -70,7 +72,7 @@
        </a>
     </li>
     @endrole
-    
+
     <!-- <li class="active"><a href=""><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
     <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li> -->
     <!-- <li><a href=""><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> </a></li> -->
