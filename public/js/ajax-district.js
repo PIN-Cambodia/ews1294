@@ -1,3 +1,5 @@
+var totalNo = 0;
+
 $('#province').on('change',function(e){
   console.log(e);
   var pro_id = e.target.value;
@@ -6,29 +8,148 @@ $('#province').on('change',function(e){
       $('#divdistricts').empty();
       //alert(data);
       $.each(data, function(index, disObj) {
+        // alert(data.length);
         var CCode2digits = disObj['CCode'];
+        var districtSize = 0;
         if(/^[0-9]*01$/.test(disObj['CCode'])) // Any digits that ending with 01
         {
-          $('#divdistricts').append(CCode2digits+'<input type="checkbox" value="'+ disObj['DCode'] +'"/> <span>'+ disObj['DName_kh'] + '</span><br />');
-          $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ CCode2digits +'<input type="checkbox" value="'+ disObj['CCode'] +'"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
+
+          // $('#divdistricts').append(CCode2digits+'<input type="checkbox" value="'+ disObj['DCode'] + '" id="' + disObj['DCode'] + '" class="district"/> <span>'+ disObj['DName_kh'] + '</span><br />');
+          // $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ CCode2digits +'<input type="checkbox" value="'+ disObj['CCode'] +'" id="' + disObj['CCode'] +'" name=\"' + disObj['CCode']+'\" class="commune"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
+          $('#divdistricts').append('<input type="checkbox" value="'+ disObj['DCode'] + '" id="' + disObj['DCode'] + '" class="district"/> <span>'+ disObj['DName_kh'] + '</span><br />');
+          $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ '<input type="checkbox" value="'+ disObj['CCode'] +'" id="' + disObj['CCode'] +'" name=\"' + disObj['CCode']+'\" class="commune"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
         }
         else
         {
-            $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ CCode2digits +'<input type="checkbox" value="'+ disObj['CCode'] +'"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
+            // $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ CCode2digits +'<input type="checkbox" value="'+ disObj['CCode'] +'" id="'+ disObj['CCode'] +'" name=\"'+ disObj['CCode'] +'\" class="commune"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
+              $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ '<input type="checkbox" value="'+ disObj['CCode'] +'" id="'+ disObj['CCode'] +'" name=\"'+ disObj['CCode'] +'\" class="commune"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
         }
       });
   });
 
-  $.get('http://verboice-cambodia.instedd.org/api/projects/359/reminder_groups.json?id[]=1', function(dataRG)
-  {
-      // alert(districts);
-      $('#rg').empty();
-      $.each(dataRG, function(index, rgeach) {
-        var nameRG = rgeach['name'];
-        $('#rg').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ nameRG + '</span><br />');
-      });
-  });
 });
+
+// onClick on district
+
+
+$(document).on("click",".district",function(e){
+
+  // using AJAX to select count the number of communes under this district.
+    var testThis = document.getElementById(this.id).checked;
+    if(testThis)
+    {
+      $.get('/numberOfcommunes?district_id='+ this.id , function(data)
+      {
+          var district_length = data.length;
+
+          $.each(data, function(index, disObj) {
+            var eachCommune1 = document.getElementById(disObj['CCode']).checked;
+            document.getElementById(disObj['CCode']).checked = true;
+            if(!eachCommune1)
+            {
+              // alert('eachCommune1 is false; TotalNo = '+totalNo);
+              $.get('/numberOfPhones?commune_id='+ disObj['CCode'] , function(NoOfPhoneInThisCommune)
+              {
+                    totalNo = totalNo + NoOfPhoneInThisCommune.length;
+
+                    if (index == district_length - 1) {
+                      $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                    }
+              });
+              //alert('eachCommune1 was not checked; TotalNo = '+totalNo);
+            }
+            else {
+                totalNo = totalNo;
+            }
+          });
+      });
+
+    }
+    // If user un-check this district
+    else {
+      $.get('/numberOfcommunes?district_id='+ this.id , function(data)
+      {
+          var district_length = data.length;
+
+          $.each(data, function(index, disObj) {
+            // For each commune in this district
+              var eachCommune2 = document.getElementById(disObj['CCode']).checked;
+              document.getElementById(disObj['CCode']).checked = false;
+              if(eachCommune2)
+              {
+
+                $.get('/numberOfPhones?commune_id='+ disObj['CCode'] , function(NoOfPhoneInThisCommune)
+                {
+                      totalNo = totalNo - NoOfPhoneInThisCommune.length;
+
+                      if ( index == district_length - 1) {
+                        $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                      }
+                });
+                 //alert('eachCommune1 was checked; TotalNo = '+totalNo);
+              }
+              else {
+                  totalNo = totalNo;
+              }
+              //$('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+
+          });
+      });
+    }
+    //alert('eachCommune1 is false; TotalNo = '+totalNo);
+    // alert('2. TotalNo = '+totalNo);
+    // alert('2A. TotalNo = '+totalNo);
+
+});
+
+// onClick on commnue
+
+$(document).on("click",".commune",function(e){
+  alert('3. TotalNo = '+totalNo);
+  var testThis = document.getElementById(this.id).checked;
+  if(testThis)
+  {
+    $.get('/numberOfPhones?commune_id='+ this.id , function(data)
+    {
+          totalNo = totalNo + data.length;
+          $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+    });
+  }
+  else {
+    $.get('/numberOfPhones?commune_id='+ this.id , function(data)
+    {
+          totalNo = totalNo - data.length;
+          $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+    });
+  }
+  alert('4. TotalNo = '+totalNo);
+});
+
+// onClick on Send
+$(document).on("click",".sendFile",function(e){
+
+  var communes_selected = [];
+
+  $.each($("input[class='commune']:checked"), function(){
+
+      communes_selected.push($(this).val());
+
+  });
+    alert(communes_selected);
+});
+
+
+
+//   $.get('http://verboice-cambodia.instedd.org/api/projects/359/reminder_groups.json?id[]=1', function(dataRG)
+//   {
+//       // alert(districts);
+//       $('#rg').empty();
+//       $.each(dataRG, function(index, rgeach) {
+//         var nameRG = rgeach['name'];
+//         $('#rg').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ nameRG + '</span><br />');
+//       });
+//   });
+// });
 
 // $('#reminderGroup').on('change',function(e){
 //

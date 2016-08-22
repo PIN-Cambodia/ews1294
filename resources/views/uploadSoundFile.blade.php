@@ -3,7 +3,11 @@
 @section('content')
 <!-- Services Section -->
 <section id="services">
-<form>
+  <!-- Opening a form -->
+  @if(Session::has('message'))
+  <p class="alert-danger">{{Session::get('message')}}</p>
+  @endif
+  {!! Form::open(array('route' =>'call.them', 'method'=>'post')) !!}
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <div class="row">
     <ol class="breadcrumb">
@@ -24,6 +28,7 @@
                          <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE_KH }}</option>
                     @endforeach
             </select>
+
         </div>
       </div>
 
@@ -43,16 +48,23 @@
         <div class="col-xs-12 col-md-12 col-lg-12">
           Districts and Communes:
         </div>
-      </div>
 
+      </div>
+        <div class="col-md-12" id="aa"></div><br>
       <div class="row topspace districts">
+
           <div class="col-xs-12 col-md-12 col-lg-12" id="divdistricts">
 
           </div>
+
+          <!-- <input type="checkbox" value="testCHB" class="testDis" id="t">eee<br>
+          <input id="70403" class="commune" type="checkbox" value="70403">
+<span>ស្នាយអញ្ជិត (Snay' Anhchit)</span> -->
+<br>
       </div>
 
       <div class="row topspace rg">
-          <div class="col-xs-12 col-md-12 col-lg-12" id="rg">
+          <div class="col-xs-12 col-md-12 col-lg-12" id="numberOfPhones">
 
           </div>
       </div>
@@ -64,17 +76,21 @@
     <!-- <ol class="breadcrumb"> -->
       <!-- <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li> -->
        <center>
-         <input type="button" name="sendFile" value="Send" class="button">
+         <input type="button" name="sendFile" value="Send" class="button sendFile" id="sendFile">
+         <!-- {{ Form::submit('  Call  ', array('class' => 'button','id'=>'deletebtn', 'onclick' => 'swal(\'Ajax request finished!\');')) }} -->
          <input type="button" name="resetFle" value="Reset" class="button">
        </center>
     <br>
     <!-- </ol> -->
   </div><!--/.row-->
 </div>	<!--/.main-->
-</form>
+<!-- closing form -->
+{!! Form::close() !!}
 </section>
 <meta name="_token" content="{!! csrf_token() !!}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="{{asset('js/ajax-district.js')}}"></script>
+<script src="{{asset('js/sweetalert-master/dist/sweetalert.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
 @endsection

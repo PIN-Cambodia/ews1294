@@ -70,6 +70,34 @@ Route::get('/disNcom', function()
   return Response::json($districs);
 });
 
+//***
+//Get the number of communes under which district.
+//***
+Route::get('/numberOfcommunes', function()
+{
+  $district_id = Input::get('district_id');
+  $districs = DB::table('district')
+  ->join('commune','district.DCode','=','commune.DCode')
+  ->select('district.DCode','DName_kh','CCode','CName_kh','CName_en')->where('district.DCode',$district_id)->where('district.status',1)->get();
+    //var_dump($districs);
+  return Response::json($districs);
+});
+
+//***
+//Get the number of phones in which commune.
+//***
+Route::get('/numberOfPhones', function()
+{
+  $commune_id = Input::get('commune_id');
+  $noOfPhones = DB::table('targetphones')
+  ->select('phone')->where('commune_code',$commune_id)->get();
+  return Response::json($noOfPhones);
+});
+
+//***
+//Make a call to those phone numbers in which commune, district and/or province.
+//***
+Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtrl@callThem']);
 
 // Route::get('/uauth', 'UserauthController@index');
 // Route::post('/uauth', 'UserauthController@loginauth');
