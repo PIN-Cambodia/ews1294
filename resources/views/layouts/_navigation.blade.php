@@ -26,22 +26,22 @@
       </a>
     </li>
     <!-- Get Phones From Call Logs Menu -->
-    <li class="<?php if (preg_match("/getPhonesFromReminderGroup/i", Request::url())) echo "active"; else echo "";?>">
+    <!-- <li class="<?php //if (preg_match("/getPhonesFromReminderGroup/i", Request::url())) echo "active"; else echo "";?>">
       <a href="getPhonesFromReminderGroup">
         <svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use>
         </svg>
          Get Phones From CallLogs
        </a>
-    </li>
+    </li> -->
     <!-- Target Phones Menu -->
-    <li class="<?php if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
+    <!-- <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
         <svg class="glyph stroked table">
           <use xlink:href="#stroked-table"></use>
         </svg>
          Target Phones
        </a>
-    </li>
+    </li> -->
     @role(['admin','NCDM'])
     <li role="presentation" class="divider"></li>
     <!-- User Management Menu -->
