@@ -15,7 +15,6 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
     'username' => 'Username',
     'password' => 'Password',
     'confirm_password' => 'Confirm Password',
@@ -27,6 +26,35 @@ return [
     'login' => 'Login',
     'remember_me' => 'Remember Me',
     'forget_password' => 'Forgot Your Password?',
+    'loading_await' => 'Loading. Please wait ...',
+    'user_profile' => 'User Profile',
+    'edit' => 'Edit',
+    'edit_profile' => 'Edit Profile',
+    'save' => 'Save',
+    'close' => 'Close',
+    'delete' => 'Delete',
+    'cancel' => 'Cancel',
+    'disable' => 'Disable',
+    'enable' => 'Enable',
+    'dialog_confirm' => 'Confirm',
+    'action_confirmation_question' => 'Are you sure to apply this action?',
+    'action_confirmation_yes' => 'Click "Delete" to apply this action.',
+    'action_confirmation_no' => 'Click "Cancel" to exit.',
     '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+
+
 
 ];

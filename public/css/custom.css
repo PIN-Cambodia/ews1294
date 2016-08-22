@@ -68,3 +68,14 @@ box-shadow: none;
 .form-control {
     height: auto;
 }
+
+.buttonAsLink
+{
+	color:#0CAAD8;
+	font-size: 12pt;
+	font-weight: bold;
+	background-color:transparent;
+	text-decoration: underline;
+	border:0;
+	cursor: pointer;
+}

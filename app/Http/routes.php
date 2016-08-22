@@ -26,17 +26,6 @@ Route::get('/extractTargetPhones', function () {
     //var_dump($provinces);
     return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 });
-/* Login, Regiser, Reset password, and Send confirm Email */
-Route::get('/login', function () {
-    return view('auth/login');
-});
-Route::get('/register', function () {
-    return view('auth/register');
-});
-// Route::auth();
-// Route::get('/home', 'HomeController@index');
-
-// Route::get('/uauth', 'UserauthController@index');
 
 Route::get('/soundFile', function () {
     $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
@@ -70,7 +59,6 @@ Route::get('/disNcom', function()
   return Response::json($districs);
 });
 
-//***
 //Get the number of communes under which district.
 //***
 Route::get('/numberOfcommunes', function()
@@ -98,21 +86,37 @@ Route::get('/numberOfPhones', function()
 //Make a call to those phone numbers in which commune, district and/or province.
 //***
 Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtrl@callThem']);
+// Login
+Route::get('/login', function () {
+    return view('auth/login');
+});
+Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginAuth']);
 
-// Route::get('/uauth', 'UserauthController@index');
-// Route::post('/uauth', 'UserauthController@loginauth');
-//Route::get('login', ['as' => 'auth.login', 'uses' => 'UserauthController@showLoginForm']);
-Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginauth']);
-Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@register']);
-//Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
+// Register
+Route::get('/register', function () {
+    return view('auth/register');
+});
+Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
 
-// Route::get('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
-// Route::post('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']);
-// Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
+// Logout
+Route::get('logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutAuth']);
 
-// Registration Routes...
-// Route::get('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@showRegistrationForm']);
-// Route::post('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
+// list of users
+Route::get('allusers', ['as' => 'allusers', 'uses' => 'UserauthController@userLists']);
+
+// User Profile
+Route::post('userprofile', ['uses' => 'UserauthController@displayUserProfiles']);
+
+// Save Edited User data
+Route::post('saveuserdata', ['uses' => 'UserauthController@saveUserProfile']);
+
+// Enable/Disable User
+Route::post('enabledisable', ['uses' => 'UserauthController@enableDisable']);
+
+// Delete User
+Route::post('deleteuser', ['uses' => 'UserauthController@deleteUser']);
+
+
 
 // Password Reset Routes...
 // Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
