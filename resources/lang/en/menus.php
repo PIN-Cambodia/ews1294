@@ -13,7 +13,7 @@ return [
     'profile' => 'Profile',
     'logout' => 'Logout',
     'users' => 'Users',
-    '' => '',
+    'receiving_call_log' => 'Receiving Call Log',
     '' => '',
     '' => '',
     '' => '',

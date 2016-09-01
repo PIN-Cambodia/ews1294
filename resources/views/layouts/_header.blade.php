@@ -20,14 +20,14 @@
              <span class="caret"></span>
            </a>
           <ul class="dropdown-menu" role="menu">
-            <li>
+            <!-- <li>
               <a href="#">
                 <svg class="glyph stroked male-user">
                   <use xlink:href="#stroked-male-user"></use>
                 </svg>
                  {{ trans('menus.profile') }}
                </a>
-            </li>
+            </li> -->
             <li>
               <a href="logout">
                 <svg class="glyph stroked cancel">

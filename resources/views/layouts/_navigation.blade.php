@@ -10,19 +10,14 @@
     <!-- Home Menu -->
     <li class="<?php if (preg_match("/home/i", Request::url())) echo "active"; else echo "";?>">
       <a href="home">
-        <svg class="glyph stroked dashboard-dial">
-          <use xlink:href="#stroked-dashboard-dial"></use>
-        </svg>
-         Home
+        <i class="pe-7s-home pe-lg"></i> Home
        </a>
     </li>
     <!-- Upload Sound File Menu -->
     <li class="<?php if (preg_match("/soundFile/i", Request::url())) echo "active"; else echo "";?>">
       <a href="soundFile">
-        <svg class="glyph stroked calendar">
-          <use xlink:href="#stroked-calendar"></use>
-        </svg>
-         Upload Sound File
+        <i class="pe-7s-cloud-upload pe-lg"></i> Upload Sound File
+
       </a>
     </li>
     <!-- Get Phones From Call Logs Menu -->
@@ -41,13 +36,25 @@
         </svg>
          Target Phones
        </a>
-    </li> -->
+    </li>
+
+   -->
+   @role(['admin','NCDM','PCDM'])
+   <li role="presentation" class="divider"></li>
+   <!-- User Management Menu -->
+   <li class="<?php if (preg_match("/receivingcalllog/i", Request::url())) echo "active"; else echo "";?>">
+     <a href="receivingcalllog">
+       <i class="pe-7s-link pe-lg"></i>
+        {{ trans('menus.receiving_call_log') }}
+     </a>
+   </li>
+   @endrole
     @role(['admin','NCDM'])
     <li role="presentation" class="divider"></li>
     <!-- User Management Menu -->
     <li class="<?php if (preg_match("/allusers/i", Request::url())) echo "active"; else echo "";?>">
       <a href="allusers">
-        <i class="fa fa-users fa-lg" aria-hidden="true"></i>
+        <i class="pe-7s-users pe-lg"></i>
          {{ trans('menus.users') }}
       </a>
     </li>
@@ -57,9 +64,7 @@
     <!-- Login Menu -->
     <li class="<?php if (preg_match("/login/i", Request::url())) echo "active"; else echo "";?>">
       <a href="login">
-        <svg class="glyph stroked male-user">
-          <use xlink:href="#stroked-male-user"></use>
-        </svg>
+        <i class="pe-7s-user pe-lg"></i>
          {{ trans('auth.login') }}
       </a>
     </li>
@@ -67,7 +72,7 @@
     @role(['admin','NCDM'])
     <li class="<?php if (preg_match("/register/i", Request::url())) echo "active"; else echo "";?>">
       <a href="register">
-        <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>
+        <i class="pe-7s-add-user pe-lg"></i>
          {{ trans('auth.register') }}
        </a>
     </li>
