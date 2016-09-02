@@ -40,7 +40,7 @@ return [
     'action_confirmation_question' => 'Are you sure to apply this action?',
     'action_confirmation_yes' => 'Click "Delete" to apply this action.',
     'action_confirmation_no' => 'Click "Cancel" to exit.',
-    '' => '',
+    'reset' => 'Reset Password',
     '' => '',
     '' => '',
     '' => '',

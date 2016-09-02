@@ -40,7 +40,6 @@
                         @endif
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <div class="checkbox">
@@ -50,14 +49,12 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-btn fa-sign-in"></i> {{ trans('auth.login') }}
                         </button>
-
-                        <a class="btn btn-link" href="{{ url('/password/reset') }}">{{ trans('auth.forget_password') }}</a>
+                        <a class="btn btn-link" href="{{ url('/reset') }}">{{ trans('auth.forget_password') }}</a>
                     </div>
                 </div>
               </form>

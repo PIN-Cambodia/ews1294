@@ -89,6 +89,15 @@ class UserauthController extends Controller
   }
 
   /*
+  * Reset password function
+  */
+  public function resetPassword()
+  {
+
+  }
+
+
+  /*
   * Display users available in system based on user role
   */
   public function userLists()
@@ -118,7 +127,7 @@ class UserauthController extends Controller
     $user_profile_data =    "<div class='modal-body'>"
                               . "<input type='text' id='txt_user_name' name='username' value='" . $user_data->name . "' /><br />"
                               . "<input type='text' id='txt_user_email' name='useremail' value='" . $user_data->email . "' /><br />"
-                              . "<button class='btn buttonAsLink'> Change Password </button>"
+                              //. "<button class='btn buttonAsLink'> Change Password </button>"
                             . "</div>"
                             . "<div class='modal-footer'>"
                               . "<button class='btn btn-default' data-dismiss='modal'>
@@ -147,7 +156,7 @@ class UserauthController extends Controller
     $new_user_profile_data =    "<div class='modal-body'>"
                               . "<input type='text' id='txt_user_name' name='username' value='" . $save_user_data->name . "' /><br />"
                               . "<input type='text' id='txt_user_email' name='useremail' value='" . $save_user_data->email . "' /><br />"
-                              . "<button class='btn buttonAsLink'> Change Password </button>"
+                              //. "<button class='btn buttonAsLink'> Change Password </button>"
                             . "</div>"
                             . "<div class='modal-footer'>"
                               . "<button class='btn btn-default' data-dismiss='modal'>

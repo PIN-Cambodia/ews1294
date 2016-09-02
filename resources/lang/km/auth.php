@@ -40,7 +40,7 @@ return [
     'action_confirmation_question' => 'តើ​អ្នក​ប្រាកដ​ជា​ចង់​អនុវត្ត​សកម្មភាព​នេះ​ឬ​?',
     'action_confirmation_yes' => 'ចុច "លុប" ដើម្បីអនុវត្តសកម្មភាពនេះ។',
     'action_confirmation_no' => 'ចុច "បោះបង់" ដើម្បី​ចាកចេញ​។',
-    '' => '',
+    'reset' => 'Reset Password',
     '' => '',
     '' => '',
     '' => '',

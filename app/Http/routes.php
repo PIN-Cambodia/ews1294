@@ -97,6 +97,11 @@ Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginA
 Route::get('/register', function () {
     return view('auth/register');
 });
+// Reset Password
+Route::get('/reset', function () {
+    return view('auth/passwords/reset');
+});
+
 Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
 
 // Logout
@@ -117,6 +122,9 @@ Route::post('enabledisable', ['uses' => 'UserauthController@enableDisable']);
 // Delete User
 Route::post('deleteuser', ['uses' => 'UserauthController@deleteUser']);
 
+// Receiving Call Log API
+// Route::get('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 
 
 // Password Reset Routes...
