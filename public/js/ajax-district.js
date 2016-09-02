@@ -125,18 +125,50 @@ $(document).on("click",".commune",function(e){
   alert('4. TotalNo = '+totalNo);
 });
 
-// onClick on Send
-$(document).on("click",".sendFile",function(e){
 
+$('form#uploadForm').on('submit',function(event){
+  event.preventDefault();
   var communes_selected = [];
-
   $.each($("input[class='commune']:checked"), function(){
-
       communes_selected.push($(this).val());
-
   });
-    alert(communes_selected);
+  //=== To get contacts of selected communes ===//
+  var formData = new FormData($(this)[0]);
+  var phones;
+
+  $.ajax({
+          url: '/phoneNumbersSelectedByCommunes?commune_ids=' + communes_selected,
+          type: 'GET',
+          async: false,
+          success: function(data) {
+              formData.append('api_token','8nPxFavwPScP22vRd403cn5bMEpghkE9pMgtGk2Cq1WV5g43YyOudvEklZCr');
+              formData.append('contacts',data);
+              $.ajax({
+                  url: 'http://303d8e98.ngrok.io/api/v1/processDataUpload',
+                  type: 'POST',
+                  data: formData,
+                  async: false,
+                  success: function(data) {
+                      console.log(data);
+                  },
+                  error: function(e)
+                  {
+                    console.log(e);
+                  },
+                  contentType: false,
+                  processData: false
+              });
+          },
+          error: function(e)
+          {
+            console.log(e);
+          },
+          contentType: false,
+          processData: false
+      });
+  return false;
 });
+
 
 
 
