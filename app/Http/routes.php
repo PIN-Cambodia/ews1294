@@ -123,7 +123,8 @@ Route::post('deleteuser', ['uses' => 'UserauthController@deleteUser']);
 
 // Receiving Call Log API
 // Route::get('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
-Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+// Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+Route::get('receivingcalllog/{json_data}', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 
 
 // Password Reset Routes...

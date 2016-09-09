@@ -19,7 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('is_disable')->default(0)->comment('1=Account is disabled otherwise =0');
             $table->tinyInteger('is_delete')->default(0)->comment('1=Account is deleted otherwise =0');
-            $table->rememberToken();
+            $table->string('api_token', 60);
+            $table->rememberToken();    
             $table->timestamps();
         });
     }
