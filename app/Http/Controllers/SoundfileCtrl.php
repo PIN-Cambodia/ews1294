@@ -13,6 +13,7 @@ use Redirect;
 use App\Role;
 use App\Permission;
 use Illuminate\Support\Facades\Input;
+use Response;
 
 
 // http://blog.damirmiladinov.com/laravel/laravel-5.2-socialite-facebook-login.html#.VxQyc5N96fU
@@ -39,7 +40,7 @@ class SoundfileCtrl extends Controller {
 			$activities->no_of_phones_called = $noOfPhones;
 			$activities->save();
 
-			return view('uploadSoundFile');
+			return $activities->id;
 	}
 
 }
