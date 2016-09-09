@@ -11,13 +11,19 @@
 |
 */
 use Illuminate\Support\Facades\Input;
+// use File;
 
 Route::get('/home', function () {
     return view('index');
 });
 
 // Route::post('getPhonesFromReminderGroup', ['as' => 'phones.insert', 'uses' => 'GetPhonesFromCallLogCtrl@getPhoneCallLog']);
-Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+// Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
+      //  Route::post('/short', 'UrlMapperController@store');
+       Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+   });
 
 Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);
 
@@ -131,3 +137,29 @@ Route::get('receivingcalllog/{json_data}', ['uses' => 'ReceivingCallLogAPIContro
 // Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
 // Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
 // Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
+
+//***
+//Get the phone numbers in which commune(s).
+//***
+Route::get('/phoneNumbersSelectedByCommunes', function()
+{
+    $commune_ids = Input::get('commune_ids');
+    $phoneNumbersInCommunes = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$commune_ids))->get();
+    $data = json_encode($phoneNumbersInCommunes);
+    // $fileName = time() . '_datafile.json';
+    // File::put(public_path($fileName),$data);
+    // return public_path($fileName);
+    //return Response::download(public_path($fileName));
+    return Response::json($data);
+});
+
+//***
+// Insert new activity after sending sound file and contacts.
+//***
+Route::get('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
+//***
+// Display Wiki page of how to use API in EWS system.
+//***
+Route::get('/wiki', function () {
+    return view('apiWiki');
+});

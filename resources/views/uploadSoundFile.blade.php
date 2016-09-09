@@ -7,7 +7,7 @@
   @if(Session::has('message'))
   <p class="alert-danger">{{Session::get('message')}}</p>
   @endif
-  {!! Form::open(array('route' =>'call.them', 'method'=>'post')) !!}
+  {!! Form::open(array('route' =>'call.them', 'method'=>'post','id'=>'uploadForm')) !!}
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <div class="row">
     <ol class="breadcrumb">
@@ -37,7 +37,8 @@
           Sound File:
         </div>
         <div class="col-xs-9 col-md-9 col-lg-9">
-          <input type="file" name="soundFile">
+          <input type="file" name="soundFile" id="soundFile"><br />
+          <!-- <input type="file" name="phoneContactFile" id="phoneContactFile" class="hideContactFile"> -->
         </div>
       </div>
 
@@ -76,7 +77,7 @@
     <!-- <ol class="breadcrumb"> -->
       <!-- <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li> -->
        <center>
-         <input type="button" name="sendFile" value="Send" class="button sendFile" id="sendFile">
+         <input type="submit" name="sendFile" value="Send" class="button sendFile" id="sendFile">
          <!-- {{ Form::submit('  Call  ', array('class' => 'button','id'=>'deletebtn', 'onclick' => 'swal(\'Ajax request finished!\');')) }} -->
          <input type="button" name="resetFle" value="Reset" class="button">
        </center>

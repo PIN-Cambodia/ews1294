@@ -125,18 +125,64 @@ $(document).on("click",".commune",function(e){
   alert('4. TotalNo = '+totalNo);
 });
 
-// onClick on Send
-$(document).on("click",".sendFile",function(e){
 
+$('form#uploadForm').on('submit',function(event){
+  event.preventDefault();
   var communes_selected = [];
-
   $.each($("input[class='commune']:checked"), function(){
-
       communes_selected.push($(this).val());
-
   });
-    alert(communes_selected);
+
+  var formData = new FormData($(this)[0]);
+  var phones;
+  // ** Pass commune codes to get phone numbers ** //
+  $.ajax({
+          url: '/phoneNumbersSelectedByCommunes?commune_ids=' + communes_selected,
+          type: 'GET',
+          async: false,
+          success: function(phones) {
+            // ** Pass commune codes and the number of phone numbers to get activity id ** //
+            $.ajax({
+                 type: "POST",
+                 url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
+                 cache: false,
+                 success: function(activityId)
+                 {
+                    formData.append('api_token','8nPxFavwPScP22vRd403cn5bMEpghkE9pMgtGk2Cq1WV5g43YyOudvEklZCr');
+                    formData.append('contacts',phones);
+                    formData.append('activity_id',activityId);
+                    // ** Trigger calls ** //
+                    $.ajax({
+                        url: 'http://303d8e98.ngrok.io/api/v1/processDataUpload',
+                        type: 'POST',
+                        data: formData,
+                        async: false,
+                        success: function(data) {
+
+                        },
+                        error: function(e)
+                        {
+                          console.log(e);
+                        },
+                        contentType: false,
+                        processData: false
+                    });
+                 },
+                 error: function() {
+                   alert('sorry, new activity cannot be inserted');
+                 }
+              });
+          },
+          error: function(e)
+          {
+            console.log(e);
+          },
+          contentType: false,
+          processData: false
+      });
+  return false;
 });
+
 
 
 

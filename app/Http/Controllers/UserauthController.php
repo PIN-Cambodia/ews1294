@@ -67,7 +67,7 @@ class UserauthController extends Controller
       //$role_ncdm->attachPermissions(array($permission_ncdm->id, $Permission_upload->id));
     }
     // In case of PCDM user role
-    if($user_role_type==2)
+    if($user_role_type == 2)
     {
       $role_pcdm =  Role::where('name', '=', 'PCDM')->first();
       $new_user->attachRole($role_pcdm->id);

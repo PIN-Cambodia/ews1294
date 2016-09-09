@@ -20,7 +20,7 @@ class ReceivingCallLogAPIController extends Controller
 {
   public function callLogAPI($json_data)
   {
-    dd(($json_data));
+    dd(Response::json($json_data));
     // $segments = explode('/', $json_data);
     // dd($segments);
     // return view('auth/register')->with('message', 'Successful register new user');

@@ -78,6 +78,13 @@
     </li>
     @endrole
 
+    <!-- Upload Sound File Menu -->
+    <li class="<?php if (preg_match("/apiWiki/i", Request::url())) echo "active"; else echo "";?>">
+      <a href="wiki">
+        <i class="pe-7s-notebook pe-lg"></i> API Wiki
+      </a>
+    </li>
+
     <!-- <li class="active"><a href=""><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
     <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li> -->
     <!-- <li><a href=""><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> </a></li> -->
