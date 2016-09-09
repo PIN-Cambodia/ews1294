@@ -65,13 +65,29 @@ class GetPhonesFromCallLogCtrl extends Controller {
 			{
 					// INSERT addresses INTO TARGET PHONE TABLE
 					$targetphones = new targetphones;
-					$targetphones->commune_code = $commune;
-					$targetphones->phone = $phone;
-					$res = $targetphones->save();
-					if($res)
-							$res_sms = "Successfully inserted";
-					else
-							$res_sms = "inserted fail";
+					// Query existing phone in given commune
+					// $itemExist = App\Models::where('phone',)
+					$itemExist = $targetphones::select('id')
+											->where('phone',$phone)
+											->where('commune_code',$commune)
+											->first();
+					//dd($itemExist->id);
+					// dd(isset($itemExist));
+					if(!isset($itemExist))
+					{
+						$targetphones->commune_code = $commune;
+						$targetphones->phone = $phone;
+						$res = $targetphones->save();
+						if($res)
+								$res_sms = "Successfully inserted";
+						else
+								$res_sms = "Fail to insert";
+					}
+					else {
+						$res_sms = "This contact in this commune is already exist!";
+					}
+
+
 
 			}
 			else

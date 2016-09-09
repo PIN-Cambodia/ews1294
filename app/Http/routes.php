@@ -18,7 +18,12 @@ Route::get('/home', function () {
 });
 
 // Route::post('getPhonesFromReminderGroup', ['as' => 'phones.insert', 'uses' => 'GetPhonesFromCallLogCtrl@getPhoneCallLog']);
-Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+// Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
+      //  Route::post('/short', 'UrlMapperController@store');
+       Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+   });
 
 Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);
 
@@ -145,4 +150,15 @@ Route::get('/phoneNumbersSelectedByCommunes', function()
     // return public_path($fileName);
     //return Response::download(public_path($fileName));
     return Response::json($data);
+});
+
+//***
+// Insert new activity after sending sound file and contacts.
+//***
+Route::get('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
+//***
+// Display Wiki page of how to use API in EWS system.
+//***
+Route::get('/wiki', function () {
+    return view('apiWiki');
 });
