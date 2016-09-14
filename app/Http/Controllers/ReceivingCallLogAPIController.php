@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Input;
 
 class ReceivingCallLogAPIController extends Controller
 {
-  //public function callLogAPI($json_data)
   public function callLogAPI()
   {
     /* json_decode($json_string, true)
@@ -28,12 +27,19 @@ class ReceivingCallLogAPIController extends Controller
     */
     $parsing_json_data = json_decode(Input::get('clog'), true);
     $call_log = new Calllogs;
-    foreach ($parsing_json_data as $data_key => $data_value)
-    {
-      $call_log -> $data_key = $data_value;
-      $call_log -> save();
-    }
-
+    $call_log -> activity_id = $parsing_json_data['activity_id'];
+    $call_log -> phone_number = $parsing_json_data['phone_number'];
+    $call_log -> result = $parsing_json_data['status'];
+    $call_log -> duration = $parsing_json_data['duration'];
+    $call_log -> no_of_retries = $parsing_json_data['retries'];
+    $call_log -> project_id = $parsing_json_data['project_id'];
+    $call_log -> call_flow_id = $parsing_json_data['call_flow_id'];
+    $call_log -> called_time = $parsing_json_data['called_time'];
+    $call_log -> retry_time = $parsing_json_data['retry_time'];
+    $call_log -> max_retry = $parsing_json_data['max_retry'];
+    $success = $call_log -> save();
+    if(!empty($success)){ return "Success: " . Input::get('clog');}
+    else { return "Error: Data cannot be inserted.";}
   }
 
 }

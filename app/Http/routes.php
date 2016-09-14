@@ -131,9 +131,10 @@ Route::post('deleteuser', ['uses' => 'UserauthController@deleteUser']);
 // Route::get('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 // Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 //Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
+{
   //Route::get('receivingcalllog/{calllog_data}', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
-  Route::get('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+  Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 });
 
 

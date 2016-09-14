@@ -16,8 +16,14 @@ class CreateCalllogsTable extends Migration
             $table->increments('id');
             $table->integer('activity_id')->unsigned();
             $table->string('phone_number')->nullable();
-            $table->string('result')->comment('0:failed; 1:completed; 2:busy; 3:canceled; 4:no-answer');
+            $table->string('result');
+            $table->tinyInteger('duration')->unsigned();
+            $table->tinyInteger('no_of_retries')->unsigned();
+            $table->tinyInteger('project_id')->unsigned();
+            $table->tinyInteger('call_flow_id')->unsigned();
             $table->timestamp('called_time');
+            $table->tinyInteger('retry_time')->unsigned();
+            $table->tinyInteger('max_retry')->unsigned();
         });
     }
 
