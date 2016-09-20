@@ -39,7 +39,7 @@
     </li>
 
    -->
-   @role(['admin','NCDM','PCDM'])
+
    <li role="presentation" class="divider"></li>
    <!-- User Management Menu -->
    <li class="<?php if (preg_match("/receivingcalllog/i", Request::url())) echo "active"; else echo "";?>">
@@ -48,7 +48,7 @@
         {{ trans('menus.receiving_call_log') }}
      </a>
    </li>
-   @endrole
+   
     @role(['admin','NCDM'])
     <li role="presentation" class="divider"></li>
     <!-- User Management Menu -->

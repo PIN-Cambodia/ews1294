@@ -279,8 +279,14 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
 
     public static $classMap = array (
         'CreateActivitiesTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_29_031449_create_activities_table.php',
+        'CreateCallsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_05_033910_create_calls_table.php',
+        'CreateCommuneTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_082536_create_commune_table.php',
+        'CreateDistrictTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_082551_create_district_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateProvinceTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_082543_create_province_table.php',
+        'CreateTargetphonesTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_082604_create_targetphones_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
+        'CreateVillageTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_082613_create_village_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'EntrustSetupTables' => __DIR__ . '/../..' . '/database/migrations/2016_08_08_045713_entrust_setup_tables.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
