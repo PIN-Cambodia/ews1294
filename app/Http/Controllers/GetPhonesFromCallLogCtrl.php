@@ -114,12 +114,14 @@ class GetPhonesFromCallLogCtrl extends Controller {
 				$reminderGroups = "";
 				$request_split = explode("#;",$request->rg_name);
 				//var_dump($request_split);
-				$reminderGroups = \DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->get();
+				$reminderGroups = \DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->where('CCode',$request_split[0])->get();
+
 				foreach ($reminderGroups as $key => $reminderGroup) {
 					# code...
-
+					//var_dump($reminderGroup->CReminderGroup);
 	        for ($i = count($callLogArray) - 1; $i >= 0; $i--) {
-	            if ($callLogArray[$i]['name'] == $reminderGroup) {
+	            // if ($callLogArray[$i]['name'] == $reminderGroup->CReminderGroup) {
+							if ($callLogArray[$i]['name'] == $request_split[1]) {
 	                // $result = json_encode($callLogArray[$i]);
 									// $result = json_encode($callLogArray[$i]['addresses']);
 									$phone = $callLogArray[$i]['addresses'];
@@ -133,6 +135,7 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	            }
 	        }
 			}
+
 				// var_dump($reminderGroups);
 				// $reminderGroupsResult = Response::json($reminderGroups);
 		//return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroupsResult]);

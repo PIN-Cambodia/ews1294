@@ -134,7 +134,7 @@ $('form#uploadForm').on('submit',function(event){
   });
 
   var formData = new FormData($(this)[0]);
-  var phones;
+  //var phones;
   // ** Pass commune codes to get phone numbers ** //
   $.ajax({
           url: '/phoneNumbersSelectedByCommunes?commune_ids=' + communes_selected,
@@ -142,8 +142,9 @@ $('form#uploadForm').on('submit',function(event){
           async: false,
           success: function(phones) {
             // ** Pass commune codes and the number of phone numbers to get activity id ** //
+            console.log(phones.length);
             $.ajax({
-                 type: "POST",
+                 type: "GET",
                  url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
                  cache: false,
                  success: function(activityId)

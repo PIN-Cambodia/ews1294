@@ -17,7 +17,8 @@ Route::get('/home', function () {
     return view('index');
 });
 
-// Route::post('getPhonesFromReminderGroup', ['as' => 'phones.insert', 'uses' => 'GetPhonesFromCallLogCtrl@getPhoneCallLog']);
+Route::post('postPhonesFromReminderGroup', ['as' => 'phones.insert', 'uses' => 'GetPhonesFromCallLogCtrl@getPhoneCallLog']);
+Route::get('getPhonesFromReminderGroup', ['uses' => 'GetPhonesFromCallLogCtrl@getPhoneCallLog']);
 // Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
@@ -144,12 +145,14 @@ Route::get('/phoneNumbersSelectedByCommunes', function()
 {
     $commune_ids = Input::get('commune_ids');
     $phoneNumbersInCommunes = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$commune_ids))->get();
-    $data = json_encode($phoneNumbersInCommunes);
+    // $phoneNumbersInCommunes = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$commune_ids))->count();
+    //$data = json_encode($phoneNumbersInCommunes);
     // $fileName = time() . '_datafile.json';
     // File::put(public_path($fileName),$data);
     // return public_path($fileName);
-    //return Response::download(public_path($fileName));
-    return Response::json($data);
+    // return Response::download(public_path($fileName));
+    //return Response::json($data);
+    return Response::json($phoneNumbersInCommunes);
 });
 
 //***
