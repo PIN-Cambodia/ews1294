@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\targetphones;
 
 class TargetPhonesTableSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class TargetPhonesTableSeeder extends Seeder
       $phones = array("010 567 487", "089 737 630", "012 628 979", "012 959 466", "011 676 331");
       for($i=0;$i<sizeof($phones);$i++)
       {
-        User::create(array(
+        targetphones::create(array(
             'commune_code'     => '150107',
             'phone'    => $phones[$i],
         ));
