@@ -150,10 +150,12 @@ $('form#uploadForm').on('submit',function(event){
                  success: function(activityId)
                  {
                     formData.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                    formData.append('contacts',phones);
+                    // formData.append('contacts',phones);
+                     formData.append('contacts', '[{"phone":"017696365"}]');
+
                     formData.append('activity_id',activityId);
-                    form.append('no_of_retry',3);
-                    form.append('retry_time', 10);
+                    formData.append('no_of_retry',3);
+                    formData.append('retry_time', 10);
 
                     // ** Trigger calls ** //
                     $.ajax({
