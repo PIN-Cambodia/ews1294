@@ -12,8 +12,8 @@ class TargetPhonesTableSeeder extends Seeder
      */
     public function run()
     {
-      //$phones = array("010 567 487", "089 737 630", "012 628 979", "012 959 466", "011 676 331");
-      $phones = array("017 696 365", "012 415 734");
+      $phones = array("010567487", "089737630", "012628979", "012959466", "011676331","017696365","012415734");
+      // $phones = array("017 696 365", "012 415 734");
       for($i=0;$i<sizeof($phones);$i++)
       {
         targetphones::create(array(
