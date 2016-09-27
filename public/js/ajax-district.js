@@ -151,7 +151,7 @@ $('form#uploadForm').on('submit',function(event){
                  {
                     // json_phones =
                     formData.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                    formData.append('contacts',JSON.stringify(phones);
+                    formData.append('contacts',JSON.stringify(phones));
                     // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
                     formData.append('activity_id',activityId);
