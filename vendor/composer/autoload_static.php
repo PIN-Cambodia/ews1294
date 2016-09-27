@@ -279,7 +279,7 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
 
     public static $classMap = array (
         'CreateActivitiesTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_29_031449_create_activities_table.php',
-        'CreateCallsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_05_033910_create_calls_table.php',
+        'CreateCalllogsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_05_033910_create_calllogs_table.php',
         'CreateCommuneTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_082536_create_commune_table.php',
         'CreateDistrictTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_082551_create_district_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
@@ -792,6 +792,7 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'SebastianBergmann\\RecursionContext\\Exception' => __DIR__ . '/..' . '/sebastian/recursion-context/src/Exception.php',
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'TargetPhonesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TargetPhonesTableSeeder.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',

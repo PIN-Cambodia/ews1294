@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreateActivitiesTable' => $baseDir . '/database/migrations/2016_08_29_031449_create_activities_table.php',
-    'CreateCallsTable' => $baseDir . '/database/migrations/2016_09_05_033910_create_calls_table.php',
+    'CreateCalllogsTable' => $baseDir . '/database/migrations/2016_09_05_033910_create_calllogs_table.php',
     'CreateCommuneTable' => $baseDir . '/database/migrations/2016_09_06_082536_create_commune_table.php',
     'CreateDistrictTable' => $baseDir . '/database/migrations/2016_09_06_082551_create_district_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
@@ -520,6 +520,7 @@ return array(
     'SebastianBergmann\\RecursionContext\\Exception' => $vendorDir . '/sebastian/recursion-context/src/Exception.php',
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
+    'TargetPhonesTableSeeder' => $baseDir . '/database/seeds/TargetPhonesTableSeeder.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
