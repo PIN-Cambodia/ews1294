@@ -105,7 +105,7 @@ $(document).on("click",".district",function(e){
 // onClick on commnue
 
 $(document).on("click",".commune",function(e){
-  alert('3. TotalNo = '+totalNo);
+  //alert('3. TotalNo = '+totalNo);
   var testThis = document.getElementById(this.id).checked;
   if(testThis)
   {
@@ -122,7 +122,7 @@ $(document).on("click",".commune",function(e){
           $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
     });
   }
-  alert('4. TotalNo = '+totalNo);
+  //alert('4. TotalNo = '+totalNo);
 });
 
 
