@@ -14,6 +14,7 @@
        </a>
     </li>
     <!-- Upload Sound File Menu -->
+    @role(['admin','NCDM','PCDM'])
     <li class="<?php if (preg_match("/soundFile/i", Request::url())) echo "active"; else echo "";?>">
       <a href="soundFile">
         <i class="pe-7s-cloud-upload pe-lg"></i> Upload Sound File
@@ -28,6 +29,7 @@
          Get Phones From CallLogs
        </a>
     </li>
+      @endrole
     <!-- Target Phones Menu -->
     <!-- <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
@@ -42,7 +44,7 @@
 
    <li role="presentation" class="divider"></li>
    <!-- User Management Menu -->
-  
+
 
     @role(['admin','NCDM'])
     <li role="presentation" class="divider"></li>
