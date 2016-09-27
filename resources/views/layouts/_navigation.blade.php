@@ -42,13 +42,8 @@
 
    <li role="presentation" class="divider"></li>
    <!-- User Management Menu -->
-   <li class="<?php if (preg_match("/receivingcalllog/i", Request::url())) echo "active"; else echo "";?>">
-     <a href="receivingcalllog">
-       <i class="pe-7s-link pe-lg"></i>
-        {{ trans('menus.receiving_call_log') }}
-     </a>
-   </li>
-   
+  
+
     @role(['admin','NCDM'])
     <li role="presentation" class="divider"></li>
     <!-- User Management Menu -->
