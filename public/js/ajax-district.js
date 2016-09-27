@@ -149,12 +149,15 @@ $('form#uploadForm').on('submit',function(event){
                  cache: false,
                  success: function(activityId)
                  {
-                    formData.append('api_token','8nPxFavwPScP22vRd403cn5bMEpghkE9pMgtGk2Cq1WV5g43YyOudvEklZCr');
+                    formData.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
                     formData.append('contacts',phones);
                     formData.append('activity_id',activityId);
+                    form.append('no_of_retry',3);
+                    form.append('retry_time', 10);
+
                     // ** Trigger calls ** //
                     $.ajax({
-                        url: 'http://303d8e98.ngrok.io/api/v1/processDataUpload',
+                        url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
                         type: 'POST',
                         data: formData,
                         async: false,
