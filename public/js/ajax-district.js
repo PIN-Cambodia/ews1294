@@ -149,9 +149,10 @@ $('form#uploadForm').on('submit',function(event){
                  cache: false,
                  success: function(activityId)
                  {
+                    // json_phones =
                     formData.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                    formData.append('contacts',phones);
-                    // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"}]');
+                    // formData.append('contacts',phones);
+                    formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
                     formData.append('activity_id',activityId);
                     formData.append('no_of_retry',3);
