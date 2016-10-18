@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Response;
 // use App\Http\Controllers\Session;
 use Session;
+use Illuminate\Support\Facades\Log;
 
 // http://blog.damirmiladinov.com/laravel/laravel-5.2-socialite-facebook-login.html#.VxQyc5N96fU
 
@@ -102,7 +103,7 @@ class GetPhonesFromCallLogCtrl extends Controller {
 			$test = (Object) Input::all();
 
 
-			Log::info('Object Register', $test);
+			Log::info('Object Register: ' . print_r($test));
 
 			die();
 			$phone = Input::get('phone');
