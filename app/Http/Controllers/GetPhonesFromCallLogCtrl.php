@@ -99,8 +99,16 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	public function registerNewContact()
 	{
 			//var_dump(Input::json());
+			$test = (Object) Input::all();
+
+
+			Log::info('Object Register', $test);
+
+			die();
 			$phone = Input::get('phone');
 			$commune = "010101";
+
+
 			if($phone != "")
 			{
 					// INSERT addresses INTO TARGET PHONE TABLE
@@ -126,8 +134,6 @@ class GetPhonesFromCallLogCtrl extends Controller {
 					else {
 						$res_sms = "This contact in this commune is already exist!";
 					}
-
-
 
 			}
 			else
