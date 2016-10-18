@@ -100,10 +100,10 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	public function registerNewContact()
 	{
 			//var_dump(Input::json());
-			$test = (Object) Input::all();
+			$test = Input::all();
 
 
-			Log::info('Object Register: ' . print_r($test));
+			Log::info('Object Register: ' . Response::json($test));
 
 			die();
 			$phone = Input::get('phone');
