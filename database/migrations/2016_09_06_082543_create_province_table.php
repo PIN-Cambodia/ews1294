@@ -13,12 +13,12 @@ class CreateProvinceTable extends Migration
     public function up()
     {
         Schema::create('province', function (Blueprint $table) {
-            $table->increments('PROCODE', 3);
-            $table->integer('prefix', 10)->unsigned()->nullable(false)->comment('1:Khum-Srok-Khet, 2:Sangkat-Khan-ReachTheany');
-            $table->string('PROVINCE', 20)->nullable();
-            $table->string('PROVINCE_KH', 20)->nullable();
+            $table->increments('PROCODE');
+            $table->integer('prefix')->unsigned()->comment('1:Khum-Srok-Khet, 2:Sangkat-Khan-ReachTheany');
+            $table->string('PROVINCE')->nullable();
+            $table->string('PROVINCE_KH')->nullable();
             $table->text('PReminderGroup')->nullable();
-            $table->integer('CallFlowID',11)->nullable();
+            $table->integer('CallFlowID')->nullable();
         });
     }
 

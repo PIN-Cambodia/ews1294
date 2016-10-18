@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTargetphonesTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,9 @@ class CreateTargetphonesTable extends Migration
      */
     public function up()
     {
-       Schema::create('targetphones', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('commune_code');
-            $table->string('phone')->nullable();
-            $table->timestamp('updated_ate');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token')->index();
             $table->timestamp('created_at');
         });
     }
@@ -28,6 +26,6 @@ class CreateTargetphonesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('targetphones');
+        Schema::drop('password_resets');
     }
 }

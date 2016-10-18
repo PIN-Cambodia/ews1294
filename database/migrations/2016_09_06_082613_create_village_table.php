@@ -13,14 +13,14 @@ class CreateVillageTable extends Migration
     public function up()
     {
         Schema::create('village', function (Blueprint $table) {
-            $table->increments('VCode', 10)->default('0')->comment('Village Code');
-            $table->integer('prefix', 10)->unsigned()->comment('1:Khum-Srok-Khet, 2:Sangkat-Khan-ReachTheany');
-            $table->string('VName_en', 50)->nullable();
-            $table->string('VName_kh', 50)->nullable();
-            $table->integer('CCode',10 )->unsigned()->comment('Commune Code');
+            $table->increments('VCode')->comment('Village Code');
+            $table->integer('prefix')->unsigned()->comment('1:Khum-Srok-Khet, 2:Sangkat-Khan-ReachTheany');
+            $table->string('VName_en')->nullable();
+            $table->string('VName_kh')->nullable();
+            $table->integer('CCode')->unsigned()->comment('Commune Code');
             $table->date('modified_date');
-            $table->integer('modified_by',10)->unsigned();
-            $table->tinyInteger('VStatus',1)->unsigned();
+            $table->integer('modified_by')->unsigned();
+            $table->tinyInteger('VStatus')->unsigned();
         });
     }
 

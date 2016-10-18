@@ -12,14 +12,14 @@ class CreateActivitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('activities', function (Blueprint $table) {
+         Schema::create('activities', function (Blueprint $table) {
             $table->increments('activity_id');
             $table->integer('maunual_auto')->unsigned()->comment('1:Manual; 2:Automatic')->nullable(false);
-            $table->integer('user_id', 10)->unsigned()->nullable(false);
-            $table->text('list_commune_codes')->nullable(false);
-            $table->integer('no_of_phones_called', 11)->nullable(false);
-            $table->tinyInteger('no_of_retry', 1)->nullable(false);
-            $table->tinyInteger('retry_time', 5)->nullable(false);
+            $table->integer('user_id')->unsigned();
+            $table->text('list_commune_codes');
+            $table->integer('no_of_phones_called');
+            $table->tinyInteger('no_of_retry');
+            $table->tinyInteger('retry_time');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });
