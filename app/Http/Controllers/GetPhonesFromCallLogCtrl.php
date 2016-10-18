@@ -57,42 +57,81 @@ class GetPhonesFromCallLogCtrl extends Controller {
     // var_dump($request);
   }
 
+	// public function registerNewContact()
+	// {
+	// 		$phone = Input::get('phone');
+	// 		$commune = Input::get('commune');
+	// 		if($phone != "" && $commune != "")
+	// 		{
+	// 				// INSERT addresses INTO TARGET PHONE TABLE
+	// 				$targetphones = new targetphones;
+	// 				// Query existing phone in given commune
+	// 				// $itemExist = App\Models::where('phone',)
+	// 				$itemExist = $targetphones::select('id')
+	// 										->where('phone',$phone)
+	// 										->where('commune_code',$commune)
+	// 										->first();
+	// 				//dd($itemExist->id);
+	// 				// dd(isset($itemExist));
+	// 				if(!isset($itemExist))
+	// 				{
+	// 					$targetphones->commune_code = $commune;
+	// 					$targetphones->phone = $phone;
+	// 					$res = $targetphones->save();
+	// 					if($res)
+	// 							$res_sms = "Successfully inserted";
+	// 					else
+	// 							$res_sms = "Fail to insert";
+	// 				}
+	// 				else {
+	// 					$res_sms = "This contact in this commune is already exist!";
+	// 				}
+	//
+	//
+	//
+	// 		}
+	// 		else
+	// 				$res_sms = "Fail to insert because some avariables are null.";
+	// 		echo $res_sms;
+	// 		// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
+	// }
+
 	public function registerNewContact()
 	{
 			$phone = Input::get('phone');
-			$commune = Input::get('commune');
-			if($phone != "" && $commune != "")
-			{
-					// INSERT addresses INTO TARGET PHONE TABLE
-					$targetphones = new targetphones;
-					// Query existing phone in given commune
-					// $itemExist = App\Models::where('phone',)
-					$itemExist = $targetphones::select('id')
-											->where('phone',$phone)
-											->where('commune_code',$commune)
-											->first();
-					//dd($itemExist->id);
-					// dd(isset($itemExist));
-					if(!isset($itemExist))
-					{
-						$targetphones->commune_code = $commune;
-						$targetphones->phone = $phone;
-						$res = $targetphones->save();
-						if($res)
-								$res_sms = "Successfully inserted";
-						else
-								$res_sms = "Fail to insert";
-					}
-					else {
-						$res_sms = "This contact in this commune is already exist!";
-					}
-
-
-
-			}
-			else
-					$res_sms = "Fail to insert because some avariables are null.";
-			echo $res_sms;
+			//$commune = "010101";
+			// if($phone != "")
+			// {
+			// 		// INSERT addresses INTO TARGET PHONE TABLE
+			// 		$targetphones = new targetphones;
+			// 		// Query existing phone in given commune
+			// 		// $itemExist = App\Models::where('phone',)
+			// 		$itemExist = $targetphones::select('id')
+			// 								->where('phone',$phone)
+			// 								->where('commune_code',$commune)
+			// 								->first();
+			// 		//dd($itemExist->id);
+			// 		// dd(isset($itemExist));
+			// 		if(!isset($itemExist))
+			// 		{
+			// 			$targetphones->commune_code = $commune;
+			// 			$targetphones->phone = $phone;
+			// 			$res = $targetphones->save();
+			// 			if($res)
+			// 					$res_sms = "Successfully inserted";
+			// 			else
+			// 					$res_sms = "Fail to insert";
+			// 		}
+			// 		else {
+			// 			$res_sms = "This contact in this commune is already exist!";
+			// 		}
+			//
+			//
+			//
+			// }
+			// else
+			// 		$res_sms = "Fail to insert because some avariables are null.";
+			echo $phone;
 			// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 	}
 
