@@ -23,7 +23,8 @@ Route::get('getPhonesFromReminderGroup', ['uses' => 'GetPhonesFromCallLogCtrl@ge
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
       //  Route::post('/short', 'UrlMapperController@store');
-       Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+      // Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+      Route::post('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
    });
 
 Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);

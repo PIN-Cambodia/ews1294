@@ -29,7 +29,7 @@
 
       <div class="row topspace">
         <div class="col-xs-12 col-md-12 col-lg-12">
-          <b>HTTP GET /api/v1/register_new_contact?api_token=&lt;token&gt;&phone=&lt;phone_number&gt;&commune=&lt;commune_code&gt;</b><br />
+          <b>HTTP POST /api/v1/register_new_contact?api_token=&lt;token&gt;&phone=&lt;phone_number&gt;&commune=&lt;commune_code&gt;</b><br />
 
           This API adds new contact into EWS system. When villager calls to EWS number for registration, this API must be called by passing neccessary parameters as the following:<br>
           <b>- api_token</b> : should be requested from EWS Admin. An authorized token should be passed, otherwise this API could not be accessible.<br />
