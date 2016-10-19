@@ -29,7 +29,7 @@
          Get Phones From CallLogs
        </a>
     </li>
-      @endrole
+
     <!-- Target Phones Menu -->
     <!-- <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
@@ -41,13 +41,16 @@
     </li>
 
    -->
-
-   <li role="presentation" class="divider"></li>
-   <!-- User Management Menu -->
-
+      <!-- CallLog Report Menu -->
+      <li class="<?php if (preg_match("/calllogreport/i", Request::url())) echo "active"; else echo "";?>">
+          <a href="calllogreport">
+              <i class="pe-7s-graph2 pe-lg"></i>
+              {{ trans('menus.calllog_report') }}
+          </a>
+      </li>
+      @endrole
 
     @role(['admin','NCDM'])
-    <li role="presentation" class="divider"></li>
     <!-- User Management Menu -->
     <li class="<?php if (preg_match("/allusers/i", Request::url())) echo "active"; else echo "";?>">
       <a href="allusers">
@@ -75,13 +78,14 @@
     </li>
     @endrole
 
+    @role(['admin'])
     <!-- Upload Sound File Menu -->
     <li class="<?php if (preg_match("/apiWiki/i", Request::url())) echo "active"; else echo "";?>">
       <a href="wiki">
         <i class="pe-7s-notebook pe-lg"></i> API Wiki
       </a>
     </li>
-
+    @endrole
     <!-- <li class="active"><a href=""><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
     <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li> -->
     <!-- <li><a href=""><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> </a></li> -->

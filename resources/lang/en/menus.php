@@ -14,6 +14,7 @@ return [
     'logout' => 'Logout',
     'users' => 'Users',
     'receiving_call_log' => 'Receiving Call Log',
+    'calllog_report' => 'CallLog Report',
     '' => '',
     '' => '',
     '' => '',
