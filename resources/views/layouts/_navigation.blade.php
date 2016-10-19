@@ -76,11 +76,13 @@
     @endrole
 
     <!-- Upload Sound File Menu -->
+      @role(['admin'])
     <li class="<?php if (preg_match("/apiWiki/i", Request::url())) echo "active"; else echo "";?>">
       <a href="wiki">
         <i class="pe-7s-notebook pe-lg"></i> API Wiki
       </a>
     </li>
+  @endrole
 
     <!-- <li class="active"><a href=""><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
     <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li> -->

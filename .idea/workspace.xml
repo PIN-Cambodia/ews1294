@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="212ce7c8-7710-4db8-bae4-bf4d481e4300" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php" />
     </list>
     <ignored path="ews.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,8 +36,8 @@
       <file leaf-file-name="GetPhonesFromCallLogCtrl.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
+            <state relative-caret-position="234">
+              <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -62,6 +64,7 @@
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="dbtable:/5e2acc6a/b69298da-93d6-46f0-afd8-c5b6d3583713/ews_dashboard.activities" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php" />
       </list>
     </option>
@@ -121,7 +124,7 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="routes&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/app/Http/routes.php&#10;User&#9;null&#9;null&#10;app.&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/config/app.php" />
+    <property name="SearchEverywhereHistoryKey" value="_navi&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/resources/views/layouts/_navigation.blade.php&#10;routes&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/app/Http/routes.php&#10;User&#9;null&#9;null&#10;app.&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/config/app.php" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
@@ -182,12 +185,12 @@
       <option name="presentableId" value="Default" />
       <updated>1476786978049</updated>
       <workItem from="1476786980133" duration="1791000" />
-      <workItem from="1476843427075" duration="9537000" />
+      <workItem from="1476843427075" duration="10802000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11328000" />
+    <option name="totallyTimeSpent" value="12593000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="853" y="52" width="1064" height="998" extended-state="0" />
@@ -339,10 +342,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="78" column="6" selection-start-line="78" selection-start-column="6" selection-end-line="78" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
+        <state relative-caret-position="234">
+          <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
           <folding />
         </state>
       </provider>
