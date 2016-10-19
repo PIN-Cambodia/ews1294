@@ -97,31 +97,56 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	// 		// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 	// }
 
-	public function registerNewContact()
-	{
-			//var_dump(Input::json());
+    public function registerNewContactTest()
+    {
+        //var_dump(Input::json());
 //			$test = Input::all();
 
 
-			// Log::info('Object Register: ' . Response::json($test));
-			$val_pass = Input::get('values');
-			//Log::info('Values: ' . Response::json($val_pass));
+        // Log::info('Object Register: ' . Response::json($test));
+        //$jsonStr = Input::get('values');
+        //Log::info('Values: ' . Response::json($val_pass));
 //        Log::info('Values: ' . $val_pass);
         // Test fix string of json
-        //$jsonStr = '[{"category": {"base": "0102"}, "node": "271a2112-60b6-456c-9ff0-45ea56fb2135", "time": "2016-10-19T02:39:51.394175Z", "text": "1", "rule_value": "1", "value": "1.00000000", "label": "BanteayMeancheyProvince"}, {"category": {"base": "010202"}, "node": "cff53191-db4e-48fe-8399-5d607481955a", "time": "2016-10-19T02:40:04.841054Z", "text": "2", "rule_value": "2", "value": "2.00000000", "label": "MongkolBoreiDistrict"}]';
-        $category = json_decode($val_pass);
-        foreach($category['category'] as $i => $v)
+        $category = '[{"category": {"base": "0102"}, "node": "271a2112-60b6-456c-9ff0-45ea56fb2135", "time": "2016-10-19T02:39:51.394175Z", "text": "1", "rule_value": "1", "value": "1.00000000", "label": "BanteayMeancheyProvince"}, {"category": {"base": "010202"}, "node": "cff53191-db4e-48fe-8399-5d607481955a", "time": "2016-10-19T02:40:04.841054Z", "text": "2", "rule_value": "2", "value": "2.00000000", "label": "MongkolBoreiDistrict"}]';
+        $cateDecode = json_decode($category);
+        //dd($cateDecode);
+        //echo $cateDecode['category'].'<br/>';
+        $commune_code = "";
+        foreach($cateDecode as $i => $v)
         {
-            Log::info('category: ' . $v);
+//            Log::info('category: ' . $v['category']);
+//            dd($v->category->base);
+
+            if(strlen($v->category->base)==6)
+            {
+                $commune_code = $v->category->base;
+                //echo '1-'.$commune_code.'<br/>';
+                break;
+            }
         }
+        echo '2-'.$commune_code.'<br/>';
 
+    }
 
-        die();
+	public function registerNewContact()
+	{
+			$jsonStr = Input::get('values');
+            $cateDecode = json_decode($jsonStr);
+//			$commune_code = "";
+            foreach($cateDecode as $i => $v)
+            {
+                if(strlen($v->category->base)==6)
+                {
+                    $commune_code = $v->category->base;
+                    break;
+                }
+            }
+
 			$phone = Input::get('phone');
-			$commune = "010101";
 
 
-			if($phone != "")
+			if($phone != "" && $commune_code != "")
 			{
 					// INSERT addresses INTO TARGET PHONE TABLE
 					$targetphones = new targetphones;
@@ -129,13 +154,13 @@ class GetPhonesFromCallLogCtrl extends Controller {
 					// $itemExist = App\Models::where('phone',)
 					$itemExist = $targetphones::select('id')
 											->where('phone',$phone)
-											->where('commune_code',$commune)
+											->where('commune_code',$commune_code)
 											->first();
 					//dd($itemExist->id);
 					// dd(isset($itemExist));
 					if(!isset($itemExist))
 					{
-						$targetphones->commune_code = $commune;
+						$targetphones->commune_code = $commune_code;
 						$targetphones->phone = $phone;
 						$res = $targetphones->save();
 						if($res)
