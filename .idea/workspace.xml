@@ -4,7 +4,6 @@
     <list default="true" id="212ce7c8-7710-4db8-bae4-bf4d481e4300" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php" />
     </list>
     <ignored path="ews.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,8 +35,8 @@
       <file leaf-file-name="GetPhonesFromCallLogCtrl.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
+            <state relative-caret-position="322">
+              <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -84,9 +83,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="853" />
+    <option name="x" value="374" />
     <option name="y" value="52" />
-    <option name="width" value="1064" />
+    <option name="width" value="1543" />
     <option name="height" value="998" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -185,15 +184,15 @@
       <option name="presentableId" value="Default" />
       <updated>1476786978049</updated>
       <workItem from="1476786980133" duration="1791000" />
-      <workItem from="1476843427075" duration="10802000" />
+      <workItem from="1476843427075" duration="12662000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12593000" />
+    <option name="totallyTimeSpent" value="14453000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="853" y="52" width="1064" height="998" extended-state="0" />
+    <frame x="374" y="52" width="1543" height="998" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -352,8 +351,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
+        <state relative-caret-position="322">
+          <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
           <folding />
         </state>
       </provider>
