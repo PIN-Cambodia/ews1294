@@ -27,6 +27,11 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
       Route::post('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
    });
 
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
+     Route::get('/register_new_contact_test', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContactTest']);
+});
+
+
 Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);
 
 Route::get('/extractTargetPhones', function () {
