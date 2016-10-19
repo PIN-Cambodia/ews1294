@@ -109,9 +109,9 @@ class GetPhonesFromCallLogCtrl extends Controller {
 //        Log::info('Values: ' . $val_pass);
         // Test fix string of json
         $category = '[{"category": {"base": "0102"}, "node": "271a2112-60b6-456c-9ff0-45ea56fb2135", "time": "2016-10-19T02:39:51.394175Z", "text": "1", "rule_value": "1", "value": "1.00000000", "label": "BanteayMeancheyProvince"}, {"category": {"base": "010202"}, "node": "cff53191-db4e-48fe-8399-5d607481955a", "time": "2016-10-19T02:40:04.841054Z", "text": "2", "rule_value": "2", "value": "2.00000000", "label": "MongkolBoreiDistrict"}]';
-        echo $category.'<br/>';
-        $category_decode = json_decode($category);
-        echo $category_decode.'<br/>';
+        $cateDecode = json_decode($category,true);
+        echo $cateDecode['category'].'<br/>';
+
 //        foreach($category['category'] as $i => $v)
 //        {
 ////            Log::info('category: ' . $v['category']);
@@ -122,12 +122,10 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	public function registerNewContact()
 	{
 			//var_dump(Input::json());
-//			$test = Input::all();
-
-
-			// Log::info('Object Register: ' . Response::json($test));
-			$jsonStr = Input::get('values');
-			Log::info('Values: ' . Response::json($jsonStr));
+			$test = Input::all();
+            Log::info('Object Register: ' . $test);
+//			$jsonStr = Input::get('values');
+//			Log::info('Values: ' . Response::json($jsonStr));
 //        Log::info('Values: ' . $val_pass);
         // Test fix string of json
 //        $jsonStr = '[{"category": {"base": "0102"}, "node": "271a2112-60b6-456c-9ff0-45ea56fb2135", "time": "2016-10-19T02:39:51.394175Z", "text": "1", "rule_value": "1", "value": "1.00000000", "label": "BanteayMeancheyProvince"}, {"category": {"base": "010202"}, "node": "cff53191-db4e-48fe-8399-5d607481955a", "time": "2016-10-19T02:40:04.841054Z", "text": "2", "rule_value": "2", "value": "2.00000000", "label": "MongkolBoreiDistrict"}]';
