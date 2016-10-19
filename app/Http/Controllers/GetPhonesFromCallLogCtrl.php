@@ -104,12 +104,12 @@ class GetPhonesFromCallLogCtrl extends Controller {
 
 
 			// Log::info('Object Register: ' . Response::json($test));
-//			$val_pass = Input::get('values');
+			$val_pass = Input::get('values');
 			//Log::info('Values: ' . Response::json($val_pass));
 //        Log::info('Values: ' . $val_pass);
         // Test fix string of json
-        $jsonStr = '[{"category": {"base": "0102"}, "node": "271a2112-60b6-456c-9ff0-45ea56fb2135", "time": "2016-10-19T02:39:51.394175Z", "text": "1", "rule_value": "1", "value": "1.00000000", "label": "BanteayMeancheyProvince"}, {"category": {"base": "010202"}, "node": "cff53191-db4e-48fe-8399-5d607481955a", "time": "2016-10-19T02:40:04.841054Z", "text": "2", "rule_value": "2", "value": "2.00000000", "label": "MongkolBoreiDistrict"}]';
-        $category = json_decode($jsonStr);
+        //$jsonStr = '[{"category": {"base": "0102"}, "node": "271a2112-60b6-456c-9ff0-45ea56fb2135", "time": "2016-10-19T02:39:51.394175Z", "text": "1", "rule_value": "1", "value": "1.00000000", "label": "BanteayMeancheyProvince"}, {"category": {"base": "010202"}, "node": "cff53191-db4e-48fe-8399-5d607481955a", "time": "2016-10-19T02:40:04.841054Z", "text": "2", "rule_value": "2", "value": "2.00000000", "label": "MongkolBoreiDistrict"}]';
+        $category = json_decode($val_pass);
         foreach($category['category'] as $i => $v)
         {
             Log::info('category: ' . $v);
