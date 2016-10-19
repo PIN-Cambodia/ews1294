@@ -105,7 +105,8 @@ class GetPhonesFromCallLogCtrl extends Controller {
 
 			// Log::info('Object Register: ' . Response::json($test));
 			$val_pass = Input::get('values');
-			Log::info('Values: ' . Response::json($val_pass));
+			//Log::info('Values: ' . Response::json($val_pass));
+        Log::info('Values: ' . $val_pass);
 			die();
 			$phone = Input::get('phone');
 			$commune = "010101";
