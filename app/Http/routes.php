@@ -135,17 +135,22 @@ Route::post('enabledisable', ['uses' => 'UserauthController@enableDisable']);
 Route::post('deleteuser', ['uses' => 'UserauthController@deleteUser']);
 
 // Receiving Call Log API
-// Route::get('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
-
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 {
     //Route::get('receivingcalllog/{calllog_data}', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
     Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 });
 
+// Sensor API
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
+{
+    Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
+});
+
 // CallLog report
 Route::get('calllogreport', ['uses' => 'CallLogReportController@CallLogReportView']);
 Route::post('getCallLogReport', ['uses' => 'CallLogReportController@getCallLogReport']);
+
 
 
 // Password Reset Routes...

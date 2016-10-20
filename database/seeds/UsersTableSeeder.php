@@ -34,5 +34,17 @@ class UsersTableSeeder extends Seeder
             ));
         }
 
+        // Create authorize api_token user for receiving data from Sensor
+        $check_existing_user_3 =  User::where('name','=', "sensor user")->first();
+        if(!$check_existing_user_3)
+        {
+            User::create(array(
+                'name'     => 'Sensor user',
+                'email'    => 'sensor@oi.org.kh',
+                'password' => Hash::make('S_*/or'),
+                'api_token' => str_random(60),
+            ));
+        }
+
     }
 }
