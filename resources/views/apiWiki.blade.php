@@ -20,7 +20,7 @@
         <div class="col-xs-11 col-md-11 col-lg-11">
           <div class="row topspace">
             <div class="col-xs-12 col-md-12 col-lg-12">
-              <h4>Register New Contact </h4>
+              <h4><b>Register New Contact </b></h4>
             </div>
           </div>
           <div class="row topspace">
@@ -39,15 +39,15 @@
     <!-- Sensor API -->
     <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <h4>Sensor API : for receiving water level data from sensor </h4>
+            <h4><b>Receive data from sensor </b> </h4>
         </div>
         <div class="col-xs-12 col-md-12 col-lg-12">
             <br><b>HTTP POST /api/v1/sensorapi?api_token=&lt;token>&data={"sensorId":integer value,"streamHeight":"value","charging":"value","voltage":"value","timestamp":"value"}</b><br />
-            This API inserts data of each sensor into EWS system. Relevant officers or people in the affected communes will received the call
-            if the stream height value of each sensor reaches the specified warning or emergency level. <br>
+            This API receives data from sensor such as water level, voltage, charging status and timestamp to EWS system. Relevant officers or people in the affected communes will receive the call
+            if the stream height value of the sensor reaches the specified warning or emergency level. <br>
             API requires the following parameters: <br>
-            <b>- api_token</b> : should be requested from EWS Admin. Only authorized token can accessed the API.<br />
-            <b>- data </b> is the sensor information to be sent. This string is in JSON format. <br />
+            <b>- api_token</b> : should be requested from EWS Admin. Only authorized token can access the API.<br />
+            <b>- data </b> : is the sensor data to be sent. This string is in JSON format. <br />
 
 
         </div>
