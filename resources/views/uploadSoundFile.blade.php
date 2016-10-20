@@ -79,7 +79,8 @@
        <center>
          <input type="submit" name="sendFile" value="Send" class="button sendFile" id="sendFile">
          <!-- {{ Form::submit('  Call  ', array('class' => 'button','id'=>'deletebtn', 'onclick' => 'swal(\'Ajax request finished!\');')) }} -->
-         <input type="button" name="resetFle" value="Reset" class="button">
+         {{--<input type="button" name="resetFle" value="Reset" class="button">--}}
+           {{ Form::reset('Reset', ['class' => 'button']) }}
        </center>
     <br>
     <!-- </ol> -->

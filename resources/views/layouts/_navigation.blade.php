@@ -21,7 +21,7 @@
 
       </a>
     </li>
-    <!-- Get Phones From Call Logs Menu -->
+    <!-- Get Phones From Call Logs Menu
     <li class="<?php if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
         <svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use>
@@ -29,6 +29,7 @@
          Get Phones From CallLogs
        </a>
     </li>
+    -->
       @endrole
     <!-- Target Phones Menu -->
     <!-- <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
