@@ -141,12 +141,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
     Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 });
 
-// Sensor API
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
-{
-    Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
-});
-
 // CallLog report
 Route::get('calllogreport', ['uses' => 'CallLogReportController@CallLogReportView']);
 Route::post('getCallLogReport', ['uses' => 'CallLogReportController@getCallLogReport']);
@@ -188,4 +182,12 @@ Route::get('/wiki', function () {
 
 Route::get('/', function () {
    return redirect('/home');
+});
+
+// ------------ Sensor ---------------------------
+// Sensor API
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
+{
+    Route::post('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
+    //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
 });
