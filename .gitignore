@@ -3,6 +3,7 @@
 Homestead.yaml
 Homestead.json
 .env
+.idea/
 composer.phar
 
 
@@ -10,4 +11,4 @@ composer.phar
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-.idea/
+

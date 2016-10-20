@@ -13,6 +13,7 @@ return [
     'profile' => 'ប្រវត្តិ',
     'logout' => 'ចាកចេញ',
     'users' => '​អ្នកប្រើ',
+    'calllog_report' => 'របាយការណ៍ CallLog',
     '' => '',
     '' => '',
     '' => '',

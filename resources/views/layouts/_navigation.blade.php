@@ -22,15 +22,16 @@
       </a>
     </li>
     <!-- Get Phones From Call Logs Menu
-    <li class="<?php if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
+    <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
         <svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use>
         </svg>
          Get Phones From CallLogs
        </a>
     </li>
+
     -->
-      @endrole
+
     <!-- Target Phones Menu -->
     <!-- <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
@@ -41,14 +42,18 @@
        </a>
     </li>
 
-   -->
 
-   <li role="presentation" class="divider"></li>
-   <!-- User Management Menu -->
-
+      <!-- CallLog Report Menu
+      <li class="<?php //if (preg_match("/calllogreport/i", Request::url())) echo "active"; else echo "";?>">
+          <a href="calllogreport">
+              <i class="pe-7s-graph2 pe-lg"></i>
+              {{ trans('menus.calllog_report') }}
+          </a>
+      </li>
+      -->
+      @endrole
 
     @role(['admin','NCDM'])
-    <li role="presentation" class="divider"></li>
     <!-- User Management Menu -->
     <li class="<?php if (preg_match("/allusers/i", Request::url())) echo "active"; else echo "";?>">
       <a href="allusers">
@@ -58,14 +63,15 @@
     </li>
     @endrole
 
-    <li role="presentation" class="divider"></li>
     <!-- Login Menu -->
-    <li class="<?php if (preg_match("/login/i", Request::url())) echo "active"; else echo "";?>">
-      <a href="login">
-        <i class="pe-7s-user pe-lg"></i>
-         {{ trans('auth.login') }}
-      </a>
-    </li>
+      @if(!Auth::user())
+      <li class="<?php if (preg_match("/login/i", Request::url())) echo "active"; else echo "";?>">
+          <a href="login">
+            <i class="pe-7s-user pe-lg"></i>
+             {{ trans('auth.login') }}
+          </a>
+      </li>
+      @endif
     <!-- Register Menu -->
     @role(['admin','NCDM'])
     <li class="<?php if (preg_match("/register/i", Request::url())) echo "active"; else echo "";?>">
@@ -76,14 +82,15 @@
     </li>
     @endrole
 
+    @role(['admin'])
     <!-- Upload Sound File Menu -->
-      @role(['admin'])
-    <li class="<?php if (preg_match("/apiWiki/i", Request::url())) echo "active"; else echo "";?>">
+    <li class="<?php if (preg_match("/wiki/i", Request::url())) echo "active"; else echo "";?>">
       <a href="wiki">
         <i class="pe-7s-notebook pe-lg"></i> API Wiki
       </a>
     </li>
-  @endrole
+    @endrole
+
 
     <!-- <li class="active"><a href=""><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
     <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li> -->
