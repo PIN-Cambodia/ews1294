@@ -191,3 +191,5 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
     Route::post('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
     //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
 });
+
+Route::post('get_authorized_province', ['uses' => 'UserauthController@getAuthorizedProvince']);

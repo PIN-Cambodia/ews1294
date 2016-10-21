@@ -10,6 +10,8 @@ use App\User;
 
 use App\Role;
 use App\Permission;
+use DB;
+
 
 use App\Http\Requests;
 
@@ -37,11 +39,12 @@ class UserauthController extends Controller
   }
 
   /*
-  * Register new user function
+  * Register new user to EWS system function
   * @param $resquest : store form value submitted from view
   */
   public function registerAuth(Request $request)
   {
+     // dd($request);
     /* insert registration data into table users in databaase */
     $new_user = new User;
     $new_user -> name = $request->name;
@@ -69,9 +72,16 @@ class UserauthController extends Controller
     // In case of PCDM user role
     if($user_role_type == 2)
     {
-      $role_pcdm =  Role::where('name', '=', 'PCDM')->first();
-      $new_user->attachRole($role_pcdm->id);
-    //  $role_pcdm->attachPermission($Permission_upload->id);
+        $role_pcdm =  Role::where('name', '=', 'PCDM')->first();
+        $new_user->attachRole($role_pcdm->id);
+
+        // insert province code for which PCDM user is authorized into table user role.
+
+        $add_province_into_role_user = DB::table('role_user')
+                                    -> where('user_id',$new_user->id)
+                                    -> where('role_id',$role_pcdm->id)
+                                    -> update(['province_code' => $request->authorized_province]);
+        //  $role_pcdm->attachPermission($Permission_upload->id);
     }
     //return redirect()->intended('register');
     //return redirect()->intended('register')->withErrors("Successful register new user");
@@ -230,5 +240,51 @@ class UserauthController extends Controller
       ));
     }
   }
+
+    /*
+    * get list of province for PCDM role in Registration view
+    */
+    public function getAuthorizedProvince(Request $request)
+    {
+        //dd($request->input('_token'));
+        $this->checkCsrfTokenFromAjax($request->input('_token'));
+
+        $pro_select_option = "";
+        $province_val= DB::table('province')->select('PROCODE', 'PROVINCE', 'PROVINCE_KH')->get();
+        foreach ($province_val as $province_val)
+        {
+            // if locale=en then
+            //$pro_select_option .= "<option value=" . $province_val->PROCODE . ">" . $province_val->PROVINCE . "</option>";
+
+            // else locale=kh
+            $pro_select_option .= "<option value=" . $province_val->PROCODE . ">" . $province_val->PROVINCE_KH . "</option>";
+        }
+        //dd($pro_select_option);
+        $province_div = "<label for=\"authorized_province\" class=\"col-md-4 control-label\">"
+                            . trans('auth.authorized_province')
+                        . "</label>"
+                        . "<div class=\"col-md-6\" id=\"select_pcdm_authorized_province\">"
+                            . "<select name=\"authorized_province\" class=\"form-control\">"
+                                . "<option value=\"0\">" . trans('auth.select_province') . "</option>"
+                                . $pro_select_option
+                            . "</select>"
+                        . "</div>";
+
+        return $province_div;
+//        $province = province::all();
+//        dd($province);
+
+//            <label for="authorized_province" class="col-md-4 control-label">{{ trans('auth.authorized_province')}}</label>
+//              <div class="col-md-6" id="select_pcdm_authorized_province">
+//                <select name="authorized_province" class="form-control">
+//                      <option value="0">{{ trans('auth.select_province')}}</option>
+//                  </select>
+//              </div>
+//    trans('auth.save')
+
+//        return $province;
+
+
+    }
 
 }

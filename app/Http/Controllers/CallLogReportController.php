@@ -1,10 +1,12 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Auth;
 
 class CallLogReportController extends Controller
 {
@@ -21,7 +23,7 @@ class CallLogReportController extends Controller
 //                -> Where('is_delete', '!=', '1')
 //                -> get();
         }
-        return view('report/calllogreport',['userlists' => $all_users]);
+       // return view('report/calllogreport',['userlists' => $all_users]);
     }
 
     // function to select call report of selected province

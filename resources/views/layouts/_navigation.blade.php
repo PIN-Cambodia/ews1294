@@ -62,12 +62,14 @@
 
     <li role="presentation" class="divider"></li>
     <!-- Login Menu -->
+    @if(!Auth::user())
     <li class="<?php if (preg_match("/login/i", Request::url())) echo "active"; else echo "";?>">
       <a href="login">
         <i class="pe-7s-user pe-lg"></i>
          {{ trans('auth.login') }}
       </a>
     </li>
+    @endif
     <!-- Register Menu -->
     @role(['admin','NCDM'])
     <li class="<?php if (preg_match("/register/i", Request::url())) echo "active"; else echo "";?>">
