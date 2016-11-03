@@ -19,7 +19,7 @@
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                     <label for="username" class="col-md-4 control-label">{{ trans('auth.username') }}</label>
                     <div class="col-md-6">
-                        <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}">
+                        <input id="username" type="text" class="form-control" name="username">
                         @if ($errors->has('username'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('username') }}</strong>
@@ -54,7 +54,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-btn fa-sign-in"></i> {{ trans('auth.login') }}
                         </button>
-                        <a class="btn btn-link" href="{{ url('/reset') }}">{{ trans('auth.forget_password') }}</a>
+                        <a class="btn btn-link" href="{{ url('password.email') }}">{{ trans('auth.forget_password') }}</a>
                     </div>
                 </div>
               </form>

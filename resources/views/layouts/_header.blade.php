@@ -8,6 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><span> EWS </span>(Emergency Warning System)</a>
+
       <!-- or if(Auth::user()) -->
       @if(Auth::check())
       <ul class="user-menu">
@@ -40,6 +41,15 @@
         </li>
       </ul>
       @endif
+      <form class="form-horizontal" role="form" method="POST" action="{{ url('/changelang') }}">
+        {{ csrf_field() }}
+        <!-- Display language flag in contrast of current locale-->
+        @if (App::getLocale()=='km')
+          <ul class="user-menu"><li><button class="btnNoBtnBackground" type="submit" value="en" name="flag_icon"> <img src="/engflag.png"/> </button></li></ul>
+        @else
+          <ul class="user-menu"><li><button class="btnNoBtnBackground" type="submit" value="km" name="flag_icon"> <img src="/kmflag.png"/> </button></li></ul>
+        @endif
+      </form>
 
     </div>
   </div><!-- /.container-fluid -->

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<section id="services">
+<section id="userlist">
   <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
       <ol class="breadcrumb">
@@ -146,8 +146,9 @@
   		cache: false,
   		success: function(result)
   		{
-        // alert("success= " + result[0].id);
+          // alert("success= " + result[0].id);
   			$("#profile_content").html(result).show();
+            location.reload();
   			//$('#modal_user_profile').modal('show');
   		}
       // error: function() {
@@ -169,7 +170,7 @@
     		cache: false,
     		success: function(result)
     		{
-          location.reload();
+                location.reload();
     		}
         // error: function() {
         //   alert('sorry, data cannot be fetch');

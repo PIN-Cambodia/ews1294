@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Hash;
 use Auth;
 use Session;
+use App;
+//use URL;
+use Redirect;
+
 /* Calling user model to be used */
 use App\User;
-
 use App\Role;
 use App\Permission;
 use DB;
-
 
 use App\Http\Requests;
 
@@ -76,16 +78,12 @@ class UserauthController extends Controller
         $new_user->attachRole($role_pcdm->id);
 
         // insert province code for which PCDM user is authorized into table user role.
-
         $add_province_into_role_user = DB::table('role_user')
                                     -> where('user_id',$new_user->id)
                                     -> where('role_id',$role_pcdm->id)
                                     -> update(['province_code' => $request->authorized_province]);
         //  $role_pcdm->attachPermission($Permission_upload->id);
     }
-    //return redirect()->intended('register');
-    //return redirect()->intended('register')->withErrors("Successful register new user");
-    // return Redirect::to('register')->with('message', 'Successful register new user');
     return view('auth/register')->with('message', 'Successful register new user');
   }
 
@@ -253,11 +251,10 @@ class UserauthController extends Controller
         $province_val= DB::table('province')->select('PROCODE', 'PROVINCE', 'PROVINCE_KH')->get();
         foreach ($province_val as $province_val)
         {
-            // if locale=en then
-            //$pro_select_option .= "<option value=" . $province_val->PROCODE . ">" . $province_val->PROVINCE . "</option>";
-
-            // else locale=kh
-            $pro_select_option .= "<option value=" . $province_val->PROCODE . ">" . $province_val->PROVINCE_KH . "</option>";
+            if (App::getLocale()=='km')
+                $pro_select_option .= "<option value=" . $province_val->PROCODE . ">" . $province_val->PROVINCE_KH . "</option>";
+            else
+                $pro_select_option .= "<option value=" . $province_val->PROCODE . ">" . $province_val->PROVINCE . "</option>";
         }
         //dd($pro_select_option);
         $province_div = "<label for=\"authorized_province\" class=\"col-md-4 control-label\">"
@@ -271,20 +268,19 @@ class UserauthController extends Controller
                         . "</div>";
 
         return $province_div;
-//        $province = province::all();
-//        dd($province);
-
-//            <label for="authorized_province" class="col-md-4 control-label">{{ trans('auth.authorized_province')}}</label>
-//              <div class="col-md-6" id="select_pcdm_authorized_province">
-//                <select name="authorized_province" class="form-control">
-//                      <option value="0">{{ trans('auth.select_province')}}</option>
-//                  </select>
-//              </div>
-//    trans('auth.save')
-
-//        return $province;
-
-
     }
+
+    /*
+    * Change Language Locale when flag icon is clicked
+    */
+    public function changeLanguage(Request $request)
+    {
+        // dd(URL::previous());
+        //if($request->flag_icon=='km')
+        //App::setLocale('$request->flag_icon');
+        \Session::put('locale', $request->flag_icon);
+        return Redirect::back();
+    }
+
 
 }

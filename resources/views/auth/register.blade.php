@@ -20,7 +20,7 @@
                   <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                       <label for="name" class="col-md-4 control-label">{{ trans('auth.name') }}</label>
                       <div class="col-md-6">
-                          <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+                          <input id="name" type="text" class="form-control" name="name">
                           @if ($errors->has('name'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('name') }}</strong>
@@ -32,7 +32,7 @@
                   <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                       <label for="email" class="col-md-4 control-label">{{ trans('auth.email') }}</label>
                       <div class="col-md-6">
-                          <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                          <input id="email" type="email" class="form-control" name="email">
                           @if ($errors->has('email'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('email') }}</strong>
@@ -96,7 +96,6 @@
   </div>	<!--/.main-->
 
     <script>
-
         // global csrf token variable
         var token = $('input[name=_token]').val();
 
@@ -108,13 +107,11 @@
         $(document).on('change', '#user_role_type', function()
         {
             var option_value = $("#user_role_type").val();
-
             // if option value is select option or NCDM then hide pcdm authorized province
             if(option_value == 1 || option_value == 0)
             {
                 $("#pcdm_authorized_province").hide();
             }
-
             // if the user is PCDM, then show list of province
             if(option_value == 2)
             {
@@ -128,14 +125,10 @@
                         $("#pcdm_authorized_province").html(result).show();
                     }
                 });
-
-
             }
 
             return false;
         });
-
-
     </script>
 </section>
 @endsection

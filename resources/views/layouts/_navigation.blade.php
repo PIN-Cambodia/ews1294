@@ -10,23 +10,21 @@
     <!-- Home Menu -->
     <li class="<?php if (preg_match("/home/i", Request::url())) echo "active"; else echo "";?>">
       <a href="home">
-        <i class="pe-7s-home pe-lg"></i> Home
+        <i class="pe-7s-home pe-lg"></i> {{ trans('menus.home') }}
        </a>
     </li>
     <!-- Upload Sound File Menu -->
     @role(['admin','NCDM','PCDM'])
     <li class="<?php if (preg_match("/soundFile/i", Request::url())) echo "active"; else echo "";?>">
       <a href="soundFile">
-        <i class="pe-7s-cloud-upload pe-lg"></i> Upload Sound File
-
+        <i class="pe-7s-cloud-upload pe-lg"></i> {{ trans('menus.upload_sound_file') }}
       </a>
     </li>
     <!-- Get Phones From Call Logs Menu -->
     <li class="<?php if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
-        <svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use>
-        </svg>
-         Get Phones From CallLogs
+        <i class="pe-7s-call pe-lg"></i>
+        {{ trans('menus.get_phones_from_call_log') }}
        </a>
     </li>
 
@@ -84,7 +82,7 @@
     <!-- Upload Sound File Menu -->
     <li class="<?php if (preg_match("/apiWiki/i", Request::url())) echo "active"; else echo "";?>">
       <a href="wiki">
-        <i class="pe-7s-notebook pe-lg"></i> API Wiki
+        <i class="pe-7s-notebook pe-lg"></i> {{ trans('menus.api_wiki') }}
       </a>
     </li>
     @endrole
