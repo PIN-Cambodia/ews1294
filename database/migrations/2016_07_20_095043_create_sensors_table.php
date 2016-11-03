@@ -14,6 +14,7 @@ class CreateSensorsTable extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('sensor_id');
             $table->string('location_code');
             $table->text('additional_location_info');
             $table->string('location_coordinates');
