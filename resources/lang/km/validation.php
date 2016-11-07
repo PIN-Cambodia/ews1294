@@ -7,86 +7,86 @@ return [
     | Validation Language Lines
     |--------------------------------------------------------------------------
     |
-    | The following language lines contain the default error messages used by
-    | the validator class. Some of these rules have multiple versions such
-    | as the size rules. Feel free to tweak each of these messages here.
+    |  following language lines contain  default error messages used by
+    |  validator class. Some of se rules have multiple versions such
+    | as  size rules. Feel free to tweak each of se messages here.
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
-    'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
-    'array'                => 'The :attribute must be an array.',
-    'before'               => 'The :attribute must be a date before :date.',
+    'accepted'             => ':attribute ត្រូវ​តែ​បាន​ទទួល​យក។',
+    'active_url'           => ':attribute មិនមែនជា URL ត្រឹមត្រូវ។',
+    'after'                => ':attribute ត្រូវ​តែ​ជា​កាលបរិច្ឆេទ​បន្ទាប់​ពី :date ។',
+    'alpha'                => ':attribute អាច​មាន​តែ​អក្សរ​ប៉ុណ្ណោះ។',
+    'alpha_dash'           => ':attribute អាច​មាន​តែ​អក្សរ លេខ និង​សញ្ញា(-) ប៉ុណ្ណោះ។',
+    'alpha_num'            => ':attribute អាច​មាន​តែ​អក្សរ និង​លេខ​ប៉ុណ្ណោះ។',
+    'array'                => ':attribute ត្រូវ​តែ​អាច​អារេ។',
+    'before'               => ':attribute ត្រូវ​តែ​ជា​កាលបរិច្ឆេទ​មុន :date ។',
     'between'              => [
-        'numeric' => 'The :attribute must be between :min and :max.',
-        'file'    => 'The :attribute must be between :min and :max kilobytes.',
-        'string'  => 'The :attribute must be between :min and :max characters.',
-        'array'   => 'The :attribute must have between :min and :max items.',
+        'numeric' => ':attribute ត្រូវ​តែ​ស្ថិត​ក្នុង​ចន្លោះ :min និង :max ។',
+        'file'    => ':attribute ត្រូវ​តែ​ស្ថិត​ក្នុង​ចន្លោះ :min និង :max គីឡូបៃ។',
+        'string'  => ':attribute ត្រូវ​តែ​ស្ថិត​ក្នុង​ចន្លោះ :min និង :max តួអក្សរ។',
+        'array'   => ':attribute ត្រូវ​តែ​មាន​​ក្នុង​ចន្លោះ :min និង :max ធាតុ។',
     ],
-    'boolean'              => 'The :attribute field must be true or false.',
+    'boolean'              => ':attribute វាល​ត្រូវ​តែ​ពិត ឬ​មិន​ពិត។',
     'confirmed'            => ':attribute មិនដូចគ្នាទេ',
-    'date'                 => 'The :attribute is not a valid date.',
-    'date_format'          => 'The :attribute does not match the format :format.',
-    'different'            => 'The :attribute and :other must be different.',
-    'digits'               => 'The :attribute must be :digits digits.',
-    'digits_between'       => 'The :attribute must be between :min and :max digits.',
-    'distinct'             => 'The :attribute field has a duplicate value.',
-    'email'                => 'The :attribute must be a valid email address.',
-    'exists'               => 'The selected :attribute is invalid.',
-    'filled'               => 'The :attribute field is required.',
-    'image'                => 'The :attribute must be an image.',
-    'in'                   => 'The selected :attribute is invalid.',
-    'in_array'             => 'The :attribute field does not exist in :other.',
-    'integer'              => 'The :attribute must be an integer.',
-    'ip'                   => 'The :attribute must be a valid IP address.',
-    'json'                 => 'The :attribute must be a valid JSON string.',
+    'date'                 => ':attribute មិនមែន​ជា​កាលបរិច្ឆេទ​ត្រឹមត្រូវ​ទេ។',
+    'date_format'          => ':attribute មិន​ដូច​នឹង​ទ្រង់ទ្រាយ :format ទេ។',
+    'different'            => ':attribute និង :or ត្រូវ​តែ​ខុស​គ្នា។',
+    'digits'               => ':attribute ត្រូវ​តែ​មាន :digits ខ្ទង់។',
+    'digits_between'       => ':attribute ត្រូវ​តែ​ស្ថិត​ក្នុង​ចន្លោះ :min និង :max ខ្ទង់។',
+    'distinct'             => ':attribute វាល​មាន​តម្លៃ​ស្ទួន។',
+    'email'                => ':attribute ត្រូវ​តែ​ជា​អាសយដ្ឋាន​អ៊ីមែល​ត្រឹមត្រូវ។',
+    'exists'               => ':attribute ដែលបានជ្រើសរើសមិនត្រឹមត្រូវ។',
+    'filled'               => ':attribute វាល​ដែល​ទាមទារ។',
+    'image'                => ':attribute ត្រូវ​តែ​ជា​រូបភាព។',
+    'in'                   => ':attribute ដែលបានជ្រើសរើសមិន​ត្រឹមត្រូវ។',
+    'in_array'             => ':attribute វា​មិនមាន​ក្នុង :or ។',
+    'integer'              => ':attribute ត្រូវ​តែ​ជា​ចំនួន​គត់។',
+    'ip'                   => ':attribute ត្រូវ​តែ​ជា​អាសយដ្ឋាន IP ត្រឹមត្រូវ។',
+    'json'                 => ':attribute ត្រូវ​តែ​ជា​ឃ្លា JSON ត្រឹមត្រូវ។',
     'max'                  => [
-        'numeric' => 'The :attribute may not be greater than :max.',
-        'file'    => 'The :attribute may not be greater than :max kilobytes.',
-        'string'  => 'The :attribute may not be greater than :max characters.',
-        'array'   => 'The :attribute may not have more than :max items.',
+        'numeric' => ':attribute មិន​អាច​ធំជាង :max ។',
+        'file'    => ':attribute មិន​អាច​ធំជាង :max គីឡូបៃ។',
+        'string'  => ':attribute មិន​អាច​ច្រើន​ជាង :max តួអក្សរ។',
+        'array'   => ':attribute មិន​អាច​មាន​ច្រើន​ជាង :max ធាតុ។',
     ],
-    'mimes'                => 'The :attribute must be a file of type: :values.',
+    'mimes'                => ':attribute ត្រូវ​តែ​ជា​ឯកសារ​ប្រភេទ៖ :values ។',
     'min'                  => [
-        'numeric' => 'The :attribute must be at least :min.',
-        'file'    => 'The :attribute must be at least :min kilobytes.',
-        'string'  => 'The :attribute must be at least :min characters.',
-        'array'   => 'The :attribute must have at least :min items.',
+        'numeric' => ':attribute ត្រូវ​តែ​​តូចជាង :min ។',
+        'file'    => ':attribute ត្រូវ​តែ​តូច​ជាង :min គីឡូបៃ។',
+        'string'  => ':attribute ត្រូវ​តែ​តិចជាង :min តួអក្សរ។',
+        'array'   => ':attribute ត្រូវ​តែ​តិច​ជាង :min ធាតុ។',
     ],
-    'not_in'               => 'The selected :attribute is invalid.',
-    'numeric'              => 'The :attribute must be a number.',
-    'present'              => 'The :attribute field must be present.',
+    'not_in'               => ':attribute ដែលបានជ្រើសរើសមិន​ត្រឹមត្រូវ។',
+    'numeric'              => ':attribute ត្រូវ​តែ​ជា​លេខ។',
+    'present'              => ':attribute ត្រូវ​តែ​មាន​។',
     'regex'                => 'ទម្រង់របស់ :attribute មិនត្រឹមត្រូវទេ',
-    'required'             => ':attribute ​ត្រូវតែ​បញ្ចូល​',
-    'required_if'          => 'The :attribute field is required when :other is :value.',
-    'required_unless'      => 'The :attribute field is required unless :other is in :values.',
-    'required_with'        => 'The :attribute field is required when :values is present.',
-    'required_with_all'    => 'The :attribute field is required when :values is present.',
-    'required_without'     => 'The :attribute field is required when :values is not present.',
-    'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same'                 => 'The :attribute and :other must match.',
+    'required'             => 'វាល​ :attribute ​ត្រូវតែ​បញ្ចូល​',
+    'required_if'          => 'វាល​ :attribute ត្រូ​វបាន​ទាមទារ​នៅ​ពេល :or ជា​តម្លៃ :value ។',
+    'required_unless'      => 'វាល​ :attribute ​ត្រូវ​តែ​បាន​ទាមទារ​លុះត្រា​តែ :or ស្ថិត​ក្នុង :values ។',
+    'required_with'        => 'វាល​ :attribute ​ត្រូវ​បាន​ទាមទារ​នៅ​ពេលមាន :values ។',
+    'required_with_all'    => 'វាល​ :attribute ​ត្រូវ​បាន​ទាមទារ​នៅ​ពេលមាន :values ។',
+    'required_without'     => 'វាល​ :attribute ត្រូវ​បាន​ទាមទារ​នៅ​ពេល​មិនមាន :values ។',
+    'required_without_all' => 'វាល​ :attribute ​ត្រូវ​បាន​ទាមទារ​នៅ​ពេល​មិនមាន :values ។',
+    'same'                 => ':attribute និង :or ត្រូវ​តែ​ដូច​គ្នា។',
     'size'                 => [
-        'numeric' => 'The :attribute must be :size.',
-        'file'    => 'The :attribute must be :size kilobytes.',
-        'string'  => 'The :attribute must be :size characters.',
-        'array'   => 'The :attribute must contain :size items.',
+        'numeric' => ':attribute ត្រូវ​តែ​​ :size ។',
+        'file'    => ':attribute ត្រូវ​តែ :size គីឡូបៃ។',
+        'string'  => ':attribute ត្រូវ​តែ :size តួអក្សរ។',
+        'array'   => ':attribute ត្រូវ​តែ​មាន :size ធាតុ។',
     ],
-    'string'               => 'The :attribute must be a string.',
-    'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'The :attribute has already been taken.',
-    'url'                  => 'The :attribute format is invalid.',
+    'string'               => ':attribute ត្រូវតែ​ជា​ឃ្លា។',
+    'timezone'             => ':attribute ត្រូវ​តែ​ជា​តំបន់​ត្រឹមត្រូវ។',
+    'unique'               => ':attribute ត្រូវ​បាន​យក​រួច​ហើយ។',
+    'url'                  => ':attribute ទ្រង់ទ្រាយ​មិន​ត្រឹមត្រូវ។',
 
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
     |--------------------------------------------------------------------------
     |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
+    | Here you may specify custom validation messages for attributes using
+    | convention "attribute.rule" to name  lines. This makes it quick to
     | specify a specific custom language line for a given attribute rule.
     |
     */
@@ -102,7 +102,7 @@ return [
     | Custom Validation Attributes
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used to swap attribute place-holders
+    |  following language lines are used to swap attribute place-holders
     | with something more reader friendly such as E-Mail Address instead
     | of "email". This simply helps us make messages a little cleaner.
     |

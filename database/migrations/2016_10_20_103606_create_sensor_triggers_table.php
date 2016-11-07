@@ -18,6 +18,7 @@ class CreateSensorTriggersTable extends Migration
             $table->integer('min_level');
             $table->integer('max_level');
             $table->integer('level_warning');
+            $table->integer('level_emergency');
             $table->text('affected_communes')->comment('list of affected communes to be called');
             $table->text('phone_numbers')->comment('(officers) phone numbers to be called for warning level');
             $table->string('sound_file')->comment('Sound file to be displayed');
