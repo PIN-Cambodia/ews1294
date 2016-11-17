@@ -46,6 +46,12 @@ Route::get('/soundFile', function () {
     return view('uploadSoundFile',['provinces' => $provinces]);
 });
 
+Route::get('/sensors', function () {
+    $sensors = DB::table('sensors')->get();
+    //var_dump($provinces); die();
+    return view('sensors',['sensors' => $sensors]);
+});
+
 Route::get('/districts', function()
 {
   $pro_id = Input::get('pro_id');
@@ -207,6 +213,16 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
     //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
 });
 
+// get list of province for PCDM role in Registration view
 Route::post('get_authorized_province', ['middleware' => 'auth','uses' => 'UserauthController@getAuthorizedProvince']);
 // Change Language locale on click of flag icon
 Route::post('changelang', ['uses' => 'UserauthController@changeLanguage']);
+
+// Display Sensor Info by Id
+Route::post('sensor_info', ['uses' => 'Sensor\SensorsController@displaySensorInfoById']);
+// Save Change Sensor Info
+Route::post('save_change_sensor_info', ['uses' => 'Sensor\SensorsController@saveChangeSensorInfo']);
+// Get All Sensors' Info
+Route::get('getSensors', 'Sensor\SensorsController@getSensors');
+// Delete Sensor Info
+Route::post('delete_sensor_info', ['uses' => 'Sensor\SensorsController@deleteSensor']);

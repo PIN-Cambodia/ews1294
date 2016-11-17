@@ -96,13 +96,6 @@ class UserauthController extends Controller
     return redirect()->intended('home');
   }
 
-  /*
-  * Reset password function
-  */
-  public function resetPassword()
-  {
-
-  }
 
 
   /*
@@ -275,9 +268,6 @@ class UserauthController extends Controller
     */
     public function changeLanguage(Request $request)
     {
-        // dd(URL::previous());
-        //if($request->flag_icon=='km')
-        //App::setLocale('$request->flag_icon');
         \Session::put('locale', $request->flag_icon);
         return Redirect::back();
     }

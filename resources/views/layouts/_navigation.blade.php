@@ -20,13 +20,15 @@
         <i class="pe-7s-cloud-upload pe-lg"></i> {{ trans('menus.upload_sound_file') }}
       </a>
     </li>
-    <!-- Get Phones From Call Logs Menu -->
-    <li class="<?php if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
+    <!-- Get Phones From Call Logs Menu
+    <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
         <i class="pe-7s-call pe-lg"></i>
         {{ trans('menus.get_phones_from_call_log') }}
        </a>
     </li>
+
+    -->
 
     <!-- Target Phones Menu -->
     <!-- <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
@@ -38,14 +40,15 @@
        </a>
     </li>
 
-   -->
-      <!-- CallLog Report Menu -->
-      <li class="<?php if (preg_match("/calllogreport/i", Request::url())) echo "active"; else echo "";?>">
+
+      <!-- CallLog Report Menu
+      <li class="<?php //if (preg_match("/calllogreport/i", Request::url())) echo "active"; else echo "";?>">
           <a href="calllogreport">
               <i class="pe-7s-graph2 pe-lg"></i>
               {{ trans('menus.calllog_report') }}
           </a>
       </li>
+      -->
       @endrole
 
     @role(['admin','NCDM'])
@@ -58,7 +61,6 @@
     </li>
     @endrole
 
-    <li role="presentation" class="divider"></li>
     <!-- Login Menu -->
     @if(!Auth::user())
     <li class="<?php if (preg_match("/login/i", Request::url())) echo "active"; else echo "";?>">
@@ -80,7 +82,7 @@
 
     @role(['admin'])
     <!-- Upload Sound File Menu -->
-    <li class="<?php if (preg_match("/apiWiki/i", Request::url())) echo "active"; else echo "";?>">
+    <li class="<?php if (preg_match("/wiki/i", Request::url())) echo "active"; else echo "";?>">
       <a href="wiki">
         <i class="pe-7s-notebook pe-lg"></i> {{ trans('menus.api_wiki') }}
       </a>

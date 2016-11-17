@@ -4,6 +4,7 @@
     <list default="true" id="212ce7c8-7710-4db8-bae4-bf4d481e4300" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/emails/sensoremail.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReceivingCallLogAPIController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReceivingCallLogAPIController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Sensor/ReceivingSensorInfoAPIController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Sensor/ReceivingSensorInfoAPIController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/mail.php" afterPath="$PROJECT_DIR$/config/mail.php" />
@@ -27,6 +28,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mockery/mockery/tests/Mockery/NamedMockTest.php" afterPath="$PROJECT_DIR$/vendor/mockery/mockery/tests/Mockery/NamedMockTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/tests/Monolog/Handler/RavenHandlerTest.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/tests/Monolog/Handler/RavenHandlerTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/XOAuth2Authenticator.php" afterPath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/XOAuth2Authenticator.php" />
+=======
+<<<<<<< HEAD
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
     </list>
     <ignored path="ews.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,14 +55,48 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - @localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="Amazon RDS" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="ews" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="ReceivingSensorInfoAPIController.php" pinned="false" current-in-tab="true">
+=======
+<<<<<<< HEAD
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GetPhonesFromCallLogCtrl.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="170" column="26" selection-start-line="170" selection-start-column="26" selection-end-line="170" selection-end-column="26" />
+              <folding />
+=======
+    <leaf>
+      <file leaf-file-name="ReceivingSensorInfoAPIController.php" pinned="false" current-in-tab="false">
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Sensor/ReceivingSensorInfoAPIController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="484">
@@ -63,10 +104,54 @@
               <folding>
                 <element signature="e#47#83#0#PHP" expanded="true" />
               </folding>
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="ajax-district.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/ajax-district.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
+              <folding>
+                <marker date="1476950805711" expanded="true" signature="1180:1186" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1186:1192" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1192:1198" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1198:1204" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1204:1210" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1787:1793" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1793:1799" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1799:1805" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1805:1811" ph=" " />
+                <marker date="1476950805711" expanded="true" signature="1811:1817" ph=" " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="167" column="5" selection-start-line="167" selection-start-column="5" selection-end-line="167" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="apiWiki.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/apiWiki.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="sensoremail.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/emails/sensoremail.blade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,6 +167,20 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+      <file leaf-file-name="uploadSoundFile.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/uploadSoundFile.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
+=======
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="186" column="17" selection-start-line="186" selection-start-column="17" selection-end-line="186" selection-end-column="17" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
               <folding />
             </state>
           </provider>
@@ -95,6 +194,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CallLogReportController.php" />
         <option value="$PROJECT_DIR$/app/Role_User.php" />
@@ -108,6 +208,20 @@
         <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/uploadSoundFile.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/ReadPhonesFromCallLog.blade.php" />
+=======
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="dbtable:/5e2acc6a/b69298da-93d6-46f0-afd8-c5b6d3583713/ews_dashboard.activities" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/ajax-district.js" />
+        <option value="$PROJECT_DIR$/resources/views/uploadSoundFile.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/apiWiki.blade.php" />
+=======
+        <option value="$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php" />
+        <option value="$PROJECT_DIR$/resources/lang/km/menus.php" />
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
         <option value="$PROJECT_DIR$/resources/lang/en/menus.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/_navigation.blade.php" />
         <option value="$PROJECT_DIR$/resources/lang/km/menus.php" />
@@ -146,6 +260,11 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/config/mail.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Sensor/ReceivingSensorInfoAPIController.php" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       </list>
     </option>
   </component>
@@ -164,10 +283,24 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="65" />
     <option name="y" value="24" />
     <option name="width" value="1855" />
     <option name="height" value="1056" />
+=======
+<<<<<<< HEAD
+    <option name="x" value="437" />
+    <option name="y" value="80" />
+    <option name="width" value="1482" />
+    <option name="height" value="998" />
+=======
+    <option name="x" value="678" />
+    <option name="y" value="55" />
+    <option name="width" value="1242" />
+    <option name="height" value="1000" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -303,7 +436,15 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../TestAuth5_3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///home/phyrum/lampstack-5.6.26-3/apache2/htdocs/ews/config/app.php&#10;User&#9;null&#9;null&#10;app.&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/config/app.php" />
+=======
+<<<<<<< HEAD
+    <property name="SearchEverywhereHistoryKey" value="apiwiki&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/resources/views/apiWiki.blade.php&#10;aj&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/public/js/ajax-district.js&#10;_na&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/resources/views/layouts/_navigation.blade.php&#10;_navi&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/resources/views/layouts/_navigation.blade.php&#10;routes&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/app/Http/routes.php&#10;User&#9;null&#9;null&#10;app.&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/config/app.php" />
+=======
+    <property name="SearchEverywhereHistoryKey" value="User&#9;null&#9;null&#10;app.&#9;FILE&#9;file:///home/samak/lampstack/apache2/htdocs/ews/config/app.php" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
@@ -382,11 +523,16 @@
       <option name="presentableId" value="Default" />
       <updated>1476786978049</updated>
       <workItem from="1476786980133" duration="1791000" />
+<<<<<<< HEAD
+      <workItem from="1476843427075" duration="15247000" />
+      <workItem from="1476930109117" duration="5391000" />
+=======
       <workItem from="1476843427075" duration="2438000" />
       <workItem from="1476848639789" duration="217000" />
       <workItem from="1476849130121" duration="6093000" />
       <workItem from="1476873489045" duration="247000" />
       <workItem from="1476930853725" duration="1073000" />
+<<<<<<< HEAD
       <workItem from="1476931935142" duration="14640000" />
       <workItem from="1477017825752" duration="15506000" />
       <workItem from="1477448888299" duration="14753000" />
@@ -408,10 +554,15 @@
       <workItem from="1478830081910" duration="10887000" />
       <workItem from="1479262403001" duration="841000" />
       <workItem from="1479347844322" duration="6615000" />
+=======
+      <workItem from="1476931935142" duration="11659000" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="189083000" />
   </component>
   <component name="TodoView">
@@ -422,6 +573,26 @@
       <are-packages-shown value="true" />
       <is-autoscroll-to-source value="true" />
     </todo-panel>
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="22429000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="437" y="80" width="1482" height="998" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24582498" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16922006" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23548387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6158257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+    <option name="totallyTimeSpent" value="23518000" />
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
@@ -435,8 +606,14 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.078496404" sideWeight="0.5055118" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29032257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44193548" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.078496404" sideWeight="0.5055118" order="2" side_tool="true" content_ui="tabs" />
+=======
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -510,20 +687,33 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/AuthServiceProvider.php">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
+=======
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_09_06_082536_create_commune_table.php">
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-847">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/CreatesUserProviders.php">
+=======
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_09_06_082543_create_province_table.php">
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-501">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/resources/lang/en/menus.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -532,13 +722,55 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/_header.blade.php">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="30" column="43" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="43" />
+=======
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_09_06_082551_create_district_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ae545724-7615-4af3-b5be-8eebb08c1768/console.sql">
+=======
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_08_08_000000_create_users_table.php">
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
           <caret line="49" column="125" selection-start-line="49" selection-start-column="125" selection-end-line="49" selection-end-column="125" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/resources/lang/en/auth.php">
+=======
+<<<<<<< HEAD
+    <entry file="dbDummy://dbtable:/5e2acc6a/b69298da-93d6-46f0-afd8-c5b6d3583713/ews_dashboard.village">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/5e2acc6a/b69298da-93d6-46f0-afd8-c5b6d3583713/ews_dashboard.activities">
+      <provider editor-type-id="text-editor">
+=======
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_08_08_045713_entrust_setup_tables.php">
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
           <caret line="42" column="54" selection-start-line="42" selection-start-column="54" selection-end-line="42" selection-end-column="54" />
@@ -547,8 +779,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/lang/en/passwords.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="360">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+=======
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -559,7 +803,27 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/resources/lang/en/pagination.php">
+=======
+<<<<<<< HEAD
+    <entry file="dbDummy://dbtable:/5e2acc6a/ae545724-7615-4af3-b5be-8eebb08c1768/db_ews.users">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/5e2acc6a/ae545724-7615-4af3-b5be-8eebb08c1768/db_ews.village">
+      <provider editor-type-id="text-editor">
+=======
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_09_05_033910_create_calllogs_table.php">
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="35" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="35" />
@@ -568,10 +832,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/lang/km/passwords.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="342">
           <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
+=======
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
         </state>
       </provider>
+<<<<<<< HEAD
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="VCode LIKE '2%'" />
+            <filter text="VCode LIKE '32%'" />
+          </filtering>
+        </state>
+      </provider>
+=======
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserauthController.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -586,6 +867,7 @@
           <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
         </state>
       </provider>
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/lang/km/validation_bk.php" />
     <entry file="file://$PROJECT_DIR$/resources/lang/km/validation.php">
@@ -623,10 +905,30 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/bootstrap/app.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+    <entry file="dbDummy://dbtable:/5e2acc6a/b69298da-93d6-46f0-afd8-c5b6d3583713/ews_dashboard.targetphones">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="172" column="41" selection-start-line="172" selection-start-column="41" selection-end-line="172" selection-end-column="41" />
+          <folding />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
         </state>
       </provider>
     </entry>
@@ -640,9 +942,18 @@
     <entry file="file://$PROJECT_DIR$/storage/logs/sensorlog.log" />
     <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="252">
           <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="342">
+          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+=======
+        <state relative-caret-position="270">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
         </state>
       </provider>
     </entry>
@@ -687,12 +998,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="396">
           <caret line="88" column="127" selection-start-line="88" selection-start-column="127" selection-end-line="88" selection-end-column="127" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/Core_c.php">
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/public/js/ajax-district.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
+          <folding>
+            <marker date="1476950805711" expanded="true" signature="1180:1186" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1186:1192" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1192:1198" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1198:1204" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1204:1210" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1787:1793" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1793:1799" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1799:1805" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1805:1811" ph=" " />
+            <marker date="1476950805711" expanded="true" signature="1811:1817" ph=" " />
+=======
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_09_06_082613_create_village_table.php">
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5238">
           <caret line="253" column="6" selection-start-line="253" selection-start-column="6" selection-end-line="253" selection-end-column="6" />
@@ -843,6 +1182,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/sensoremail.blade.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="108">
           <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
           <folding />
@@ -853,6 +1193,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state relative-caret-position="540">
+          <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+          <folding>
+            <element signature="e#47#75#0#PHP" expanded="true" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GetPhonesFromCallLogCtrl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="170" column="26" selection-start-line="170" selection-start-column="26" selection-end-line="170" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/uploadSoundFile.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="167" column="5" selection-start-line="167" selection-start-column="5" selection-end-line="167" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/apiWiki.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="186" column="17" selection-start-line="186" selection-start-column="17" selection-end-line="186" selection-end-column="17" />
+>>>>>>> 95f717a2bad0ca0332f6f28bf4c5a8d591dd662d
+>>>>>>> 1935c4d31816341ed2191b073d298788171b1f4e
           <folding />
         </state>
       </provider>

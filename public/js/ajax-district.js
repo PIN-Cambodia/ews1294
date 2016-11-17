@@ -53,7 +53,7 @@ $(document).on("click",".district",function(e){
                     totalNo = totalNo + NoOfPhoneInThisCommune.length;
 
                     if (index == district_length - 1) {
-                      $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                      $('#numberOfPhones').html('Total of phone numbers: <h2>'+ totalNo +'</h2>');
                     }
               });
               //alert('eachCommune1 was not checked; TotalNo = '+totalNo);
@@ -83,7 +83,7 @@ $(document).on("click",".district",function(e){
                       totalNo = totalNo - NoOfPhoneInThisCommune.length;
 
                       if ( index == district_length - 1) {
-                        $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                        $('#numberOfPhones').html('Total of phone numbers: <h2>'+ totalNo +'</h2>');
                       }
                 });
                  //alert('eachCommune1 was checked; TotalNo = '+totalNo);
@@ -112,14 +112,14 @@ $(document).on("click",".commune",function(e){
     $.get('/numberOfPhones?commune_id='+ this.id , function(data)
     {
           totalNo = totalNo + data.length;
-          $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+          $('#numberOfPhones').html('Total of phone numbers: <h2>'+ totalNo +'</h2>');
     });
   }
   else {
     $.get('/numberOfPhones?commune_id='+ this.id , function(data)
     {
           totalNo = totalNo - data.length;
-          $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+          $('#numberOfPhones').html('Total of phone numbers: <h2>'+ totalNo +'</h2>');
     });
   }
   //alert('4. TotalNo = '+totalNo);
