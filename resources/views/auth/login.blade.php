@@ -54,7 +54,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-btn fa-sign-in"></i> {{ trans('auth.login') }}
                         </button>
-                        <a class="btn btn-link" href="{{ url('password.email') }}">{{ trans('auth.forget_password') }}</a>
+                        <a class="btn btn-link" href="{{ url('emails') }}">{{ trans('auth.forget_password') }}</a>
                     </div>
                 </div>
               </form>

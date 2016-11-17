@@ -15,8 +15,8 @@ class CreateSensorTriggersTable extends Migration
         Schema::create('sensortriggers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sensor_id');
-            $table->integer('min_level');
-            $table->integer('max_level');
+            // $table->integer('min_level');
+            // $table->integer('max_level');
             $table->integer('level_warning');
             $table->integer('level_emergency');
             $table->text('affected_communes')->comment('list of affected communes to be called');

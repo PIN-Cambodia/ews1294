@@ -54,9 +54,10 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-
-    //'from' => ['address' => null, 'name' => null],
-    'from' => ['address' => 'noreply@ews1294.info', 'name' => 'EWSResetPassword'],
+    'from' => [
+        'address' => 'wsa@example.com',
+        'name' => 'Example',
+    ],
 
     /*
     |--------------------------------------------------------------------------

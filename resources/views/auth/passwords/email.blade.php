@@ -19,7 +19,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('password.email') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('emails') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

@@ -27,7 +27,7 @@
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('emails') }}</strong>
                                     </span>
                                     @endif
                                 </div>
