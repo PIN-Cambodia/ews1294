@@ -121,7 +121,7 @@ class RavenHandlerTest extends TestCase
 
         $user = array(
             'id' => '123',
-            'email' => 'test@test.com',
+            'emails' => 'test@test.com',
         );
 
         $recordWithContext = $this->getRecord(Logger::INFO, 'test', array('user' => $user));

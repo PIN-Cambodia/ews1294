@@ -9,7 +9,7 @@
   <div class="row">
     <ol class="breadcrumb">
       <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-      <li class="active"> Get Phone number from CallLog registration</li>
+      <li class="active"> {{ trans('menus.get_phones_from_call_log_registration') }}</li>
     </ol>
   </div><!--/.row-->
   <div class="row topspace">

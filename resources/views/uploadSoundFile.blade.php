@@ -12,7 +12,7 @@
   <div class="row">
     <ol class="breadcrumb">
       <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-      <li class="active"> Upload Sound File Here</li>
+      <li class="active"> {{ trans('menus.upload_sound_file') }} </li>
     </ol>
   </div><!--/.row-->
   <div class="row topspace">

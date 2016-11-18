@@ -17,13 +17,12 @@
 
   <script src="js/jquery-1.11.1.min.js"></script>
   <script src="js/lumino.glyphs.js"></script>
-
-  <script src="js/jquery-waiting.js"></script>
+  <script src="/js/jquery-waiting.js"></script>
 
   <!--Icons-->
   <!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
-  <script src="js/respond.min.js"></script>
+  <script src="/js/html5shiv.js"></script>
+  <script src="/js/respond.min.js"></script>
   <![endif]-->
 
   </head>
@@ -34,8 +33,5 @@
     @yield('content')
     @yield('datatable-js')
     @include('layouts._footer')
-
-
-
   </body>
 </html>

@@ -166,6 +166,7 @@ trait ResetsPasswords
      */
     public function getReset(Request $request, $token = null)
     {
+
         return $this->showResetForm($request, $token);
     }
 
@@ -180,6 +181,7 @@ trait ResetsPasswords
      */
     public function showResetForm(Request $request, $token = null)
     {
+
         if (is_null($token)) {
             return $this->getEmail();
         }

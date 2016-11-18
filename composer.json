@@ -7,8 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-	       "laravelcollective/html": "5.2.*",
-         "zizaco/entrust": "dev-laravel-5"
+        "laravelcollective/html": "5.2.*",
+        "zizaco/entrust": "dev-laravel-5",
+        "monolog/monolog": "^1.21"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

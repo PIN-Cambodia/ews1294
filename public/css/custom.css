@@ -29,8 +29,7 @@ box-shadow: none;
   width:50px;
 }*/
 .districts {
-  border:2px;
-  solid #ccc;
+  border:2px solid #ccc;
   width:300px;
   height:500px;
   overflow-y: scroll;
@@ -40,8 +39,7 @@ box-shadow: none;
   padding-left: 30px;
 }
 .phones {
-  border:2px;
-  solid #ccc;
+  border:2px solid #ccc;
   width:300px;
   height:300px;
   overflow-y: scroll;
@@ -80,8 +78,14 @@ box-shadow: none;
 	cursor: pointer;
 }
 
-.hideContactFile
-{
+.hideContactFile {
   display: block;
   overflow: hidden;
+}
+
+.btnNoBtnBackground {
+    background:none!important;
+    border: 1px solid #FFFFFF;
+    padding:0!important;
+    cursor: pointer;
 }

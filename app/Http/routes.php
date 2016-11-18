@@ -105,51 +105,66 @@ Route::get('/numberOfPhones', function()
 //Make a call to those phone numbers in which commune, district and/or province.
 //***
 Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtrl@callThem']);
+
+/** ----- User Registration, Login, Logout, Reset Password and User Management ------ **/
+// Register
+Route::get('/register', function () {
+    return view('auth/register');
+})->middleware('auth');
+Route::post('register', ['middleware' => 'auth', 'as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
+
 // Login
 Route::get('/login', function () {
     return view('auth/login');
 });
-Route::post('login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginAuth']);
-
-// Register
-Route::get('/register', function () {
-    return view('auth/register');
-});
-// Reset Password
-Route::get('/reset', function () {
-    return view('auth/passwords/reset');
-});
-
-Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
+Route::post('/login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginAuth']);
 
 // Logout
-Route::get('logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutAuth']);
+Route::get('/logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutAuth']);
+
+// Reset Password
+// show reset password form
+Route::get('/password.email', function () {
+    return view('auth/passwords/email');
+});
+
+// send email to reset password
+Route::post('/password.email', ['uses' => 'Auth\PasswordController@sendResetLinkEmail']);
+
+// Reset Password
+Route::post('/password.reset', ['uses' => 'Auth\PasswordController@reset']);
+
+// Get value of token and email for reset password
+// Route::get('password.reset/{token?}', ['uses' => 'Auth\PasswordController@showResetForm']);
+Route::get('/password.reset/{token?}', ['uses' => 'Auth\PasswordController@getReset']);
 
 // list of users
-Route::get('allusers', ['as' => 'allusers', 'uses' => 'UserauthController@userLists']);
+Route::get('/allusers', ['middleware' => 'auth', 'as' => 'allusers', 'uses' => 'UserauthController@userLists']);
 
 // User Profile
-Route::post('userprofile', ['uses' => 'UserauthController@displayUserProfiles']);
+Route::post('/userprofile', ['middleware' => 'auth', 'uses' => 'UserauthController@displayUserProfiles']);
 
 // Save Edited User data
-Route::post('saveuserdata', ['uses' => 'UserauthController@saveUserProfile']);
+Route::post('/saveuserdata', ['middleware' => 'auth', 'uses' => 'UserauthController@saveUserProfile']);
 
 // Enable/Disable User
-Route::post('enabledisable', ['uses' => 'UserauthController@enableDisable']);
+Route::post('/enabledisable', ['middleware' => 'auth', 'uses' => 'UserauthController@enableDisable']);
 
 // Delete User
-Route::post('deleteuser', ['uses' => 'UserauthController@deleteUser']);
+Route::post('/deleteuser', ['middleware' => 'auth', 'uses' => 'UserauthController@deleteUser']);
+
+
 
 // Receiving Call Log API
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 {
     //Route::get('receivingcalllog/{calllog_data}', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
-    Route::post('receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+    Route::post('/receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
 });
 
 // CallLog report
-Route::get('calllogreport', ['uses' => 'CallLogReportController@CallLogReportView']);
-Route::post('getCallLogReport', ['uses' => 'CallLogReportController@getCallLogReport']);
+Route::get('/calllogreport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@CallLogReportView']);
+Route::post('/getCallLogReport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@getCallLogReport']);
 
 
 
@@ -184,7 +199,7 @@ Route::get('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
 //***
 Route::get('/wiki', function () {
     return view('apiWiki');
-});
+})->middleware('auth');
 
 Route::get('/', function () {
    return redirect('/home');
@@ -198,6 +213,11 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
     //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
 });
 
+// get list of province for PCDM role in Registration view
+Route::post('get_authorized_province', ['middleware' => 'auth','uses' => 'UserauthController@getAuthorizedProvince']);
+// Change Language locale on click of flag icon
+Route::post('changelang', ['uses' => 'UserauthController@changeLanguage']);
+
 // Display Sensor Info by Id
 Route::post('sensor_info', ['uses' => 'Sensor\SensorsController@displaySensorInfoById']);
 // Save Change Sensor Info
@@ -206,6 +226,7 @@ Route::post('save_change_sensor_info', ['uses' => 'Sensor\SensorsController@save
 Route::get('getSensors', 'Sensor\SensorsController@getSensors');
 // Delete Sensor Info
 Route::post('delete_sensor_info', ['uses' => 'Sensor\SensorsController@deleteSensor']);
+
 // Add Sensor Info
 Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 // Display Sensor Map
@@ -234,3 +255,4 @@ as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
         ->orderBy('timestamp','desc')->limit(2)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
 });
+

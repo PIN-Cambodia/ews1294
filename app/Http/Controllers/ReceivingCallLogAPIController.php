@@ -41,5 +41,4 @@ class ReceivingCallLogAPIController extends Controller
     if(!empty($success)){ return "Success: " . Input::get('clog');}
     else { return "Error: Data cannot be inserted.";}
   }
-
 }
