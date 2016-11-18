@@ -206,3 +206,31 @@ Route::post('save_change_sensor_info', ['uses' => 'Sensor\SensorsController@save
 Route::get('getSensors', 'Sensor\SensorsController@getSensors');
 // Delete Sensor Info
 Route::post('delete_sensor_info', ['uses' => 'Sensor\SensorsController@deleteSensor']);
+// Add Sensor Info
+Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSensor']);
+// Display Sensor Map
+Route::post('sensors_map', ['uses' => 'Sensor\SensorsController@addNewSensor']);
+
+
+Route::get('/sensors_map_test', function () {
+    $sensors = DB::table('sensors')->get();
+//var_dump($provinces); die();
+    return view('sensorsMap',['sensors' => $sensors]);
+});
+
+Route::get('/sensorsLog20', function () {
+    $sensor_id = Input::get('sensor_id');
+    $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
+});
+
+Route::get('/sensorsLog1thReadingOf30days', function () {
+    $sensor_id = Input::get('sensor_id');
+    $sensorlogs = DB::table('sensorlogs')
+        ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO'))
+as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
+        ->where('sensor_id','=',$sensor_id)
+        ->groupBy('time')
+        ->orderBy('timestamp','desc')->limit(2)->get();
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
+});
