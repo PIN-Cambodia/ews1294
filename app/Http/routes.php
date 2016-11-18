@@ -252,7 +252,7 @@ Route::get('/sensorsLog1thReadingOf30days', function () {
 as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
         ->where('sensor_id','=',$sensor_id)
         ->groupBy('time')
-        ->orderBy('timestamp','desc')->limit(2)->get();
+        ->orderBy('timestamp','desc')->limit(30)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
 });
 
