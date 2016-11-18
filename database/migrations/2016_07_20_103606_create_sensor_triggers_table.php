@@ -23,7 +23,7 @@ class CreateSensorTriggersTable extends Migration
             $table->text('phone_numbers')->comment('(officers) phone numbers to be called for warning level');
             $table->string('sound_file')->comment('Sound file to be displayed');
             $table->text('emails_list')->comment('List of emails to be contact');
-            $table->text('email_message')->comment('Email message to be sent');
+            // $table->text('email_message')->comment('Email message to be sent');
             $table->timestamps();
         });
     }

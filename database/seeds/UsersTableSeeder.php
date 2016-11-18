@@ -19,7 +19,8 @@ class UsersTableSeeder extends Seeder
                 'name'     => 'Chris Sevilleja',
                 'email'    => 'chris@scotch.io',
                 'password' => Hash::make('awesome'),
-                'api_token' => str_random(60),
+                //'api_token' => str_random(60),
+                'api_token' => 'ldanmxW3bk107k0T9ReWVPVlkdiF5KdvloUzQhSjOnyyivrWjmwTdJYlz5ly',
             ));
         }
         // Create authorize api_token user for retrieving callLog from Twilio IVR system
@@ -30,7 +31,8 @@ class UsersTableSeeder extends Seeder
                 'name'     => 'Twilio user',
                 'email'    => 'twilio@oi.org',
                 'password' => Hash::make('tw_%*'),
-                'api_token' => str_random(60),
+                //'api_token' => str_random(60),
+                'api_token' => 'tYW6Vp4Dez4lQ21a4UOwxMb3UNKeSb6QaCS2IDfA6TKSPpjOGWt2QsM0gCj3',
             ));
         }
 
@@ -42,7 +44,8 @@ class UsersTableSeeder extends Seeder
                 'name'     => 'Sensor user',
                 'email'    => 'sensor@oi.org.kh',
                 'password' => Hash::make('S_*/or'),
-                'api_token' => str_random(60),
+                //'api_token' => str_random(60),
+                'api_token' => 'mqZnfQBMa6WYgQWgScg6e3fIiYBjZIbWeqZ73DcEMu8WumHyqTQRJkofQMBK',
             ));
         }
 

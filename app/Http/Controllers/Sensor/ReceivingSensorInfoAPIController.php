@@ -65,61 +65,26 @@ class ReceivingSensorInfoAPIController extends Controller
     */
     public function checkForAutomaticCallOrEmailAction($current_sensor_value)
     {
-        // dd($current_sensor_value);
-        //    "sensor_id" => 2
-        //    "stream_height" => "400"
-        //    "charging" => "1"
-        //    "voltage" => "4191"
-        //    "timestamp" => "2016-10-20T02:39:21.839Z"
-        //    "id" => 21
+        // create object from table sensortriggers
         $sensor_trigger = new sensortriggers();
         // get data from table sensortriggers (sensor_id,level_warning,level_emergency...etc)
         $sensor_trigger_result = $sensor_trigger->where('sensor_id',$current_sensor_value->sensor_id)
                                     ->first();
-        // dd($sensor_trigger_result);
-        //    "id" => 1
-        //    "sensor_id" => 1020301
-        //    "level_warning" => 400
-        //    "level_emergency" => 550
-        //    "affected_communes" => "010203,010204"
-        //    "phone_numbers" => "089555127,0964482868"
-        //    "sound_file" => "test.mp3"
-        //    "emails_list" => "sphyrum@yahoo.com,phyrum@open.org.kh"
-        //    "email_message" => "Beaware the flood might be reached the warning level"
-        //    "created_at" => null
-        //    "updated_at" => null
 
         /** if the received streamHeight of sensor is between the defined warning level value
         *      and the emergency level value then
         *   Trigger call and Send mail to relevant officers in the defined list
         **/
         if($current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
-            && $current_sensor_value->stream_height <= $sensor_trigger_result->level_emergency)
+            && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
         {
-            echo "<br/> Warning level is reached <br/>";
+           // echo "<br/> Warning level is reached <br/>" . asset('js/ajax-district.js');
 
-            // list of emails of relevant officers
-            $email_arr =explode(",", $sensor_trigger_result->emails_list);
-
-            // send email to every relevant officers in the list
-            foreach ($email_arr as $email_arr)
-            {
-                Mail::send('emails.sensoremail',
-                    ['title'=>'Email Sensor', 'content'=>'Warning level sensor'],
-                    function($message) use ($email_arr) {
-                    $message ->to($email_arr)
-                        ->subject("EWS Water Warning Level")
-                        ->replyTo('noreply@ews1294.info');
-                });
-
-            }
+            // send email to relevant officers (PCDM, NCDM)
+            $this->sendMailToOfficers($sensor_trigger_result->emails_list, "Warning");
 
             // list of phone number of relevant officers
             $email_arr =explode(",", $sensor_trigger_result->phone_numbers);
-
-
-
-
 
         }
 
@@ -130,11 +95,60 @@ class ReceivingSensorInfoAPIController extends Controller
         **/
         if($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
         {
-            echo "<br/> Emergency level is reached <br/>";
-
+            // echo "<br/> Emergency level is reached <br/>";
+            // send email to relevant officers (PCDM, NCDM)
+            $this->sendMailToOfficers($sensor_trigger_result->emails_list, "Emergency");
         }
 
 
     }
 
+    /**
+     * @param $email_lists is list of PCDM and/or NCDM officers that we need to send email to
+     * @param $alert_level can be either Warning_level or Emergency_level
+     *
+     */
+    public function sendMailToOfficers($email_lists, $alert_level)
+    {
+        // list of emails of relevant officers
+        $officer_email =explode(",", $email_lists);
+
+        if($alert_level == "Warning")
+        {
+            $title = "Warning Alert from Sensor";
+            $content = "This is Warning Alert Notification";
+        }
+        if($alert_level == "Emergency")
+        {
+            $title = "Emergency Alert from Sensor";
+            $content = "This is Emergency Alert Notification";
+        }
+
+        // send email to every relevant officers in the list
+        foreach ($officer_email as $officer_email)
+        {
+            Mail::send('emails.sensoremail',
+                ['title'=>$title, 'content'=>$content],
+                function($message) use ($officer_email, $title, $alert_level) {
+                    $message ->to($officer_email)
+                        ->subject($title)
+                        ->replyTo('noreply@ews1294.info');
+
+                    // return message of sending email
+                    echo "<br><h4> Email sent </h4>" . $alert_level . " Alert Email is sent to <b> " . $officer_email . "</b> ";
+
+                });
+        }
+    }
+
+    /**
+     * @param $phone_numbers
+     */
+    public function automaticCallToAffectedPeople($phone_numbers)
+    {
+        // list of phone number of relevant officers
+        $officers_phone_number =explode(",", $phone_numbers);
+
+
+    }
 }
