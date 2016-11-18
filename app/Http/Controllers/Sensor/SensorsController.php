@@ -17,21 +17,21 @@ class SensorsController extends Controller
     public function displaySensorInfoById(Request $request)
     {
         $this->checkCsrfTokenFromAjax($request->input('_token'));
-
+//        alert($request->id);
         $sensor_by_id = Sensors::where('id','=', $request->id)->first();
         // Data to be displayed in body and footer of modal
         $user_profile_data =    "<div class='modal-body'>"
-            . "<input type='text' id='txtLocationCode' name='locationCode' value='" . $sensor_by_id->location_code . "' /><br />"
-            . "<input type='text' id='txtAdditionalLocationInfo' name='additionalLocationInfo' value='" . $sensor_by_id->additional_location_info . "' /><br />"
-            . "<input type='text' id='txtLocationCoordinates' name='locationCoordinates' value='" . $sensor_by_id->location_coordinates . "' /><br />"
+            . "<input type='text' id='txtLocationCodeEdit' name='locationCode' value='" . $sensor_by_id->location_code . "' /><br />"
+            . "<input type='text' id='txtAdditionalLocationInfoEdit' name='additionalLocationInfo' value='" . $sensor_by_id->additional_location_info . "' /><br />"
+            . "<input type='text' id='txtLocationCoordinatesEdit' name='locationCoordinates' value='" . $sensor_by_id->location_coordinates . "' /><br />"
             . "</div>"
             . "<div class='modal-footer'>"
-            . "<button class='btn btn-default' data-dismiss='modal'>
-                                  <i class='fa fa-times fa-lg' aria-hidden='true'></i> "
+            . "<button class='btn btn-default' data-dismiss='modal'  name='". $sensor_by_id->id ."'>
+                 <i class='fa fa-times fa-lg' aria-hidden='true'></i> "
             . trans('auth.cancel')
             ."</button>"
             . "<button class='btn btn-primary' data-dismiss='modal' id='save_change_sensor' name='". $sensor_by_id->id ."'>
-                                  <i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i> "
+                  <i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i> "
             . trans('auth.save')
             ."</button>"
             . "</div>";
@@ -57,21 +57,20 @@ class SensorsController extends Controller
     public function saveChangeSensorInfo(Request $request)
     {
         $this->checkCsrfTokenFromAjax($request->input('_token'));
-
+//        alert($request->id);
         $sensor_info = Sensors::where('id','=', $request->id)->first();
-        var_dump($sensor_info);
-        $sensor_info->location_code = $request->sensor_code;
-        $sensor_info->additional_location_info = $request->sensor_loc;
+        $sensor_info->location_code = $request->loc_code;
+        $sensor_info->additional_location_info = $request->additon_loc_info;
         $sensor_info->location_coordinates = $request->sensor_coordinates;
         $sensor_info->save();
         $saved_sensor_info =    "<div class='modal-body'>"
-            . "<input type='text' id='txt_user_name' name='username' value='" . $sensor_info->location_code . "' /><br />"
-            . "<input type='text' id='txt_user_email' name='useremail' value='" . $sensor_info->additional_location_info . "' /><br />"
-            . "<input type='text' id='txt_user_email' name='useremail' value='" . $sensor_info->location_coordinates . "' /><br />"
+            . "<input type='text' id='txt_location_code' name='location_code' value='" . $sensor_info->location_code . "' /><br />"
+            . "<input type='text' id='txt_additional_location_info' name='additional_location_info' value='" . $sensor_info->additional_location_info . "' /><br />"
+            . "<input type='text' id='txt_location_coordinates' name='location_coordinates' value='" . $sensor_info->location_coordinates . "' /><br />"
             //. "<button class='btn buttonAsLink'> Change Password </button>"
             . "</div>"
             . "<div class='modal-footer'>"
-            . "<button class='btn btn-default' data-dismiss='modal'>
+            . "<button class='btn btn-default' data-dismiss='modal' >
                                   <i class='fa fa-times fa-lg' aria-hidden='true'></i> "
             . trans('auth.cancel')
             ."</button>"
@@ -97,6 +96,22 @@ class SensorsController extends Controller
         $delete_sensor_info->delete();
 
         return $delete_sensor_info;
+    }
+
+    public function addNewSensor(Request $request)
+    {
+        $this->checkCsrfTokenFromAjax($request->input('_token'));
+
+        $sensors = new Sensors;
+        $sensors->sensor_id = $request->sensor_code;
+        $sensors->location_code = $request->loc_code;
+        $sensors->additional_location_info = $request->sensor_additional_info;
+        $coordidates = $request->sensor_lat .';'. $request->sensor_long;
+        $sensors->location_coordinates = $coordidates;
+
+        $sensors->save();
+
+        return $sensors->id;
     }
 
 }
