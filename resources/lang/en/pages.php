@@ -14,7 +14,7 @@ return [
     'send' => 'Send',
     'reset' => 'Reset',
     'all_provinces' => 'All Provinces',
-    '' => '',
+    'total_no_phones_:' => 'Total of phone numbers:',
     '' => '',
     '' => '',
     '' => '',

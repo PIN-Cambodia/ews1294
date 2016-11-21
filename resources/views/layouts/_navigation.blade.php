@@ -1,12 +1,5 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-  <!-- <form role="search">
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Search">
-    </div>
-  </form> -->
-
   <ul class="nav menu">
-
     <!-- Home Menu -->
     <li class="<?php if (preg_match("/home/i", Request::url())) echo "active"; else echo "";?>">
       <a href="home">
@@ -27,9 +20,7 @@
         {{ trans('menus.get_phones_from_call_log') }}
        </a>
     </li>
-
     -->
-
     <!-- Target Phones Menu -->
     <!-- <li class="<?php //if (preg_match("/extractTargetPhones/i", Request::url())) echo "active"; else echo "";?>">
       <a href="extractTargetPhones">
@@ -39,8 +30,6 @@
          Target Phones
        </a>
     </li>
-
-
       <!-- CallLog Report Menu
       <li class="<?php //if (preg_match("/calllogreport/i", Request::url())) echo "active"; else echo "";?>">
           <a href="calllogreport">
@@ -88,8 +77,6 @@
       </a>
     </li>
     @endrole
-
-
     <!-- <li class="active"><a href=""><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home </a></li>
     <li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a></li> -->
     <!-- <li><a href=""><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> </a></li> -->

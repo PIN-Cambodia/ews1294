@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{{ url('/') }}">
-        {{--<img src="/logo.png">--}}
+        <img src="/logo.png">
         <b> {{ trans('menus.ews_header') }} </b>
       </a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
