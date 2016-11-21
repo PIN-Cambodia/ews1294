@@ -41,8 +41,11 @@ Route::get('/extractTargetPhones', function () {
 });
 
 Route::get('/soundFile', function () {
-    $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
-    //var_dump($provinces);
+    if (App::getLocale()=='km')
+        $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
+    else
+        $provinces = DB::table('province')->select('PROCODE','PROVINCE')->get();
+    // var_dump($provinces);
     return view('uploadSoundFile',['provinces' => $provinces]);
 });
 

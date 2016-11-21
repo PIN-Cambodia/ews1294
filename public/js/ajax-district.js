@@ -176,7 +176,7 @@ $('form#uploadForm').on('submit',function(event){
                     });
                  },
                  error: function() {
-                   alert('sorry, new activity cannot be inserted');
+                   alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
                  }
               });
           },
