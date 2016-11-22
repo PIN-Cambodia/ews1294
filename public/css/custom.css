@@ -92,18 +92,6 @@ select {
     cursor: pointer;
 }
 
-.user-menu a {
-    color: #428bca;
-}
-
-.navbar-header .navbar-brand {
-    color: #428bca;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: 500;
-    letter-spacing: 2px;
-}
-
 .bigsizebtn
 {
     padding: 8px 25px;
@@ -115,7 +103,26 @@ select {
     cursor: pointer;
 }
 
-/* Sidebar override on style.css file */
+/* override classes on style.css file */
+
+.user-menu a {
+    color: #364A65;
+}
+
+.navbar-header .navbar-brand {
+    color: #364A65;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.sidebar ul.nav .active a, .sidebar ul.nav li.parent a.active,
+.sidebar ul.nav .active > a:hover, .sidebar ul.nav li.parent a.active:hover,
+.sidebar ul.nav .active > a:focus, .sidebar ul.nav li.parent a.active:focus {
+    color: #fff;
+    background-color: #364A65;
+}
 
 @media (min-width: 768px) {
     .sidebar {
@@ -137,6 +144,7 @@ select {
         width: 100%;
     }
 }
+
 /*Breadcrumbs*/
 
 .breadcrumb {
@@ -146,4 +154,71 @@ select {
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     margin-top:60px;
    /* margin: 0 ;*/
+}
+
+
+
+/* override classes on bootstrap.css file */
+.btn-primary {
+    color: #fff;
+    background-color: #384B65;
+    border-color: #374556;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #747B86;
+    border-color: #364A65;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #914854;
+    border-color: #87434E;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active,
+.open > .dropdown-toggle.btn-danger {
+    color: #fff;
+    background-color: #AD6B76;
+    border-color: #914854;
+}
+
+.btn-link {
+    font-weight: normal;
+    color: #364A65;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+a {
+    color: #364A65;
+    text-decoration: none;
+}
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    color: #364A65;
+    content: "/\00a0";
+}
+.breadcrumb > .active {
+    color: #364A65;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #4f617a;
+    border-color: #435368;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open > .dropdown-toggle.btn-info {
+    color: #fff;
+    background-color: #7a8ea9;
+    border-color: #4f617a;
 }
