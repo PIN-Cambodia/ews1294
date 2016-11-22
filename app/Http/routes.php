@@ -73,10 +73,20 @@ Route::get('/communes', function()
 
 Route::get('/disNcom', function()
 {
-  $pro_id = Input::get('pro_id');
-  $districs = DB::table('district')
-  ->join('commune','district.DCode','=','commune.DCode')
-  ->select('district.DCode','DName_kh','CCode','CName_kh','CName_en')->where('PCode',$pro_id)->where('district.status',1)->get();
+    $pro_id = Input::get('pro_id');
+    if (App::getLocale()=='km')
+    {
+        $districs = DB::table('district')
+            ->join('commune','district.DCode','=','commune.DCode')
+            ->select('district.DCode','DName_kh AS DName','CCode','CName_kh AS CName')->where('PCode',$pro_id)->where('district.status',1)->get();
+    }
+    else
+    {
+        $districs = DB::table('district')
+            ->join('commune','district.DCode','=','commune.DCode')
+            ->select('district.DCode','DName_en AS DName','CCode','CName_en AS CName')->where('PCode',$pro_id)->where('district.status',1)->get();
+    }
+
     //var_dump($districs);
   return Response::json($districs);
 });
