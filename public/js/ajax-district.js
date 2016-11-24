@@ -145,7 +145,7 @@ $(document).ready(function(){
             async: false,
             success: function(phones) {
                 // ** Pass commune codes and the number of phone numbers to get activity id ** //
-                var test = new FormData($("#uploadForm")[0]);
+                var formData = new FormData($("#uploadForm")[0]);
                 $.ajax({
                     url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
                     data: test,
@@ -156,22 +156,22 @@ $(document).ready(function(){
                     contentType: false,
                     success: function (activityId) {
                         console.log(activityId);
-                        test.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                        test.append('contacts','[{"phone":"017696365"}]');
-                        // test.append('contacts',JSON.stringify(phones));
+                        formData.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
+                        // test.append('contacts','[{"phone":"017696365"}]');
+                        formData.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
-                        test.append('activity_id',activityId[0]);
-                        // test.append('sound_url','http://ews1294.info/sounds/'+activityId[1]);
-                        test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
-                        test.append('no_of_retry',3);
-                        test.append('retry_time', 10);
-                        console.log(test);
+                        formData.append('activity_id',activityId[0]);
+                        formData.append('sound_url','http://ews1294.info/sounds/'+activityId[1]);
+                        // test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
+                        formData.append('no_of_retry',3);
+                        formData.append('retry_time', 10);
+                        console.log(formData);
                         // ** Trigger calls ** //
                         $.ajax({
                             url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
                             method: 'POST',
-                            data: test,
+                            data: formData,
                             async: false,
                             // success: function(data) {;                     },
                             error: function(e)
