@@ -14,8 +14,9 @@ class CreateActivitiesTable extends Migration
     {
          Schema::create('activities', function (Blueprint $table) {
             $table->increments('activity_id');
-            $table->integer('maunual_auto')->unsigned()->comment('1:Manual; 2:Automatic');
+            $table->integer('manual_auto')->unsigned()->comment('1:Manual; 2:Automatic');
             $table->integer('user_id')->unsigned();
+            $table->text('sound_file');
             $table->text('list_commune_codes');
             $table->integer('no_of_phones_called');
             $table->tinyInteger('no_of_retry');

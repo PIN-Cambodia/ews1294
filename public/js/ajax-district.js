@@ -134,6 +134,8 @@ $('form#uploadForm').on('submit',function(event){
   });
 
   var formData = new FormData($(this)[0]);
+    console.log(formData);
+
   //var phones;
   // ** Pass commune codes to get phone numbers ** //
   $.ajax({

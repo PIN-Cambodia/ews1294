@@ -13,54 +13,80 @@
       <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
-              <form class="form-horizontal" role="form" method="POST" action="{{ url('/getCallLogReport') }}">
-                {{ csrf_field() }}
-                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                    <label for="username" class="col-md-4 control-label">{{ trans('auth.username') }}</label>
-                    <div class="col-md-6">
-                        <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}">
-                        @if ($errors->has('username'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('username') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="col-md-4 control-label">{{ trans('auth.password') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="password" type="password" class="form-control" name="password">
-
-                        @if ($errors->has('password'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+              {{--<form class="form-horizontal" role="form" method="POST" action="{{ url('/getCallLogReport') }}">--}}
+                 {{ csrf_field() }}
+                <div class="row">
+                 <div class="col-xs-4 col-md-4 col-lg-4">
+                     {{ trans('pages.province_:') }}
+                 </div>
+                 <div class="col-xs-8 col-md-8 col-lg-8">
+                     <select name="province_id" id="province_id">
+                         <option value="0"> {{ trans('pages.select_province') }} </option>
+                         @foreach ($allprovince as $item)
+                             @if (App::getLocale()=='km')
+                                 <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE_KH }}</option>
+                             @else
+                                 <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE }}</option>
+                             @endif
+                         @endforeach
+                     </select>
+                 </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-6 col-md-offset-4">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember"> {{ trans('auth.remember_me') }}
-                            </label>
+                    <div class="row topspace" style="text-align:center">
+                        <div class="col-xs-12 col-md-12 col-lg-12" >
+                            <button class="btn btn-primary" name="submit_report" id="submit_report">
+                                <i class="fa fa-send fa-lg" aria-hidden="true"></i>
+                                {{ trans('pages.submit') }}
+                            </button>
+                            <button type="reset" class="btn btn-danger">
+                                <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
+                                {{ trans('pages.reset') }}
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-btn fa-sign-in"></i> {{ trans('auth.login') }}
-                        </button>
-                        <a class="btn btn-link" href="{{ url('/reset') }}">{{ trans('auth.forget_password') }}</a>
-                    </div>
-                </div>
-              </form>
+                <hr>
+                <div id="report_result" class="table-responsive" style="height: 700px; overflow-y: scroll;"></div>
+             {{-- </form>--}}
             </div><!-- \ panel panel-body -->
           </div><!-- \ panel panel-default -->
       </div>
     </div><!--/.row-->
   </div>	<!--/.main-->
 </section>
+
+<script>
+    // global csrf token variable
+    var token = $('input[name=_token]').val();
+    //$("#report_result").hide();
+
+    /* Edit User Profile */
+    $(document).on('click', '#submit_report', function()
+    {
+        var province_val = $('#province_id').val();
+        if(province_val!=0)
+        {
+            $.ajax({
+             type: "POST",
+             url: "{{ url('/getCallLogReport') }}",
+             data: {_token: token, prov_id: province_val},
+             cache: false,
+             success: function(result)
+             {
+                //alert("success= " + result);
+                $("#report_result").html(result).show();
+             },
+             error: function() {
+                alert('sorry, data cannot be fetch');
+             },
+            always: function(alwaysD) {
+                 console.log(alwaysD);
+            }
+             });
+        }
+
+        return false;
+    });
+</script>
 @endsection
