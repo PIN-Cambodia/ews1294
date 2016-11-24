@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-lg-12 ">
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel-body" style="padding-bottom: 30px;">
                             <!-- Opening a form -->
                             @if(Session::has('message'))
                                 <p class="alert-danger">{{Session::get('message')}}</p>

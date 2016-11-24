@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <hr>
-                <div id="report_result" class="table-responsive" style="max-height: 500px; overflow-y: scroll;padding-bottom: 5px;"></div>
+                <div id="report_result" class="table-responsive" style="max-height: 550px; overflow-y: scroll;padding-bottom: 5px;"></div>
              {{-- </form>--}}
             </div><!-- \ panel panel-body -->
           </div><!-- \ panel panel-default -->
