@@ -18,44 +18,17 @@ use Illuminate\Support\Facades\Log;
 
 class GetPhonesFromCallLogCtrl extends Controller {
 
-	public function callThem(Request $request)
+    public function callThem(Request $request)
   {
     // dump the given variable and end execution of the script
-    //dd($request->request);
-		// $communes = array();
+        dd($request->request);
 		$communes_selected = "";
 		foreach ($request->request as $key => $item) {
-			// dd($item);
 			$communes_selected = $communes_selected . "," . $item;
-			//echo "item = ".$item."<br>" ;
 		}
-		//dd($communes_selected);
-		// $input = Request::all();
-		// dd($input);
-		// $t = "12,10203";
-		// $phoneNumbers = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$communes_selected))->get();
 		$phoneNumbers = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$communes_selected))->count();
 
 		Session::flash('message',$phoneNumbers);
-		// dd($phoneNumbers);
-		// return view('uploadSoundFile',['reminderGroups' => $phoneNumbers]);
-		// return view('uploadSoundFile',['reminderGroups' => $reminderGroups]);
-    // if(Auth::attempt(['name'=> $request->username, 'password' => $request->password]))
-    // {
-    //   echo "auth check <br>";
-    //   // redirect to upload sound file page
-    //   // return redirect()->intended('any url link');
-    // }
-    // else {
-    //   echo "else auth check <br>";
-    //   // redirct to the back to the login form
-		//
-    // }
-		//
-    // //dd($request->username);
-    // echo "username= " . $request->username;
-    // echo "password= " . $request->password;
-    // var_dump($request);
   }
 
 	// public function registerNewContact()

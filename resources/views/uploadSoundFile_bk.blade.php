@@ -7,7 +7,7 @@
         @if(Session::has('message'))
             <p class="alert-danger">{{Session::get('message')}}</p>
         @endif
-        {!! Form::open(array('route' =>'call.them', 'method'=>'post','id'=>'uploadForm')) !!}
+        {!! Form::open(array('route' =>'call.them', 'method'=>'post','id'=>'uploadForm', 'files' => true)) !!}
 
         <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
             <div class="row">
@@ -108,7 +108,16 @@
     </section>
 
     <meta name="_token" content="{!! csrf_token() !!}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="{{asset('js/ajax-district.js')}}"></script>
     <script src="{{asset('js/sweetalert-master/dist/sweetalert.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+
+        });
+    </script>
+    @
 @endsection

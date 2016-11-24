@@ -1,4 +1,7 @@
 var totalNo = 0;
+$.ajaxSetup({
+    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+});
 
 $('#province').on('change',function(e){
   console.log(e);
@@ -125,7 +128,6 @@ $(document).on("click",".commune",function(e){
   //alert('4. TotalNo = '+totalNo);
 });
 
-
 $('form#uploadForm').on('submit',function(event){
   event.preventDefault();
   var communes_selected = [];
@@ -133,8 +135,6 @@ $('form#uploadForm').on('submit',function(event){
       communes_selected.push($(this).val());
   });
 
-  var formData = new FormData($(this)[0]);
-  //var phones;
   // ** Pass commune codes to get phone numbers ** //
   $.ajax({
           url: '/phoneNumbersSelectedByCommunes?commune_ids=' + communes_selected,
@@ -142,43 +142,45 @@ $('form#uploadForm').on('submit',function(event){
           async: false,
           success: function(phones) {
             // ** Pass commune codes and the number of phone numbers to get activity id ** //
-            console.log(phones.length);
-            $.ajax({
-                 type: "GET",
-                 url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
-                 cache: false,
-                 success: function(activityId)
-                 {
-                    // json_phones =
-                    formData.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                    formData.append('contacts',JSON.stringify(phones));
-                    // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
+              test = new FormData($("#uploadForm")[0]);
+              $.ajax({
+                          url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
+                          data: test,
+                          dataType: 'json',
+                          async: false,
+                          method: 'POST',
+                          processData: false,
+                          contentType: false,
+                          success: function (activityId) {
+                              console.log(activityId);
+                              test.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
+                              test.append('contacts',JSON.stringify(phones));
+                              // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
-                    formData.append('activity_id',activityId);
-                    formData.append('no_of_retry',3);
-                    formData.append('retry_time', 10);
-
-                    // ** Trigger calls ** //
-                    $.ajax({
-                        url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
-                        type: 'POST',
-                        data: formData,
-                        async: false,
-                        success: function(data) {
-
-                        },
-                        error: function(e)
-                        {
-                          console.log(e);
-                        },
-                        contentType: false,
-                        processData: false
-                    });
-                 },
-                 error: function() {
-                   alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
-                 }
-              });
+                              test.append('activity_id',activityId[0]);
+                              test.append('sound_url','http://ews1294.info/sounds/'+activityId[1]);
+                              test.append('no_of_retry',3);
+                              test.append('retry_time', 10);
+                              console.log(test);
+                              // ** Trigger calls ** //
+                              $.ajax({
+                                  url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
+                                  type: 'POST',
+                                  data: test,
+                                  async: false,
+                                  success: function(data) {;                     },
+                                  error: function(e)
+                                  {
+                                      console.log(e);
+                                  },
+                                  contentType: false,
+                                  processData: false
+                              });
+                          },
+                          error: function() {
+                              alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
+                          },
+                      });
           },
           error: function(e)
           {
@@ -187,7 +189,6 @@ $('form#uploadForm').on('submit',function(event){
           contentType: false,
           processData: false
       });
-  return false;
 });
 
 
