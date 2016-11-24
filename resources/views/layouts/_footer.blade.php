@@ -1,26 +1,24 @@
-
-
-	{{--<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>--}}{{--
-	<script>
-		$('#calendar').datepicker({
-		});
-
-		!function ($) {
-		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){
-		        $(this).find('em:first').toggleClass("glyphicon-minus");
-		    });
-		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-		}(window.jQuery);
-
-		$(window).on('resize', function () {
-		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-		})
-		$(window).on('resize', function () {
-		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-		})
-	</script>--}}
+<div id="footer">
+	<div class="row">
+		<div class="col-xs-7 col-md-8 col-lg-9 "></div>
+		<div class="col-xs-5 col-md-4 col-lg-3 ">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-3 text-center">
+				<a href="http://ec.europa.eu/echo/what/humanitarian-aid/risk-reduction_en" target="_blank">
+					<img src="EU.png" height="50px">
+				</a>
+			</div>
+			<div class="col-lg-2 text-center">
+				<a href="http://www.ncdm.gov.kh/" target="_blank">
+					<img src="NCDM.png" height="50px">
+				</a>
+			</div>
+			<div class="col-lg-2 text-center">
+				<a href="https://www.facebook.com/PINCambodiacz/" target="_blank">
+					<img src="PIN.png" height="50px">
+				</a>
+			</div>
+			<div class="col-lg-1"></div>
+		</div>
+	</div>
+</div>
