@@ -6,21 +6,19 @@
 
 @section('datatable-js')
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-
 @endsection
 @section('content')
-
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li class="active"> {{ trans('sensors.modal_title_edit_sensor') }} </li>
+                <li class="active"> {{ trans('sensors.sensor_trigger_mgmt') }} </li>
             </ol>
         </div><!--/.row-->
         <div class="row" >
             <div class="col-xs-12 col-md-12 col-lg-12" >
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center "><b>{{ trans('sensors.modal_title_edit_sensor_table') }}</b>
+                    <div class="panel-heading text-center"><b>{{ trans('sensors.modal_title_edit_sensor_table') }}</b>
                         <br><button class="btn btn-danger" id="add_sensor">
                             <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
                             {{ trans('sensors.add') }}</button>
@@ -38,6 +36,8 @@
                             </thead>
                             <tbody>
                             {{ csrf_field() }}
+                            @if(!empty($sensors))
+
                             @foreach($sensors as $sensor)
                                 <tr>
                                     <td>{{$sensor->sensor_id}}</td>
@@ -63,6 +63,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -75,7 +76,7 @@
 
 
     <!-- Add Sensor Info Modal -->
-    <div class="modal fade" id="modal_add_sensor_record" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modal_add_sensor_trigger_record" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -241,7 +241,7 @@ Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSe
 Route::post('sensors_map', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 
 
-Route::get('/sensors_map_test', function () {
+Route::get('/sensormap', function () {
     $sensors = DB::table('sensors')->get();
 //var_dump($provinces); die();
     return view('sensorsMap',['sensors' => $sensors]);
@@ -267,3 +267,5 @@ as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
 });
 
+// Sensor Trigger
+Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');

@@ -31,7 +31,7 @@ return [
     'modal_title_edit_sensor_table' => 'Sensor Information Table',
     'add' => 'Add',
     'sensorlog24' => 'A list of 24 reading',
-    'sensor_mgmt' => 'ការគ្រប់គ្រង sensor',
+    'sensor_mgmt' => 'ការគ្រប់គ្រង​ឧបករណ៍​ចាប់​សញ្ញា',
     'sensor_trigger_mgmt' => 'ការគ្រប់គ្រង sensor trigger',
     '' => '',
     '' => '',
