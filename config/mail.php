@@ -55,8 +55,8 @@ return [
     |
     */
     'from' => [
-        'address' => 'wsa@example.com',
-        'name' => 'Example',
+        'address' => 'noreply@ews1294.info',
+        'name' => 'Early Warning System',
     ],
 
     /*

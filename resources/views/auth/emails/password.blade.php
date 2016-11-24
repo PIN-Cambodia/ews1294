@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12 col-md12 col-lg-12">
             <h2 style="background-color:#0CAAD8;vertical-align: bottom;text-align: center;color: white;padding: 10px;">
-                <b> EWS (Emergency Warning System) </b>
+                <b> Early Warning System (EWS) </b>
             </h2>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <br><br>
             Regards,
             <br>
-            EWS System Team
+            EWS Team
         </div>
     </div>
     <div class="row">

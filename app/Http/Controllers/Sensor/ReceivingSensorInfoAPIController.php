@@ -29,7 +29,7 @@ class ReceivingSensorInfoAPIController extends Controller
             $this->logger->addInfo(nl2br("Successfully inserted data: " . Input::get('data')));
             echo "Successfully inserted data: " . Input::get('data');
             // Check for automatically call or send E-mail to relevant people
-            $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
+            // $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
         }
     }
     /**
