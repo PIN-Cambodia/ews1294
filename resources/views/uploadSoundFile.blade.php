@@ -41,7 +41,7 @@
                                                 {{ trans('pages.sound_file_:') }}
                                             </div>
                                             <div class="col-xs-8 col-md-8 col-lg-8">
-                                                <input type="file" name="soundFile" id="soundFile"><br />
+                                                <input type="file" name="soundFile" id="soundFile" accept="audio/*"><br />
                                             </div>
                                         </div><!-- /.row -->
 
