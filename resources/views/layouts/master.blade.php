@@ -10,12 +10,14 @@
   <link href="css/datepicker3.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/pe-icon-7-stroke.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
   <link href="css/custom.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
+
 
     @yield('datatable-css')
 
     <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/lumino.glyphs.js"></script>
     <script src="/js/jquery-waiting.js"></script>
 
