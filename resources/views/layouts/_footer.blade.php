@@ -1,11 +1,11 @@
 
 
-	<script src="js/bootstrap.min.js"></script>
+	{{--<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
 	<script src="js/chart-data.js"></script>
 	<script src="js/easypiechart.js"></script>
 	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>--}}{{--
 	<script>
 		$('#calendar').datepicker({
 		});
@@ -23,4 +23,4 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
-	</script>
+	</script>--}}
