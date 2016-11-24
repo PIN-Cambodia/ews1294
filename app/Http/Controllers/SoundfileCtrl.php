@@ -31,7 +31,7 @@ class SoundfileCtrl extends Controller {
         $communes = Input::get('communes');
 		$noOfPhones = Input::get('noOfPhones');
         $newfilename='soundFile_'.date('m_d_Y_hia').'.'.$request->file('soundFile')->getClientOriginalExtension();
-        $request->file('soundFile')->move(public_path("/sounds"), $newfilename);
+        //$request->file('soundFile')->move(public_path("/sounds"), $newfilename);
 
         $activities = new activities;
 		$activities->manual_auto = 1;
