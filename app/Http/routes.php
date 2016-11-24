@@ -48,7 +48,7 @@ Route::get('/soundFile', function () {
         $provinces = DB::table('province')->select('PROCODE','PROVINCE')->get();
     // var_dump($provinces);
     return view('uploadSoundFile',['provinces' => $provinces]);
-});
+})->middleware('auth');
 
 Route::get('/sensors', function () {
     $sensors = DB::table('sensors')->get();
