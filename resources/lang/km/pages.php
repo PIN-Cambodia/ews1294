@@ -16,7 +16,7 @@ return [
     'all_provinces' => 'ខេត្ត​ទាំងអស់',
     'total_no_phones_:' => 'ចំនួន​សរុប​នៃលេខទូរសព្ទ៖',
     'select_province' => 'ជ្រើសខេត្ត',
-    'submit' => 'Submit',
+    'show_data' => 'បង្ហាញ​ទិន្នន័យ',
     'tbl_title_number' => 'លេខ​រៀង',
     'tbl_title_date' => 'កាលបរិច្ឆេទ',
     'tbl_title_sound_file' => 'ឯកសារ​​ជា​​សំឡេង',

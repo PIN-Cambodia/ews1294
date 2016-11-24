@@ -37,7 +37,7 @@
                         <div class="col-xs-12 col-md-12 col-lg-12" >
                             <button class="btn btn-primary" name="submit_report" id="submit_report">
                                 <i class="fa fa-send fa-lg" aria-hidden="true"></i>
-                                {{ trans('pages.submit') }}
+                                {{ trans('pages.show_data') }}
                             </button>
                             <button type="reset" class="btn btn-danger">
                                 <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <hr>
-                <div id="report_result" class="table-responsive" style="height: 700px; overflow-y: scroll;"></div>
+                <div id="report_result" class="table-responsive" style="min-height: 300px; overflow-y: scroll;"></div>
              {{-- </form>--}}
             </div><!-- \ panel panel-body -->
           </div><!-- \ panel panel-default -->

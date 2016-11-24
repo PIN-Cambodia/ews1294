@@ -26,10 +26,11 @@ class ReceivingCallLogAPIController extends Controller
     * When TRUE, returned objects will be converted into associative arrays.
     */
     $parsing_json_data = json_decode(Input::get('clog'), true);
-    if($parsing_json_data['status'] == 'completed') $result_status = 1;
-    elseif($parsing_json_data['status'] == 'failed') $result_status = 2;
-    elseif($parsing_json_data['status'] == 'busy') $result_status = 3;
-    elseif($parsing_json_data['status'] == 'no-answer') $result_status = 4;
+
+    if($parsing_json_data['status'] == 'completed') $result_status = '1';
+    elseif($parsing_json_data['status'] == 'failed') $result_status = '2';
+    elseif($parsing_json_data['status'] == 'busy') $result_status = '3';
+    elseif($parsing_json_data['status'] == 'no-answer') $result_status = '4';
 
     $call_log = new Calllogs;
     $call_log -> phone_number = $parsing_json_data['phone'];

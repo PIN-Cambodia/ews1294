@@ -32,6 +32,6 @@
     @include('layouts._header')
     @yield('content')
     @yield('datatable-js')
-    {{--@include('layouts._footer')--}}
+    @include('layouts._footer')
   </body>
 </html>

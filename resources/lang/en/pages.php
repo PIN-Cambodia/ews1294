@@ -16,7 +16,7 @@ return [
     'all_provinces' => 'All Provinces',
     'total_no_phones_:' => 'Total of phone numbers:',
     'select_province' => 'Select Province',
-    'submit' => 'Submit',
+    'show_data' => 'Show Data',
     'tbl_title_number' => 'No.',
     'tbl_title_date' => 'Date',
     'tbl_title_sound_file' => 'Sound File',
