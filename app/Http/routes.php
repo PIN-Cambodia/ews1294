@@ -176,7 +176,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 });
 
 // CallLog report
-Route::get('/calllogreport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@CallLogReportView']);
+Route::get('/calllogreport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@CallLogReportView'])->middleware('auth');
 Route::post('/getCallLogReport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@getCallLogReport']);
 
 
