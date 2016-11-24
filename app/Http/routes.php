@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 // use File;
 
@@ -47,7 +48,7 @@ Route::get('/soundFile', function () {
         $provinces = DB::table('province')->select('PROCODE','PROVINCE')->get();
     // var_dump($provinces);
     return view('uploadSoundFile',['provinces' => $provinces]);
-});
+})->middleware('auth');
 
 Route::get('/sensors', function () {
     $sensors = DB::table('sensors')->get();
@@ -200,7 +201,7 @@ Route::get('/phoneNumbersSelectedByCommunes', function()
 //***
 // Insert new activity after sending sound file and contacts.
 //***
-Route::get('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
+Route::post('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
 //***
 // Display Wiki page of how to use API in EWS system.
 //***
@@ -250,6 +251,9 @@ Route::get('/sensorsLog20', function () {
     $sensor_id = Input::get('sensor_id');
     $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
+});
+Route::post('api/v1/add-category', function(Request $request){
+    \Illuminate\Support\Facades\Log::info($request);
 });
 
 Route::get('/sensorsLog1thReadingOf30days', function () {

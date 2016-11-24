@@ -16,7 +16,7 @@
                             @if(Session::has('message'))
                                 <p class="alert-danger">{{Session::get('message')}}</p>
                             @endif
-                            {!! Form::open(array('route' =>'call.them', 'method'=>'post','id'=>'uploadForm')) !!}
+                            {!! Form::open(array('route' =>'call.them', 'method'=>'post','id'=>'uploadForm', 'files' => true)) !!}
                                 <div class="row">
                                     <div class="col-xs-6 col-md-6 col-lg-6">
                                         <div class="row topspace">
@@ -90,7 +90,26 @@
         </div>	<!--/.main-->
     </section>
     <meta name="_token" content="{!! csrf_token() !!}" />
-    <script src="{{asset('js/ajax-district.js')}}"></script>
-    <script src="{{asset('js/sweetalert-master/dist/sweetalert.min.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
+    {{--<script src="js/jquery-1.11.1.min.js"></script>--}}
+   {{-- <script type="text/javascript">
+        $(document).ready(function(){
+            alert("TEST");
+            var formData = new FormData();
+            formData.append('api_token', 'C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
+            formData.append('contacts', '[{"phone":"086234665"}]');
+            formData.append('sound_url', 'https://s3-ap-southeast-1.amazonaws.com/twilio-ews-resources/sounds/2016-11-10:15:43:45_Pursat_02.mp3');
+            formData.append('activity_id',3);
+            formData.append('no_of_retry',3);
+            formData.append('retry_time', 10);
+            $.ajax({
+                url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
+                data: formData,
+                dataType: 'json',
+                async: false,
+                method: 'POST',
+                processData: false,
+                contentType: false,
+                success: function (response) {console.log(response);},});
+        });
+    </script>--}}
 @endsection

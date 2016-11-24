@@ -19,12 +19,7 @@
 						<img src="PIN.png" height="50px">
 					</a>
 				</div>
-
 			</div>
-
-
 		</div>
-
 	</div>
-
 </div>
