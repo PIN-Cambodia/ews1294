@@ -147,7 +147,7 @@ $(document).ready(function(){
                 var formData = new FormData($("#uploadForm")[0]);
                 $.ajax({
                     url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
-                    data: test,
+                    data: formData,
                     dataType: 'json',
                     async: false,
                     method: 'POST',
