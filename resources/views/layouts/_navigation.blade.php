@@ -61,23 +61,23 @@
 
     <!-- ------- sensor ----- -->
     <!-- sensor management -->
-    <!--<li class="<?php //if (preg_match("/sensors/i", Request::url())) echo "active"; else echo "";?>">
+    <li class="<?php //if (preg_match("/sensors/i", Request::url())) echo "active"; else echo "";?>">
       <a href="sensors">
         <i class="pe-7s-signal pe-lg"></i> {{ trans('sensors.sensor_mgmt') }}
       </a>
+    </li>
+    <!-- sensor trigger management -->
+  <!--<li class="<?php //if (preg_match("/sensormap/i", Request::url())) echo "active"; else echo "";?>">
+      <a href="sensormap">
+        <i class="pe-7s-tools pe-lg"></i> {{ trans('sensors.sensor_map') }}
+      </a>
     </li>-->
     <!-- sensor trigger management -->
-    <!--<li class="<?php //if (preg_match("/sensormap/i", Request::url())) echo "active"; else echo "";?>">
-        <a href="sensormap">
-          <i class="pe-7s-tools pe-lg"></i> {{ trans('sensors.sensor_map') }}
-        </a>
-      </li>-->
-    <!-- sensor trigger management -->
-    <!--<li class="<?php //if (preg_match("/sensortrigger/i", Request::url())) echo "active"; else echo "";?>">
-        <a href="sensortrigger">
-          <i class="pe-7s-tools pe-lg"></i> {{ trans('sensors.sensor_trigger_mgmt') }}
-        </a>
-      </li>-->
+    <li class="<?php if (preg_match("/sensortrigger/i", Request::url())) echo "active"; else echo "";?>">
+      <a href="sensortrigger">
+        <i class="pe-7s-tools pe-lg"></i> {{ trans('sensors.sensor_trigger_mgmt') }}
+      </a>
+    </li>
   </ul>
 
 </div><!--/.sidebar-->

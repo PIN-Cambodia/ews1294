@@ -27,6 +27,8 @@ return [
     'tbl_title_failed' => 'បរាជ័យ',
     'tbl_title_busy' => 'រវល់',
     'tbl_title_no_answer' => 'មិន​លើក​ទូរសព្ទ',
+    'select_district' => 'ជ្រើសស្រុក',
+    'select_communes' => 'ជ្រើសឃំុ',
     '' => '',
     '' => '',
     '' => '',

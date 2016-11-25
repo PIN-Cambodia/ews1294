@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Sensor;
 
+use App\Http\Controllers\UserauthController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\sensortriggers;
-use Illuminate\Support\Facades\Input;
 
 class SensorTriggerController extends Controller
 {
@@ -17,14 +17,11 @@ class SensorTriggerController extends Controller
 
     public function addSensorTrigger(Request $request)
     {
-        // dd(Input::all());
-        dd($request->file('warning_sound_file'));
+        //dd($request);
+        // UserauthController::checkCsrfTokenFromAjax($request->input('_token'));
 
-        //dd($request->hasFile('file'));
-        //dd(\Illuminate\Support\Facades\Request::file('warning_sound_file'));
-
-        //$file = $request->file('warning_sound_file');
-        //dd($file);
+        $file = $request->file('warning_sound_file');
+        dd($file);
         //Display File Name
 //        echo 'File Name: '.$file->getClientOriginalName();
 //        echo '<br>';
