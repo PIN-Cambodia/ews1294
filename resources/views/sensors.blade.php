@@ -19,11 +19,15 @@
         </div><!--/.row-->
         <div class="row" >
             <div class="col-xs-12 col-md-12 col-lg-12" >
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center "><b>{{ trans('sensors.modal_title_edit_sensor_table') }}</b>
-                        <br><button class="btn btn-danger" id="add_sensor">
-                            <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                            {{ trans('sensors.add') }}</button>
+                <div class="panel panel-default"  style="padding-bottom: 30px;">
+                    <div class="panel-heading text-center ">
+                        <div class="row">
+                            <div class="col-xs-8 col-md-9 col-lg-10 "><b>{{ trans('sensors.modal_title_edit_sensor_table') }}</b></div>
+                            <div class="col-xs-6 col-md-3 col-lg-2 "><button class="btn btn-info" id="add_sensor">
+                                    <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+                                    {{ trans('sensors.add_new') }}</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <table class="table table-bordered" id="province-table">
@@ -52,7 +56,7 @@
                                     </td>
                                     <td>
                                        <!-- Edit Sensor Record Button -->
-                                       <button class="btn btn-info" id="edit_sensor_info" name="{{ $sensor->id }}">
+                                       <button class="btn btn-primary" id="edit_sensor_info" name="{{ $sensor->id }}">
                                             <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                                             {{ trans('auth.edit') }} </button>
 

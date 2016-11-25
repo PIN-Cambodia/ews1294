@@ -10,7 +10,7 @@
     @role(['admin','NCDM','PCDM'])
     <li class="<?php if (preg_match("/soundFile/i", Request::url())) echo "active"; else echo "";?>">
       <a href="soundFile">
-        <i class="pe-7s-cloud-upload pe-lg"></i> {{ trans('menus.upload_sound_file') }}
+        <i class="pe-7s-speaker pe-lg"></i> {{ trans('menus.upload_sound_file') }}
       </a>
     </li>
    {{-- CallLog Report Menu--}}
@@ -61,17 +61,18 @@
 
     <!-- ------- sensor ----- -->
     <!-- sensor management -->
-    <!--<li class="<?php //if (preg_match("/sensors/i", Request::url())) echo "active"; else echo "";?>">
+    {{--<li class="<?php if (preg_match("/sensors/i", Request::url())) echo "active"; else echo "";?>">
       <a href="sensors">
-        <i class="pe-7s-notebook pe-lg"></i> {{ trans('menus.sensor_mgmt') }}
+        <i class="pe-7s-signal pe-lg"></i> {{ trans('menus.sensors_mgt') }}
       </a>
-    </li>-->
-    <!-- sensor trigger management -->
-    <!--<li class="<?php //if (preg_match("/sensortrigger/i", Request::url())) echo "active"; else echo "";?>">
-      <a href="sensortrigger">
-        <i class="pe-7s-notebook pe-lg"></i> {{ trans('menus.sensor_trigger_mgmt') }}
+    </li>
+    <li class="<?php if (preg_match("/sensorsmap/i", Request::url())) echo "active"; else echo "";?>">
+      <a href="sensorsmap">
+        <i class="pe-7s-map-2 pe-lg"></i> {{ trans('menus.sensors_map') }}
       </a>
-    </li>-->
+    </li>--}}
+
+
   </ul>
 
 </div><!--/.sidebar-->

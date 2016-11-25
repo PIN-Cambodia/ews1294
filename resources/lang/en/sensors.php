@@ -29,7 +29,7 @@ return [
     'modal_title_edit_sensor' => 'Edit Sensor Information',
     'modal_title_add_sensor' => 'Add Sensor Information',
     'modal_title_edit_sensor_table' => 'Sensor Information Table',
-    'add' => 'Add',
+    'add_new' => 'Add New',
     'sensorlog24' => 'A list of 24 reading',
     'sensor_mgmt' => 'Sensor Management',
     'sensor_trigger_mgmt' => 'Sensor Trigger Management',
