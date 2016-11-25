@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Socialite;
 
 use App\Models\activities;
@@ -15,6 +16,7 @@ use App\Role;
 use App\Permission;
 use Illuminate\Support\Facades\Input;
 use Response;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 //use Illuminate\Support\Facades\Storage;
 
@@ -37,7 +39,12 @@ class SoundfileCtrl extends Controller
         $communes = Input::get('communes');
         $noOfPhones = Input::get('noOfPhones');
         $newfilename = 'soundFile_' . date('m_d_Y_hia') . '.' . $request->file('soundFile')->getClientOriginalExtension();
-        $request->file('soundFile')->move(public_path("/sounds"), $newfilename);
+        //$request->file('soundFile')->move(public_path("/sounds"), $newfilename);
+        // Upload sound file and contact as json to AWS s3 storage
+        $storage = Storage::disk('s3');
+        $uploadedSound = $storage->put('sounds/' . $newfilename, fopen($request->file('soundFile')->getRealPath(), 'r+'), 'public');
+
+//        dd($uploadedSound);
 
         $activities = new activities;
         $activities->manual_auto = 1;

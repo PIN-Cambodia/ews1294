@@ -162,7 +162,7 @@ $(document).ready(function(){
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
                         formData.append('activity_id',activityId[0]);
-                        formData.append('sound_url','http://ews1294.info/sounds/'+activityId[1]);
+                        formData.append('sound_url','https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/'+activityId[1]);
                         // test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
                         formData.append('no_of_retry',3);
                         formData.append('retry_time', 10);

@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "5.2.*",
         "zizaco/entrust": "dev-laravel-5",
-        "monolog/monolog": "^1.21"
+        "monolog/monolog": "^1.21",
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

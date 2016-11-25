@@ -106,7 +106,7 @@ class SensorsController extends Controller
         $sensors->sensor_id = $request->sensor_code;
         $sensors->location_code = $request->loc_code;
         $sensors->additional_location_info = $request->sensor_additional_info;
-        $coordidates = $request->sensor_long .', '. $request->sensor_lat;
+        $coordidates = $request->sensor_lat .', '. $request->sensor_long;
         $sensors->location_coordinates = $coordidates;
 
         $sensors->save();

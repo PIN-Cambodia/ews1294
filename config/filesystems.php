@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key' => 'AKIAIUM7TZ2E3WTETC6A',
+            'secret' => 'Wmq0AdqNQ6KK9SEn+C4dZrKPYNL5JsnJyYKJ2wZF',
+            'region' => 'ap-southeast-1',
+            'bucket' => 'ews-dashboard-resources',
         ],
 
         'uploads' => [
