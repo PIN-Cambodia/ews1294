@@ -33,6 +33,7 @@ return [
     'sensorlog24' => 'A list of 24 reading',
     'sensor_mgmt' => 'Sensor Management',
     'sensor_trigger_mgmt' => 'Sensor Trigger Management',
+    'sensor_map' => 'Sensor Map',
     '' => '',
     '' => '',
     '' => '',
