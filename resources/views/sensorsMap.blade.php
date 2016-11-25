@@ -70,8 +70,6 @@
 
 
   map.addLayer(vectorLayer);
-
-
   //Add a selector control to the vectorLayer with popup functions
   var controls = {
     selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })

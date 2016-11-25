@@ -31,6 +31,7 @@
                                 <th>Stream Height</th>
                                 <th>Charging</th>
                                 <th>Voltage</th>
+                                <th>Timestamp</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,6 +47,9 @@
                                     </td>
                                     <td>
                                        {{$sensorlog->voltage}}
+                                    </td>
+                                    <td>
+                                        {{$sensorlog->timestamp}}
                                     </td>
                                 </tr>
                             @endforeach

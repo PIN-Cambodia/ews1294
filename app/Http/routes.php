@@ -238,7 +238,7 @@ Route::post('delete_sensor_info', ['uses' => 'Sensor\SensorsController@deleteSen
 // Add Sensor Info
 Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 // Display Sensor Map
-Route::post('sensors_map', ['uses' => 'Sensor\SensorsController@addNewSensor']);
+Route::post('sensors_map_old', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 
 
 Route::get('/sensormap', function () {

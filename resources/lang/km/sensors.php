@@ -33,6 +33,7 @@ return [
     'sensorlog24' => 'A list of 24 reading',
     'sensor_mgmt' => 'ការគ្រប់គ្រង​ឧបករណ៍​ចាប់​សញ្ញា',
     'sensor_trigger_mgmt' => 'ការគ្រប់គ្រង sensor trigger',
+    'sensor_map' => 'ផែនទី​​ឧបករណ៍​ចាប់​សញ្ញា',
     'sensor_id' => 'Sensor ID',
     'warning_level' => 'Warning Level',
     'emergency_level' => 'Emergency Level',
