@@ -305,3 +305,20 @@ Route::get('/checkall', function()
 //    var_dump($districs);
     return $districs;
 });
+
+
+Route::get('/checkallTest', function()
+{
+    $pro_id = Input::get('pro_id');
+    $districs = DB::table('district')
+        ->join('commune','district.DCode','=','commune.DCode')
+        ->join('targetphones','targetphones.commune_code','=','commune.CCode')
+//        ->select(DB::raw('COUNT(phone) as phone'))
+          ->select(DB::raw('COUNT(phone) as phone,commune_code as com'))
+            ->groupBy('commune_code')
+        ->where('PCode',$pro_id)->where('district.status',1)->get();
+
+
+    var_dump($districs);
+//    return $districs;
+});
