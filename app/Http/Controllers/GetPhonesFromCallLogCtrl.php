@@ -183,6 +183,7 @@ class GetPhonesFromCallLogCtrl extends Controller {
                                  $phone = $callLogArray[$i]['addresses'];
                                  // INSERT addresses INTO TARGET PHONE TABLE
                                  foreach ($phone as $key => $eachPhone) {
+                                     preg_replace('/^(\+855|855)/', '0', $eachPhone);
                                      $targetphones = new targetphones;
                                      $targetphones->commune_code = $request_split[0];
                                      $targetphones->phone = $eachPhone;
