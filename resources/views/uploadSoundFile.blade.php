@@ -49,9 +49,15 @@
                                     <div class="col-xs-6 col-md-6 col-lg-6">
                                         <div class="row topspace">
                                             <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: left">
-                                                {{ trans('pages.districts_and_communes_:') }}
+                                                {{trans('pages.districts_and_communes_:') }}
                                             </div>
                                         </div><!-- /.row -->
+                                        <div class="row topspace">
+                                            <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: left" id="divcheckall">
+                                                {{--<input type="checkbox" value="Check All" id="checkAll" class="checkall"/>&nbsp;{{trans('pages.checkAll') }}<br />--}}
+                                            </div>
+                                        </div><!-- /.row -->
+
                                         <div class="row topspace districts">
                                             <div class="col-xs-12 col-md-12 col-lg-12" id="divdistricts">
 

@@ -42,7 +42,7 @@
     var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point( {{$sensor->location_coordinates }} ).transform(epsg4326, projectTo),
             {description:'<a href ="/sensorsLog20?sensor_id={{$sensor->sensor_id }}"> {{$sensor->location_coordinates }}</a>'} ,
-            {externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+            {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
     );
     vectorLayer.addFeatures(feature);
 
@@ -57,14 +57,14 @@
 //  var feature = new OpenLayers.Feature.Vector(
 //          new OpenLayers.Geometry.Point( 105.96,12.55  ).transform(epsg4326, projectTo),
 //          {description:'Big Ben'} ,
-//          {externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
 //  );
 //  vectorLayer.addFeatures(feature);
 //
 //  var feature = new OpenLayers.Feature.Vector(
 //          new OpenLayers.Geometry.Point( 105.67,12.00 ).transform(epsg4326, projectTo),
 //          {description:'London Eye'} ,
-//          {externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
 //  );
 //  vectorLayer.addFeatures(feature);
 

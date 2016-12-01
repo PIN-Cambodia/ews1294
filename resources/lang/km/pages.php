@@ -27,6 +27,7 @@ return [
     'tbl_title_failed' => 'បរាជ័យ',
     'tbl_title_busy' => 'រវល់',
     'tbl_title_no_answer' => 'មិន​លើក​ទូរសព្ទ',
+    'checkAll' => 'ជ្រើសយកទាំងអស់',
     '' => '',
     '' => '',
     '' => '',

@@ -27,7 +27,7 @@ return [
     'tbl_title_failed' => 'Failed',
     'tbl_title_busy' => 'Busy',
     'tbl_title_no_answer' => 'No Answer',
-    '' => '',
+    'checkAll' => 'Check All',
     '' => '',
     '' => '',
     '' => '',

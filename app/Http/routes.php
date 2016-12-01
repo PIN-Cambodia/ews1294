@@ -116,6 +116,17 @@ Route::get('/numberOfPhones', function()
 });
 
 //***
+//Get the number of phones in which commune.
+//***
+Route::get('/numberOfPhonesUpdate', function()
+{
+    $commune_id = Input::get('commune_id');
+    $noOfPhones = DB::table('targetphones')
+        ->select(DB::raw('COUNT(phone) as phone'))->where('commune_code',$commune_id)->get();
+    return $noOfPhones;
+});
+
+//***
 //Make a call to those phone numbers in which commune, district and/or province.
 //***
 Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtrl@callThem']);
@@ -241,20 +252,29 @@ Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSe
 Route::post('sensors_map_old', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 
 
-Route::get('/sensormap', function () {
+Route::get('/sensormapOld', function () {
     $sensors = DB::table('sensors')->get();
 //var_dump($provinces); die();
+    return view('sensorsMap',['sensors' => $sensors]);
+});
+
+Route::get('/sensormap', function () {
+    $sensors = DB::table('sensors')
+        ->join('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
+        ->select('sensors.id', 'sensors.sensor_id','sensors.location_code','sensors.additional_location_info','sensors.location_coordinates','sensors.emergency_level','sensors.warning_level','sensorlogs.stream_height')
+        ->get();
+//var_dump($sensors); die();
     return view('sensorsMap',['sensors' => $sensors]);
 });
 
 Route::get('/sensorsLog20', function () {
     $sensor_id = Input::get('sensor_id');
     $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
-    return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '1', 'sensorId' => $sensor_id]);
 });
-Route::post('api/v1/add-category', function(Request $request){
-    \Illuminate\Support\Facades\Log::info($request);
-});
+//Route::post('api/v1/add-category', function(Request $request){
+//    \Illuminate\Support\Facades\Log::info($request);
+//});
 
 Route::get('/sensorsLog1thReadingOf30days', function () {
     $sensor_id = Input::get('sensor_id');
@@ -264,8 +284,24 @@ as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
         ->where('sensor_id','=',$sensor_id)
         ->groupBy('time')
         ->orderBy('timestamp','desc')->limit(30)->get();
-    return view('sensorsLogReport',['sensorlogs' => $sensorlogs]);
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
 
 // Sensor Trigger
 Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
+
+Route::get('/checkall', function()
+{
+    $pro_id = Input::get('pro_id');
+        $districs = DB::table('district')
+            ->join('commune','district.DCode','=','commune.DCode')
+            ->join('targetphones','targetphones.commune_code','=','commune.CCode')
+            ->select(DB::raw('COUNT(phone) as phone'))
+//          ->select(DB::raw('COUNT(phone) as phone,commune_code as com'))
+//            ->groupBy('commune_code')
+            ->where('PCode',$pro_id)->where('district.status',1)->get();
+
+
+//    var_dump($districs);
+    return $districs;
+});

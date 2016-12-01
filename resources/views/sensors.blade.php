@@ -1,11 +1,13 @@
 @extends('layouts.master')
 
 @section('datatable-css')
-    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet" />
 @endsection
 
 @section('datatable-js')
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
 
 @endsection
 @section('content')
@@ -14,7 +16,7 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li class="active"> {{ trans('sensors.modal_title_edit_sensor') }} </li>
+                <li class="active"> {{ trans('sensors.sensor_mgmt') }} </li>
             </ol>
         </div><!--/.row-->
         <div class="row" >
@@ -30,14 +32,18 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-bordered" id="province-table">
+                        {{--<table class="table table-bordered" id="province-table">--}}
+                            <table class='table responsive cell-border table-bordered' id='province-table' cellspacing='0' width='100%'>
                             <thead>
                             <tr>
                                 <th>Sensor ID</th>
                                 <th>Location Code</th>
                                 <th>Location Information</th>
                                 <th>Location Coordinates</th>
+                                <th>Warning Level</th>
+                                <th>Emergency Level</th>
                                 <th>Action</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -53,6 +59,12 @@
                                     </td>
                                     <td>
                                        {{$sensor->location_coordinates}}
+                                    </td>
+                                    <td>
+                                        {{$sensor->warning_level}}
+                                    </td>
+                                    <td>
+                                        {{$sensor->emergency_level}}
                                     </td>
                                     <td>
                                        <!-- Edit Sensor Record Button -->
@@ -92,7 +104,9 @@
                     Additional Info: <input type='text' id='txtAdditionalLocationInfo' name='additionalLocationInfo'  /><br />
                     Latitude: <input type='text' id='txtLocationLatitude' name='locationLatitude'/><br />
                     Longitude: <input type='text' id='txtLocationLongitude' name='locationLongitude'/><br />
-                    </div>
+                    Warning Level: <input type='text' id='txtWarning' name='warning'/><br />
+                    Emergency Level: <input type='text' id='txtEmergency' name='emergency'/><br />
+                </div>
                 <div class='modal-footer'>
                     <button class='btn btn-default' data-dismiss='modal'>
                         <i class='fa fa-times fa-lg' aria-hidden='true'></i>
@@ -100,7 +114,7 @@
                     </button>
                     <button class='btn btn-primary' data-dismiss='modal' id='add_sensor_data'>
                         <i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i>
-                        {{ trans('sensors.add')  }}
+                        {{ trans('sensors.add_new')  }}
                     </button>
                 </div>
 
@@ -160,7 +174,8 @@
             });
 
             var table = $('#province-table').DataTable({
-                "paging":   true
+                "paging":   true,
+                scrollY: '50vh'
             });
 
             // global csrf token variable
@@ -204,11 +219,13 @@
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfo').val();
                 var txtLocationLatitude = $('#txtLocationLatitude').val();
                 var txtLocationLongitude = $('#txtLocationLongitude').val();
+                var txtWarning = $('#txtWarning').val();
+                var txtEmergency = $('#txtEmergency').val();
 
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/add_new_sensor_info') }}",
-                    data: {_token: token, sensor_code: txtSensorID, loc_code: txtLocationCode, sensor_additional_info: txtAdditionalLocationInfo, sensor_lat: txtLocationLatitude, sensor_long: txtLocationLongitude},
+                    data: {_token: token, sensor_code: txtSensorID, loc_code: txtLocationCode, sensor_additional_info: txtAdditionalLocationInfo, sensor_lat: txtLocationLatitude, sensor_long: txtLocationLongitude, warning_level: txtWarning, emergency_level: txtEmergency},
                     cache: false,
                     success: function(result)
                     {
@@ -229,14 +246,16 @@
                 var txtLocationCode = $('#txtLocationCodeEdit').val();
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfoEdit').val();
                 var txtLocationCoordinates = $('#txtLocationCoordinatesEdit').val();
+                var txtWarningLevel = $('#txtWarningEdit').val();
+                var txtEmergencyLevel = $('#txtEmergencyEdit').val();
                 var btn_val = $(this).attr('name');
-                alert(btn_val);
+//                alert(btn_val);
                 //$('#modal_user_profile').modal('hide');
                 //alert('save= ' + btn_user_val + " name= " + txt_user_name + " email= " + txt_user_email);
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/save_change_sensor_info') }}",
-                    data: {_token: token, id: btn_val, loc_code: txtLocationCode, additon_loc_info: txtAdditionalLocationInfo, sensor_coordinates: txtLocationCoordinates},
+                    data: {_token: token, id: btn_val, loc_code: txtLocationCode, additon_loc_info: txtAdditionalLocationInfo, sensor_coordinates: txtLocationCoordinates, sensor_warning: txtWarningLevel, sensor_emergency: txtEmergencyLevel},
                     cache: false,
                     success: function(result)
                     {

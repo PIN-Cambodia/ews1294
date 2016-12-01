@@ -152,13 +152,13 @@ class GetPhonesFromCallLogCtrl extends Controller {
 			// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 	}
 
+	// currently used
 	public function getPhoneCallLog(Request $request)
 	{
 				// dd($request);
 				// $verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/call_logs.json?name=' . $id;
-				$verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/projects/359/reminder_groups.json?id[]=1';
+        $verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/projects/359/reminder_groups.json?id[]=1';
         $curlCallLog = curl_init($verboiceCallLogAPI);
-				//$curlCallLog = curl_init();
         curl_setopt($curlCallLog, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curlCallLog, CURLOPT_USERPWD, Config::get('constants.VERBOICE_AUTH_USER').":".Config::get('constants.VERBOICE_AUTH_PASS'));
         curl_setopt($curlCallLog, CURLOPT_RETURNTRANSFER, true);
@@ -175,21 +175,22 @@ class GetPhonesFromCallLogCtrl extends Controller {
 				foreach ($reminderGroups as $key => $reminderGroup) {
 					# code...
 					//var_dump($reminderGroup->CReminderGroup);
-	        for ($i = count($callLogArray) - 1; $i >= 0; $i--) {
-	            // if ($callLogArray[$i]['name'] == $reminderGroup->CReminderGroup) {
-							if ($callLogArray[$i]['name'] == $request_split[1]) {
-	                // $result = json_encode($callLogArray[$i]);
-									// $result = json_encode($callLogArray[$i]['addresses']);
-									$phone = $callLogArray[$i]['addresses'];
-									// INSERT addresses INTO TARGET PHONE TABLE
-									foreach ($phone as $key => $eachPhone) {
-											$targetphones = new targetphones;
-											$targetphones->commune_code = $request_split[0];
-											$targetphones->phone = $eachPhone;
-											$targetphones->save();
-									}
-	            }
-	        }
+                    for ($i = count($callLogArray) - 1; $i >= 0; $i--) {
+                         if ($callLogArray[$i]['name'] == $reminderGroup->CReminderGroup) {
+                             if ($callLogArray[$i]['name'] == $request_split[1]) {
+                                 // $result = json_encode($callLogArray[$i]);
+                                 // $result = json_encode($callLogArray[$i]['addresses']);
+                                 $phone = $callLogArray[$i]['addresses'];
+                                 // INSERT addresses INTO TARGET PHONE TABLE
+                                 foreach ($phone as $key => $eachPhone) {
+                                     $targetphones = new targetphones;
+                                     $targetphones->commune_code = $request_split[0];
+                                     $targetphones->phone = $eachPhone;
+                                     $targetphones->save();
+                                 }
+                             }
+                         }
+                    }
 			}
 
 				// var_dump($reminderGroups);
