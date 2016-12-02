@@ -315,7 +315,6 @@ Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActiv
 
 Route::get('/sensormap', function () {
     $sensorIds=sensors::select('sensor_id')->get()->toArray();
-    var_dump($sensorIds);
     $sensorlogsAll = array();
     foreach($sensorIds as $sensorId)
     {
@@ -332,7 +331,7 @@ Route::get('/sensormap', function () {
             ->get();
         array_push($sensorlogsAll,$sensorlogs);
     }
-    var_dump($sensorlogsAll);die;
+//    var_dump($sensorlogsAll);die;
     return view('sensorsMap',['sensors' => $sensorlogsAll]);
 });
 
