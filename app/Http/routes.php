@@ -264,12 +264,12 @@ Route::get('/sensormap', function () {
         ->rightJoin('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
         ->rightJoin('sensortriggers','sensortriggers.sensor_id','=','sensors.sensor_id')
 //        ->select('sensors.id', 'sensors.sensor_id','sensors.location_code','sensors.additional_location_info','sensors.location_coordinates','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
-        ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+        ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height','sensors.location_coordinates')
         ->orderBy('sensorlogs.timestamp','ASC')
         ->groupBy('sensors.sensor_id')
 //        ->max('sensorlogs.timestamp');
         ->get();
-var_dump($sensors); die();
+//var_dump($sensors); die();
     return view('sensorsMap',['sensors' => $sensors]);
 });
 
@@ -319,21 +319,40 @@ Route::get('/sensorsLogLastReadingOf30days', function () {
 //    $sensorIds=$sensorIds->to_array();
 
 //    var_dump($sensorIds);die;
-    $sensorlogs = DB::table('sensorlogs')
-        ->select(DB::raw("DISTINCT(sensor_id), date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO'))
+    $sensorlogsAll = array();
+    foreach($sensorIds as $sensorId)
+    {
+        $sensorlogs = DB::table('sensorlogs')
+            ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO'))
 as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
 //        ->where('sensor_id','=',$sensor_id)
-        ->whereIn('sensor_id',$sensorIds)
+            ->whereIn('sensor_id',$sensorId)
 //        ->groupBy('time')
 //            ->groupBy('sensor_id')
 
 
-        ->orderBy('timestamp','desc')
-        ->orderBy('sensor_id')
-        ->limit(30)
-        ->get();
-    var_dump($sensorlogs);die;
-    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
+            ->orderBy('timestamp','desc')
+            ->orderBy('sensor_id')
+            ->limit(1)
+            ->get();
+        array_push($sensorlogsAll,$sensorlogs);
+    }
+
+//    $sensorlogs = DB::table('sensorlogs')
+//        ->select(DB::raw("DISTINCT(sensor_id), date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO'))
+//as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
+////        ->where('sensor_id','=',$sensor_id)
+//        ->whereIn('sensor_id',$sensorIds)
+////        ->groupBy('time')
+//            ->groupBy('sensor_id')
+//
+//
+//        ->orderBy('timestamp','desc')
+//        ->orderBy('sensor_id')
+//        ->limit(1)
+//        ->get();
+//    var_dump($sensorlogsAll);die;
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogsAll, 'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
 
 // Sensor Trigger
