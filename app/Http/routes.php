@@ -322,7 +322,7 @@ Route::get('/sensormap', function () {
             ->join('sensortriggers','sensortriggers.sensor_id','=','sensorlogs.sensor_id')
             ->join('sensors','sensorlogs.sensor_id','=','sensors.sensor_id')
 //            ->join('commune','district.DCode','=','commune.DCode')
-            ->select('sensors.id','sensortriggers.sensor_id', 'stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates')
+            ->select('sensorlogs.id as id','sensortriggers.sensor_id', 'stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates')
 //            ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
             ->whereIn('sensorlogs.sensor_id',$sensorId)
             ->orderBy('sensorlogs.timestamp','desc')

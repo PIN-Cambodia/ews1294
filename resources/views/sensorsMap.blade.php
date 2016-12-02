@@ -46,6 +46,8 @@
             imgSensor='img/marker_yellow.png';
     @elseif($sensor->stream_height >= $sensor->emergency_level)
             imgSensor='img/marker_red.png';
+    @elseif($sensor->stream_height < $sensor->warning_level)
+            imgSensor='img/marker_green.png';
     @else
             imgSensor='img/marker_black.png';
     @endif
@@ -57,10 +59,11 @@
     );
     vectorLayer.addFeatures(feature);
 
-  @endforeach
-
   var marker = new OpenLayers.Marker(101.2336,13.3665);
   marker.id = " {{$sensor->id}} ";
+          @endforeach
+  /*var marker = new OpenLayers.Marker(101.2336,13.3665);
+  marker.id = " {{$sensor->id}} ";*/
   marker.events.register("click",marker,function () {
     //alert('test on click on map');
   });
