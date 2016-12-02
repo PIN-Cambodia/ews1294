@@ -12,7 +12,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12 ">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="fixed-panel">.dfsadfasdf
+                        <div class="fixed-panel">
 
                             <!-- Opening a form -->
                             @if(Session::has('message'))
