@@ -58,17 +58,8 @@
               externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
     );
     vectorLayer.addFeatures(feature);
-
   @endforeach
 
-  /*
-  var marker = new OpenLayers.Marker(101.2336,13.3665);
-
-  marker.id = "{{$sensor->id}} ";
-  marker.events.register("click",marker,function () {
-    //alert('test on click on map');
-  });
-   */
 //  var feature = new OpenLayers.Feature.Vector(
 //          new OpenLayers.Geometry.Point( 105.96,12.55  ).transform(epsg4326, projectTo),
 //          {description:'Big Ben'} ,
