@@ -12,7 +12,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="fixed-panel">
-                        {{--<form class="form-horizontal" role="form" method="POST" action="{{ url('/getCallLogReport') }}">--}}
+                        {{--<form class="form-horizontal" role="form" method="POST" action="{{ url('/calllogreport') }}">--}}
                         {{ csrf_field() }}
                         <div class="row" id="report_header_content">
                             <div class="col-xs-4 col-md-4 col-lg-4">
@@ -38,7 +38,7 @@
                                         <i class="fa fa-send fa-lg" aria-hidden="true"></i>
                                         {{ trans('pages.show_data') }}
                                     </button>
-                                    <button type="reset" class="btn btn-danger">
+                                    <button class="btn btn-danger" id="reset_page">
                                         <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
                                         {{ trans('pages.reset') }}
                                     </button>
@@ -81,6 +81,11 @@
         var token = $('input[name=_token]').val();
         var button = $('#submit_report');
         button.removeAttr('disabled');
+
+        $(document).on('click', '#reset_page', function()
+        {
+            $(location).attr("href", '/calllogreport');
+        });
 
         /* Edit User Profile */
         $(document).on('click', '#submit_report', function()
