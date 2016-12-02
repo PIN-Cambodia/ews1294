@@ -48,6 +48,8 @@
             imgSensor='img/marker_red.png';
     @elseif($sensor->stream_height < $sensor->warning_level)
             imgSensor='img/marker_green.png';
+    @else
+            imgSensor='img/marker_black.png';
     @endif
     var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point( {{$sensor->location_coordinates }} ).transform(epsg4326, projectTo),
