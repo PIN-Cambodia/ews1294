@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Sensor;
 
 use App\Models\Sensors;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;

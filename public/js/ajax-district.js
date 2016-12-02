@@ -257,7 +257,9 @@ $(document).ready(function(){
                             method: 'POST',
                             data: formData,
                             async: false,
-                            // success: function(data) {;                     },
+                            success: function(data) {
+                                $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                            },
                             error: function(e)
                             {
                                 console.log(e);

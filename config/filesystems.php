@@ -56,12 +56,15 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'AKIAIUM7TZ2E3WTETC6A',
-            'secret' => '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',
-            'region' => 'ap-southeast-1',
-            'bucket' => 'ews-dashboard-resources',
+            'key' => env('S3_KEY'),
+            'secret' => env('S3_SECRET'),
+            'region' => env('S3_REGION'),
+            'bucket' => env('S3_BUCKET'),
+            //'key' => 'AKIAIUM7TZ2E3WTETC6A',
+            //'secret' => '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',
+            //'region' => 'ap-southeast-1',
+            //'bucket' => 'ews-dashboard-resources',
         ],
-
         'uploads' => [
             'driver' => 'local',
             'root' => public_path() . '/uploads',

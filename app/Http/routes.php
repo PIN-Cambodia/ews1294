@@ -53,7 +53,7 @@ Route::get('/soundFile', function () {
 
 Route::get('/sensors', function () {
     $sensors = DB::table('sensors')->get();
-    //var_dump($provinces); die();
+    //var_dump($sensors); die();
     return view('sensors',['sensors' => $sensors]);
 });
 
@@ -179,8 +179,6 @@ Route::post('/enabledisable', ['middleware' => 'auth', 'uses' => 'UserauthContro
 // Delete User
 Route::post('/deleteuser', ['middleware' => 'auth', 'uses' => 'UserauthController@deleteUser']);
 
-
-
 // Receiving Call Log API
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 {
@@ -189,9 +187,8 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 });
 
 // CallLog report
-Route::get('/calllogreport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@CallLogReportView'])->middleware('auth');
+Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView'])->middleware('auth');
 Route::post('/getCallLogReport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@getCallLogReport']);
-
 
 //***
 //Get the phone numbers in which commune(s).
@@ -252,14 +249,13 @@ Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSe
 // Display Sensor Map
 Route::post('sensors_map_old', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 
-
 Route::get('/sensormapOld', function () {
     $sensors = DB::table('sensors')->get();
 //var_dump($provinces); die();
     return view('sensorsMap',['sensors' => $sensors]);
 });
 
-Route::get('/sensormap', function () {
+/*Route::get('/sensormap', function () {
     $sensors = DB::table('sensors')
         ->rightJoin('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
         ->rightJoin('sensortriggers','sensortriggers.sensor_id','=','sensors.sensor_id')
@@ -271,7 +267,7 @@ Route::get('/sensormap', function () {
         ->get();
 //var_dump($sensors); die();
     return view('sensorsMap',['sensors' => $sensors]);
-});
+});*/
 
 Route::get('/sensormapTest', function () {
     $sensors = DB::table('sensorlogs')
@@ -300,64 +296,50 @@ Route::get('/sensorsLog20', function () {
 Route::get('/sensorsLog1thReadingOf30days', function () {
     $sensor_id = Input::get('sensor_id');
     $sensorlogs = DB::table('sensorlogs')
-        ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO'))
-as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
+        ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
         ->where('sensor_id','=',$sensor_id)
         ->groupBy('time')
         ->orderBy('timestamp','desc')->limit(30)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
 
-Route::get('/sensorsLogLastReadingOf30days', function () {
-    $sensor_id = Input::get('sensor_id');
-//    $sensorIds = DB::table('sensors')
-//        ->select('sensor_id')
-//        ->orderBy('sensor_id')
-//        ->get();
 
+/**** Sensor Trigger ***/
+// Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
+Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
+Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
+
+/*** Showing call log report for specific activity ID ***/
+//http://localhost:8000/calllogActivity?activID=3
+Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity')->middleware('auth');
+
+Route::get('/sensormap', function () {
     $sensorIds=sensors::select('sensor_id')->get()->toArray();
-//    $sensorIds=$sensorIds->to_array();
-
-//    var_dump($sensorIds);die;
     $sensorlogsAll = array();
     foreach($sensorIds as $sensorId)
     {
         $sensorlogs = DB::table('sensorlogs')
-            ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO'))
-as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
-//        ->where('sensor_id','=',$sensor_id)
-            ->whereIn('sensor_id',$sensorId)
-//        ->groupBy('time')
-//            ->groupBy('sensor_id')
-
-
-            ->orderBy('timestamp','desc')
-            ->orderBy('sensor_id')
+            ->join('sensortriggers','sensortriggers.sensor_id','=','sensorlogs.sensor_id')
+            ->join('sensors','sensorlogs.sensor_id','=','sensors.sensor_id')
+//            ->join('commune','district.DCode','=','commune.DCode')
+            ->select('sensors.id','sensortriggers.sensor_id', 'stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates')
+//            ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+            ->whereIn('sensorlogs.sensor_id',$sensorId)
+            ->orderBy('sensorlogs.timestamp','desc')
+            ->orderBy('sensorlogs.sensor_id')
             ->limit(1)
             ->get();
         array_push($sensorlogsAll,$sensorlogs);
     }
-
-//    $sensorlogs = DB::table('sensorlogs')
-//        ->select(DB::raw("DISTINCT(sensor_id), date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO'))
-//as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
-////        ->where('sensor_id','=',$sensor_id)
-//        ->whereIn('sensor_id',$sensorIds)
-////        ->groupBy('time')
-//            ->groupBy('sensor_id')
-//
-//
-//        ->orderBy('timestamp','desc')
-//        ->orderBy('sensor_id')
-//        ->limit(1)
-//        ->get();
-//    var_dump($sensorlogsAll);die;
-    return view('sensorsLogReport',['sensorlogs' => $sensorlogsAll, 'reportPage' => '2', 'sensorId' => $sensor_id]);
+//    var_dump($sensorlogsAll);
+    return view('sensorsMap',['sensors' => $sensorlogsAll]);
 });
 
 // Sensor Trigger
 Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
 
+
+// check all districts and communes in UploadSoundFile form
 Route::get('/checkall', function()
 {
     $pro_id = Input::get('pro_id');
@@ -368,12 +350,9 @@ Route::get('/checkall', function()
 //          ->select(DB::raw('COUNT(phone) as phone,commune_code as com'))
 //            ->groupBy('commune_code')
             ->where('PCode',$pro_id)->where('district.status',1)->get();
-
-
 //    var_dump($districs);
     return $districs;
 });
-
 
 Route::get('/checkallTest', function()
 {
@@ -385,8 +364,6 @@ Route::get('/checkallTest', function()
           ->select(DB::raw('COUNT(phone) as phone,commune_code as com'))
             ->groupBy('commune_code')
         ->where('PCode',$pro_id)->where('district.status',1)->get();
-
-
     var_dump($districs);
 //    return $districs;
 });

@@ -34,9 +34,9 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	// public function registerNewContact()
 	// {
 	// 		$phone = Input::get('phone');
-	// 		$commune = Input::get('commune');
-	// 		if($phone != "" && $commune != "")
-	// 		{
+    // 		$commune = Input::get('commune');
+    // 		if($phone != "" && $commune != "")
+    // 		{
 	// 				// INSERT addresses INTO TARGET PHONE TABLE
 	// 				$targetphones = new targetphones;
 	// 				// Query existing phone in given commune
