@@ -110,17 +110,17 @@
                         {{ trans('sensors.affected_communes')}} <br />
                          <div class="row">
                              <div class="col-lg-3">
-                                 <select class="fullwidth">
+                                 <select class="fullwidth" id="province">
                                      <option> {{ trans('pages.select_province') }}</option>
                                  </select>
                              </div>
                              <div class="col-lg-3">
-                                 <select class="fullwidth">
+                                 <select class="fullwidth" id="district">
                                      <option> {{ trans('pages.select_district') }}</option>
                                  </select>
                              </div>
                              <div class="col-lg-6">
-                                 <select class="fullwidth" multiple>
+                                 <select class="fullwidth" id="commune" multiple>
                                      <option> {{ trans('pages.select_communes') }}</option>
                                  </select>
                              </div>
@@ -162,10 +162,14 @@
         var token = $('input[name=_token]').val();
 
         /* Display Modal Add New Sensor Trigger */
-        $(document).on('click', '#add_sensor_trigger', function () {
+        $(document).on('click', '#add_sensor_trigger', function ()
+        {
+            alert("report is clicked");
             $('#modal_add_sensor_trigger_record').modal('show');
             return false;
         });
+
+
 
         /* Add Sensor Trigger Data */
         /*$(document).on('click', '#add_sensor_trigger_data', function () {

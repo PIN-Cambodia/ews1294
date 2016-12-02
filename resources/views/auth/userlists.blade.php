@@ -126,7 +126,7 @@
         // alert("success= " + result[0].id);
   			$("#profile_content").html(result).show();
   			$('#modal_user_profile').modal('show');
-  		}
+  		},
       // error: function() {
       //   alert('sorry, data cannot be fetch');
       // }
@@ -152,7 +152,7 @@
   			$("#profile_content").html(result).show();
             location.reload();
   			//$('#modal_user_profile').modal('show');
-  		}
+  		},
       // error: function() {
       //   alert('sorry, data cannot be fetch');
       // }
@@ -173,7 +173,7 @@
     		success: function(result)
     		{
                 location.reload();
-    		}
+    		},
         // error: function() {
         //   alert('sorry, data cannot be fetch');
         // }

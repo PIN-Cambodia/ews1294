@@ -178,8 +178,6 @@ Route::post('/enabledisable', ['middleware' => 'auth', 'uses' => 'UserauthContro
 // Delete User
 Route::post('/deleteuser', ['middleware' => 'auth', 'uses' => 'UserauthController@deleteUser']);
 
-
-
 // Receiving Call Log API
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 {
@@ -190,7 +188,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 // CallLog report
 Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView'])->middleware('auth');
 Route::post('/getCallLogReport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@getCallLogReport']);
-
 
 //***
 //Get the phone numbers in which commune(s).
@@ -250,7 +247,6 @@ Route::post('delete_sensor_info', ['uses' => 'Sensor\SensorsController@deleteSen
 Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 // Display Sensor Map
 Route::post('sensors_map_old', ['uses' => 'Sensor\SensorsController@addNewSensor']);
-
 
 Route::get('/sensormapOld', function () {
     $sensors = DB::table('sensors')->get();
