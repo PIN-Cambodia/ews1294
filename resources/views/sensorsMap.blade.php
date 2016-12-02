@@ -59,8 +59,8 @@
     );
     vectorLayer.addFeatures(feature);
 
-  var marker = new OpenLayers.Marker(101.2336,13.3665);
-  marker.id = " {{$sensor->id}} ";
+  //var marker = new OpenLayers.Marker(101.2336,13.3665);
+  //marker.id = " {{$sensor->id}} ";
           @endforeach
   /*var marker = new OpenLayers.Marker(101.2336,13.3665);
   marker.id = " {{$sensor->id}} ";*/
