@@ -260,12 +260,12 @@ Route::get('/sensormap', function () {
         ->rightJoin('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
         ->rightJoin('sensortriggers','sensortriggers.sensor_id','=','sensors.sensor_id')
 //        ->select('sensors.id', 'sensors.sensor_id','sensors.location_code','sensors.additional_location_info','sensors.location_coordinates','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
-        ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+        ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height','sensors.location_coordinates')
         ->orderBy('sensorlogs.timestamp','ASC')
         ->groupBy('sensors.sensor_id')
 //        ->max('sensorlogs.timestamp');
         ->get();
-var_dump($sensors); die();
+//var_dump($sensors); die();
     return view('sensorsMap',['sensors' => $sensors]);
 });
 

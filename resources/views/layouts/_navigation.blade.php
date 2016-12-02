@@ -74,11 +74,11 @@
       </a>
    </li>
     <!-- sensor trigger management -->
-    <li class="<?php if (preg_match("/sensortrigger/i", Request::url())) echo "active"; else echo "";?>">
+    <!--<li class="<?php //if (preg_match("/sensortrigger/i", Request::url())) echo "active"; else echo "";?>">
       <a href="sensortrigger">
         <i class="pe-7s-tools pe-lg"></i> {{ trans('sensors.sensor_trigger_mgmt') }}
       </a>
-    </li>
+    </li>-->
 
   </ul>
 </div><!--/.sidebar-->
