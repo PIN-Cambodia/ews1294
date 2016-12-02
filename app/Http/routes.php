@@ -255,7 +255,7 @@ Route::get('/sensormapOld', function () {
     return view('sensorsMap',['sensors' => $sensors]);
 });
 
-Route::get('/sensormap', function () {
+/*Route::get('/sensormap', function () {
     $sensors = DB::table('sensors')
         ->rightJoin('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
         ->rightJoin('sensortriggers','sensortriggers.sensor_id','=','sensors.sensor_id')
@@ -267,7 +267,7 @@ Route::get('/sensormap', function () {
         ->get();
 //var_dump($sensors); die();
     return view('sensorsMap',['sensors' => $sensors]);
-});
+});*/
 
 Route::get('/sensormapTest', function () {
     $sensors = DB::table('sensorlogs')
@@ -313,31 +313,26 @@ Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addS
 //http://localhost:8000/calllogActivity?activID=3
 Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity')->middleware('auth');
 
-Route::get('/sensorsLogLastReadingOf30days', function () {
-    $sensor_id = Input::get('sensor_id');
-//    $sensorIds = DB::table('sensors')
-//        ->select('sensor_id')
-//        ->orderBy('sensor_id')
-//        ->get();
-
+Route::get('/sensormap', function () {
     $sensorIds=sensors::select('sensor_id')->get()->toArray();
-//    $sensorIds=$sensorIds->to_array();
-
-//    var_dump($sensorIds);die;
-    $sensorlogs = DB::table('sensorlogs')
-        ->select(DB::raw("DISTINCT(sensor_id), date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
-//        ->where('sensor_id','=',$sensor_id)
-        ->whereIn('sensor_id',$sensorIds)
-//        ->groupBy('time')
-//            ->groupBy('sensor_id')
-
-
-        ->orderBy('timestamp','desc')
-        ->orderBy('sensor_id')
-        ->limit(30)
-        ->get();
-    var_dump($sensorlogs);die;
-    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
+    $sensorlogsAll = array();
+    foreach($sensorIds as $sensorId)
+    {
+        $sensorlogs = DB::table('sensorlogs')
+            ->join('sensortriggers','sensortriggers.sensor_id','=','sensorlogs.sensor_id')
+            ->join('sensors','sensorlogs.sensor_id','=','sensors.sensor_id')
+//            ->join('commune','district.DCode','=','commune.DCode')
+            ->select('sensors.id','sensortriggers.sensor_id', 'stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates')
+//            ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+            ->whereIn('sensorlogs.sensor_id',$sensorId)
+            ->orderBy('sensorlogs.timestamp','desc')
+            ->orderBy('sensorlogs.sensor_id')
+            ->limit(1)
+            ->get();
+        array_push($sensorlogsAll,$sensorlogs);
+    }
+//    var_dump($sensorlogsAll);
+    return view('sensorsMap',['sensors' => $sensorlogsAll]);
 });
 
 // Sensor Trigger

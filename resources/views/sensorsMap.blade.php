@@ -38,7 +38,8 @@
   map.setCenter (lonLat, zoom);
 
   var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
-  @foreach($sensors as $sensor)
+  @foreach($sensors[0] as $sensor)
+
     // Define markers as "features" of the vector layer:
     var imgSensor;
     @if($sensor->stream_height >= $sensor->warning_level && $sensor->stream_height < $sensor->emergency_level)
