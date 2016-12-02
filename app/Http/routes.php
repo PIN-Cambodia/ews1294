@@ -331,7 +331,7 @@ Route::get('/sensormap', function () {
             ->get();
         array_push($sensorlogsAll,$sensorlogs);
     }
-    var_dump($sensorlogsAll);die;
+//    var_dump($sensorlogsAll);die;
     return view('sensorsMap',['sensors' => $sensorlogsAll]);
 });
 
