@@ -40,8 +40,6 @@
                                 <th>Location Code</th>
                                 <th>Location Information</th>
                                 <th>Location Coordinates</th>
-                                <th>Warning Level</th>
-                                <th>Emergency Level</th>
                                 <th>Action</th>
 
                             </tr>
@@ -59,12 +57,6 @@
                                     </td>
                                     <td>
                                        {{$sensor->location_coordinates}}
-                                    </td>
-                                    <td>
-                                        {{$sensor->warning_level}}
-                                    </td>
-                                    <td>
-                                        {{$sensor->emergency_level}}
                                     </td>
                                     <td>
                                        <!-- Edit Sensor Record Button -->
@@ -104,8 +96,6 @@
                     Additional Info: <input type='text' id='txtAdditionalLocationInfo' name='additionalLocationInfo'  /><br />
                     Latitude: <input type='text' id='txtLocationLatitude' name='locationLatitude'/><br />
                     Longitude: <input type='text' id='txtLocationLongitude' name='locationLongitude'/><br />
-                    Warning Level: <input type='text' id='txtWarning' name='warning'/><br />
-                    Emergency Level: <input type='text' id='txtEmergency' name='emergency'/><br />
                 </div>
                 <div class='modal-footer'>
                     <button class='btn btn-default' data-dismiss='modal'>
@@ -219,13 +209,11 @@
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfo').val();
                 var txtLocationLatitude = $('#txtLocationLatitude').val();
                 var txtLocationLongitude = $('#txtLocationLongitude').val();
-                var txtWarning = $('#txtWarning').val();
-                var txtEmergency = $('#txtEmergency').val();
 
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/add_new_sensor_info') }}",
-                    data: {_token: token, sensor_code: txtSensorID, loc_code: txtLocationCode, sensor_additional_info: txtAdditionalLocationInfo, sensor_lat: txtLocationLatitude, sensor_long: txtLocationLongitude, warning_level: txtWarning, emergency_level: txtEmergency},
+                    data: {_token: token, sensor_code: txtSensorID, loc_code: txtLocationCode, sensor_additional_info: txtAdditionalLocationInfo, sensor_lat: txtLocationLatitude, sensor_long: txtLocationLongitude},
                     cache: false,
                     success: function(result)
                     {
@@ -246,8 +234,6 @@
                 var txtLocationCode = $('#txtLocationCodeEdit').val();
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfoEdit').val();
                 var txtLocationCoordinates = $('#txtLocationCoordinatesEdit').val();
-                var txtWarningLevel = $('#txtWarningEdit').val();
-                var txtEmergencyLevel = $('#txtEmergencyEdit').val();
                 var btn_val = $(this).attr('name');
 //                alert(btn_val);
                 //$('#modal_user_profile').modal('hide');
@@ -255,7 +241,7 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/save_change_sensor_info') }}",
-                    data: {_token: token, id: btn_val, loc_code: txtLocationCode, additon_loc_info: txtAdditionalLocationInfo, sensor_coordinates: txtLocationCoordinates, sensor_warning: txtWarningLevel, sensor_emergency: txtEmergencyLevel},
+                    data: {_token: token, id: btn_val, loc_code: txtLocationCode, additon_loc_info: txtAdditionalLocationInfo, sensor_coordinates: txtLocationCoordinates},
                     cache: false,
                     success: function(result)
                     {
