@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Models\Sensors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 // use File;
@@ -256,10 +257,30 @@ Route::get('/sensormapOld', function () {
 
 Route::get('/sensormap', function () {
     $sensors = DB::table('sensors')
-        ->join('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
-        ->select('sensors.id', 'sensors.sensor_id','sensors.location_code','sensors.additional_location_info','sensors.location_coordinates','sensors.emergency_level','sensors.warning_level','sensorlogs.stream_height')
+        ->rightJoin('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
+        ->rightJoin('sensortriggers','sensortriggers.sensor_id','=','sensors.sensor_id')
+//        ->select('sensors.id', 'sensors.sensor_id','sensors.location_code','sensors.additional_location_info','sensors.location_coordinates','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+        ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+        ->orderBy('sensorlogs.timestamp','ASC')
+        ->groupBy('sensors.sensor_id')
+//        ->max('sensorlogs.timestamp');
         ->get();
-//var_dump($sensors); die();
+var_dump($sensors); die();
+    return view('sensorsMap',['sensors' => $sensors]);
+});
+
+Route::get('/sensormapTest', function () {
+    $sensors = DB::table('sensorlogs')
+//        ->rightJoin('sensorlogs','sensorlogs.sensor_id','=','sensors.sensor_id')
+//        ->rightJoin('sensortriggers','sensortriggers.sensor_id','=','sensors.sensor_id')
+//        ->select('sensors.id', 'sensors.sensor_id','sensors.location_code','sensors.additional_location_info','sensors.location_coordinates','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+//        ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
+        ->select('id', 'sensor_id','sensorlogs.stream_height')
+        ->orderBy('sensorlogs.timestamp','DESC')
+        ->groupBy('sensor_id')
+//        ->max('sensorlogs.timestamp');
+        ->get();
+    var_dump($sensors); die();
     return view('sensorsMap',['sensors' => $sensors]);
 });
 
@@ -282,6 +303,7 @@ Route::get('/sensorsLog1thReadingOf30days', function () {
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
 
+
 /**** Sensor Trigger ***/
 // Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
 Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
@@ -290,6 +312,37 @@ Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addS
 /*** Showing call log report for specific activity ID ***/
 //http://localhost:8000/calllogActivity?activID=3
 Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity')->middleware('auth');
+
+Route::get('/sensorsLogLastReadingOf30days', function () {
+    $sensor_id = Input::get('sensor_id');
+//    $sensorIds = DB::table('sensors')
+//        ->select('sensor_id')
+//        ->orderBy('sensor_id')
+//        ->get();
+
+    $sensorIds=sensors::select('sensor_id')->get()->toArray();
+//    $sensorIds=$sensorIds->to_array();
+
+//    var_dump($sensorIds);die;
+    $sensorlogs = DB::table('sensorlogs')
+        ->select(DB::raw("DISTINCT(sensor_id), date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
+//        ->where('sensor_id','=',$sensor_id)
+        ->whereIn('sensor_id',$sensorIds)
+//        ->groupBy('time')
+//            ->groupBy('sensor_id')
+
+
+        ->orderBy('timestamp','desc')
+        ->orderBy('sensor_id')
+        ->limit(30)
+        ->get();
+    var_dump($sensorlogs);die;
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
+});
+
+// Sensor Trigger
+Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
+
 
 // check all districts and communes in UploadSoundFile form
 Route::get('/checkall', function()
