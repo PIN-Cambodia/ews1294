@@ -1,24 +1,15 @@
 @extends('layouts.master')
-@section('datatable-css')
-    <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet"
-          xmlns="http://www.w3.org/1999/html"/>
-    <link href="//cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet" />
-@endsection
-@section('datatable-js')
-    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
-@endsection
 @section('content')
-
-    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-        <div class="row">
-            <ol class="breadcrumb">
-                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li class="active"> {{ trans('sensors.sensor_trigger_mgmt') }} </li>
-            </ol>
-        </div><!--/.row-->
-        <div class="row" >
-            <div class="col-xs-12 col-md-12 col-lg-12" >
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+            <li class="active"> {{ trans('sensors.sensor_trigger_mgmt') }} </li>
+        </ol>
+    </div><!--/.row-->
+    <div class="row" >
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <div class="fixed-panel">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
                         <div class="row">
@@ -34,6 +25,7 @@
                         </div><!-- /.row -->
                     </div><!-- /.panel-heading -->
                     <div class="panel-body">
+
                         <table class="table table-striped responsive" id="trigger-tbl" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -94,12 +86,12 @@
                                 @endif
                             </tbody>
                         </table>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/.row-->
-    </div>	<!--/.main-->
+                    </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+            </div><!-- /fixed-panel -->
+        </div><!-- /col -->
+    </div><!-- /row -->
+</div>	<!--/.main-->
 
     <!-- Add New Sensor trigger Info Modal -->
     <div class="modal fade" id="modal_add_sensor_trigger_record" tabindex="-1" role="dialog">
@@ -109,27 +101,37 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title text-center" id="myModalLabel">{{ trans('sensors.modal_title_add_sensor_trigger') }}</h4>
                 </div>
-                <form class="form-horizontal" enctype="multipart/from-data" method="POST" action="{{ url('/addsensortrigger') }}" id="add_new_sensor_trigger">
+                {!! Form::open(array('url' => '/addsensortrigger','files'=>'true')) !!}
                     {{ csrf_field() }}
                     <div class='modal-body'>
                         {{ trans('sensors.sensor_id') }} <input type='text' id='sensor_id' name='sensor_id' /><br />
                         {{ trans('sensors.warning_level') }} <input type='text' id='warning_level' name='warning_level' /><br />
                         {{ trans('sensors.emergency_level')}} <input type='text' id='emergency_level' name='emergency_level'  /><br />
                         {{ trans('sensors.affected_communes')}} <br />
-                            <select>
-                                <option> {{ trans('pages.select_province') }}</option>
-                            </select>
-                            <select>
-                                <option> {{ trans('pages.select_district') }}</option>
-                            </select>
-                            <select multiple>
-                                <option> {{ trans('pages.select_communes') }}</option>
-                            </select>
+                         <div class="row">
+                             <div class="col-lg-3">
+                                 <select class="fullwidth">
+                                     <option> {{ trans('pages.select_province') }}</option>
+                                 </select>
+                             </div>
+                             <div class="col-lg-3">
+                                 <select class="fullwidth">
+                                     <option> {{ trans('pages.select_district') }}</option>
+                                 </select>
+                             </div>
+                             <div class="col-lg-6">
+                                 <select class="fullwidth" multiple>
+                                     <option> {{ trans('pages.select_communes') }}</option>
+                                 </select>
+                             </div>
+                         </div>
                         <br />
                         {{ trans('sensors.phone_numbers')}} <br />
                             <textarea rows="4" cols="50" id='phone_numbers' name='phone_numbers'></textarea> <br />
-                        {{ trans('sensors.sound_file_warning')}} <input type='file' id='warning_sound_file' name='warning_sound_file'/><br />
-                        {{ trans('sensors.sound_file_emergency')}} <input type='file' id='emergency_sound_file' name='emergency_sound_file'/><br />
+                        {{ trans('sensors.sound_file_warning')}}
+                            <input type='file' id='warning_sound_file' name='warning_sound_file'/><br />
+                        {{ trans('sensors.sound_file_emergency')}}
+                            <input type='file' id='emergency_sound_file' name='emergency_sound_file'/><br />
                         {{ trans('sensors.emails')}} <br />
                             <textarea rows="4" cols="50" id='email_list' name='email_list'></textarea> <br />
                     </div>
@@ -143,18 +145,21 @@
                             {{ trans('sensors.add_new')  }}
                         </button>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
 <script>
     $(function() {
-        $('#trigger-tbl').DataTable();
+        $('#trigger-tbl').DataTable({
+            scrollY: '50vh',
+            deferRender:    true,
+            scroller:       true
+        });
 
         // global csrf token variable
         var token = $('input[name=_token]').val();
-        // alert('token=' + token);
 
         /* Display Modal Add New Sensor Trigger */
         $(document).on('click', '#add_sensor_trigger', function () {

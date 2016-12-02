@@ -52,7 +52,7 @@ Route::get('/soundFile', function () {
 
 Route::get('/sensors', function () {
     $sensors = DB::table('sensors')->get();
-    //var_dump($provinces); die();
+    //var_dump($sensors); die();
     return view('sensors',['sensors' => $sensors]);
 });
 
@@ -177,7 +177,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
 });
 
 // CallLog report
-Route::get('/calllogreport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@CallLogReportView'])->middleware('auth');
+Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView'])->middleware('auth');
 Route::post('/getCallLogReport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@getCallLogReport']);
 
 
@@ -271,3 +271,7 @@ as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
 // Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
 Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
 Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
+
+// Showing call log report for specific activity ID
+//http://localhost:8000/calllogActivity?activID=3
+Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity')->middleware('auth');

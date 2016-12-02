@@ -18,13 +18,14 @@ class SensorTriggerController extends Controller
     public function addSensorTrigger(Request $request)
     {
         // dd(Input::all());
-        dd($request->file('warning_sound_file'));
+        // dd($request->file('warning_sound_file'));
 
-        //dd($request->hasFile('file'));
+        //dd($request->hasFile('warning_sound_file'));
         //dd(\Illuminate\Support\Facades\Request::file('warning_sound_file'));
 
-        //$file = $request->file('warning_sound_file');
-        //dd($file);
+        $file = $request->file('warning_sound_file');
+        // dd($file->getClientOriginalName());
+        dd($file->getClientOriginalName());
         //Display File Name
 //        echo 'File Name: '.$file->getClientOriginalName();
 //        echo '<br>';

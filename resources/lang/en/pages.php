@@ -29,6 +29,7 @@ return [
     'tbl_title_no_answer' => 'No Answer',
     'select_district' => 'Select District',
     'select_communes' => 'Select Communes',
+    'tbl_title_total' => 'Total',
     '' => '',
     '' => '',
     '' => '',

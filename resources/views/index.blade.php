@@ -19,4 +19,16 @@
   </div>	<!--/.main-->
 </section>
 
+  <script>
+    $(document).ready(function() {
+      fitIframe();
+      $(window).resize(function() {
+        fitIframe();
+      });
+    });
+    function fitIframe() {
+      /* $('#sidebar-collapse').height()-90 : means take height of sidebar-collapse - the height of header and footer  */
+      $('iframe').css("min-height", $('#sidebar-collapse').height()-(50+$('#footer').height()));
+    }
+  </script>
 @endsection

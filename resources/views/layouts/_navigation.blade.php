@@ -61,6 +61,7 @@
 
     <!-- ------- sensor ----- -->
     <!-- sensor management -->
+
     <li class="<?php if (preg_match("/sensors/i", Request::url())) echo "active"; else echo "";?>">
       <a href="sensors">
         <i class="pe-7s-signal pe-lg"></i> {{ trans('menus.sensors_mgt') }}
