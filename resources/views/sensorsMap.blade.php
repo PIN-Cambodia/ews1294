@@ -60,7 +60,6 @@
     vectorLayer.addFeatures(feature);
 
   @endforeach
-
   var marker = new OpenLayers.Marker(101.2336,13.3665);
   marker.id = " {{$sensor->id}} ";
   marker.events.register("click",marker,function () {
