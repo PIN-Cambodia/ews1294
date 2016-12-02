@@ -30,6 +30,7 @@ return [
     'select_district' => 'ជ្រើសស្រុក',
     'select_communes' => 'ជ្រើសឃំុ',
     'tbl_title_total' => 'ចំនួន​សរុប',
+    'checkAll' => 'ជ្រើសយកទាំងអស់',
     '' => '',
     '' => '',
     '' => '',

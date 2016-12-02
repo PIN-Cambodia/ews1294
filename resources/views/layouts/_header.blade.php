@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-fixed-top" role="navigation" style="min-height: 15vh; background-color: #f1f4f7">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{{ url('/') }}">

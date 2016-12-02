@@ -72,7 +72,7 @@
   <!-- <li class="<?php //if (preg_match("/sensormap/i", Request::url())) echo "active"; else echo "";?>">
         <a href="sensormap">
           <i class="pe-7s-map-2 pe-lg"></i> {{ trans('sensors.sensor_map') }}
-          </a>
+        </a>
         </li>-->
     <!-- sensor trigger management -->
     <li class="<?php if (preg_match("/sensortrigger/i", Request::url())) echo "active"; else echo "";?>">

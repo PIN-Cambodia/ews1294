@@ -19,9 +19,11 @@ class SensorsController extends Controller
         $sensor_by_id = Sensors::where('id','=', $request->id)->first();
         // Data to be displayed in body and footer of modal
         $user_profile_data =    "<div class='modal-body'>"
-            . "<input type='text' id='txtLocationCodeEdit' name='locationCode' value='" . $sensor_by_id->location_code . "' /><br />"
-            . "<input type='text' id='txtAdditionalLocationInfoEdit' name='additionalLocationInfo' value='" . $sensor_by_id->additional_location_info . "' /><br />"
-            . "<input type='text' id='txtLocationCoordinatesEdit' name='locationCoordinates' value='" . $sensor_by_id->location_coordinates . "' /><br />"
+            . "Location Code: <input type='text' id='txtLocationCodeEdit' name='locationCode' value='" . $sensor_by_id->location_code . "' /><br />"
+            . "Location Info: <input type='text' id='txtAdditionalLocationInfoEdit' name='additionalLocationInfo' value='" . $sensor_by_id->additional_location_info . "' /><br />"
+            . "Coordinates: <input type='text' id='txtLocationCoordinatesEdit' name='locationCoordinates' value='" . $sensor_by_id->location_coordinates . "' /><br />"
+            . "Warning Level: <input type='text' id='txtWarningEdit' name='Warning' value='" . $sensor_by_id->warning_level . "' /><br />"
+            . "Emergency Level: <input type='text' id='txtEmergencyEdit' name='Emergency' value='" . $sensor_by_id->emergency_level . "' /><br />"
             . "</div>"
             . "<div class='modal-footer'>"
             . "<button class='btn btn-default' data-dismiss='modal'  name='". $sensor_by_id->id ."'>
@@ -60,11 +62,15 @@ class SensorsController extends Controller
         $sensor_info->location_code = $request->loc_code;
         $sensor_info->additional_location_info = $request->additon_loc_info;
         $sensor_info->location_coordinates = $request->sensor_coordinates;
+        $sensor_info->warning_level = $request->sensor_warning;
+        $sensor_info->emergency_level = $request->sensor_emergency;
         $sensor_info->save();
         $saved_sensor_info =    "<div class='modal-body'>"
             . "<input type='text' id='txt_location_code' name='location_code' value='" . $sensor_info->location_code . "' /><br />"
             . "<input type='text' id='txt_additional_location_info' name='additional_location_info' value='" . $sensor_info->additional_location_info . "' /><br />"
             . "<input type='text' id='txt_location_coordinates' name='location_coordinates' value='" . $sensor_info->location_coordinates . "' /><br />"
+            . "<input type='text' id='txt_warning_level' name='warning_level' value='" . $sensor_info->warning_level . "' /><br />"
+            . "<input type='text' id='txt_emergency_level' name='emergency_level' value='" . $sensor_info->emergency_level  . "' /><br />"
             //. "<button class='btn buttonAsLink'> Change Password </button>"
             . "</div>"
             . "<div class='modal-footer'>"
@@ -106,6 +112,8 @@ class SensorsController extends Controller
         $sensors->additional_location_info = $request->sensor_additional_info;
         $coordidates = $request->sensor_lat .', '. $request->sensor_long;
         $sensors->location_coordinates = $coordidates;
+        $sensors->warning_level  = $request->warning_level;
+        $sensors->emergency_level  = $request->emergency_level ;
 
         $sensors->save();
 

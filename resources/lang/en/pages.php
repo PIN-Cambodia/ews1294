@@ -30,7 +30,7 @@ return [
     'select_district' => 'Select District',
     'select_communes' => 'Select Communes',
     'tbl_title_total' => 'Total',
-    '' => '',
+    'checkAll' => 'Check All',
     '' => '',
     '' => '',
     '' => '',

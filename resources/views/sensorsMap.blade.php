@@ -20,7 +20,8 @@
   {{--</section>--}}
 
 {{--@endsection--}}
-
+<link rel="stylesheet" href="http://dev.openlayers.org/theme/default/style.css" type="text/css">
+<link rel="stylesheet" href="http://dev.openlayers.org/examples/style.css" type="text/css">
 <script src="/js/OpenLayers.js"></script>
 <script>
   map = new OpenLayers.Map("mapdiv");
@@ -39,10 +40,19 @@
   var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
   @foreach($sensors as $sensor)
     // Define markers as "features" of the vector layer:
+    var imgSensor;
+    @if($sensor->stream_height >= $sensor->warning_level && $sensor->stream_height < $sensor->emergency_level)
+            imgSensor='img/marker_yellow.png';
+    @elseif($sensor->stream_height >= $sensor->emergency_level)
+            imgSensor='img/marker_red.png';
+    @else
+            imgSensor='img/marker_black.png';
+    @endif
     var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point( {{$sensor->location_coordinates }} ).transform(epsg4326, projectTo),
-            {description:'<a href ="/sensorsLog20?sensor_id={{$sensor->sensor_id }}"> {{$sensor->location_coordinates }}</a>'} ,
-            {externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+            {description:'<b>Show Report of Sensor ID: {{$sensor->sensor_id}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor->sensor_id }}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 20 readings</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor->sensor_id }}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 1th readings of 30 days</b> </a>'} ,
+            {
+              externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
     );
     vectorLayer.addFeatures(feature);
 
@@ -51,20 +61,20 @@
   var marker = new OpenLayers.Marker(101.2336,13.3665);
   marker.id = " {{$sensor->id}} ";
   marker.events.register("click",marker,function () {
-    alert('test on click on map');
+    //alert('test on click on map');
   });
 
 //  var feature = new OpenLayers.Feature.Vector(
 //          new OpenLayers.Geometry.Point( 105.96,12.55  ).transform(epsg4326, projectTo),
 //          {description:'Big Ben'} ,
-//          {externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
 //  );
 //  vectorLayer.addFeatures(feature);
 //
 //  var feature = new OpenLayers.Feature.Vector(
 //          new OpenLayers.Geometry.Point( 105.67,12.00 ).transform(epsg4326, projectTo),
 //          {description:'London Eye'} ,
-//          {externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
 //  );
 //  vectorLayer.addFeatures(feature);
 

@@ -1,36 +1,105 @@
 $(document).ready(function(){
     var totalNo = 0;
-    /*$.ajaxSetup({
-        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-    });
-*/
+
     $('#province').on('change',function(e){
         console.log(e);
         var pro_id = e.target.value;
         $.get('/disNcom?pro_id='+ pro_id , function(data)
         {
+            $('#numberOfPhones').empty();
+            $('#divcheckall').empty();
+            $('#divcheckall').append('<input type="checkbox" value="'+ pro_id + '" id="' + pro_id + '" class="checkall"/> <span>Check All</span><br />');
             $('#divdistricts').empty();
-            //alert(data);
+            var isDistrict = 0;
+            var preDis;
             $.each(data, function(index, disObj) {
-                // alert(data.length);
                 var CCode2digits = disObj['CCode'];
                 var districtSize = 0;
-                if(/^[0-9]*01$/.test(disObj['CCode'])) // Any digits that ending with 01
-                {
+                if(index>0)
+                    preDis = data[index-1]['DCode'];
 
-                    $('#divdistricts').append('<input type="checkbox" value="'+ disObj['DCode'] + '" id="' + disObj['DCode'] + '" class="district"/> <span>'+ disObj['DName'] + '</span><br />');
-                    $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +'<input type="checkbox" value="'+ disObj['CCode'] +'" id="' + disObj['CCode'] +'" name=\"' + disObj['CCode']+'\" class="commune"/> <span>'+ disObj['CName'] +' </span><br />');
-                    // $('#divdistricts').append('<input type="checkbox" value="'+ disObj['DCode'] + '" id="' + disObj['DCode'] + '" class="district"/> <span>'+ disObj['DName_kh'] + '</span><br />');
-                    // $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ '<input type="checkbox" value="'+ disObj['CCode'] +'" id="' + disObj['CCode'] +'" name=\"' + disObj['CCode']+'\" class="commune"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
-                }
-                else
+                if(preDis != data[index]['DCode'])
                 {
-                    // $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ CCode2digits +'<input type="checkbox" value="'+ disObj['CCode'] +'" id="'+ disObj['CCode'] +'" name=\"'+ disObj['CCode'] +'\" class="commune"/> <span>'+ disObj['CName_kh'] +' ('+ disObj['CName_en'] + ')</span><br />');
-                    $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ '<input type="checkbox" value="'+ disObj['CCode'] +'" id="'+ disObj['CCode'] +'" name=\"'+ disObj['CCode'] +'\" class="commune"/> <span>'+ disObj['CName'] +' </span><br />');
+                    $('#divdistricts').append('<input type="checkbox" value="'+ disObj['DCode'] + '" id="' + disObj['DCode'] + '" class="district"/> <span>'+ disObj['DName'] + '</span><br />');
+                    $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="checkbox" value="'+ disObj['CCode'] +'" id="' + disObj['CCode'] +'" name=\"' + disObj['CCode']+'\" class="commune"/> <span>'+ disObj['CName'] +' </span><br />');
+                }
+                else{
+                    $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="checkbox" value="'+ disObj['CCode'] +'" id="'+ disObj['CCode'] +'" name=\"'+ disObj['CCode'] +'\" class="commune"/> <span>'+ disObj['CName'] +' </span><br />');
                 }
             });
         });
 
+    });
+
+    // onClick on CheckAll checkbox
+    $(document).on("click",".checkall",function (e) {
+        var pro_id = e.target.value;
+        var isCheckAll = document.getElementById(this.id).checked;
+        if(isCheckAll) {
+            $.ajax({
+                url: '/disNcom?pro_id='+ pro_id ,
+                method: 'GET',
+                async: false,
+                success: function (allcommunes) {
+                    var previousDis;
+                    $.each(allcommunes, function(i, eachCommune) {
+                        if(i>0)
+                            previousDis = allcommunes[i-1]['DCode'];
+                        if(previousDis != allcommunes[i]['DCode'])
+                        {
+                            document.getElementById(eachCommune['DCode']).checked = true;
+                            document.getElementById(eachCommune['CCode']).checked = true;
+                        }
+                        else
+                            document.getElementById(eachCommune['CCode']).checked = true;
+                    });
+
+                    $.ajax({
+                        url: '/checkall?pro_id='+ pro_id ,
+                        method: 'GET',
+                        async: false,
+                        success: function (NoOfPhoneInThisProvince) {
+                            totalNo = NoOfPhoneInThisProvince[0].phone;
+                            $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+        else
+        {
+            $.ajax({
+                url: '/disNcom?pro_id='+ pro_id ,
+                method: 'GET',
+                async: false,
+                success: function (allcommunes) {
+                    var previousDis;
+                    $.each(allcommunes, function(i, eachCommune) {
+                        if(i>0)
+                            previousDis = allcommunes[i-1]['DCode'];
+                        if(previousDis != allcommunes[i]['DCode'])
+                        {
+                            document.getElementById(eachCommune['DCode']).checked = false;
+                            document.getElementById(eachCommune['CCode']).checked = false;
+                        }
+                        else
+                            document.getElementById(eachCommune['CCode']).checked = false;
+                    });
+                    totalNo = 0;
+                    $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                    //$('#numberOfPhones').empty();
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
     });
 
 // onClick on district
@@ -51,16 +120,20 @@ $(document).ready(function(){
                     document.getElementById(disObj['CCode']).checked = true;
                     if(!eachCommune1)
                     {
-                        // alert('eachCommune1 is false; TotalNo = '+totalNo);
-                        $.get('/numberOfPhones?commune_id='+ disObj['CCode'] , function(NoOfPhoneInThisCommune)
-                        {
-                            totalNo = totalNo + NoOfPhoneInThisCommune.length;
-
-                            if (index == district_length - 1) {
-                                $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                        $.ajax({
+                            url: '/numberOfPhonesUpdate?commune_id='+ disObj['CCode'] ,
+                            method: 'GET',
+                            async: false,
+                            success: function (NoOfPhoneInThisCommune) {
+                                totalNo = totalNo + NoOfPhoneInThisCommune[0].phone;
+                                if ( index == district_length - 1) {
+                                    $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                                }
+                            },
+                            error: function (err) {
+                                console.log(err);
                             }
                         });
-                        //alert('eachCommune1 was not checked; TotalNo = '+totalNo);
                     }
                     else {
                         totalNo = totalNo;
@@ -81,52 +154,63 @@ $(document).ready(function(){
                     document.getElementById(disObj['CCode']).checked = false;
                     if(eachCommune2)
                     {
-
-                        $.get('/numberOfPhones?commune_id='+ disObj['CCode'] , function(NoOfPhoneInThisCommune)
-                        {
-                            totalNo = totalNo - NoOfPhoneInThisCommune.length;
-
-                            if ( index == district_length - 1) {
-                                $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                        $.ajax({
+                            url: '/numberOfPhonesUpdate?commune_id='+ disObj['CCode'] ,
+                            method: 'GET',
+                            async: false,
+                            success: function (NoOfPhoneInThisCommune) {
+                                totalNo = totalNo - NoOfPhoneInThisCommune[0].phone;
+                                if ( index == district_length - 1) {
+                                    $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                                }
+                            },
+                            error: function (err) {
+                                console.log(err);
                             }
                         });
-                        //alert('eachCommune1 was checked; TotalNo = '+totalNo);
                     }
                     else {
                         totalNo = totalNo;
                     }
-                    //$('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
-
                 });
             });
         }
-        //alert('eachCommune1 is false; TotalNo = '+totalNo);
-        // alert('2. TotalNo = '+totalNo);
-        // alert('2A. TotalNo = '+totalNo);
-
     });
 
 // onClick on commnue
 
     $(document).on("click",".commune",function(e){
-        //alert('3. TotalNo = '+totalNo);
         var testThis = document.getElementById(this.id).checked;
         if(testThis)
         {
-            $.get('/numberOfPhones?commune_id='+ this.id , function(data)
-            {
-                totalNo = totalNo + data.length;
-                $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+            $.ajax({
+                url: '/numberOfPhonesUpdate?commune_id='+ this.id ,
+                method: 'GET',
+                async: false,
+                success: function (NoOfPhoneInThisCommuneSelect) {
+                    totalNo = totalNo + NoOfPhoneInThisCommuneSelect[0].phone;
+                    $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                },
+                error: function (err) {
+                    console.log(err);
+                }
             });
         }
         else {
-            $.get('/numberOfPhones?commune_id='+ this.id , function(data)
-            {
-                totalNo = totalNo - data.length;
-                $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+
+            $.ajax({
+                url: '/numberOfPhonesUpdate?commune_id='+ this.id ,
+                method: 'GET',
+                async: false,
+                success: function (NoOfPhoneInThisCommuneDiselect) {
+                    totalNo = totalNo - NoOfPhoneInThisCommuneDiselect[0].phone;
+                    $('#numberOfPhones').html('<h2>'+ totalNo +'</h2>');
+                },
+                error: function (err) {
+                    console.log(err);
+                }
             });
         }
-        //alert('4. TotalNo = '+totalNo);
     });
 
 

@@ -14,14 +14,37 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li class="active"> {{ trans('sensors.modal_title_edit_sensor') }} </li>
+                <li class="active"> {{ trans('sensors.sensorLogReport') }} </li>
             </ol>
         </div><!--/.row-->
         <div class="row" >
             <div class="col-xs-12 col-md-12 col-lg-12" >
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center "><b>{{ trans('sensors.sensorlog24') }}</b>
-
+                    <div class="panel-heading text-center ">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-9 col-lg-10 "><b>
+                                    @if($reportPage=='1')
+                                        {{ trans('sensors.sensorlog24') }}
+                                    @else
+                                        {{ trans('sensors.sensorlog1threadingOf30days') }}
+                                    @endif
+                                </b></div>
+                            <div class="col-xs-6 col-md-3 col-lg-2 ">
+                                @if($reportPage=='2')
+                                    <a href="sensorsLog20?sensor_id={{$sensorId}}">
+                                @else
+                                    <a href="sensorsLog1thReadingOf30days?sensor_id={{$sensorId}}">
+                                @endif
+                                <button class="btn btn-info" id="sensor_log_report">
+                                    <i class="fa fa-table  fa-lg" aria-hidden="true"></i>
+                                    @if($reportPage=='1')
+                                        {{ trans('sensors.sensorlog1threadingOf30daysBtn') }}
+                                    @else
+                                        {{ trans('sensors.sensorlog24Btn') }}
+                                    @endif
+                                    </button></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <table class="table table-bordered" id="sensorlogs-table">
