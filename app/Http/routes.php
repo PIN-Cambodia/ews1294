@@ -43,11 +43,27 @@ Route::get('/extractTargetPhones', function () {
 });
 
 Route::get('/soundFile', function () {
-    if (App::getLocale()=='km')
-        $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
-    else
-        $provinces = DB::table('province')->select('PROCODE','PROVINCE')->get();
-    // var_dump($provinces);
+
+    if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
+    {
+        if (App::getLocale()=='km')
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
+        else
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE')->get();
+    }
+    if(Auth::user()->hasRole('PCDM'))
+    {
+        $pcdm_province=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
+
+        if (App::getLocale()=='km')
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')
+                    -> where('PROCODE', $pcdm_province->province_code)
+                    ->get();
+        else
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE')
+                    -> where('PROCODE', $pcdm_province->province_code)
+                    ->get();
+    }
     return view('uploadSoundFile',['provinces' => $provinces]);
 })->middleware('auth');
 
@@ -55,7 +71,7 @@ Route::get('/sensors', function () {
     $sensors = DB::table('sensors')->get();
     //var_dump($sensors); die();
     return view('sensors',['sensors' => $sensors]);
-});
+})->middleware('auth');
 
 Route::get('/districts', function()
 {
@@ -335,7 +351,7 @@ Route::get('/sensormap', function () {
     return view('sensorsMap',['sensors' => $sensorlogsAll]);
 });
 
-// Sensor Trigger
+/** Sensor Trigger Report data display **/
 Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
 
 
@@ -367,3 +383,8 @@ Route::get('/checkallTest', function()
     var_dump($districs);
 //    return $districs;
 });
+
+/** Sensor Trigger Add, Edit, and Delete **/
+/** Add **/
+// get all province to be displayed in add modal
+Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces'])->middleware('auth');
