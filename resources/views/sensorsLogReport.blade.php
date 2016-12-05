@@ -10,15 +10,16 @@
 @endsection
 @section('content')
 
-    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-        <div class="row">
-            <ol class="breadcrumb">
-                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li class="active"> {{ trans('sensors.sensorLogReport') }} </li>
-            </ol>
-        </div><!--/.row-->
-        <div class="row" >
-            <div class="col-xs-12 col-md-12 col-lg-12" >
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+            <li class="active"> {{ trans('sensors.sensorLogReport') }} </li>
+        </ol>
+    </div><!--/.row-->
+    <div class="row" >
+        <div class="col-xs-12 col-md-12 col-lg-12" >
+            <div class="fixed-panel">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center ">
                         <div class="row">
@@ -78,29 +79,28 @@
                             @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/.row-->
+                    </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+            </div><!-- /fixed-panel -->
+        </div><!--/.cold-->
+    </div><!--/.row-->
+</div>	<!--/.main-->
 
-    </div>	<!--/.main-->
+<script>
 
-    <script>
-
-        $(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            var table = $('#sensorlogs-table').DataTable({
-                "paging":   true
-            });
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
 
-    </script>
+        var table = $('#sensorlogs-table').DataTable({
+            "paging":   true
+        });
+    });
+
+</script>
 @endsection
 
 
