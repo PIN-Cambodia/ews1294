@@ -109,7 +109,7 @@ class GetPhonesFromCallLogCtrl extends Controller {
 //			$commune_code = "";
             foreach($cateDecode as $i => $v)
             {
-                if(strlen($v->category->base)==6)
+                if(strlen($v->category->base)==5 || strlen($v->category->base)==6)
                 {
                     $commune_code = $v->category->base;
                     break;
