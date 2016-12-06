@@ -164,12 +164,23 @@
         /* Display Modal Add New Sensor Trigger */
         $(document).on('click', '#add_sensor_trigger', function ()
         {
-            alert("report is clicked");
-            $('#modal_add_sensor_trigger_record').modal('show');
+            console.log("report is clicked: token=" + token);
+            $.ajax({
+                type: "POST",
+                url: "{{ url('/getAllProvinces') }}",
+                data: {_token: token},
+                cache: false,
+                success: function(result)
+                {
+                    // alert("success= " + result[0].id);
+                    console.log("result= " + result);
+//                    $("#sensor_info_detail").html(result).show();
+//                    $('#modal_sensor_record').modal('show');
+                    $('#modal_add_sensor_trigger_record').html(result).modal('show');
+                }
+            });
             return false;
         });
-
-
 
         /* Add Sensor Trigger Data */
         /*$(document).on('click', '#add_sensor_trigger_data', function () {

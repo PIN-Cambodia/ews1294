@@ -15,9 +15,14 @@ class SensorTriggerController extends Controller
         return view('sensor/sensortrigger', ['sensor_trigger' => $sensor_trigger]);
     }
 
+    public function getAllProvinces()
+    {
+        $all_provinces = province::all();
+        return $all_provinces;
+    }
     public function getPDCDataForSensorTrigger()
     {
-        $province = province::all();
+
         //$district = DB::table('province')->get();
         //$province = DB::table('province')->get();
 

@@ -25,18 +25,12 @@
 <script src="/js/OpenLayers.js"></script>
 <script>
   map = new OpenLayers.Map("mapdiv");
-  //alert('map=' + map);
   map.addLayer(new OpenLayers.Layer.OSM());
-
   epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
   projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
-
   var lonLat = new OpenLayers.LonLat( 104.9167,11.5500 ).transform(epsg4326, projectTo);
-
-
   var zoom=7;
   map.setCenter (lonLat, zoom);
-
   var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
   @foreach($sensors as $sensor)
     var imgSensor="img/marker_black.png";
@@ -64,27 +58,10 @@
                       externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
                     );
                 vectorLayer.addFeatures(feature);
-
           @endif
         @endforeach
     @endif
   @endforeach
-
-//  var feature = new OpenLayers.Feature.Vector(
-//          new OpenLayers.Geometry.Point( 105.96,12.55  ).transform(epsg4326, projectTo),
-//          {description:'Big Ben'} ,
-//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-//  );
-//  vectorLayer.addFeatures(feature);
-//
-//  var feature = new OpenLayers.Feature.Vector(
-//          new OpenLayers.Geometry.Point( 105.67,12.00 ).transform(epsg4326, projectTo),
-//          {description:'London Eye'} ,
-//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-//  );
-//  vectorLayer.addFeatures(feature);
-
-
   map.addLayer(vectorLayer);
   //Add a selector control to the vectorLayer with popup functions
   var controls = {
