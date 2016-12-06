@@ -148,7 +148,8 @@ class GetPhonesFromCallLogCtrl extends Controller {
 			}
 			else
 					$res_sms = "Fail to insert because some avariables are null.";
-			echo $phone;
+//			echo $phone;
+        echo $cateDecode;
 			// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 	}
 
