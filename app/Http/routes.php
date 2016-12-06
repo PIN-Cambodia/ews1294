@@ -391,3 +391,16 @@ Route::get('/checkallTest', function()
 /** Add **/
 // get all province to be displayed in add modal
 Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces'])->middleware('auth');
+
+
+Route::get('/testAPI', function () {
+    $findCom ='Repeat';
+    if(strlen($findCom) == 5 || strlen($findCom) == 6)
+    {
+        echo '5';
+        if(preg_match('/^[0-9]/',$findCom))
+            echo 'true';
+        else
+            echo 'false';
+    }
+});

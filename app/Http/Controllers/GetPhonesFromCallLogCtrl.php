@@ -110,9 +110,10 @@ class GetPhonesFromCallLogCtrl extends Controller {
             foreach($cateDecode as $i => $v)
             {
                 $findCommune = $v->category->base;
-                if(strlen($findCommune)>=5 && strlen($findCommune)<=6)
+                echo "com: ".$findCommune;
+                if(strlen($findCommune)==5 || strlen($findCommune)==6)
                 {
-                    if(preg_match('/[^0-9]/',$findCommune))
+                    if(preg_match('/^[0-9]/',$findCommune))
                     {
                         $commune_code = $findCommune;
                         break;
