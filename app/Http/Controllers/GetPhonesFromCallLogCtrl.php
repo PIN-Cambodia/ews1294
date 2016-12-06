@@ -109,10 +109,15 @@ class GetPhonesFromCallLogCtrl extends Controller {
 //			$commune_code = "";
             foreach($cateDecode as $i => $v)
             {
-                if(strlen($v->category->base)==5 || strlen($v->category->base)==6)
+                $findCommune = $v->category->base;
+                if(strlen($findCommune)>=5 && strlen($findCommune)<=6)
                 {
-                    $commune_code = $v->category->base;
-                    break;
+                    if(preg_match('/[^0-9]/',$findCommune))
+                    {
+                        $commune_code = $findCommune;
+                        break;
+                    }
+
                 }
             }
 
@@ -148,8 +153,8 @@ class GetPhonesFromCallLogCtrl extends Controller {
 			}
 			else
 					$res_sms = "Fail to insert because some avariables are null.";
-//			echo $phone;
-        echo $cateDecode;
+			echo $phone;
+//        echo $cateDecode;
 			// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 	}
 
