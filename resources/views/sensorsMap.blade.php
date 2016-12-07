@@ -29,7 +29,7 @@
   epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
   projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
   /*var lonLat = new OpenLayers.LonLat( 104.9167,11.5500 ).transform(epsg4326, projectTo);*/
-  var lonLat = new OpenLayers.LonLat( 104.9167,11.9000 ).transform(epsg4326, projectTo);
+  var lonLat = new OpenLayers.LonLat( 106.00,11.9000 ).transform(epsg4326, projectTo);
   var zoom=8;
   map.setCenter (lonLat, zoom);
   var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
