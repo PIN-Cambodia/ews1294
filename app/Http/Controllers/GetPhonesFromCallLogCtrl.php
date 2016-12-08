@@ -106,23 +106,22 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	{
 			$jsonStr = Input::get('values');
             $cateDecode = json_decode($jsonStr);
-//			$commune_code = "";
             foreach($cateDecode as $i => $v)
             {
                 $findCommune = $v->category->base;
-                echo "com: ".$findCommune."<br>";
-                if(strlen($findCommune)==5 || strlen($findCommune)==6)
+                // *** If category->base is NUMERICAL CHARACTERS *** //
+                if(preg_match('/^[0-9]/',$findCommune))
                 {
-                    if(preg_match('/^[0-9]/',$findCommune))
-                    {
-                        if(substr($findCommune,0,1) === "0")
-                            $commune_code = substr($findCommune,1);
-                        else
-                            $commune_code = $findCommune;
+                    // *** AND If category->base starting with 0 character, THEN cut it out. *** //
+                    if(substr($findCommune,0,1) === "0")
+                        $findCommune = substr($findCommune,1);
+
+                    // *** AND IF len($findCommune) is between 5 (ex:10205)and 6(ex:120204) *** //
+                    if(strlen($findCommune)==5 || strlen($findCommune)==6){
+                        $commune_code = $findCommune;
                         echo "=> correct commune code; ";
                         break;
                     }
-
                 }
             }
 
