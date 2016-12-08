@@ -115,8 +115,11 @@ class GetPhonesFromCallLogCtrl extends Controller {
                 {
                     if(preg_match('/^[0-9]/',$findCommune))
                     {
-                        $commune_code = $findCommune;
-                        echo "=> correct";
+                        if(substr($findCommune,0,1) === "0")
+                            $commune_code = substr($findCommune,1);
+                        else
+                            $commune_code = $findCommune;
+                        echo "=> correct commune code; ";
                         break;
                     }
 

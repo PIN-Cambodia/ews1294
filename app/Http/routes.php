@@ -394,12 +394,18 @@ Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAll
 
 
 Route::get('/testAPI', function () {
-    $findCom ='Repeat';
+    $findCom ='60504';
     if(strlen($findCom) == 5 || strlen($findCom) == 6)
     {
-        echo '5';
+
         if(preg_match('/^[0-9]/',$findCom))
-            echo 'true';
+        {
+            if(substr($findCom,0,1) === "0")
+                echo "0 out: ".substr($findCom,1);
+            else
+                echo "no 0: ".$findCom;
+        }
+
         else
             echo 'false';
     }
