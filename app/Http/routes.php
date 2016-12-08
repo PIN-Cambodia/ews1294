@@ -394,19 +394,18 @@ Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAll
 
 
 Route::get('/testAPI', function () {
-    $findCom ='60504';
-    if(strlen($findCom) == 5 || strlen($findCom) == 6)
+    $findCommune = '0110203';
+    // *** If category->base is NUMERICAL CHARACTERS *** //
+    if(preg_match('/^[0-9]/',$findCommune))
     {
+        // *** AND If category->base starting with 0 character, THEN cut it out. *** //
+        if(substr($findCommune,0,1) === "0")
+            $findCommune = substr($findCommune,1);
 
-        if(preg_match('/^[0-9]/',$findCom))
-        {
-            if(substr($findCom,0,1) === "0")
-                echo "0 out: ".substr($findCom,1);
-            else
-                echo "no 0: ".$findCom;
+        // *** AND IF len($findCommune) is between 5 (ex:10205)and 6(ex:120204) *** //
+        if(strlen($findCommune)==5 || strlen($findCommune)==6){
+            $commune_code = $findCommune;
+            echo $commune_code."=> correct commune code; ";
         }
-
-        else
-            echo 'false';
     }
 });

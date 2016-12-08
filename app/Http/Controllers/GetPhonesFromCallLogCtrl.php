@@ -119,7 +119,7 @@ class GetPhonesFromCallLogCtrl extends Controller {
                     // *** AND IF len($findCommune) is between 5 (ex:10205)and 6(ex:120204) *** //
                     if(strlen($findCommune)==5 || strlen($findCommune)==6){
                         $commune_code = $findCommune;
-                        echo "=> correct commune code; ";
+                        echo $commune_code."=> correct commune code; ";
                         break;
                     }
                 }
