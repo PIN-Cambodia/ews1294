@@ -330,25 +330,28 @@ Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addS
 Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity')->middleware('auth');
 
 Route::get('/sensormap', function () {
-    $sensorIds=sensors::select('sensor_id')->get()->toArray();
+    $sensorIds=sensors::select('sensor_id','location_coordinates')->get()->toArray();
     $sensorlogsAll = array();
+    $i=0;
     foreach($sensorIds as $sensorId)
     {
         $sensorlogs = DB::table('sensorlogs')
-            ->join('sensortriggers','sensortriggers.sensor_id','=','sensorlogs.sensor_id')
             ->join('sensors','sensorlogs.sensor_id','=','sensors.sensor_id')
-//            ->join('commune','district.DCode','=','commune.DCode')
-            ->select('sensorlogs.id as id','sensortriggers.sensor_id', 'stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates')
-//            ->select('sensors.id', 'sensors.sensor_id','sensortriggers.level_emergency as emergency_level','sensortriggers.level_warning as warning_level','sensorlogs.stream_height')
-            ->whereIn('sensorlogs.sensor_id',$sensorId)
+            ->join('sensortriggers','sensortriggers.sensor_id','=','sensorlogs.sensor_id')
+            ->select('sensorlogs.id as id','sensortriggers.sensor_id as sensor_id', 'stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates',DB::raw("timestampdiff(HOUR, timestamp, NOW())"),DB::raw("NOW()"))
+            ->where('sensorlogs.sensor_id','=',$sensorId['sensor_id'])
             ->orderBy('sensorlogs.timestamp','desc')
             ->orderBy('sensorlogs.sensor_id')
+            ->where(DB::raw("timestampdiff(HOUR, timestamp, NOW())"),'<=','24')
             ->limit(1)
             ->get();
-        array_push($sensorlogsAll,$sensorlogs);
+        if(sizeof($sensorlogs)>0)
+        {
+            $sensorlogsAll[] = $sensorlogs[0];
+        }
     }
-//    var_dump($sensorlogsAll);die;
-    return view('sensorsMap',['sensors' => $sensorlogsAll]);
+    return view('sensorsMap',['sensors' => $sensorIds, 'sensors24hrs' => $sensorlogsAll]);
+
 });
 
 /** Sensor Trigger Report data display **/
@@ -393,3 +396,23 @@ Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addS
 Route::post('/editsensortrigger', ['uses' => 'Sensor\SensorTriggerController@editSensorTrigger'])->middleware('auth');
 Route::post('/saveeditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@saveEditSensorTrigger'])->middleware('auth');
 Route::post('/deletesensortrigger', ['uses' => 'Sensor\SensorTriggerController@deleteSensorTrigger'])->middleware('auth');
+
+Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces'])->middleware('auth');
+
+Route::get('/testAPI', function () {
+    $findCommune = '0110203';
+    // *** If category->base is NUMERICAL CHARACTERS *** //
+    if(preg_match('/^[0-9]/',$findCommune))
+    {
+        // *** AND If category->base starting with 0 character, THEN cut it out. *** //
+        if(substr($findCommune,0,1) === "0")
+            $findCommune = substr($findCommune,1);
+
+        // *** AND IF len($findCommune) is between 5 (ex:10205)and 6(ex:120204) *** //
+        if(strlen($findCommune)==5 || strlen($findCommune)==6){
+            $commune_code = $findCommune;
+            echo $commune_code."=> correct commune code; ";
+        }
+    }
+});
+

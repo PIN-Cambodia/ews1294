@@ -25,56 +25,44 @@
 <script src="/js/OpenLayers.js"></script>
 <script>
   map = new OpenLayers.Map("mapdiv");
-  //alert('map=' + map);
   map.addLayer(new OpenLayers.Layer.OSM());
-
   epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
   projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
-
-  var lonLat = new OpenLayers.LonLat( 104.9167,11.5500 ).transform(epsg4326, projectTo);
-
-
-  var zoom=9;
+  /*var lonLat = new OpenLayers.LonLat( 104.9167,11.5500 ).transform(epsg4326, projectTo);*/
+  var lonLat = new OpenLayers.LonLat( 106.00,11.9000 ).transform(epsg4326, projectTo);
+  var zoom=8;
   map.setCenter (lonLat, zoom);
-
   var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
-  @foreach($sensors[0] as $sensor)
-
-    // Define markers as "features" of the vector layer:
-    var imgSensor;
-    @if($sensor->stream_height >= $sensor->warning_level && $sensor->stream_height < $sensor->emergency_level)
-            imgSensor='img/marker_yellow.png';
-    @elseif($sensor->stream_height >= $sensor->emergency_level)
-            imgSensor='img/marker_red.png';
-    @elseif($sensor->stream_height < $sensor->warning_level)
-            imgSensor='img/marker_green.png';
-    @else
-            imgSensor='img/marker_black.png';
-    @endif
+  @foreach($sensors as $sensor)
+    var imgSensor="img/marker_black.png";
     var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( {{$sensor->location_coordinates }} ).transform(epsg4326, projectTo),
-            {description:'<b>Show Report of Sensor ID: {{$sensor->sensor_id}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor->sensor_id }}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 20 readings</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor->sensor_id }}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 1th readings of 30 days</b> </a>'} ,
-            {
+          new OpenLayers.Geometry.Point( {{$sensor['location_coordinates'] }} ).transform(epsg4326, projectTo),
+          {description:'<b>Show Report of Sensor ID: {{$sensor['sensor_id']}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor['sensor_id']}}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 20 readings</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor['sensor_id']}}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 1th readings of 30 days</b> </a>'} ,
+          {
               externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
     );
     vectorLayer.addFeatures(feature);
+    @if(!empty($sensors24hrs))
+        @foreach($sensors24hrs as $sensor24)
+          @if($sensor['sensor_id'] == $sensor24->sensor_id)
+                @if($sensor24->stream_height >= $sensor24->warning_level && $sensor24->stream_height < $sensor24->emergency_level)
+                    imgSensor='img/marker_yellow.png';
+                @elseif($sensor24->stream_height >= $sensor24->emergency_level)
+                    imgSensor='img/marker_red.png';
+                @elseif($sensor24->stream_height < $sensor24->warning_level)
+                    imgSensor='img/marker_green.png';
+                @endif
+                var feature = new OpenLayers.Feature.Vector(
+                    new OpenLayers.Geometry.Point( {{$sensor24->location_coordinates }} ).transform(epsg4326, projectTo),
+                    {description:'<b>Show Report of Sensor ID: {{$sensor24->sensor_id}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor24->sensor_id }}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 20 readings</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor24->sensor_id }}"><i class="fa fa-btn fa-arrow-right "></i> <b>A List of 1th readings of 30 days</b> </a>'} ,
+                    {
+                      externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
+                    );
+                vectorLayer.addFeatures(feature);
+          @endif
+        @endforeach
+    @endif
   @endforeach
-
-//  var feature = new OpenLayers.Feature.Vector(
-//          new OpenLayers.Geometry.Point( 105.96,12.55  ).transform(epsg4326, projectTo),
-//          {description:'Big Ben'} ,
-//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-//  );
-//  vectorLayer.addFeatures(feature);
-//
-//  var feature = new OpenLayers.Feature.Vector(
-//          new OpenLayers.Geometry.Point( 105.67,12.00 ).transform(epsg4326, projectTo),
-//          {description:'London Eye'} ,
-//          {externalGraphic: 'img/marker_red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-//  );
-//  vectorLayer.addFeatures(feature);
-
-
   map.addLayer(vectorLayer);
   //Add a selector control to the vectorLayer with popup functions
   var controls = {

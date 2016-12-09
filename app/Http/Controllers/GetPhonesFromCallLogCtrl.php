@@ -106,13 +106,22 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	{
 			$jsonStr = Input::get('values');
             $cateDecode = json_decode($jsonStr);
-//			$commune_code = "";
             foreach($cateDecode as $i => $v)
             {
-                if(strlen($v->category->base)==6)
+                $findCommune = $v->category->base;
+                // *** If category->base is NUMERICAL CHARACTERS *** //
+                if(preg_match('/^[0-9]/',$findCommune))
                 {
-                    $commune_code = $v->category->base;
-                    break;
+                    // *** AND If category->base starting with 0 character, THEN cut it out. *** //
+                    if(substr($findCommune,0,1) === "0")
+                        $findCommune = substr($findCommune,1);
+
+                    // *** AND IF len($findCommune) is between 5 (ex:10205)and 6(ex:120204) *** //
+                    if(strlen($findCommune)==5 || strlen($findCommune)==6){
+                        $commune_code = $findCommune;
+                        echo $commune_code."=> correct commune code; ";
+                        break;
+                    }
                 }
             }
 
@@ -148,7 +157,8 @@ class GetPhonesFromCallLogCtrl extends Controller {
 			}
 			else
 					$res_sms = "Fail to insert because some avariables are null.";
-			echo $phone;
+			echo "phone number: ".$phone;
+//        echo $cateDecode;
 			// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 	}
 
