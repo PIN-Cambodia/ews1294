@@ -409,3 +409,5 @@ Route::get('/testAPI', function () {
         }
     }
 });
+
+Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart']);

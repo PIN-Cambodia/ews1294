@@ -121,7 +121,7 @@ class RavenHandlerTest extends TestCase
 
         $user = array(
             'id' => '123',
-            'emails' => 'test@test.com',
+            'email' => 'test@test.com',
         );
 
         $recordWithContext = $this->getRecord(Logger::INFO, 'test', array('user' => $user));
@@ -192,6 +192,32 @@ class RavenHandlerTest extends TestCase
         $handler = $this->getMock('Monolog\Handler\RavenHandler', null, array($this->getRavenClient()));
         $handler->expects($this->never())->method('handle');
         $handler->setLevel(Logger::ERROR);
+        $handler->handleBatch($records);
+    }
+
+    public function testHandleBatchPicksProperMessage()
+    {
+        $records = array(
+            $this->getRecord(Logger::DEBUG, 'debug message 1'),
+            $this->getRecord(Logger::DEBUG, 'debug message 2'),
+            $this->getRecord(Logger::INFO, 'information 1'),
+            $this->getRecord(Logger::ERROR, 'error 1'),
+            $this->getRecord(Logger::WARNING, 'warning'),
+            $this->getRecord(Logger::ERROR, 'error 2'),
+            $this->getRecord(Logger::INFO, 'information 2'),
+        );
+
+        $logFormatter = $this->getMock('Monolog\\Formatter\\FormatterInterface');
+        $logFormatter->expects($this->once())->method('formatBatch');
+
+        $formatter = $this->getMock('Monolog\\Formatter\\FormatterInterface');
+        $formatter->expects($this->once())->method('format')->with($this->callback(function ($record) use ($records) {
+            return $record['message'] == 'error 1';
+        }));
+
+        $handler = $this->getHandler($this->getRavenClient());
+        $handler->setBatchFormatter($logFormatter);
+        $handler->setFormatter($formatter);
         $handler->handleBatch($records);
     }
 
