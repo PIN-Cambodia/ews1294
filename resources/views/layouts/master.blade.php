@@ -11,7 +11,7 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/pe-icon-7-stroke.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
-  <!--datatable css-->
+  <!-- datatable css -->
   <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet"
         xmlns="http://www.w3.org/1999/html"/>
   <link href="//cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet" />

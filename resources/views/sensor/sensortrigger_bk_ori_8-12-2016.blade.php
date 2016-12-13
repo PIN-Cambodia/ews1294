@@ -76,12 +76,12 @@
                                         <td> {{ $sensor_trigger->created_at }} </td>
                                         <td>
                                             <!-- Edit Sensor Trigger Record Button -->
-                                            <button class="btn btn-info" id="edit_sensor_trigger_info" name="{{ $sensor_trigger->id }}">
+                                            <button class="btn btn-info" id="edit_sensor_trigger_info" name="{{ $sensor_trigger->sensor_id }}">
                                                 <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                                                 {{ trans('auth.edit') }}
                                             </button>
                                             <!-- Delete Sensor Trigger Record Button -->
-                                            <button class="btn btn-danger" id="delete_sensor_trigger_info" name="{{ $sensor_trigger->id }}">
+                                            <button class="btn btn-danger" id="delete_sensor_trigger_info" name="{{ $sensor_trigger->sensor_id }}">
                                                 <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
                                                 {{ trans('auth.delete') }}
                                             </button>
@@ -172,56 +172,6 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<!-- Edit New Sensor trigger Info Modal -->
-<div class="modal fade" id="modal_edit_sensor_trigger_record" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            {!! Form::open(array('url' =>'/editsensortrigger', 'method'=>'post','id'=>'add_sstr_form', 'files' => true)) !!}
-            {{ csrf_field() }}
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-center" id="myModalLabel">{{ trans('sensors.modal_title_add_sensor_trigger') }}</h4>
-            </div>
-            <div id="modal_edit_content"></div>
-            {!! Form::close() !!}
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!-- show confirm delete dialog -->
-<div class="modal fade" id="modal_delete_sensor_trigger_record" data-backdrop="static" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title"><b>{{ trans('sensors.dialog_confirm') }}</b></h3>
-            </div>
-            <div class="modal-body">
-                <h4>
-                    {{ trans('sensors.action_confirmation_question') }} <br /><br />
-                    {{ trans('sensors.action_confirmation_yes') }} <br />
-                    {{ trans('sensors.action_confirmation_no') }} <br /><br />
-                </h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss='modal'>
-                    <i class="fa fa-times fa-lg" aria-hidden="true"></i>
-                    {{ trans('auth.cancel') }} </button>
-                <button type="button" class="btn btn-danger" id="btn_delete_yes">
-                    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                    {{ trans('auth.delete') }}</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!--show waiting loading dialog -->
-<div class="modal fade fixed-dialog-center" id="modal_waiting" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-        <div><h3>{{ trans('sensors.waiting_dialog') }}</h3></div>
-        <div id="waiting" ></div>
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 <script>
     $(function() {
         $('#trigger-tbl').DataTable({
@@ -232,13 +182,10 @@
 
         $("#ss_district").hide();
         $("#ss_commune_div").hide();
-        $('#waiting').waiting({
-            className: 'waiting-circles',
-            elements: 10,
-            radius: 50,
-            speed: 120,
-            auto: true
-        });
+        if($("#ss_district") == "")
+        {
+            alert("empty");
+        }
 
         // global csrf token variable
         var token = $('input[name=_token]').val();
@@ -287,7 +234,7 @@
             $("#ss_district").hide();
             $("#ss_commune_div").hide();
             //$(this).find("input,textarea,select, #ss_commune_div:input").val('').end();
-            $('#able_to_reset_form_data')
+            $(this)
                     .find("input,textarea,select")
                     .val('')
                     .end()
@@ -302,54 +249,11 @@
             return false;
         });
 
-        /* Show Modal Edit Sensor Trigger */
-        $(document).on('click', '#edit_sensor_trigger_info', function ()
-        {
-            var edit_val = $(this).attr('name');
-            $.ajax({
-                type: "POST",
-                url: "{{ url('/editsensortrigger') }}",
-                data: {_token: token, edit_val: edit_val},
-                cache: false,
-                success: function(result)
-                {
-                    $('#modal_edit_content').html(result);
-                    $('#modal_edit_sensor_trigger_record').modal('show');
-                },
-                // error: function() {
-                //   alert('sorry, data cannot be fetch');
-                // }
-            });
-            //$('#modal_edit_sensor_trigger_record').modal('show');
-            return false;
-        });
-        /* Delete Sensor Trigger data */
-        $(document).on('click', '#delete_sensor_trigger_info', function()
-        {
-            var del_val = $(this).attr('name');
-            $('#modal_delete_sensor_trigger_record').modal('show');
-            $('#btn_delete_yes').click(function(e){
-                $('#modal_delete_sensor_trigger_record').modal('hide');
-                $('#modal_waiting').modal('show');
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('/deletesensortrigger') }}",
-                    data: {_token: token, delete_val: del_val},
-                    cache: false,
-                    success: function()
-                    {
-                        $('#modal_waiting').modal('hide');
-                        location.reload();
 
-                    },
-                    // error: function() {
-                    //   alert('sorry, data cannot be fetch');
-                    // }
-                });
-            });
-            return false;
-        });
     }); // ./$(function()
-
 </script>
 @endsection
+
+
+
+
