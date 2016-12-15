@@ -5,6 +5,7 @@ Homestead.json
 .env
 .idea/
 composer.phar
+/vendor/
 
 
 # Elastic Beanstalk Files

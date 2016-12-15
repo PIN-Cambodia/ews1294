@@ -37,6 +37,7 @@
     <![endif]-->
     <script src="{{asset('js/ajax-district.js')}}"></script>
     <script src="{{asset('js/sweetalert-master/dist/sweetalert.min.js')}}"></script>
+    <script src="/js/custom.js"></script>
 
   </head>
 
