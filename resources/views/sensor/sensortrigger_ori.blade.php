@@ -176,60 +176,13 @@
     <div class="modal fade" id="modal_edit_sensor_trigger_record" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                {!! Form::open(array('url' =>'/saveeditsensortrigger', 'method'=>'post','id'=>'add_sstr_form', 'files' => true)) !!}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-center" id="myModalLabel">{{ trans('sensors.modal_title_add_sensor_trigger') }}</h4>
-                </div>
-                {!! Form::open(array('url' =>'/addsensortrigger', 'method'=>'post','id'=>'add_sstr_form', 'files' => true)) !!}
-                {{ csrf_field() }}
-                <div class='modal-body'>
-                    {{ trans('sensors.sensor_id') }}
-                    <select class="fullwidth select_style" id="sensor_id" name="sensor_id">
-                        @if(!empty($sensor_list))
-                            <option value='0'> {{ trans('sensors.select_sensor') }}</option>
-                            @foreach($sensor_list as $each_sensor)
-                                <option value="{{ $each_sensor->sensor_id }}">{{ $each_sensor->sensor_id }}</option>
-                            @endforeach
-                        @endif
-                    </select><br />
-                    {{ trans('sensors.warning_level') }}
-                    <input type='text' id='warning_level' name='warning_level' /><br />
-                    {{ trans('sensors.emergency_level')}}
-                    <input type='text' id='emergency_level' name='emergency_level'  /><br />
-                    {{ trans('sensors.affected_communes')}} <br />
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <select class="fullwidth select_style" id="ss_province">
-                                @if(!empty($all_province))
-                                    <option value='0'> {{ trans('pages.select_province') }}</option>
-                                    @foreach($all_province as $each_province)
-                                        @if (App::getLocale()=='km')
-                                            <option value="{{ $each_province->PROCODE }}">{{ $each_province->PROVINCE_KH }}</option>
-                                        @else
-                                            <option value="{{ $each_province->PROCODE }}">{{ $each_province->PROVINCE }}</option>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-lg-3">
-                            <select class="fullwidth select_style" id="ss_district"></select>
-                        </div>
-                        <div class="col-lg-6" id="ss_commune_div">
-                            <div class="row select_style_height">
-                                <div class="col-lg-12" id="ss_commune" name="ss_communes"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    {{ trans('sensors.phone_numbers')}} <br />
-                    <textarea rows="4" cols="50" id='phone_numbers' name='phone_numbers'></textarea> <br />
-                    {{ trans('sensors.sound_file_warning')}}
-                    <input type='file' id='warning_sound_file' name='warning_sound_file' accept='audio/*'/><br />
-                    {{ trans('sensors.sound_file_emergency')}}
-                    <input type='file' id='emergency_sound_file' name='emergency_sound_file' accept='audio/*'/><br />
-                    {{ trans('sensors.emails')}} <br />
-                    <textarea rows="4" cols="50" id='email_list' name='email_list'></textarea> <br />
+                    <h4 class="modal-title text-center" id="myModalEdit">{{ trans('sensors.modal_title_edit_sensor_trigger') }}</h4>
+                </div><!-- /.modal-header -->
+                <div class='modal-body' id="modal_edit_content">
+
                 </div><!-- /.modal-body -->
                 <div class='modal-footer'>
                     <button class='btn btn-default' data-dismiss='modal'>
@@ -303,6 +256,7 @@
 
             /* Show Districts select option */
             $('#ss_province').change(function () {
+                alert("ss province 1");
                 var province_id = $('#ss_province').val();
                 if(province_id !="")
                 {
@@ -364,6 +318,20 @@
             $(document).on('click', '#edit_sensor_trigger_info', function ()
             {
                 var edit_val = $(this).attr('name');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('/geteditsensortrigger') }}",
+                    data: {_token: token, edit_val: edit_val},
+                    cache: false,
+                    success: function(result)
+                    {
+                        $('#modal_edit_content').html(result);
+                        $('#modal_edit_sensor_trigger_record').modal('show');
+                    },
+                    // error: function() {
+                    //   alert('sorry, data cannot be fetch');
+                    // }
+                });
                 //$('#modal_edit_sensor_trigger_record').modal('show');
                 return false;
             });

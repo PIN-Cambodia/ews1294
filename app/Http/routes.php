@@ -393,7 +393,7 @@ Route::get('/checkallTest', function()
 Route::post('/getDistricts', ['uses' => 'Sensor\SensorTriggerController@getDistrictPerProvince'])->middleware('auth');
 Route::post('/getCommunes', ['uses' => 'Sensor\SensorTriggerController@getCommunesPerDistrict'])->middleware('auth');
 Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger'])->middleware('auth');
-Route::post('/editsensortrigger', ['uses' => 'Sensor\SensorTriggerController@editSensorTrigger'])->middleware('auth');
+Route::post('/geteditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@getEditSensorTrigger'])->middleware('auth');
 Route::post('/saveeditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@saveEditSensorTrigger'])->middleware('auth');
 Route::post('/deletesensortrigger', ['uses' => 'Sensor\SensorTriggerController@deleteSensorTrigger'])->middleware('auth');
 
