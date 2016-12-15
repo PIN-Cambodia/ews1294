@@ -23,14 +23,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center ">
                         <div class="row">
-                            <div class="col-xs-6 col-md-9 col-lg-10 "><b>
+                            <div class="col-xs-5 col-md-7 col-lg-9 "><b>
                                     @if($reportPage=='1')
                                         {{ trans('sensors.sensorlog24') }}
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days') }}
                                     @endif
                                 </b></div>
-                            <div class="col-xs-6 col-md-3 col-lg-2 ">
+                            <div class="col-xs-7 col-md-5 col-lg-3 ">
                                 @if($reportPage=='2')
                                     <a href="sensorsLog20?sensor_id={{$sensorId}}">
                                 @else
