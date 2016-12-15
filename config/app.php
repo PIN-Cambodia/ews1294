@@ -167,8 +167,9 @@ return [
 
         /* User roles and permissions */
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
 
-    ],
+],
 
     /*
     |--------------------------------------------------------------------------

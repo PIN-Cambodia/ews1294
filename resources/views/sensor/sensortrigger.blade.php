@@ -175,7 +175,12 @@
 <div class="modal fade" id="modal_edit_sensor_trigger_record" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+<<<<<<< HEAD
             {!! Form::open(array('url' =>'/saveeditsensortrigger', 'method'=>'post','id'=>'edit_sstr_form', 'files' => true)) !!}
+=======
+            {!! Form::open(array('url' =>'/saveeditsensortrigger', 'method'=>'post','id'=>'add_sstr_form', 'files' => true)) !!}
+            {{ csrf_field() }}
+>>>>>>> be00e7a20e003befb40057b2367ddc39709073e1
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title text-center" id="myModalEdit">{{ trans('sensors.modal_title_edit_sensor_trigger') }}</h4>
@@ -188,7 +193,11 @@
                     <i class='fa fa-times fa-lg' aria-hidden='true'></i>
                     {{trans('sensors.cancel')}}
                 </button>
+<<<<<<< HEAD
                 <button class='btn btn-primary' id='edit_sensor_trigger_data'>
+=======
+                <button type="submit" class='btn btn-primary' id='add_sensor_trigger_data'>
+>>>>>>> be00e7a20e003befb40057b2367ddc39709073e1
                     <i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i>
                     {{ trans('sensors.save')  }}
                 </button>

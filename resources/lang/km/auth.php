@@ -37,7 +37,7 @@ return [
     'disable' => 'បិទ',
     'enable' => 'បើក',
     'reset_password' => 'កំណត់​ពាក្យសម្ងាត់​ឡើងវិញ',
-    'send_email' => 'ផ្ញើរអ៊ីមែល',
+    'send_email' => 'ផ្ញើអ៊ីមែល',
     'dialog_confirm' => 'ការបញ្ជាក់',
     'action_confirmation_question' => 'តើ​អ្នក​ប្រាកដ​ជា​ចង់​អនុវត្ត​សកម្មភាព​នេះ​ឬ​?',
     'action_confirmation_yes' => 'ចុច "លុប" ដើម្បីអនុវត្តសកម្មភាពនេះ។',

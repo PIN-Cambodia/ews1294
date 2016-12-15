@@ -1,11 +1,40 @@
 $(document).ready(function(){
     var totalNo = 0;
+    var province_val = document.getElementById('province').value;
+    if(province_val!='AllProvinces')
+    {
+        $.get('/disNcom?pro_id='+ province_val , function(data)
+        {
+            $('#numberOfPhones').empty();
+            $('#divcheckall').empty();
+            $('#divcheckall').append('<input type="checkbox" value="'+ province_val + '" id="' + province_val + '" class="checkall"/> <span>Check All</span><br />');
+            $('#divdistricts').empty();
+            var isDistrict = 0;
+            var preDis;
+            $.each(data, function(index, disObj) {
+                var CCode2digits = disObj['CCode'];
+                var districtSize = 0;
+                if(index>0)
+                    preDis = data[index-1]['DCode'];
+
+                if(preDis != data[index]['DCode'])
+                {
+                    $('#divdistricts').append('<input type="checkbox" value="'+ disObj['DCode'] + '" id="' + disObj['DCode'] + '" class="district"/> <span>'+ disObj['DName'] + '</span><br />');
+                    $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="checkbox" value="'+ disObj['CCode'] +'" id="' + disObj['CCode'] +'" name=\"' + disObj['CCode']+'\" class="commune"/> <span>'+ disObj['CName'] +' </span><br />');
+                }
+                else{
+                    $('#divdistricts').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<input type="checkbox" value="'+ disObj['CCode'] +'" id="'+ disObj['CCode'] +'" name=\"'+ disObj['CCode'] +'\" class="commune"/> <span>'+ disObj['CName'] +' </span><br />');
+                }
+            });
+        });
+    }
 
     $('#province').on('change',function(e){
         console.log(e);
         var pro_id = e.target.value;
         $.get('/disNcom?pro_id='+ pro_id , function(data)
         {
+
             $('#numberOfPhones').empty();
             $('#divcheckall').empty();
             $('#divcheckall').append('<input type="checkbox" value="'+ pro_id + '" id="' + pro_id + '" class="checkall"/> <span>Check All</span><br />');
@@ -242,7 +271,7 @@ $(document).ready(function(){
                     success: function (activityId) {
                         console.log(activityId);
                         formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                        // formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
+                        // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
                         formDataTwillioAPI.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 

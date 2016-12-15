@@ -20,7 +20,10 @@
                             </div>
                             <div class="col-xs-8 col-md-8 col-lg-8">
                                 <select name="province_id" id="province_id">
-                                    <option value="0"> {{ trans('pages.select_province') }} </option>
+                                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
+                                        <option value="0"> {{ trans('pages.select_province') }} </option>
+                                    @endif
+
                                     @foreach ($allprovince as $item)
                                         @if (App::getLocale()=='km')
                                             <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE_KH }}</option>
