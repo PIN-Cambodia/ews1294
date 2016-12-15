@@ -74,12 +74,11 @@ $(function() {
         return false;
     });
 
+    // edit sensor trigger data is submitted
     $(document).on('click', '#edit_sensor_trigger_data', function ()
     {
-        //$('#modal_add_sensor_trigger_record').modal('show');
         $('#modal_waiting').modal('show');
-        $( "#edit_sstr_form" ).submit();
-        //return false;
+        $('#edit_sstr_form').submit();
     });
 
     // allow only number in textbox

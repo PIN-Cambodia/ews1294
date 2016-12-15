@@ -246,14 +246,6 @@
         $("#ss_district").hide();
         $("#ss_commune_div").hide();
 
-//        $('#waiting').waiting({
-//            className: 'waiting-circles',
-//            elements: 10,
-//            radius: 50,
-//            speed: 120,
-//            auto: true
-//        });
-
         /* clear all data when modal onClose or dismiss */
         $('#modal_add_sensor_trigger_record').on('hidden.bs.modal', function () {
             $("#ss_district").hide();
@@ -274,12 +266,11 @@
             return false;
         });
 
+        // add sensor trigger data is submitted
         $(document).on('click', '#add_sensor_trigger_data', function ()
         {
-            //$('#modal_add_sensor_trigger_record').modal('show');
             $('#modal_waiting').modal('show');
             $( "#add_sstr_form" ).submit();
-            //return false;
         });
 
         /* Show Modal Edit Sensor Trigger */
