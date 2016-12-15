@@ -9,23 +9,7 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-<<<<<<< HEAD
             "version": "3.20.6",
-=======
-<<<<<<< HEAD
-            "version": "3.20.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "da0d8955770c3c84007bfe7c652351af2c031068"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/da0d8955770c3c84007bfe7c652351af2c031068",
-                "reference": "da0d8955770c3c84007bfe7c652351af2c031068",
-=======
-            "version": "3.20.2",
->>>>>>> 1d478056e69d2a6fd7a114db875e1a1a2694462a
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
@@ -33,14 +17,8 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f30cacdedd5cf932d471b13e16a48eeef399c97f",
                 "reference": "f30cacdedd5cf932d471b13e16a48eeef399c97f",
-=======
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/22e4ff095a78a7d82d6ac17c94ca5042be195684",
-                "reference": "22e4ff095a78a7d82d6ac17c94ca5042be195684",
->>>>>>> 9bacac1a4a4c79d10f1e74e07a7331606dd2c050
->>>>>>> 1d478056e69d2a6fd7a114db875e1a1a2694462a
                 "shasum": ""
             },
             "require": {
@@ -107,15 +85,7 @@
                 "s3",
                 "sdk"
             ],
-<<<<<<< HEAD
             "time": "2016-12-14 22:06:52"
-=======
-<<<<<<< HEAD
-            "time": "2016-12-07 22:50:22"
-=======
-            "time": "2016-12-06 21:04:43"
->>>>>>> 9bacac1a4a4c79d10f1e74e07a7331606dd2c050
->>>>>>> 1d478056e69d2a6fd7a114db875e1a1a2694462a
         },
         {
             "name": "classpreloader/classpreloader",
@@ -586,8 +556,6 @@
                 "tokenizer"
             ],
             "time": "2016-12-07 09:37:55"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "khill/lavacharts",
@@ -677,7 +645,6 @@
                 "graphs"
             ],
             "time": "2016-04-28 14:43:39"
->>>>>>> 1d478056e69d2a6fd7a114db875e1a1a2694462a
         },
         {
             "name": "laravel/framework",
