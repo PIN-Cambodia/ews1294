@@ -96,7 +96,6 @@
     </div>	<!--/.main-->
 
     <!--show waiting loading dialog -->
-    {{--<div class="modal fade fixed-dialog-center" id="modal_waiting" data-keyboard="false" data-backdrop="static">--}}
     <div class="modal fade fixed-dialog-center" id="modal_waiting" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div><h3>{{ trans('sensors.waiting_dialog') }}</h3></div><br/>
