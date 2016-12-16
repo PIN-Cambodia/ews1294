@@ -24,6 +24,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/lumino.glyphs.js"></script>
     <script src="/js/jquery-waiting.js"></script>
+    <script src="/js/jquery.validate.js"></script>
 
     <!--datatable JS -->
     <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>

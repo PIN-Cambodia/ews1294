@@ -109,9 +109,9 @@
             {!! Form::open(array('url' =>'/addsensortrigger', 'method'=>'post','id'=>'add_sstr_form', 'files' => true)) !!}
             <div class='modal-body'>
                 {{ trans('sensors.sensor_id') }}
-                <select class="fullwidth select_style" id="sensor_id" name="sensor_id">
+                <select class="fullwidth select_style" id="sensor_id" name="sensor_id" required>
                     @if(!empty($sensor_list_add_new))
-                        <option value='0'> {{ trans('sensors.select_sensor') }}</option>
+                        <option value=''> {{ trans('sensors.select_sensor') }}</option>
                         @foreach($sensor_list_add_new as $each_sensor)
                             <option value="{{ $each_sensor->sensor_id }}">{{ $each_sensor->sensor_id }}</option>
                         @endforeach
@@ -148,13 +148,13 @@
                 </div>
                 <br />
                 {{ trans('sensors.phone_numbers')}} <br />
-                <textarea rows="4" cols="50" id='phone_numbers' name='phone_numbers' placeholder='{{ trans('sensors.enter_multiple_phone_numbers') }}'></textarea> <br />
+                <textarea class="multinumbers" rows="4" cols="50" id='phone_numbers' name='phone_numbers' placeholder='{{ trans('sensors.enter_multiple_phone_numbers') }}'></textarea> <br />
                 {{ trans('sensors.sound_file_warning')}}
                 <input type='file' id='warning_sound_file' name='warning_sound_file' accept='audio/*'/><br />
                 {{ trans('sensors.sound_file_emergency')}}
                 <input type='file' id='emergency_sound_file' name='emergency_sound_file' accept='audio/*'/><br />
                 {{ trans('sensors.emails')}} <br />
-                <textarea rows="4" cols="50" id='email_list' name='email_list' placeholder='{{ trans('sensors.enter_multiple_emails') }}'></textarea> <br />
+                <textarea class="multiemail" rows="4" cols="50" id='email_list' name='email_list' placeholder='{{ trans('sensors.enter_multiple_emails') }}'></textarea> <br />
             </div><!-- /.modal-body -->
             <div class='modal-footer'>
                 <button class='btn btn-default' data-dismiss='modal'>
@@ -252,13 +252,13 @@
             $("#ss_district").hide();
             $("#ss_commune_div").hide();
             //$(this).find("input,textarea,select, #ss_commune_div:input").val('').end();
-            $('#able_to_reset_form_data')
-                    .find("input,textarea,select")
-                    .val('')
-                    .end()
-                    .find("input[type=checkbox], input[type=radio]")
-                    .prop("checked", "")
-                    .end();
+            $(this)
+                .find("input, textarea, select")
+                .val('')
+                .end()
+                .find("input[type=checkbox], input[type=radio]")
+                .prop("checked", "")
+                .end();
         });
         /* Show Modal Add New Sensor Trigger */
         $(document).on('click', '#add_sensor_trigger', function ()
@@ -270,8 +270,13 @@
         // add sensor trigger data is submitted
         $(document).on('click', '#add_sensor_trigger_data', function ()
         {
-            $('#modal_waiting').modal('show');
-            $( "#add_sstr_form" ).submit();
+            var sensor_id = $('#sensor_id').val();
+            if(sensor_id!="")
+            {
+                $('#modal_waiting').modal('show');
+                $( "#add_sstr_form" ).submit();
+            }
+
         });
 
         /* Show Modal Edit Sensor Trigger */

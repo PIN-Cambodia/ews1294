@@ -5,14 +5,6 @@
 $(function() {
     var token = $('input[name=_token]').val();
 
-    $('#waiting').waiting({
-        className: 'waiting-circles',
-        elements: 10,
-        radius: 50,
-        speed: 120,
-        auto: true
-    });
-
     $('#upload_warning_file').hide();
     $('#upload_emergency_file').hide();
 
@@ -84,7 +76,7 @@ $(function() {
     // allow only number in textbox
     $(".numeric").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+        if ($.inArray(e.keyCode, [46, 8, 9, 110]) !== -1 ||
             // Allow: Ctrl+A, Command+A
             (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
             // Allow: home, end, left, right, down, up
@@ -97,5 +89,54 @@ $(function() {
             e.preventDefault();
         }
     });
+
+    $(".multinumbers").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 188, 110]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.keyCode === 190 || e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    // jQuery.validator.addMethod("multiemail", function (value, element) {
+    //         var email = value.split(/[,]+/); // split element by ,
+    //         valid = true;
+    //         for (var i in email) {
+    //             value = email[i];
+    //             valid = valid && jQuery.validator.methods.email.call(this, $.trim(value), element);
+    //         }
+    //         return valid;
+    //     },
+    //     jQuery.validator.messages.multiemail
+    // );
+    //
+    // //$("form").validate({
+    // $("form").validate({
+    //     debug: true,
+    //     rules: {
+    //         emailTest: {
+    //             multiemail: true
+    //         }
+    //     },
+    //     messages: {
+    //         emailTest: {
+    //             multiemail: "You must enter a valid email, or comma separate multiple"
+    //         }
+    //     },
+    //     submitHandler: function(form) {
+    //         return false;
+    //     }
+    // });
+
+    // ^\d+(,\d+)*$
+    //^[0-9](,[0-9])*$
 
 });

@@ -314,7 +314,9 @@ class SensorTriggerController extends Controller
                             . "</div>"
                         . "</div><br />" // /. affected_communes div
                         . trans('sensors.phone_numbers')
-                        . "<input type='text' id='phone_numbers' name='phone_numbers' value='" . $ss_trigger_record[0]->phone_numbers . "'/><br />"
+                        // . "<input type='text' id='phone_numbers' name='phone_numbers' value='" . $ss_trigger_record[0]->phone_numbers . "'/><br />"
+                        . "<textarea class='multinumbers' rows='4' cols='50' id='phone_numbers' name='phone_numbers' placeholder='"
+                            . trans('sensors.enter_multiple_phone_numbers') . "'>" . $ss_trigger_record[0]->phone_numbers . " </textarea><br />"
                         . trans('sensors.sound_file_warning')
                         . "<div class='row' id='existing_warning_file'>"
                             . "<div class='col-lg-8' >"
