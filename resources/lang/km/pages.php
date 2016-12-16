@@ -31,7 +31,7 @@ return [
     'select_communes' => 'ជ្រើសឃំុ',
     'tbl_title_total' => 'ចំនួន​សរុប',
     'checkAll' => 'ជ្រើសយកទាំងអស់',
-    '' => '',
+    'tbl_title_wrong_number' => 'លេខ​ខុស',
     '' => '',
     '' => '',
     '' => '',

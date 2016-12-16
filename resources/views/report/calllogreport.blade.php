@@ -65,6 +65,7 @@
                                 <th class='text-center active'> {{ trans('pages.tbl_title_failed') }} </th>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_busy') }} </th>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_no_answer') }} </th>
+                                <th class='text-center active'> {{ trans('pages.tbl_title_wrong_number') }} </th>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_total') }} </th>
                             </tr>
                             </thead>
@@ -90,7 +91,7 @@
             $(location).attr("href", '/calllogreport');
         });
 
-        /* Edit User Profile */
+        /* Submit Report */
         $(document).on('click', '#submit_report', function()
         {
             // once submit_report button is clicked, disabled it for 3 seconds to prevent muliple double click
@@ -121,6 +122,7 @@
                         { "data": "failed_call" },
                         { "data": "busy_call" },
                         { "data": "no_answer_call" },
+                        { "data": "wrong_number_call" },
                         { "data": "current_total_call" }
                     ],
                     scrollY:        true,

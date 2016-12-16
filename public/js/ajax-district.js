@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var totalNo = 0;
-    var province_val = document.getElementById('province').value;
+    var province_val = $('#province').val();
     if(province_val!='AllProvinces')
     {
         $.get('/disNcom?pro_id='+ province_val , function(data)
@@ -271,7 +271,7 @@ $(document).ready(function(){
                     success: function (activityId) {
                         console.log(activityId);
                         formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                        // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
+                        // formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
                         formDataTwillioAPI.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
@@ -300,8 +300,9 @@ $(document).ready(function(){
                         });
                     },
                     error: function() {
-                        alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
                         $('#modal_waiting').modal('hide');
+                        alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
+                        //$('#modal_waiting').modal('show');
                     },
                 });
             },
