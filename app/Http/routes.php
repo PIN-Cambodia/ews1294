@@ -326,7 +326,7 @@ Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTr
 Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
 
 /*** Showing call log report for specific activity ID ***/
-//web url /calllogActivity?activID=3
+//web url/calllogActivity?activID=3
 Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity')->middleware('auth');
 
 Route::get('/sensormap', function () {

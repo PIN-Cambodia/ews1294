@@ -28,7 +28,7 @@
                                         <th class='text-center active'> {{ trans('pages.tbl_title_failed') }} </th>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_busy') }} </th>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_no_answer') }} </th>
-                                        <th class='text-center active'> {{ trans('pages.tbl_title_wrong_number') }} </th>
+                                        <th class='text-center active'> {{ trans('pages.tbl_title_error') }} </th>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_total') }} </th>
                                     </tr>
                                     </thead>
@@ -44,7 +44,7 @@
                                                 <td class='text-center'> {{ $result["failed_call"] }} </td>
                                                 <td class='text-center'> {{ $result["busy_call"] }} </td>
                                                 <td class='text-center'> {{ $result["no_answer_call"] }} </td>
-                                                <td class='text-center'> {{ $result["wrong_number_call"] }} </td>
+                                                <td class='text-center'> {{ $result["error_number_call"] }} </td>
                                                 <td class='text-center'> {{ $result["current_total_call"] }} </td>
                                             </tr>
 
