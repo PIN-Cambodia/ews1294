@@ -124,8 +124,6 @@ class SensorTriggerController extends Controller
             catch (\Exception $e) {
                 $this->logger->addError("Upload Sound file Error: " . $e->getMessage() . " in " . $e->getFile());
             }
-
-
         }
 
         /** insert data into table **/
@@ -156,7 +154,6 @@ class SensorTriggerController extends Controller
 
             $sensor_trigger_tbl->emails_list = $request -> email_list;
             $sensor_trigger_tbl->save();
-
         }
         catch (\Exception $e) {
             $this->logger->addError("Inserted Data Error: " . $e->getMessage() . " in " . $e->getFile());
@@ -172,7 +169,7 @@ class SensorTriggerController extends Controller
     {
         $edit_sensor_id = $request->edit_val;
 
-        $commune_checkbox=""; $prov_options=""; $dis_options="";$province_substr_len=0;$district_substr_len=0;
+        $commune_checkbox=""; $prov_options=""; $dis_options=""; $province_substr_len=0; $district_substr_len=0;
         $other_prov_options =""; $other_dis_options=""; $other_commune_checkbox="";
 
         // select sensor trigger record
@@ -353,8 +350,9 @@ class SensorTriggerController extends Controller
                         . "</div>" // /.row
                         //. "<input type='text' value='" . $ss_trigger_record[0]->emergency_sound_file  . "' disabled/><br />"
                         . trans('sensors.emails')
-                        . "<textarea rows='4' cols='50' id='email_list' name='email_list'>" . $ss_trigger_record[0]->emails_list . "</textarea><br />"
-                    . "</div>" // /.modal-body
+                        . "<textarea rows='4' cols='50' id='email_list_edit' name='email_list'>" . $ss_trigger_record[0]->emails_list . "</textarea><br />"
+                        . "<span id='error_email_format-edit'></span>"
+                        . "</div>" // /.modal-body
                     . "<script src='/js/custom.js'></script>"
                     ;
         return $modal_body;

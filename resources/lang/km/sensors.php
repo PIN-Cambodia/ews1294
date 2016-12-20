@@ -55,7 +55,7 @@ return [
     'change_sound_file' => 'ប្តូរ​ឯកសារ​',
     'enter_multiple_phone_numbers' => 'បញ្ចូល​លេខទូរសព្ទ​ដែល​បំបែក​ដោយ​សញ្ញា​ក្បៀស ឧ. 012xxxxxx,011xxxxxx,086xxxxxx',
     'enter_multiple_emails' => 'បញ្ចូល​អ៊ីមែល​​ដែល​បំបែក​ដោយ​សញ្ញា​ក្បៀស ឧ. abc@yahoo.com,def@gmail.com',
-    '' => '',
+    'error_email_validation' => 'ទម្រង់​អ៊ីមែល​មិន​ត្រឹមត្រូវ​៖ ',
     '' => '',
     '' => '',
     '' => '',

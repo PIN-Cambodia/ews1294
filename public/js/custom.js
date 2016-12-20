@@ -1,5 +1,8 @@
-<script>
-    $(function() {
+/**
+ * Created by phyrum on 12/14/16.
+ */
+
+$(function() {
     var token = $('input[name=_token]').val();
 
     $('#upload_warning_file').hide();
@@ -63,23 +66,6 @@
         return false;
     });
 
-    // edit sensor trigger data is submitted
-    $(document).on('click', '#edit_sensor_trigger_data', function ()
-    {
-        var check_invalid_email = checkValidateEmail($('#email_list_edit'));
-        //console.log("1. calling func= " + check_invalid_email);
-        if (check_invalid_email != "")
-        {
-            $('#error_email_format-edit').html("<font color='red'>{{trans('sensors.error_email_validation')}}" + check_invalid_email + "</font>");
-        }
-        else
-        {
-            $('#modal_waiting').modal('show');
-            $('#edit_sstr_form').submit();
-        }
-        return false;
-    });
-
     // allow only number in textbox
     $(".numeric").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
@@ -133,4 +119,3 @@ function validateEmail(email) {
     var re = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/i;
     return re.test(email) ? true : false;
 }
-</script>

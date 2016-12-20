@@ -55,7 +55,7 @@ return [
     'change_sound_file' => 'Change File',
     'enter_multiple_phone_numbers' => 'Enter Phone number and separate it by comma e.g. 012xxxxxx,011xxxxxx,086xxxxxx',
     'enter_multiple_emails' => 'Enter Email and separate it by comma e.g. abc@yahoo.com,def@gmail.com',
-    '' => '',
+    'error_email_validation' => 'Invalid Email Format: ',
     '' => '',
     '' => '',
     '' => '',
