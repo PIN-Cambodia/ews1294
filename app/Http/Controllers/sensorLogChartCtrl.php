@@ -21,7 +21,7 @@ class sensorLogChartCtrl extends Controller
 
         $sensor_id = Input::get('sensor_id');
         $graph_type = Input::get('type');
-        if($graph_type==1)
+        if($graph_type==2)
         {
             $sensorlogs = DB::table('sensorlogs')
                 ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
@@ -41,6 +41,7 @@ class sensorLogChartCtrl extends Controller
             ->select(DB::raw("level_warning, level_emergency"))
             ->where('sensor_id','=',$sensor_id)
             ->first();
+        //dd($sensorlogs);
 
         foreach($sensorlogs as $sensorlog)
         {
