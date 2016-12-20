@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var totalNo = 0;
-    var province_val = document.getElementById('province').value;
+    var province_val = $('#province').val();
     if(province_val!='AllProvinces')
     {
         $.get('/disNcom?pro_id='+ province_val , function(data)
@@ -245,13 +245,12 @@ $(document).ready(function(){
 
     $('form#uploadForm').on('submit',function(event){
         event.preventDefault();
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-
+        $('#modal_waiting').modal('show');
         var communes_selected = [];
         $.each($("input[class='commune']:checked"), function(){
             communes_selected.push($(this).val());
@@ -278,7 +277,8 @@ $(document).ready(function(){
                         console.log(activityId);
                         formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
                         // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
-                        formData.append('contacts',JSON.stringify(phones));
+                        // formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
+                        formDataTwillioAPI.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
                         formDataTwillioAPI.append('activity_id',activityId[0]);
@@ -294,6 +294,7 @@ $(document).ready(function(){
                             data: formDataTwillioAPI,
                             async: false,
                             success: function(data) {
+                                $('#modal_waiting').modal('hide');
                                 $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
                             },
                             error: function(e)

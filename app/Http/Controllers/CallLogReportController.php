@@ -34,9 +34,9 @@ class CallLogReportController extends Controller
     {
         // select activities data in a whole province based on activity created_date
         if($request->prov_id <=9)
-            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) < 6 "));
+            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) < 6 ORDER BY activity_id desc "));
         else
-            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 "));
+            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 ORDER BY activity_id desc "));
         $call_logs_result = $this->getCallLogBody($activity_data_query, false);
         return $call_logs_result;
     }
@@ -47,7 +47,7 @@ class CallLogReportController extends Controller
         $activity_id = Input::get('activID');
         // select activities data in a whole province based on activity created_date
         $activity_record = DB::table('activities')->where('activity_id', $activity_id)
-                            ->orderBy('created_at', 'desc')
+                            ->orderBy('activity_id', 'desc')
                             ->get();
         $result = $this->getCallLogBody($activity_record, true);
         return view('report/calllogreport_per_activity', ['result'=> $result]);
@@ -66,7 +66,7 @@ class CallLogReportController extends Controller
             foreach ($activity_data as $activity)
             {
                 $commune_name_all="";$success_call=0; $failed_call=0;
-                $busy_call=0; $no_answer_call=0; $current_total_call=0;
+                $busy_call=0; $no_answer_call=0; $error_number_call=0; $current_total_call=0;
                 $i=$i+1;
                 // to display each commune name per activity record
                 $each_commune_code = explode(',',$activity->list_commune_codes);
@@ -92,7 +92,7 @@ class CallLogReportController extends Controller
                     foreach($call_log_each_activity as $calllog_activity)
                     {
                         /**
-                         * calllogs.result = 1:Completed; 2:Failed; 3:Busy; 4:No Answer
+                         * calllogs.result = 1:Completed; 2:Failed; 3:Busy; 4:No Answer; 5: Error
                          */
                         if($calllog_activity->result == '1')
                             $success_call = $calllog_activity->total_result;
@@ -102,8 +102,10 @@ class CallLogReportController extends Controller
                             $busy_call = $calllog_activity->total_result;
                         elseif($calllog_activity->result == '4')
                             $no_answer_call = $calllog_activity->total_result;
+                        elseif($calllog_activity->result == '5')
+                            $error_number_call = $calllog_activity->total_result;
                     }
-                    $current_total_call = $success_call + $failed_call + $busy_call + $no_answer_call;
+                    $current_total_call = $success_call + $failed_call + $busy_call + $no_answer_call + $error_number_call;
                 }
                 // each array of a record
                 $arr_each= array("No" => $i,
@@ -115,6 +117,7 @@ class CallLogReportController extends Controller
                     'failed_call'=>$failed_call,
                     'busy_call'=>$busy_call,
                     'no_answer_call'=>$no_answer_call,
+                    'error_number_call'=>$error_number_call,
                     'current_total_call'=>$current_total_call);
                 // push each array of a record into all_array
                 array_push($all_arr, $arr_each);

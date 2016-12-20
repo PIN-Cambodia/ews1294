@@ -332,3 +332,25 @@ fieldset[disabled] .btn-primary.active {
     left:50%;
     transform: translate(0%,-50%);
 }
+.full-width{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Spinning loading */
+.spinner {
+    margin: 20px;
+    height: 80px;
+    width: 80px;
+    animation: rotate 0.8s infinite linear;
+    border: 8px solid #fff;
+    border-right-color: transparent;
+    border-radius: 50%;
+}
+
+@keyframes rotate {
+    0%    { transform: rotate(0deg); }
+    100%  { transform: rotate(360deg); }
+}

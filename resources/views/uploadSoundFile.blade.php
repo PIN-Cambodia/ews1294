@@ -94,9 +94,18 @@
             </div> <!-- / col -->
         </div><!--/.row-->
     </div>	<!--/.main-->
+
+    <!--show waiting loading dialog -->
+    <div class="modal fade fixed-dialog-center" id="modal_waiting" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div><h3>{{ trans('sensors.waiting_dialog') }}</h3></div><br/>
+            <div class="spinner"></div>
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 </section>
-{{--<meta name="_token" content="{!! csrf_token() !!}" />--}}
-<meta name="_token" content="{{ csrf_token() }}" />
+<meta name="_token" content="{!! csrf_token() !!}" />
 {{--<script src="js/jquery-1.11.1.min.js"></script>--}}
 {{-- <script type="text/javascript">
     $(document).ready(function(){

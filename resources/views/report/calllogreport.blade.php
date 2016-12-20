@@ -58,13 +58,14 @@
                                 <th rowspan='2' class='text-center active'> {{ trans('pages.tbl_title_sound_file') }} </th>
                                 <th rowspan='2' class='text-center active'> {{ trans('pages.tbl_title_list_of_communes') }} </th>
                                 <th rowspan='2' class='text-center active'> {{ trans('pages.tbl_no_of_phone_called') }} </th>
-                                <th colspan='5' class='text-center active'> {{ trans('pages.tbl_title_call_status') }} </th>
+                                <th colspan='6' class='text-center active'> {{ trans('pages.tbl_title_call_status') }} </th>
                             </tr>
                             <tr>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_completed') }} </th>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_failed') }} </th>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_busy') }} </th>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_no_answer') }} </th>
+                                <th class='text-center active'> {{ trans('pages.tbl_title_error') }} </th>
                                 <th class='text-center active'> {{ trans('pages.tbl_title_total') }} </th>
                             </tr>
                             </thead>
@@ -90,7 +91,7 @@
             $(location).attr("href", '/calllogreport');
         });
 
-        /* Edit User Profile */
+        /* Submit Report */
         $(document).on('click', '#submit_report', function()
         {
             // once submit_report button is clicked, disabled it for 3 seconds to prevent muliple double click
@@ -121,6 +122,7 @@
                         { "data": "failed_call" },
                         { "data": "busy_call" },
                         { "data": "no_answer_call" },
+                        { "data": "error_number_call" },
                         { "data": "current_total_call" }
                     ],
                     scrollY:        true,

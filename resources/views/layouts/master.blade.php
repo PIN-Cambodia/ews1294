@@ -15,7 +15,6 @@
   <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet"
         xmlns="http://www.w3.org/1999/html"/>
   <link href="//cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet" />
-
   <link href="css/custom.css" rel="stylesheet">
 
 
@@ -25,6 +24,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/lumino.glyphs.js"></script>
     <script src="/js/jquery-waiting.js"></script>
+    <script src="/js/jquery.validate.js"></script>
 
     <!--datatable JS -->
     <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
@@ -37,6 +37,7 @@
     <![endif]-->
     <script src="{{asset('js/ajax-district.js')}}"></script>
     <script src="{{asset('js/sweetalert-master/dist/sweetalert.min.js')}}"></script>
+    <script src="/js/custom.js"></script>
 
   </head>
 

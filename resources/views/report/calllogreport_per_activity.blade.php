@@ -21,13 +21,14 @@
                                         <th rowspan='2' class='text-center active'> {{ trans('pages.tbl_title_sound_file') }} </th>
                                         <th rowspan='2' class='text-center active'> {{ trans('pages.tbl_title_list_of_communes') }} </th>
                                         <th rowspan='2' class='text-center active'> {{ trans('pages.tbl_no_of_phone_called') }} </th>
-                                        <th colspan='5' class='text-center active'> {{ trans('pages.tbl_title_call_status') }} </th>
+                                        <th colspan='6' class='text-center active'> {{ trans('pages.tbl_title_call_status') }} </th>
                                     </tr>
                                     <tr>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_completed') }} </th>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_failed') }} </th>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_busy') }} </th>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_no_answer') }} </th>
+                                        <th class='text-center active'> {{ trans('pages.tbl_title_error') }} </th>
                                         <th class='text-center active'> {{ trans('pages.tbl_title_total') }} </th>
                                     </tr>
                                     </thead>
@@ -43,6 +44,7 @@
                                                 <td class='text-center'> {{ $result["failed_call"] }} </td>
                                                 <td class='text-center'> {{ $result["busy_call"] }} </td>
                                                 <td class='text-center'> {{ $result["no_answer_call"] }} </td>
+                                                <td class='text-center'> {{ $result["error_number_call"] }} </td>
                                                 <td class='text-center'> {{ $result["current_total_call"] }} </td>
                                             </tr>
 
