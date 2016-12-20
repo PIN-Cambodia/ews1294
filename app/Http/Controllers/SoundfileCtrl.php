@@ -33,7 +33,7 @@ class SoundfileCtrl extends Controller
 
     public function insertNewActivity(Request $request)
     {
-        if (Session::token() !== $request->input('_token')) {
+        if (Session::token() != $request->input('_token')) {
             return response()->json(array('msg' => 'Unauthorized attempt to create setting'));
         }
         $communes = Input::get('communes');

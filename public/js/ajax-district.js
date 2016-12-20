@@ -246,6 +246,12 @@ $(document).ready(function(){
     $('form#uploadForm').on('submit',function(event){
         event.preventDefault();
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
         var communes_selected = [];
         $.each($("input[class='commune']:checked"), function(){
             communes_selected.push($(this).val());
@@ -259,6 +265,7 @@ $(document).ready(function(){
             success: function(phones) {
                 // ** Pass commune codes and the number of phone numbers to get activity id ** //
                 var formData = new FormData($("#uploadForm")[0]);
+                var formDataTwillioAPI = new FormData();
                 $.ajax({
                     url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
                     data: formData,
@@ -269,22 +276,22 @@ $(document).ready(function(){
                     contentType: false,
                     success: function (activityId) {
                         console.log(activityId);
-                        formData.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                        // test.append('contacts','[{"phone":"017696365"}]');
+                        formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
+                        // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
                         formData.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
-                        formData.append('activity_id',activityId[0]);
-                        formData.append('sound_url','https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/'+activityId[1]);
+                        formDataTwillioAPI.append('activity_id',activityId[0]);
+                        formDataTwillioAPI.append('sound_url','https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/'+activityId[1]);
                         // test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
-                        formData.append('no_of_retry',3);
-                        formData.append('retry_time', 10);
-                        console.log(formData);
+                        formDataTwillioAPI.append('no_of_retry',3);
+                        formDataTwillioAPI.append('retry_time', 10);
+                        console.log(formDataTwillioAPI);
                         // ** Trigger calls ** //
                         $.ajax({
                             url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
                             method: 'POST',
-                            data: formData,
+                            data: formDataTwillioAPI,
                             async: false,
                             success: function(data) {
                                 $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
@@ -297,8 +304,9 @@ $(document).ready(function(){
                             processData: false
                         });
                     },
-                    error: function() {
+                    error: function(error) {
                         alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
+                        console.log(error)
                     },
                 });
             },

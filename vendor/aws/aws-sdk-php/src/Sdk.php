@@ -16,6 +16,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionAppstream(array $args = [])
  * @method \Aws\AutoScaling\AutoScalingClient createAutoScaling(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionAutoScaling(array $args = [])
+ * @method \Aws\Batch\BatchClient createBatch(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionBatch(array $args = [])
  * @method \Aws\Budgets\BudgetsClient createBudgets(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionBudgets(array $args = [])
  * @method \Aws\CloudFormation\CloudFormationClient createCloudFormation(array $args = [])
@@ -170,6 +172,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionSwf(array $args = [])
  * @method \Aws\Waf\WafClient createWaf(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionWaf(array $args = [])
+ * @method \Aws\WafRegional\WafRegionalClient createWafRegional(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionWafRegional(array $args = [])
  * @method \Aws\WorkSpaces\WorkSpacesClient createWorkSpaces(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionWorkSpaces(array $args = [])
  * @method \Aws\XRay\XRayClient createXRay(array $args = [])
@@ -177,11 +181,7 @@ namespace Aws;
  */
 class Sdk
 {
-<<<<<<< HEAD
-    const VERSION = '3.20.3';
-=======
-    const VERSION = '3.20.2';
->>>>>>> 9bacac1a4a4c79d10f1e74e07a7331606dd2c050
+    const VERSION = '3.20.7';
 
     /** @var array Arguments for creating clients */
     private $args;

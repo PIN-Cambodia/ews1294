@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
+class ComposerStaticInitb90044b7778853dab185fc936a8950fc
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -12,16 +12,16 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -121,8 +121,8 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Zizaco\\Entrust\\' => 
         array (
@@ -424,6 +424,8 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'Aws\\AwsClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/AwsClient.php',
         'Aws\\AwsClientInterface' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/AwsClientInterface.php',
         'Aws\\AwsClientTrait' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/AwsClientTrait.php',
+        'Aws\\Batch\\BatchClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Batch/BatchClient.php',
+        'Aws\\Batch\\Exception\\BatchException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Batch/Exception/BatchException.php',
         'Aws\\Budgets\\BudgetsClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Budgets/BudgetsClient.php',
         'Aws\\Budgets\\Exception\\BudgetsException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Budgets/Exception/BudgetsException.php',
         'Aws\\CacheInterface' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/CacheInterface.php',
@@ -675,6 +677,8 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
         'Aws\\Swf\\Exception\\SwfException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Swf/Exception/SwfException.php',
         'Aws\\Swf\\SwfClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Swf/SwfClient.php',
         'Aws\\TraceMiddleware' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/TraceMiddleware.php',
+        'Aws\\WafRegional\\Exception\\WafRegionalException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/WafRegional/Exception/WafRegionalException.php',
+        'Aws\\WafRegional\\WafRegionalClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/WafRegional/WafRegionalClient.php',
         'Aws\\Waf\\Exception\\WafException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Waf/Exception/WafException.php',
         'Aws\\Waf\\WafClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Waf/WafClient.php',
         'Aws\\Waiter' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Waiter.php',
@@ -3657,10 +3661,10 @@ class ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit4cb7592cd8cfef2f43c25299c400adb2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb90044b7778853dab185fc936a8950fc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb90044b7778853dab185fc936a8950fc::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb90044b7778853dab185fc936a8950fc::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb90044b7778853dab185fc936a8950fc::$classMap;
 
         }, null, ClassLoader::class);
     }

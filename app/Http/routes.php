@@ -11,6 +11,8 @@
 |
 */
 use App\Models\Sensors;
+use App\Models\sensortriggers;
+use App\Models\targetphones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 // use File;
@@ -213,13 +215,23 @@ Route::get('/phoneNumbersSelectedByCommunes', function()
 {
     $commune_ids = Input::get('commune_ids');
     $phoneNumbersInCommunes = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$commune_ids))->get();
-    // $phoneNumbersInCommunes = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$commune_ids))->count();
-    //$data = json_encode($phoneNumbersInCommunes);
-    // $fileName = time() . '_datafile.json';
-    // File::put(public_path($fileName),$data);
-    // return public_path($fileName);
-    // return Response::download(public_path($fileName));
-    //return Response::json($data);
+    return Response::json($phoneNumbersInCommunes);
+});
+
+Route::get('/phoneNumbersSelectedByCommunesTest', function()
+{
+    $commune_ids = Input::get('commune_ids');
+    $targetphones_tbl = new targetphones;
+    $phoneNumbersInCommunes = $targetphones_tbl->select('phone')->whereIn('commune_code',explode(",",$commune_ids))->get();
+
+    $phoneNumbers_officers = \DB::table('sensortriggers')->select('phone_numbers as phone')->where('sensor_id','1020301')->get();
+
+    $splitArray = explode(",",$phoneNumbers_officers[0]->phone);
+    foreach ($splitArray as $splitArrayEach)
+    {
+        $phoneNumbersInCommunes->push(['phone'=> $splitArrayEach]);
+    }
+
     return Response::json($phoneNumbersInCommunes);
 });
 
@@ -416,5 +428,7 @@ Route::get('/testAPI', function () {
     }
 });
 
-Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart']);
+Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart30Days']);
+
+Route::get('/testGetPhoneNumbers', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@getPhoneNumbersToBeCalled']);
 
