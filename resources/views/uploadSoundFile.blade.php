@@ -105,12 +105,7 @@
 
 
 </section>
-
 <meta name="_token" content="{!! csrf_token() !!}" />
-
-
-
-
 {{--<script src="js/jquery-1.11.1.min.js"></script>--}}
 {{-- <script type="text/javascript">
     $(document).ready(function(){

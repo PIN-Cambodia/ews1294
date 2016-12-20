@@ -13,10 +13,27 @@
                 <div class="panel panel-default"  style="padding-bottom: 30px;">
                     <div class="panel-heading text-center ">
                         <div class="row">
-                            <div class="col-xs-8 col-md-9 col-lg-10 "><b>{{ trans('sensors.modal_title_edit_sensor_table') }}</b></div>
-                            <div class="col-xs-6 col-md-3 col-lg-2 "><button class="btn btn-info" id="add_sensor">
-                                    <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
-                                    {{ trans('sensors.add_new') }}</button>
+                            <div class="col-xs-8 col-md-9 col-lg-10 ">
+                                <b>
+                                    @if($graph_type=='1')
+                                        {{ trans('sensors.sensorlog24_graph') }}
+                                    @else
+                                        {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
+                                    @endif
+
+                                </b>
+                            </div>
+                            <div class="col-xs-6 col-md-3 col-lg-2 ">
+                                @if($graph_type=='1')
+                                    <a href="sensorsLog20?sensor_id={{$sensorId}}">
+                                @else
+                                    <a href="sensorsLog1thReadingOf30days?sensor_id={{$sensorId}}">
+                                @endif
+                                        <button class="btn btn-info" id="add_sensor">
+                                            <i class="fa fa-table  fa-lg" aria-hidden="true"></i>
+                                            {{ trans('sensors.sensor_log_table_link') }}
+                                        </button>
+                                    </a>
                             </div>
                         </div>
                     </div>

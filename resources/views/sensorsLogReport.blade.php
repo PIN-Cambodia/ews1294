@@ -23,27 +23,35 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center ">
                         <div class="row">
-                            <div class="col-xs-5 col-md-7 col-lg-9 "><b>
+                            <div class="col-xs-4 col-md-5 col-lg-7 "><b>
                                     @if($reportPage=='1')
                                         {{ trans('sensors.sensorlog24') }}
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days') }}
                                     @endif
                                 </b></div>
-                            <div class="col-xs-7 col-md-5 col-lg-3 ">
+                            <div class="col-xs-8 col-md-7 col-lg-5 ">
+                                <a href="sensorlogReportInChart?sensor_id={{$sensorId}}&type={{$reportPage}}">
+                                    <button class="btn btn-info" id="sensor_log_report_graph">
+                                        <i class="fa fa-line-chart  fa-lg" aria-hidden="true"></i>
+                                        {{ trans('sensors.sensor_log_graph_link') }}
+                                    </button>
+                                </a>
                                 @if($reportPage=='2')
                                     <a href="sensorsLog20?sensor_id={{$sensorId}}">
                                 @else
                                     <a href="sensorsLog1thReadingOf30days?sensor_id={{$sensorId}}">
                                 @endif
-                                <button class="btn btn-info" id="sensor_log_report">
-                                    <i class="fa fa-table  fa-lg" aria-hidden="true"></i>
-                                    @if($reportPage=='1')
-                                        {{ trans('sensors.sensorlog1threadingOf30daysBtn') }}
-                                    @else
-                                        {{ trans('sensors.sensorlog24Btn') }}
-                                    @endif
-                                    </button></a>
+                                        <button class="btn btn-info" id="sensor_log_report">
+                                            <i class="fa fa-table  fa-lg" aria-hidden="true"></i>
+                                            @if($reportPage=='1')
+                                                {{ trans('sensors.sensorlog1threadingOf30daysBtn') }}
+                                            @else
+                                                {{ trans('sensors.sensorlog24Btn') }}
+                                            @endif
+                                        </button>
+                                    </a>
+
                             </div>
                         </div>
                     </div>

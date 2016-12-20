@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Sensor;
 use App\Http\Controllers\Controller;
 use App\Models\Sensorlogs;
 use App\Models\sensortriggers;
+use App\Models\targetphones;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Illuminate\Support\Facades\Config;
 
 class ReceivingSensorInfoAPIController extends Controller
 {
@@ -29,7 +32,7 @@ class ReceivingSensorInfoAPIController extends Controller
             $this->logger->addInfo(nl2br("Successfully inserted data: " . Input::get('data')));
             echo "Successfully inserted data: " . Input::get('data');
             // Check for automatically call or send E-mail to relevant people
-            // $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
+             //$this->checkForAutomaticCallOrEmailAction($return_inserted_val);
         }
     }
     /**
@@ -75,16 +78,29 @@ class ReceivingSensorInfoAPIController extends Controller
         *      and the emergency level value then
         *   Trigger call and Send mail to relevant officers in the defined list
         **/
+
         if($current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
             && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
         {
            // echo "<br/> Warning level is reached <br/>" . asset('js/ajax-district.js');
 
             // send email to relevant officers (PCDM, NCDM)
-            $this->sendMailToOfficers($sensor_trigger_result->emails_list, "Warning");
+            //phyrum $this->sendMailToOfficers($sensor_trigger_result->emails_list, "Warning");
 
-            // list of phone number of relevant officers
-            $email_arr =explode(",", $sensor_trigger_result->phone_numbers);
+
+            // https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/
+            $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
+            /*$officer_phones = Response::json($sensor_trigger_result->phone_numbers);
+            $splitOfficerPhones = explode(",",$sensor_trigger_result->phone_numbers);
+            foreach ($splitOfficerPhones as $eachOfficerPhone)
+            {
+                $jsonStr = '{"phone":"'.$eachOfficerPhone.'"}';
+                $phoneNumbersInCommunes->push($jsonStr);
+            }
+            return Response::json($phoneNumbersInCommunes);*/
+            $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
+            //echo $phone_json;
+            echo $this->automaticCallToAffectedPeople($url_sound_file_warning, $phone_json);
 
         }
 
@@ -93,11 +109,18 @@ class ReceivingSensorInfoAPIController extends Controller
         *   1. Trigger call and send mail to relevant officers in the defined list
         *   2. Trigger call to phone numbers in all affected_communes list
         **/
-        if($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
+        elseif($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
         {
             // echo "<br/> Emergency level is reached <br/>";
             // send email to relevant officers (PCDM, NCDM)
-            $this->sendMailToOfficers($sensor_trigger_result->emails_list, "Emergency");
+            //phyrum $this->sendMailToOfficers($sensor_trigger_result->emails_list, "Emergency");
+            // list of Officers' and Villagers' phone numbers
+            $url_sound_file_emergency = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->emergency_sound_file;
+            // get villlagers' phone numbers
+            $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
+
+            echo $this->automaticCallToAffectedPeople($url_sound_file_emergency, $phone_json);
+
         }
 
 
@@ -144,11 +167,57 @@ class ReceivingSensorInfoAPIController extends Controller
     /**
      * @param $phone_numbers
      */
-    public function automaticCallToAffectedPeople($phone_numbers)
+    public function automaticCallToAffectedPeople($url_sound,$phone_tobe_called)
     {
-        // list of phone number of relevant officers
-        $officers_phone_number =explode(",", $phone_numbers);
 
+        /*$data = array("api_token" => Config::get('constants.TWILIO_API_TOKEN'), "clog" => json_encode($callLogRecord));
+        $data_string = json_encode($data);
+        $ch = curl_init('http://ews-dashboard-production.ap-southeast-1.elasticbeanstalk.com/api/v1/receivingcalllog');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string))
+        );
+        $result = curl_exec($ch);
+        return;*/
 
+        echo "start calling<br>";
+        $twillioCallAPI = 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload';
+        $fields = array(
+            "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
+            "contacts" => $phone_tobe_called,
+            "activity_id" => "999",
+            "sound_url" => $url_sound,
+            "no_of_retry" => "3",
+            "retry_time" => "10"
+        );
+        $data_fields = json_encode($fields);
+        $curltwillioCallAPI = curl_init($twillioCallAPI);
+        curl_setopt($curltwillioCallAPI, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curltwillioCallAPI, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($curltwillioCallAPI, CURLOPT_POSTFIELDS, $data_fields);
+        curl_setopt($curltwillioCallAPI, CURLOPT_POSTFIELDS, $data_fields);
+        curl_setopt($curltwillioCallAPI, CURLOPT_HEADER,  array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_fields))
+        );
+
+        $curlResponse = curl_exec($curltwillioCallAPI);
+        return $curlResponse;
+    }
+
+    public function getPhoneNumbersToBeCalled($officerPhones,$affectedCommunes)
+    {
+        $targetphones_tbl = new targetphones;
+        $phoneNumbersInCommunes = $targetphones_tbl->select('phone')->whereIn('commune_code',explode(",",$affectedCommunes))->get();
+
+        $splitArray = explode(",",$officerPhones);
+        foreach ($splitArray as $splitArrayEach)
+        {
+            $phoneNumbersInCommunes->push(['phone'=> $splitArrayEach]);
+        }
+        return Response::json($phoneNumbersInCommunes);
     }
 }

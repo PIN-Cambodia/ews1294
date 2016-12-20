@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3c6c23eb8e5a1bde9f16ce9a737148cb",
-    "content-hash": "8dcb35d3bb9b2b7e9cf000a995fe919b",
+    "hash": "f6a88f1b85eed2fbf82517b823e4c85b",
+    "content-hash": "404fa51fe598d054f19f9cb788d39bf5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.20.6",
+            "version": "3.20.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f30cacdedd5cf932d471b13e16a48eeef399c97f"
+                "reference": "0e868349a6d834050f273540a8cb811bb7f6d1b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f30cacdedd5cf932d471b13e16a48eeef399c97f",
-                "reference": "f30cacdedd5cf932d471b13e16a48eeef399c97f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0e868349a6d834050f273540a8cb811bb7f6d1b7",
+                "reference": "0e868349a6d834050f273540a8cb811bb7f6d1b7",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-12-14 22:06:52"
+            "time": "2016-12-19 23:13:56"
         },
         {
             "name": "classpreloader/classpreloader",
