@@ -148,13 +148,14 @@
                 </div>
                 <br />
                 {{ trans('sensors.phone_numbers')}} <br />
-                <textarea class="multinumbers" rows="4" cols="50" id='phone_numbers' name='phone_numbers' placeholder='{{ trans('sensors.enter_multiple_phone_numbers') }}'></textarea> <br />
+                <textarea class='multinumbers' rows='4' cols='50' id='phone_numbers' name='phone_numbers' placeholder='{{ trans('sensors.enter_multiple_phone_numbers') }}'></textarea> <br />
                 {{ trans('sensors.sound_file_warning')}}
                 <input type='file' id='warning_sound_file' name='warning_sound_file' accept='audio/*'/><br />
                 {{ trans('sensors.sound_file_emergency')}}
                 <input type='file' id='emergency_sound_file' name='emergency_sound_file' accept='audio/*'/><br />
                 {{ trans('sensors.emails')}} <br />
-                <textarea class="multiemail" rows="4" cols="50" id='email_list' name='email_list' placeholder='{{ trans('sensors.enter_multiple_emails') }}'></textarea> <br />
+                <textarea rows='4' cols='50' id='email_list' name='email_list' placeholder='{{ trans('sensors.enter_multiple_emails') }}'></textarea> <br />
+                <span id="error_email_format"></span>
             </div><!-- /.modal-body -->
             <div class='modal-footer'>
                 <button class='btn btn-default' data-dismiss='modal'>
@@ -228,11 +229,9 @@
 <div class="modal fade fixed-dialog-center" id="modal_waiting" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
         <div><h3>{{ trans('sensors.waiting_dialog') }}</h3></div><br/>
-        {{--<div id="waiting" ></div>--}}
         <div class="spinner"></div>
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 <script>
     $(function() {
         // global csrf token variable
@@ -270,14 +269,38 @@
         // add sensor trigger data is submitted
         $(document).on('click', '#add_sensor_trigger_data', function ()
         {
+            var check_invalid_email = checkValidateEmail($('#email_list'));
+            if (check_invalid_email != "")
+                $('#error_email_format').html("<font color='red'>{{trans('sensors.error_email_validation')}}" + check_invalid_email + "</font>");
             var sensor_id = $('#sensor_id').val();
             if(sensor_id!="")
             {
-                $('#modal_waiting').modal('show');
-                $( "#add_sstr_form" ).submit();
+                if(check_invalid_email=="")
+                {
+                    $('#modal_add_sensor_trigger_record').modal('hide');
+                    $('#modal_waiting').modal('show');
+                    $( "#add_sstr_form" ).submit();
+                }
+                return false;
             }
 
         });
+
+        // edit sensor trigger data is submitted
+         $(document).on('click', '#edit_sensor_trigger_data', function ()
+         {
+             var check_invalid_email = checkValidateEmail($('#email_list_edit'));
+             //console.log("1. calling func= " + check_invalid_email);
+             if (check_invalid_email != "")
+                $('#error_email_format-edit').html("<font color='red'>{{trans('sensors.error_email_validation')}}" + check_invalid_email + "</font>");
+            else
+             {
+                $('#modal_edit_sensor_trigger_record').modal('hide');
+                $('#modal_waiting').modal('show');
+                $('#edit_sstr_form').submit();
+             }
+             return false;
+         });
 
         /* Show Modal Edit Sensor Trigger */
         $(document).on('click', '#edit_sensor_trigger_info', function ()

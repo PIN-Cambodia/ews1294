@@ -66,13 +66,6 @@ $(function() {
         return false;
     });
 
-    // edit sensor trigger data is submitted
-    $(document).on('click', '#edit_sensor_trigger_data', function ()
-    {
-        $('#modal_waiting').modal('show');
-        $('#edit_sstr_form').submit();
-    });
-
     // allow only number in textbox
     $(".numeric").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
@@ -106,37 +99,23 @@ $(function() {
         }
     });
 
-    // jQuery.validator.addMethod("multiemail", function (value, element) {
-    //         var email = value.split(/[,]+/); // split element by ,
-    //         valid = true;
-    //         for (var i in email) {
-    //             value = email[i];
-    //             valid = valid && jQuery.validator.methods.email.call(this, $.trim(value), element);
-    //         }
-    //         return valid;
-    //     },
-    //     jQuery.validator.messages.multiemail
-    // );
-    //
-    // //$("form").validate({
-    // $("form").validate({
-    //     debug: true,
-    //     rules: {
-    //         emailTest: {
-    //             multiemail: true
-    //         }
-    //     },
-    //     messages: {
-    //         emailTest: {
-    //             multiemail: "You must enter a valid email, or comma separate multiple"
-    //         }
-    //     },
-    //     submitHandler: function(form) {
-    //         return false;
-    //     }
-    // });
-
-    // ^\d+(,\d+)*$
-    //^[0-9](,[0-9])*$
-
 });
+
+function checkValidateEmail(email_list) {
+    //var emails = $(this).val().split(',');
+    var emails = email_list.val().split(',');
+    var invalidEmails = [];
+    $('#error_email_format').html("");
+    for (i = 0; i < emails.length; i++) {
+        console.log('email= ' + emails);
+        if (!validateEmail(emails[i].trim())) {
+            invalidEmails.push(emails[i].trim());
+        }
+    }
+    //console.log('2. invalidEmails()= ' + invalidEmails);
+    return invalidEmails;
+}
+function validateEmail(email) {
+    var re = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/i;
+    return re.test(email) ? true : false;
+}
