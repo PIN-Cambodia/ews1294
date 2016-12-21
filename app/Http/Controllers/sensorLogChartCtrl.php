@@ -14,10 +14,12 @@ class sensorLogChartCtrl extends Controller
     public function createChart30Days()
     {
         $sensenlogTable = \Lava::DataTable();
-        $sensenlogTable->addDateColumn('Day of Month')
-                        ->addNumberColumn('Warning')
+        $sensenlogTable
+            ->addDateColumn('Day of Month')
+                        ->addNumberColumn('Stream Height')
                         ->addNumberColumn('Emergency')
-                        ->addNumberColumn('Stream Height');
+                        ->addNumberColumn('Warning');
+
 
         $sensor_id = Input::get('sensor_id');
         $graph_type = Input::get('type');
@@ -45,9 +47,12 @@ class sensorLogChartCtrl extends Controller
 
         foreach($sensorlogs as $sensorlog)
         {
-            $sensenlogTable->addRow([$sensorlog->time, $sensortrigger->level_warning, $sensortrigger->level_emergency, $sensorlog->stream_height]);
+            $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
         }
-        $chart = Lava::LineChart('SensorLogChart',$sensenlogTable);
+        $chart = Lava::LineChart('SensorLogChart',$sensenlogTable)
+        ->setOptions(['pointSize' => 3,
+            'curveType' => 'function'
+        ]);
 
         return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
     }
