@@ -15,44 +15,55 @@
           <div class="panel-body">
             <div class="fixed-panel">
               {{ csrf_field() }}
-              @foreach ($userlists as $userlist)
-                <div class="col-xs-12 col-md-4 col-lg-4">
-                  <div class="row">
-                    <div class="col-xs-2 col-md-2 col-lg-2">
-                      <i class="fa fa-user fa-lg" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-xs-10 col-md-10 col-lg-10">
-                      {{ $userlist->name }} <br />
-                      <!-- Edit User Profile Button -->
-                       <button class="btn btn-info" id="edit_user_profile" name="{{ $userlist->id }}">
-                           <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-                            {{ trans('auth.edit') }} </button>
+              @if(!empty($userlists))
+                @foreach ($userlists as $userlist)
+                  <div class="col-xs-12 col-md-4 col-lg-4">
+                    <div class="row">
+                      <div class="col-xs-2 col-md-2 col-lg-2">
+                        <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                      </div>
+                      <div class="col-xs-10 col-md-10 col-lg-10">
+                        <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                          <div class="col-xs-12 col-md-12 col-lg-12">
+                            @if($userlist->is_delete == 1)
+                              <i class="fa fa-trash-o fa-lg" aria-hidden="true" style="color: #914854;"></i>
+                            @endif
+                            {{ $userlist->name }}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12 col-md-12 col-lg-12">
+                            <!-- Edit User Profile Button -->
+                            <button class="btn btn-info" id="edit_user_profile" name="{{ $userlist->id }}">
+                              <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                              {{ trans('auth.edit') }} </button>
 
-                      <!-- Enable or Disable user Button -->
-                      <!-- <form class="form-horizontal" role="form" method="POST" action="{{ url('/enabledisable') }}">
-                        {{ csrf_field() }} -->
-                        @if($userlist->is_disable == 1)
-                          <button class="btn btn-primary" id="enable_disble_user" name="enable_user" value="{{ $userlist->id }}" >
-                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
-                             {{ trans('auth.enable') }}
-                          </button>
-                        @else
-                          <button class="btn btn-primary" id="enable_disble_user" name="disable_user" value="{{ $userlist->id }}" >
-                            <i class="fa fa-eye-slash fa-lg" aria-hidden="true"></i>
-                             {{ trans('auth.disable') }}
-                          </button>
-                        @endif
-
-                        <!-- </form> -->
-
-                      <!-- Delete a user Button -->
-                      <button class="btn btn-danger" id="delete_user" name="{{ $userlist->id }}">
-                          <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                           {{ trans('auth.delete') }}</button>
-                    </div>
-                  </div><!-- / row -->
-                </div>
-              @endforeach
+                            <!-- Enable or Disable user Button -->
+                            <!-- <form class="form-horizontal" role="form" method="POST" action="{{ url('/enabledisable') }}">
+                            {{ csrf_field() }} -->
+                              @if($userlist->is_disable == 1)
+                                <button class="btn btn-primary" id="enable_disble_user" name="enable_user" value="{{ $userlist->id }}" >
+                                  <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                  {{ trans('auth.enable') }}
+                                </button>
+                              @else
+                                <button class="btn btn-primary" id="enable_disble_user" name="disable_user" value="{{ $userlist->id }}" >
+                                  <i class="fa fa-eye-slash fa-lg" aria-hidden="true"></i>
+                                  {{ trans('auth.disable') }}
+                                </button>
+                            @endif
+                            <!-- </form> -->
+                              <!-- Delete a user Button -->
+                              <button class="btn btn-danger" id="delete_user" name="{{ $userlist->id }}">
+                                <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                                {{ trans('auth.delete') }}</button>
+                            </div>
+                        </div>
+                      </div><!-- / col -->
+                    </div><!-- / row -->
+                  </div>
+                @endforeach
+              @endif
             </div> <!-- /fixed-panel -->
           </div><!-- /panel-body -->
         </div><!-- /panel-default -->

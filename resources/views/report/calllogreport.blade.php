@@ -23,20 +23,25 @@
                                     @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
                                         <option value="0"> {{ trans('pages.select_province') }} </option>
                                     @endif
-
-                                    @foreach ($allprovince as $item)
-                                        @if (App::getLocale()=='km')
-                                            <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE_KH }}</option>
-                                        @else
-                                            <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE }}</option>
-                                        @endif
-                                    @endforeach
+                                    @if(!empty($allprovince))
+                                        @foreach ($allprovince as $item)
+                                            @if (App::getLocale()=='km')
+                                                <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE_KH }}</option>
+                                            @else
+                                                <option value="{{ $item->PROCODE }}">{{ $item->PROVINCE }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row topspace" style="text-align:center">
                                 <div class="col-xs-12 col-md-12 col-lg-12" >
+                                    @if(!empty($sensor))
+                                        <?php //dd($sensor);?>
+                                        <input type="hidden" id="sensor_val" name="sensor_val" value={{$sensor}}>
+                                    @endif
                                     <button class="btn btn-primary" name="submit_report" id="submit_report">
                                         <i class="fa fa-send fa-lg" aria-hidden="true"></i>
                                         {{ trans('pages.show_data') }}
@@ -94,7 +99,8 @@
         /* Submit Report */
         $(document).on('click', '#submit_report', function()
         {
-            // once submit_report button is clicked, disabled it for 3 seconds to prevent muliple double click
+            var sensor_val = $('#sensor_val').val();
+            // once submit_report button is clicked, disabled it for 3 seconds to prevent multiple double click
             button.attr('disabled', 'disabled');
             setTimeout(function() {
                 button.removeAttr('disabled');
@@ -108,7 +114,7 @@
                     "ajax": {
                         type: "POST",
                         url: "{{ url('/getCallLogReport') }}",
-                        data: {_token: token, prov_id: province_val},
+                        data: {_token: token, prov_id: province_val, sensor_status: sensor_val},
                         cache: false,
                         dataSrc: 'data'
                     },

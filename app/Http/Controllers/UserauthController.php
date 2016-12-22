@@ -29,15 +29,19 @@ class UserauthController extends Controller
   {
     if(!empty($request->remember)) $remember = true;
     else $remember = false;
-    if(Auth::attempt(['name'=> $request->username, 'password' => $request->password], $remember))
+
+    $check_user = User::where('name', $request->username)->first();
+    // check user who is disable or deleted by ncdm
+    if(!empty($check_user))
     {
-      // redirect to upload sound file page
-      return redirect()->intended('soundFile');
+        if($check_user->is_disable == 1) return view('auth/login',['disable_user_error' => trans('pages.disable_user')]);
+        elseif($check_user->is_delete == 1) return view('auth/login',['delete_user_error' => trans('pages.delete_user')]);
     }
-    else {
-      // redirct to the back to the login form
-      return redirect()->intended('login');
-    }
+
+    if(Auth::attempt(['name'=> $request->username, 'password' => $request->password], $remember))
+        return redirect()->intended('soundFile');
+    else
+        return redirect()->intended('login');
   }
 
   /*
@@ -46,7 +50,6 @@ class UserauthController extends Controller
   */
   public function registerAuth(Request $request)
   {
-     // dd($request);
     /* insert registration data into table users in databaase */
     $new_user = new User;
     $new_user -> name = $request->name;
@@ -96,8 +99,6 @@ class UserauthController extends Controller
     return redirect()->intended('home');
   }
 
-
-
   /*
   * Display users available in system based on user role
   */
@@ -107,12 +108,13 @@ class UserauthController extends Controller
     {
       $all_users = User::all();
     }
-    if(Auth::user()->hasRole('NCDM'))
+    elseif(Auth::user()->hasRole('NCDM'))
     {
       $all_users = User::where('name', '!=', 'admin')
                   -> Where('is_delete', '!=', '1')
                   -> get();
     }
+    else $all_users = "";
     return view('auth/userlists',['userlists' => $all_users]);
   }
 

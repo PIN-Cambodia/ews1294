@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Input;
 
 class CallLogReportController extends Controller
 {
+    public function SensorCallLogReportView()
+    {
+         return $this->CallLogReportView(true);
+    }
     // CallLog Report View
-    public function CallLogReportView()
+    public function CallLogReportView($sensor=false)
     {
         if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
         {
@@ -26,17 +30,25 @@ class CallLogReportController extends Controller
             $pcdm_data=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
             $all_province=DB::table('province')->where('PROCODE', $pcdm_data->province_code)->get();
         }
-        return view('report/calllogreport', ['allprovince'=> $all_province]);
+        if($sensor==true)
+            return view('report/calllogreport', ['allprovince'=> $all_province, 'sensor' => $sensor]);
+        else
+            return view('report/calllogreport', ['allprovince'=> $all_province]);
     }
 
     // function to select call report of selected province
     public function getCallLogReport(Request $request)
     {
+        // sensor call log report: automatic
+        if(!empty($request->sensor_status) == 1) $manual_auto_value = 2;
+        // ews call log report: manual
+        else $manual_auto_value = 1;
+
         // select activities data in a whole province based on activity created_date
         if($request->prov_id <=9)
-            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) < 6 ORDER BY activity_id desc "));
+            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE manual_auto = '$manual_auto_value' and list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) < 6 ORDER BY activity_id desc "));
         else
-            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 ORDER BY activity_id desc "));
+            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE manual_auto = '$manual_auto_value' and list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 ORDER BY activity_id desc "));
         $call_logs_result = $this->getCallLogBody($activity_data_query, false);
         return $call_logs_result;
     }
