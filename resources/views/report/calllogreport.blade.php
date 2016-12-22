@@ -78,7 +78,6 @@
                         {{-- </form>--}}
                     </div> <!-- /fixed-panel -->
                 </div><!-- \ panel panel-body -->
-
             </div><!-- \ panel panel-default -->
         </div><!--/.col-->
     </div><!--/.row-->
