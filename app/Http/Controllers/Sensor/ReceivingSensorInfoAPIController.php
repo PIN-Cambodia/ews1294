@@ -35,8 +35,9 @@ class ReceivingSensorInfoAPIController extends Controller
             // write to log
             $this->logger->addInfo(nl2br("Successfully inserted data: " . Input::get('data')));
             echo "Successfully inserted data: " . Input::get('data');
-            // Check for automatically call or send E-mail to relevant people
-            $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
+
+            /** Check for automatically call or send E-mail to relevant people **/
+            // $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
         }
     }
     /**
@@ -87,24 +88,23 @@ class ReceivingSensorInfoAPIController extends Controller
         if($current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
             && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
         {
-            // send email to relevant officers (PCDM, NCDM)
+            /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
             $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
 
-
-// samak code for automatically call
-//            // https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/
-//            $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
-//            /*$officer_phones = Response::json($sensor_trigger_result->phone_numbers);
-//            $splitOfficerPhones = explode(",",$sensor_trigger_result->phone_numbers);
-//            foreach ($splitOfficerPhones as $eachOfficerPhone)
-//            {
-//                $jsonStr = '{"phone":"'.$eachOfficerPhone.'"}';
-//                $phoneNumbersInCommunes->push($jsonStr);
-//            }
-//            return Response::json($phoneNumbersInCommunes);*/
-//            $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
-//            //echo $phone_json;
-//            echo $this->automaticCallToAffectedPeople($url_sound_file_warning, $phone_json);
+            /** automatically call **/
+            // https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/
+            $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
+            /*$officer_phones = Response::json($sensor_trigger_result->phone_numbers);
+            $splitOfficerPhones = explode(",",$sensor_trigger_result->phone_numbers);
+            foreach ($splitOfficerPhones as $eachOfficerPhone)
+            {
+                $jsonStr = '{"phone":"'.$eachOfficerPhone.'"}';
+                $phoneNumbersInCommunes->push($jsonStr);
+            }
+            return Response::json($phoneNumbersInCommunes);*/
+            $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
+            //echo $phone_json;
+            echo $this->automaticCallToAffectedPeople($url_sound_file_warning, $phone_json);
         }
 
         /** if (the sensor received streamHeight >= defined Emergency level value) then
@@ -113,15 +113,15 @@ class ReceivingSensorInfoAPIController extends Controller
         **/
         elseif($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
         {
-            // send email to relevant officers (PCDM, NCDM)
+            /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
             $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Emergency");
 
-// samak code for automatically call
-//            // list of Officers' and Villagers' phone numbers
-//            $url_sound_file_emergency = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->emergency_sound_file;
-//            // get villagers' phone numbers
-//            $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
-//            echo $this->automaticCallToAffectedPeople($url_sound_file_emergency, $phone_json);
+            /** automatically call **/
+            // list of Officers' and Villagers' phone numbers
+            $url_sound_file_emergency = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->emergency_sound_file;
+            // get villagers' phone numbers
+            $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
+            echo $this->automaticCallToAffectedPeople($url_sound_file_emergency, $phone_json);
         }
 
     }
@@ -230,14 +230,20 @@ class ReceivingSensorInfoAPIController extends Controller
         // send email to every relevant officers in the list
         foreach ($officer_email as $officer_email)
         {
-            Mail::send('emails.sensoremail',
-                [ 'content'=>$content, 'content_kh'=>$content_kh],
-                function($message) use ($officer_email, $subject_title, $alert_level) {
-                    $message ->to($officer_email)
-                        ->subject($subject_title);
-                    // return message of sending email
-                    echo "<br>" . $alert_level . " Alert Email is sent to <b> " . $officer_email . "</b> ";
-                });
+            try{
+                Mail::send('emails.sensoremail',
+                    [ 'content'=>$content, 'content_kh'=>$content_kh],
+                    function($message) use ($officer_email, $subject_title, $alert_level) {
+                        $message ->to($officer_email)
+                            ->subject($subject_title);
+                        // return message of sending email
+                        echo "<br>" . $alert_level . " Alert Email is sent to <b> " . $officer_email . "</b> ";
+                    });
+                $this->logger->addInfo(nl2br("Successfully Sending " . $alert_level . " Alert Email to: " . $officer_email));
+            }
+            catch (\Exception $e) {
+                $this->logger->addError("E-mail Sending Error: " . $e->getMessage() . " in " . $e->getFile());
+            }
         }
     }
 

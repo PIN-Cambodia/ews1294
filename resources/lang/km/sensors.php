@@ -60,7 +60,7 @@ return [
     'enter_multiple_phone_numbers' => 'បញ្ចូល​លេខទូរសព្ទ​ដែល​បំបែក​ដោយ​សញ្ញា​ក្បៀស ឧ. 012xxxxxx,011xxxxxx,086xxxxxx',
     'enter_multiple_emails' => 'បញ្ចូល​អ៊ីមែល​​ដែល​បំបែក​ដោយ​សញ្ញា​ក្បៀស ឧ. abc@yahoo.com,def@gmail.com',
     'error_email_validation' => 'ទម្រង់​អ៊ីមែល​មិន​ត្រឹមត្រូវ​៖ ',
-    'sensor_call_log' => 'របាយការណ៍ Call Logs របស់​​ឧបករណ៍​ចាប់​សញ្ញា',
+    'sensor_call_log' => 'កំណត់ហេតុ​នៃ​ការ​ហៅ​ទូរសព្ទរបស់​​ឧបករណ៍​ចាប់​សញ្ញា',
     '' => '',
     '' => '',
     '' => '',
