@@ -21,7 +21,7 @@
     </li>
     @endrole
 
-    @role(['admin','NCDM'])
+    @role(['admin'])
     <!-- User Management Menu -->
     <li class="<?php if (preg_match("/allusers/i", Request::url())) echo "active"; else echo "";?>">
       <a href="allusers">

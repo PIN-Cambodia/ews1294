@@ -106,14 +106,18 @@ class UserauthController extends Controller
   {
     if(Auth::user()->hasRole('admin'))
     {
-      $all_users = User::all();
+        //$all_users = User::all();
+        $all_users = User::whereNotIn('name', ['Chris Sevilleja','Twilio user','Sensor user'])
+                        -> get();
     }
-    elseif(Auth::user()->hasRole('NCDM'))
-    {
-      $all_users = User::where('name', '!=', 'admin')
-                  -> Where('is_delete', '!=', '1')
-                  -> get();
-    }
+    /** 22nd 12 2016 got a request from James to remove rights of managing user from NCDM. Only admin has this rights. **/
+//    elseif(Auth::user()->hasRole('NCDM'))
+//    {
+//      $all_users = User::where('name', '!=', 'admin')
+//                    -> whereNotIn('name', ['Chris Sevilleja','Twilio user','Sensor user'])
+//                    -> where('is_delete', '!=', '1')
+//                    -> get();
+//    }
     else $all_users = "";
     return view('auth/userlists',['userlists' => $all_users]);
   }
