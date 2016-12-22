@@ -280,6 +280,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .fixed-panel {
     /*max-height: 85vh;*/
+    height: 1000px;
     overflow-y: scroll !important;
     overflow-x: hidden;
 }
@@ -353,4 +354,9 @@ fieldset[disabled] .btn-primary.active {
 @keyframes rotate {
     0%    { transform: rotate(0deg); }
     100%  { transform: rotate(360deg); }
+}
+
+.panel-default {
+    border-color: #ddd;
+    height: 1000px;
 }

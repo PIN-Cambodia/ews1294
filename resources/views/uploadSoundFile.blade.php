@@ -13,7 +13,6 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="fixed-panel">
-
                             <!-- Opening a form -->
                             @if(Session::has('message'))
                                 <p class="alert-danger">{{Session::get('message')}}</p>
