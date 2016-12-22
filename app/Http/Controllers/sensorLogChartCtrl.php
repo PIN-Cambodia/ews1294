@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Khill\Lavacharts\Configs\HorizontalAxis;
+use Khill\Lavacharts\Configs\VerticalAxis;
 use Khill\Lavacharts\Laravel\LavachartsFacade as Lava;
 
 class sensorLogChartCtrl extends Controller
@@ -15,10 +17,10 @@ class sensorLogChartCtrl extends Controller
     {
         $sensenlogTable = \Lava::DataTable();
         $sensenlogTable
-            ->addDateColumn('Day of Month')
-                        ->addNumberColumn('Stream Height')
-                        ->addNumberColumn('Emergency')
-                        ->addNumberColumn('Warning');
+                ->addStringColumn('')
+                ->addNumberColumn('Water Level')
+                ->addNumberColumn('Emergency Level')
+                ->addNumberColumn('Warning Level');
 
 
         $sensor_id = Input::get('sensor_id');
@@ -29,13 +31,13 @@ class sensorLogChartCtrl extends Controller
                 ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
                 ->groupBy('time')
-                ->orderBy('timestamp','desc')->limit(30)->get();
+                ->orderBy('timestamp')->limit(30)->get();
         }
         else
         {
             $sensorlogs = DB::table('sensorlogs')
-                ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
-                ->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
+                ->select(DB::raw("timestamp as time, stream_height"))
+                ->where('sensor_id','=',$sensor_id)->orderBy('timestamp')->limit(24)->get();
         }
 
 
@@ -43,15 +45,17 @@ class sensorLogChartCtrl extends Controller
             ->select(DB::raw("level_warning, level_emergency"))
             ->where('sensor_id','=',$sensor_id)
             ->first();
-        //dd($sensorlogs);
+//        dd($sensorlogs);
 
         foreach($sensorlogs as $sensorlog)
         {
             $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
         }
         $chart = Lava::LineChart('SensorLogChart',$sensenlogTable)
-        ->setOptions(['pointSize' => 3,
-            'curveType' => 'function'
+        ->setOptions(['pointSize' => 1,
+            'curveType' => 'function',
+            'height' => 350,
+            'axisTitlesPosition' => 'none'
         ]);
 
         return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
