@@ -13,7 +13,15 @@
       <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading"> {{ trans('auth.login') }} </div>
+            <br />
+            @if(!empty($disable_user_error))
+                <center><i><font color='red'> {{ $disable_user_error }} </font></i></center>
+            @endif
+            @if(!empty($delete_user_error))
+                <center><i><font color='red'> {{ $delete_user_error }} </font></i></center>
+            @endif
           <div class="panel-body">
+
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">

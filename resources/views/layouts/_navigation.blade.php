@@ -21,7 +21,7 @@
     </li>
     @endrole
 
-    @role(['admin','NCDM'])
+    @role(['admin'])
     <!-- User Management Menu -->
     <li class="<?php if (preg_match("/allusers/i", Request::url())) echo "active"; else echo "";?>">
       <a href="allusers">
@@ -41,7 +41,7 @@
     </li>
     @endif
     <!-- Register Menu -->
-    @role(['admin','NCDM'])
+    @role(['admin'])
     <li class="<?php if (preg_match("/register/i", Request::url())) echo "active"; else echo "";?>">
       <a href="register">
         <i class="pe-7s-add-user pe-lg"></i>
@@ -78,6 +78,12 @@
     <li class="<?php if (preg_match("/sensortrigger/i", Request::url())) echo "active"; else echo "";?>">
       <a href="sensortrigger">
         <i class="pe-7s-tools pe-lg"></i> {{ trans('sensors.sensor_trigger_mgmt') }}
+      </a>
+    </li>
+    <!-- sensor call log -->
+    <li class="<?php if (preg_match("/sensorcallreport/i", Request::url())) echo "active"; else echo "";?>">
+      <a href="sensorcallreport">
+        <i class="pe-7s-graph2 pe-lg"></i> {{ trans('sensors.sensor_call_log') }}
       </a>
     </li>
     @endrole

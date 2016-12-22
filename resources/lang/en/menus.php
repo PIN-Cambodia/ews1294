@@ -14,7 +14,7 @@ return [
     'logout' => 'Logout',
     'users' => 'Users',
     'receiving_call_log' => 'Receiving Call Logs',
-    'calllog_report' => 'CallLog Report',
+    'calllog_report' => 'Call Log History',
     'upload_sound_file' => 'Make Emergency Call',
     'get_phones_from_call_log' => 'Get Phones From Call Logs',
     'get_phones_from_call_log_registration' => 'Get Phone number from CallLog registration',

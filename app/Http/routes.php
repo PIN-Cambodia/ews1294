@@ -153,7 +153,10 @@ Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtr
 /** ----- User Registration, Login, Logout, Reset Password and User Management ------ **/
 // Register
 Route::get('/register', function () {
-    return view('auth/register');
+    if(Auth::user()->hasRole('admin'))
+        return view('auth/register');
+    else return redirect()->intended('home');
+
 })->middleware('auth');
 Route::post('register', ['middleware' => 'auth', 'as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
 
@@ -363,7 +366,6 @@ Route::get('/sensormap', function () {
         }
     }
     return view('sensorsMap',['sensors' => $sensorIds, 'sensors24hrs' => $sensorlogsAll]);
-
 });
 
 /** Sensor Trigger Report data display **/
@@ -432,3 +434,5 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
 
 Route::get('/testGetPhoneNumbers', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@getPhoneNumbersToBeCalled']);
 
+// Sensor CallLog report
+Route::get('/sensorcallreport', ['uses' => 'CallLogReportController@SensorCallLogReportView']);

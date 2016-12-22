@@ -61,6 +61,7 @@ return [
     'enter_multiple_emails' => 'Enter Email and separate it by comma e.g. abc@yahoo.com,def@gmail.com',
     'error_email_validation' => 'Invalid Email Format: ',
     'popup_label' => 'Show Report of Sensor ID:',
+    'sensor_call_log' => 'Sensor Call Log History',
     '' => '',
     '' => '',
     '' => '',
