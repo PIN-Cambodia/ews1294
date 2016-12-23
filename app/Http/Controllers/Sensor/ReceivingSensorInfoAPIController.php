@@ -283,7 +283,7 @@ class ReceivingSensorInfoAPIController extends Controller
 
         $curlResponse = curl_exec($curltwillioCallAPI);
         return $curlResponse;*/
-        if($activity_created > 0)
+        if(sizeof($activity_created))
         {
             $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
             $data = array(
