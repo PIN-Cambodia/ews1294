@@ -254,8 +254,8 @@ class ReceivingSensorInfoAPIController extends Controller
             $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
             $data = array(
                 "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
-                "contacts" => "[{\"phone\":\"017696365\"}]",
-//                "contacts" => $phone_tobe_called,
+//                "contacts" => "[{\"phone\":\"017696365\"}]",
+                "contacts" => $phone_tobe_called,
                 "activity_id" => $activity_created,
                 "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$url_sound,
                 "no_of_retry" => "3",
