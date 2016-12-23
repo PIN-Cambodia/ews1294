@@ -99,7 +99,7 @@ class ReceivingSensorInfoAPIController extends Controller
             $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
             //echo $phone_json;
-            $this->automaticCallToAffectedPeople($sensor_trigger_result->warning_sound_file, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
+            $this->automaticCallToAffectedPeople($sensor_trigger_result->warning_sound_file, $phone_json, "", $current_sensor_value->sensor_id);
         }
 
         /** if (the sensor received streamHeight >= defined Emergency level value) then
@@ -244,54 +244,19 @@ class ReceivingSensorInfoAPIController extends Controller
 
     public function automaticCallToAffectedPeople($url_sound,$phone_tobe_called, $affected_communes,$sensor_id)
     {
-
-        /*$data = array("api_token" => Config::get('constants.TWILIO_API_TOKEN'), "clog" => json_encode($callLogRecord));
-        $data_string = json_encode($data);
-        $ch = curl_init('http://ews-dashboard-production.ap-southeast-1.elasticbeanstalk.com/api/v1/receivingcalllog');
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string))
-        );
-        $result = curl_exec($ch);
-        return;*/
-        // dd(sizeof($phone_tobe_called));die;
         // Create new activity //
         $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
         echo "start calling<br>";
-        /*$twillioCallAPI = 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload';
-        $fields = array(
-            "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
-            "contacts" => $phone_tobe_called,
-            "activity_id" => $activity_created[0],
-            "sound_url" => $activity_created[1],
-            "no_of_retry" => "3",
-            "retry_time" => "10"
-        );
-        $data_fields = json_encode($fields);
-        $curltwillioCallAPI = curl_init($twillioCallAPI);
-        curl_setopt($curltwillioCallAPI, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curltwillioCallAPI, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($curltwillioCallAPI, CURLOPT_POSTFIELDS, $data_fields);
-        curl_setopt($curltwillioCallAPI, CURLOPT_POSTFIELDS, $data_fields);
-        curl_setopt($curltwillioCallAPI, CURLOPT_HEADER,  array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_fields))
-        );
 
-        $curlResponse = curl_exec($curltwillioCallAPI);
-        return $curlResponse;*/
-        if(sizeof($activity_created))
+        if($activity_created > 0)
         {
             $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
             $data = array(
                 "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
                 "contacts" => "[{\"phone\":\"017696365\"}]",
 //            "contacts" => $phone_tobe_called,
-                "activity_id" => $activity_created[0],
-                "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$activity_created[1],
+                "activity_id" => $activity_created,
+                "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$url_sound,
                 "no_of_retry" => "3",
                 "retry_time" => "10"
             );
@@ -301,7 +266,11 @@ class ReceivingSensorInfoAPIController extends Controller
             $response = $client->request('POST', $twillioCallApi, ['json' => $data]);
             return $response;
         }
-
+        else
+        {
+            echo "error";
+            return 0;
+        }
     }
 
     // Function to insert New Activity //
@@ -316,7 +285,7 @@ class ReceivingSensorInfoAPIController extends Controller
         $activities->sound_file = $soundFile;
         $activities->save();
 
-        return array($activities->id, $soundFile);
+        return $activities->id;
     }
 
     public function getPhoneNumbersToBeCalled($officerPhones,$affectedCommunes)
