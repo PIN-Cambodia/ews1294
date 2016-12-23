@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Sensor;
 
 use App\Http\Controllers\Controller;
+use App\Models\activities;
 use App\Models\Sensorlogs;
 use App\Models\sensortriggers;
 use App\Models\targetphones;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
@@ -37,7 +40,7 @@ class ReceivingSensorInfoAPIController extends Controller
             echo "Successfully inserted data: " . Input::get('data');
 
             /** Check for automatically call or send E-mail to relevant people **/
-            // $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
+             //$this->checkForAutomaticCallOrEmailAction($return_inserted_val); // samak
         }
     }
     /**
@@ -89,22 +92,11 @@ class ReceivingSensorInfoAPIController extends Controller
             && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
         {
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
-            $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
+//            phyrum $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
 
             /** automatically call **/
-            // https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/
-            $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
-            /*$officer_phones = Response::json($sensor_trigger_result->phone_numbers);
-            $splitOfficerPhones = explode(",",$sensor_trigger_result->phone_numbers);
-            foreach ($splitOfficerPhones as $eachOfficerPhone)
-            {
-                $jsonStr = '{"phone":"'.$eachOfficerPhone.'"}';
-                $phoneNumbersInCommunes->push($jsonStr);
-            }
-            return Response::json($phoneNumbersInCommunes);*/
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
-            //echo $phone_json;
-            echo $this->automaticCallToAffectedPeople($url_sound_file_warning, $phone_json);
+            $this->automaticCallToAffectedPeople($sensor_trigger_result->warning_sound_file, $phone_json, "", $current_sensor_value->sensor_id);
         }
 
         /** if (the sensor received streamHeight >= defined Emergency level value) then
@@ -114,14 +106,13 @@ class ReceivingSensorInfoAPIController extends Controller
         elseif($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
         {
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
-            $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Emergency");
+//            phyrum $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Emergency");
 
             /** automatically call **/
+
             // list of Officers' and Villagers' phone numbers
-            $url_sound_file_emergency = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->emergency_sound_file;
-            // get villagers' phone numbers
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
-            echo $this->automaticCallToAffectedPeople($url_sound_file_emergency, $phone_json);
+            $this->automaticCallToAffectedPeople($sensor_trigger_result->emergency_sound_file, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
         }
 
     }
@@ -247,45 +238,52 @@ class ReceivingSensorInfoAPIController extends Controller
         }
     }
 
-    public function automaticCallToAffectedPeople($url_sound,$phone_tobe_called)
+    public function automaticCallToAffectedPeople($url_sound,$phone_tobe_called, $affected_communes,$sensor_id)
     {
+        // Create new activity //
+        $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
 
-        /*$data = array("api_token" => Config::get('constants.TWILIO_API_TOKEN'), "clog" => json_encode($callLogRecord));
-        $data_string = json_encode($data);
-        $ch = curl_init('http://ews-dashboard-production.ap-southeast-1.elasticbeanstalk.com/api/v1/receivingcalllog');
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string))
-        );
-        $result = curl_exec($ch);
-        return;*/
+        if($activity_created > 0)
+        {
+            echo "start calling<br>";
+            $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
+            $data = array(
+                "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
+//                "contacts" => "[{\"phone\":\"017696365\"}]",
+//                "contacts" => '[{"phone":"017696365"}]',
 
-        echo "start calling<br>";
-        $twillioCallAPI = 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload';
-        $fields = array(
-            "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
-            "contacts" => $phone_tobe_called,
-            "activity_id" => "999",
-            "sound_url" => $url_sound,
-            "no_of_retry" => "3",
-            "retry_time" => "10"
-        );
-        $data_fields = json_encode($fields);
-        $curltwillioCallAPI = curl_init($twillioCallAPI);
-        curl_setopt($curltwillioCallAPI, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curltwillioCallAPI, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($curltwillioCallAPI, CURLOPT_POSTFIELDS, $data_fields);
-        curl_setopt($curltwillioCallAPI, CURLOPT_POSTFIELDS, $data_fields);
-        curl_setopt($curltwillioCallAPI, CURLOPT_HEADER,  array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_fields))
-        );
+                "contacts" => $phone_tobe_called,
+                "activity_id" => $activity_created,
+                "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$url_sound,
+                "no_of_retry" => "3",
+                "retry_time" => "10"
+            );
 
-        $curlResponse = curl_exec($curltwillioCallAPI);
-        return $curlResponse;
+            // Using laravel php library GuzzleHttp for execute external API(Eg: Bong Pheak API)
+            $client = new Client();
+            $response = $client->request('POST', $twillioCallApi, ['json' => $data]);
+            return $response;
+        }
+        else
+        {
+            echo "error";
+            return 0;
+        }
+    }
+
+    // Function to insert New Activity //
+    public function insertNewActivity($noOfPhones,$soundFile,$affected_commune,$sensor)
+    {
+        $activities = new activities;
+        $activities->manual_auto = 2;
+        $activities->user_id = 3;
+        $activities->sensor_id = $sensor;
+        $activities->list_commune_codes = $affected_commune;
+        $activities->no_of_phones_called = $noOfPhones;
+        $activities->sound_file = $soundFile;
+        $activities->save();
+
+        return $activities->id;
     }
 
     public function getPhoneNumbersToBeCalled($officerPhones,$affectedCommunes)
@@ -298,6 +296,7 @@ class ReceivingSensorInfoAPIController extends Controller
         {
             $phoneNumbersInCommunes->push(['phone'=> $splitArrayEach]);
         }
-        return Response::json($phoneNumbersInCommunes);
+        $jsonstr = json_encode($phoneNumbersInCommunes);
+        return $jsonstr;
     }
 }
