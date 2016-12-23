@@ -241,15 +241,14 @@ $(document).ready(function(){
             });
         }
     });
-
-
+    
     $('form#uploadForm').on('submit',function(event){
         event.preventDefault();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        //     }
+        // });
         $('#modal_waiting').modal('show');
         var communes_selected = [];
         $.each($("input[class='commune']:checked"), function(){
@@ -266,6 +265,9 @@ $(document).ready(function(){
                 var formData = new FormData($("#uploadForm")[0]);
                 var formDataTwillioAPI = new FormData();
                 $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
                     url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
                     data: formData,
                     dataType: 'json',
@@ -276,9 +278,10 @@ $(document).ready(function(){
                     success: function (activityId) {
                         console.log(activityId);
                         formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                        // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
-                        formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
-                        //formDataTwillioAPI.append('contacts',JSON.stringify(phones));
+                        //formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
+                        //formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
+
+                        formDataTwillioAPI.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
                         formDataTwillioAPI.append('activity_id',activityId[0]);
@@ -286,7 +289,7 @@ $(document).ready(function(){
                         // test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
                         formDataTwillioAPI.append('no_of_retry',3);
                         formDataTwillioAPI.append('retry_time', 10);
-                        console.log(formDataTwillioAPI);
+                        console.log('twillio=' + formDataTwillioAPI);
                         // ** Trigger calls ** //
                         $.ajax({
                             url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
@@ -296,6 +299,8 @@ $(document).ready(function(){
                             success: function(data) {
                                 $('#modal_waiting').modal('hide');
                                 $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                            },always: function (data1) {
+                                console.log('data1= ' + data1);
                             },
                             error: function(e)
                             {
