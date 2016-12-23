@@ -7,7 +7,6 @@
   @if(Session::has('message'))
   <p class="alert-danger">{{Session::get('message')}}</p>
   @endif
-
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
       <div class="row">
         <ol class="breadcrumb">
@@ -20,14 +19,14 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-xs-11 col-md-11 col-lg-11">
-                  <div class="row topspace">
+                  <div class="row">
                     <div class="col-xs-12 col-md-12 col-lg-12">
                       <h4><b>Register New Contact </b></h4>
                     </div>
                   </div>
-                  <div class="row topspace">
+                  <div class="row">
                     <div class="col-xs-12 col-md-12 col-lg-12">
-                      <b>HTTP POST /api/v1/register_new_contact?api_token=&lt;token&gt;</b><br />
+                        <br><b>HTTP POST /api/v1/register_new_contact?api_token=&lt;token&gt;</b><br />
                       This API adds new contact with mobile number and commune code into EWS system. When villager calls to EWS number for
                         registration, this API must be called by passing neccessary parameters as the following:<br>
                       <b>- api_token</b> : should be requested from EWS Admin. An authorized token should be passed,

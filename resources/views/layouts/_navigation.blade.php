@@ -80,12 +80,6 @@
         <i class="pe-7s-tools pe-lg"></i> {{ trans('sensors.sensor_trigger_mgmt') }}
       </a>
     </li>
-    <!-- sensor call log -->
-    <li class="<?php if (preg_match("/sensorcallreport/i", Request::url())) echo "active"; else echo "";?>">
-      <a href="sensorcallreport">
-        <i class="pe-7s-graph2 pe-lg"></i> {{ trans('sensors.sensor_call_log') }}
-      </a>
-    </li>
     @endrole
   </ul>
 </div><!--/.sidebar-->

@@ -71,8 +71,14 @@ Route::get('/soundFile', function () {
 
 Route::get('/sensors', function () {
     $sensors = DB::table('sensors')->get();
+    if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM')) $all_province = DB::table('province')->get();
+    elseif(Auth::user()->hasRole('PCDM'))
+    {
+        $pcdm_province=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
+        $all_province=DB::table('province')->where('PROCODE', $pcdm_province->province_code)->get();
+    }
     //var_dump($sensors); die();
-    return view('sensors',['sensors' => $sensors]);
+    return view('sensors',['sensors' => $sensors, 'all_province' => $all_province]);
 })->middleware('auth');
 
 Route::get('/districts', function()
@@ -434,5 +440,4 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
 
 Route::get('/testGetPhoneNumbers', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@getPhoneNumbersToBeCalled']);
 
-// Sensor CallLog report
-Route::get('/sensorcallreport', ['uses' => 'CallLogReportController@SensorCallLogReportView']);
+Route::post('/getSSCommunes', ['uses' => 'Sensor\SensorsController@getSSCommunesPerDistrict'])->middleware('auth');
