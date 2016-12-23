@@ -441,3 +441,5 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
 Route::get('/testGetPhoneNumbers', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@getPhoneNumbersToBeCalled']);
 
 Route::post('/getSSCommunes', ['uses' => 'Sensor\SensorsController@getSSCommunesPerDistrict'])->middleware('auth');
+
+Route::post('/getSSList', ['uses' => 'CallLogReportController@getSensorListInSelectedProvince'])->middleware('auth');

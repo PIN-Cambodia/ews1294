@@ -32,11 +32,23 @@ class CallLogReportController extends Controller
     // function to select call report of selected province
     public function getCallLogReport(Request $request)
     {
-        // select activities data in a whole province based on activity created_date
-        if($request->prov_id <=9)
-            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) < 6 ORDER BY activity_id desc "));
+        //DB::enableQueryLog();
+        // select activities data in a whole province based on activity, sensor_id sorted by activity id desc
+        if(!empty($request->sensor_id))
+        {
+            if($request->prov_id <=9)
+                $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE sensor_id = $request->sensor_id and list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) < 6 ORDER BY activity_id desc "));
+            else
+                $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE sensor_id = $request->sensor_id and list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 ORDER BY activity_id desc "));
+        }
         else
-            $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 ORDER BY activity_id desc "));
+        {
+            if($request->prov_id <=9)
+                $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) < 6 ORDER BY activity_id desc "));
+            else
+                $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 ORDER BY activity_id desc "));
+        }
+        //dd(DB::getQueryLog());
         $call_logs_result = $this->getCallLogBody($activity_data_query, false);
         return $call_logs_result;
     }
@@ -129,4 +141,27 @@ class CallLogReportController extends Controller
         //return array("data" => $all_arr);
     }
 
+    // show list of sensor based on selected province
+    public function getSensorListInSelectedProvince(Request $request)
+    {
+        //dd($request->province_id_val);
+        // select sensor data
+        //DB::enableQueryLog();
+        $sensor_list=""; $sensor_lists="";
+        if($request->province_id_val <=9)
+            $sensor_data_query = DB::select(DB::raw("SELECT * FROM sensors WHERE location_code  like '$request->province_id_val%' HAVING LENGTH(SUBSTRING_INDEX(`location_code`,',',1)) < 6"));
+        else
+            $sensor_data_query = DB::select(DB::raw("SELECT * FROM sensors WHERE location_code  like '$request->province_id_val%' HAVING LENGTH(SUBSTRING_INDEX(`location_code`,',',1)) >= 6"));
+        // dd(DB::getQueryLog());
+        // dd($sensor_data_query);
+        if(!empty($sensor_data_query))
+        {
+            foreach($sensor_data_query as $sensor_data_query)
+            {
+                $sensor_list .= "<option value='". $sensor_data_query->sensor_id . "'>" . $sensor_data_query->sensor_id . "</option>";
+            }
+            $sensor_lists = "<option value=''>" . trans('sensors.select_sensor_id') . "</option>" . $sensor_list;
+        }
+        return $sensor_lists;
+    }
 }
