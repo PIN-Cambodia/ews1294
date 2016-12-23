@@ -38,8 +38,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
     Route::post('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
     //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
 
-
-
 });
 
 /** user needs to log in in order to access the following routes */
@@ -76,11 +74,6 @@ Route::group(['middleware' => ['auth']], function(){
 
     // get list of province for PCDM role in Registration view
     Route::post('get_authorized_province', ['uses' => 'UserauthController@getAuthorizedProvince']);
-
-
-
-
-
 });
 
 /** Only Admin has rights to access the following routes */
@@ -146,8 +139,6 @@ Route::group(['middleware' => ['auth', 'admin.auth']], function(){
     Route::post('/saveeditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@saveEditSensorTrigger']);
     Route::post('/deletesensortrigger', ['uses' => 'Sensor\SensorTriggerController@deleteSensorTrigger']);
     Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces']);
-
-
 });
 
 Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);
