@@ -247,7 +247,7 @@ class ReceivingSensorInfoAPIController extends Controller
         // Create new activity //
         $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
         echo "start calling<br>";
-//        echo ($phone_tobe_called);
+        echo ($phone_tobe_called);
 //        [{"phone":"017696365"}]
         if($activity_created > 0)
         {
