@@ -247,7 +247,8 @@ class ReceivingSensorInfoAPIController extends Controller
         // Create new activity //
         $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
         echo "start calling<br>";
-        echo implode("",$phone_tobe_called);
+        echo $phone_tobe_called."<br>";
+        var_dump($phone_tobe_called);
 //        [{"phone":"017696365"}]
         if($activity_created > 0)
         {
@@ -257,7 +258,7 @@ class ReceivingSensorInfoAPIController extends Controller
 //                "contacts" => "[{\"phone\":\"017696365\"}]",
 //                "contacts" => '[{"phone":"017696365"}]',
 
-                "contacts" => implode("",$phone_tobe_called),
+                "contacts" => $phone_tobe_called,
                 "activity_id" => $activity_created,
                 "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$url_sound,
                 "no_of_retry" => "3",
@@ -301,6 +302,6 @@ class ReceivingSensorInfoAPIController extends Controller
         {
             $phoneNumbersInCommunes->push(['phone'=> $splitArrayEach]);
         }
-        return $phoneNumbersInCommunes;
+        return json_encode(Response::json($phoneNumbersInCommunes));
     }
 }
