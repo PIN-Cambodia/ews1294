@@ -40,7 +40,7 @@ class ReceivingSensorInfoAPIController extends Controller
             echo "Successfully inserted data: " . Input::get('data');
 
             /** Check for automatically call or send E-mail to relevant people **/
-             $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
+             //$this->checkForAutomaticCallOrEmailAction($return_inserted_val); // samak
         }
     }
     /**
@@ -95,10 +95,7 @@ class ReceivingSensorInfoAPIController extends Controller
 //            phyrum $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
 
             /** automatically call **/
-            // https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/
-            $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
-            //echo $phone_json;
             $this->automaticCallToAffectedPeople($sensor_trigger_result->warning_sound_file, $phone_json, "", $current_sensor_value->sensor_id);
         }
 
@@ -113,7 +110,6 @@ class ReceivingSensorInfoAPIController extends Controller
 
             /** automatically call **/
 
-            $url_sound_file_emergency = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->emergency_sound_file;
             // list of Officers' and Villagers' phone numbers
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
             $this->automaticCallToAffectedPeople($sensor_trigger_result->emergency_sound_file, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
@@ -246,12 +242,10 @@ class ReceivingSensorInfoAPIController extends Controller
     {
         // Create new activity //
         $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
-        echo "start calling<br>";
-        echo $phone_tobe_called."<br>";
-        var_dump($phone_tobe_called);
-//        [{"phone":"017696365"}]
+
         if($activity_created > 0)
         {
+            echo "start calling<br>";
             $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
             $data = array(
                 "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
@@ -302,6 +296,7 @@ class ReceivingSensorInfoAPIController extends Controller
         {
             $phoneNumbersInCommunes->push(['phone'=> $splitArrayEach]);
         }
-        return json_encode(Response::json($phoneNumbersInCommunes));
+        $jsonstr = json_encode($phoneNumbersInCommunes);
+        return $jsonstr;
     }
 }
