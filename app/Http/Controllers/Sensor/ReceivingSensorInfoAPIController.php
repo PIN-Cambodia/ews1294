@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Sensor;
 
 use App\Http\Controllers\Controller;
+use App\Models\activities;
 use App\Models\Sensorlogs;
 use App\Models\sensortriggers;
 use App\Models\targetphones;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
@@ -96,7 +99,7 @@ class ReceivingSensorInfoAPIController extends Controller
             $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
             //echo $phone_json;
-            echo $this->automaticCallToAffectedPeople($url_sound_file_warning, $phone_json, $sensor_trigger_result->affected_communes);
+            $this->automaticCallToAffectedPeople($url_sound_file_warning, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
         }
 
         /** if (the sensor received streamHeight >= defined Emergency level value) then
@@ -113,7 +116,7 @@ class ReceivingSensorInfoAPIController extends Controller
             $url_sound_file_emergency = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->emergency_sound_file;
             // list of Officers' and Villagers' phone numbers
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
-            echo $this->automaticCallToAffectedPeople($url_sound_file_emergency, $phone_json, $sensor_trigger_result->affected_communes);
+            $this->automaticCallToAffectedPeople($url_sound_file_emergency, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
         }
 
     }
@@ -239,7 +242,7 @@ class ReceivingSensorInfoAPIController extends Controller
         }
     }
 
-    public function automaticCallToAffectedPeople($url_sound,$phone_tobe_called, $affected_communes)
+    public function automaticCallToAffectedPeople($url_sound,$phone_tobe_called, $affected_communes,$sensor_id)
     {
 
         /*$data = array("api_token" => Config::get('constants.TWILIO_API_TOKEN'), "clog" => json_encode($callLogRecord));
@@ -254,11 +257,11 @@ class ReceivingSensorInfoAPIController extends Controller
         );
         $result = curl_exec($ch);
         return;*/
-        dd(sizeof($phone_tobe_called));die;
+        // dd(sizeof($phone_tobe_called));die;
         // Create new activity //
-        $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes);
+        $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
         echo "start calling<br>";
-        $twillioCallAPI = 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload';
+        /*$twillioCallAPI = 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload';
         $fields = array(
             "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
             "contacts" => $phone_tobe_called,
@@ -279,15 +282,35 @@ class ReceivingSensorInfoAPIController extends Controller
         );
 
         $curlResponse = curl_exec($curltwillioCallAPI);
-        return $curlResponse;
+        return $curlResponse;*/
+        if($activity_created > 0)
+        {
+            $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
+            $data = array(
+                "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
+                "contacts" => "[{\"phone\":\"017696365\"}]",
+//            "contacts" => $phone_tobe_called,
+                "activity_id" => $activity_created[0],
+                "sound_url" => $activity_created[1],
+                "no_of_retry" => "3",
+                "retry_time" => "10"
+            );
+
+            // Using laravel php library GuzzleHttp for execute external API(Eg: Bong Pheak API)
+            $client = new Client();
+            $response = $client->request('POST', $twillioCallApi, ['json' => $data]);
+            return $response;
+        }
+
     }
 
     // Function to insert New Activity //
-    public function insertNewActivity($noOfPhones,$soundFile,$affected_commune)
+    public function insertNewActivity($noOfPhones,$soundFile,$affected_commune,$sensor)
     {
         $activities = new activities;
         $activities->manual_auto = 2;
-        $activities->user_id = Auth::user()->id;
+        $activities->user_id = 3;
+        $activities->sensor_id = $sensor;
         $activities->list_commune_codes = $affected_commune;
         $activities->no_of_phones_called = $noOfPhones;
         $activities->sound_file = $soundFile;
