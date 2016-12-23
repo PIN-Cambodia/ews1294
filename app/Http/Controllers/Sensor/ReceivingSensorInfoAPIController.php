@@ -247,15 +247,15 @@ class ReceivingSensorInfoAPIController extends Controller
         // Create new activity //
         $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
         echo "start calling<br>";
-        var_dump($phone_tobe_called);
-
+//        echo ($phone_tobe_called);
+//        [{"phone":"017696365"}]
         if($activity_created > 0)
         {
             $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
             $data = array(
                 "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
-//                "contacts" => "[{\"phone\":\"017696365\"}]",
-                "contacts" => $phone_tobe_called,
+                "contacts" => "[{\"phone\":\"017696365\"}]",
+//                "contacts" => $phone_tobe_called,
                 "activity_id" => $activity_created,
                 "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$url_sound,
                 "no_of_retry" => "3",
