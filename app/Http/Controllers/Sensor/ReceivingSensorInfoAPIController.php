@@ -99,7 +99,7 @@ class ReceivingSensorInfoAPIController extends Controller
             $url_sound_file_warning = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->warning_sound_file;
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
             //echo $phone_json;
-            $this->automaticCallToAffectedPeople($url_sound_file_warning, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
+            $this->automaticCallToAffectedPeople($sensor_trigger_result->warning_sound_file, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
         }
 
         /** if (the sensor received streamHeight >= defined Emergency level value) then
@@ -116,7 +116,7 @@ class ReceivingSensorInfoAPIController extends Controller
             $url_sound_file_emergency = "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$sensor_trigger_result->emergency_sound_file;
             // list of Officers' and Villagers' phone numbers
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
-            $this->automaticCallToAffectedPeople($url_sound_file_emergency, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
+            $this->automaticCallToAffectedPeople($sensor_trigger_result->emergency_sound_file, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
         }
 
     }
@@ -291,7 +291,7 @@ class ReceivingSensorInfoAPIController extends Controller
                 "contacts" => "[{\"phone\":\"017696365\"}]",
 //            "contacts" => $phone_tobe_called,
                 "activity_id" => $activity_created[0],
-                "sound_url" => $activity_created[1],
+                "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$activity_created[1],
                 "no_of_retry" => "3",
                 "retry_time" => "10"
             );
