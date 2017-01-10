@@ -33,6 +33,7 @@ class SoundfileCtrl extends Controller
 
     public function insertNewActivity(Request $request)
     {
+//        echo  $request->input('_token');
         if (Session::token() != $request->input('_token')) {
             return response()->json(array('msg' => 'Unauthorized attempt to create setting'));
         }
@@ -40,7 +41,7 @@ class SoundfileCtrl extends Controller
         $noOfPhones = Input::get('noOfPhones');
 //        $newfilename = 'soundFile_' . date('m_d_Y_hia') . '.' . $request->file('soundFile')->getClientOriginalExtension();
         $newfilename = $request->file('soundFile')->getClientOriginalName();
-        dd($newfilename);
+//        dd($newfilename);
         //$request->file('soundFile')->move(public_path("/sounds"), $newfilename);
         // Upload sound file and contact as json to AWS s3 storage
         $storage = Storage::disk('s3');
