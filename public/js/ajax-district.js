@@ -311,7 +311,7 @@ $(document).ready(function(){
                                             sendSuccss = true;
                                             console.log(data);
                                             //$(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
-                                            push = [];
+                                            phone = [];
                                         },always: function (data1) {
                                             console.log('data1= ' + data1);
                                         },
