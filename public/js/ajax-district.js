@@ -314,7 +314,7 @@ $(document).ready(function(){
                     },
                     error: function(error) {
                         alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
-                        console.log(error)
+                        console.log(error);
                     },
                 });
             },
