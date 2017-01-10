@@ -260,6 +260,7 @@ $(document).ready(function(){
         $.ajax({
             url: '/phoneNumbersSelectedByCommunes?commune_ids=' + communes_selected,
             method: 'GET',
+            async: false,
             success: function(phones) {
                 // ** Pass commune codes and the number of phone numbers to get activity id ** //
                 var formData = new FormData($("#uploadForm")[0]);
@@ -271,6 +272,7 @@ $(document).ready(function(){
                     url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
                     data: formData,
                     dataType: 'json',
+                    async: false,
                     method: 'POST',
                     processData: false,
                     contentType: false,
