@@ -295,7 +295,7 @@ $(document).ready(function(){
                         $.ajax({
                             url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
                             method: 'POST',
-                            timeout: 20000,
+                            timeout: 600000,
                             data: formDataTwillioAPI,
                             success: function(data) {
                                 $('#modal_waiting').modal('hide');
