@@ -291,7 +291,7 @@ $(document).ready(function(){
                         formDataTwillioAPI.append('no_of_retry',3);
                         formDataTwillioAPI.append('retry_time', 10);
                         console.log('twillio=' + formDataTwillioAPI);
-                        var phone;
+                        var phone = [];
                         var startIndex = 0;
                         var maxIndex = 10000;
                         for(var i = startIndex; i < phones.length; i++){
