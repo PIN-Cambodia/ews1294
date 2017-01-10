@@ -296,7 +296,6 @@ $(document).ready(function(){
                             url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
                             method: 'POST',
                             data: formDataTwillioAPI,
-                            async: false,
                             success: function(data) {
                                 $('#modal_waiting').modal('hide');
                                 //console.log(data);
