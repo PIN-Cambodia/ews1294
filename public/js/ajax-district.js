@@ -244,12 +244,12 @@ $(document).ready(function(){
     
     $('form#uploadForm').on('submit',function(event){
         event.preventDefault();
-        $.ajaxSetup({
+        /*$.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
-        });
-        $('#modal_waiting').modal('show');
+        });*/
+        //$('#modal_waiting').modal('show');
         var communes_selected = [];
         $.each($("input[class='commune']:checked"), function(){
             communes_selected.push($(this).val());
@@ -265,9 +265,9 @@ $(document).ready(function(){
                 var formData = new FormData($("#uploadForm")[0]);
                 var formDataTwillioAPI = new FormData();
                 $.ajax({
-                    // headers: {
-                    //     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    // },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
                     url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
                     data: formData,
                     dataType: 'json',
