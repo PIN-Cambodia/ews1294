@@ -241,16 +241,15 @@ $(document).ready(function(){
             });
         }
     });
-
-
+    
     $('form#uploadForm').on('submit',function(event){
         event.preventDefault();
-        /*$.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });*/
-        //$('#modal_waiting').modal('show');
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        //     }
+        // });
+        $('#modal_waiting').modal('show');
         var communes_selected = [];
         $.each($("input[class='commune']:checked"), function(){
             communes_selected.push($(this).val());
@@ -282,6 +281,7 @@ $(document).ready(function(){
                          // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
                         // formDataTwillioAPI.append('contacts','[{"phone":"0965537007"}]');
                         // formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
+
                         formDataTwillioAPI.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
@@ -290,7 +290,7 @@ $(document).ready(function(){
                         // test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
                         formDataTwillioAPI.append('no_of_retry',3);
                         formDataTwillioAPI.append('retry_time', 10);
-                        console.log(formDataTwillioAPI);
+                        console.log('twillio=' + formDataTwillioAPI);
                         // ** Trigger calls ** //
                         $.ajax({
                             url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
@@ -301,6 +301,8 @@ $(document).ready(function(){
                                 //$('#modal_waiting').modal('hide');
                                 console.log(data);
                                 $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                            },always: function (data1) {
+                                console.log('data1= ' + data1);
                             },
                             error: function(e)
                             {

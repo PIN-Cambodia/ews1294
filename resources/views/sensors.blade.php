@@ -25,21 +25,29 @@
                         <table class='table responsive cell-border table-bordered' id='province-table' cellspacing='0' width='100%'>
                             <thead>
                             <tr>
-                                <th>Sensor ID</th>
-                                <th>Location Code</th>
-                                <th>Location Information</th>
-                                <th>Location Coordinates</th>
-                                <th>Action</th>
-
+                                <th>{{ trans('sensors.sensor_id') }}</th>
+                                <th>{{ trans('sensors.location') }}</th>
+                                <th>{{ trans('sensors.additional_Info') }}</th>
+                                <th>{{ trans('sensors.location_coordinates') }}</th>
+                                <th>{{ trans('sensors.action') }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             {{ csrf_field() }}
                             @foreach($sensors as $sensor)
+                                <?php
+                                    $location= "";
+                                    $location_name = \DB::table('commune')->where('CCode', $sensor->location_code)->first();
+                                    if(!empty($location_name)){
+                                        if (\App::getLocale()=='km')
+                                            $location = $location_name->CName_kh;
+                                        else $location = $location_name->CName_en;
+                                    }
+                                ?>
                                 <tr>
                                     <td>{{$sensor->sensor_id}}</td>
                                     <td>
-                                        {{$sensor->location_code}}
+                                        {{$location}}
                                     </td>
                                     <td>
                                         {{$sensor->additional_location_info}}
@@ -70,7 +78,6 @@
 
     </div>	<!--/.main-->
 
-
     <!-- Add Sensor Info Modal -->
     <div class="modal fade" id="modal_add_sensor_record" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -80,11 +87,39 @@
                     <h4 class="modal-title text-center" id="myModalLabel">{{ trans('sensors.modal_title_add_sensor') }}</h4>
                 </div>
                 <div class='modal-body'>
-                    ID: <input type='text' id='txtSensorID' name='sensorID' /><br />
-                    Location: <input type='text' id='txtLocationCode' name='locationCode' /><br />
-                    Additional Info: <input type='text' id='txtAdditionalLocationInfo' name='additionalLocationInfo'  /><br />
-                    Latitude: <input type='text' id='txtLocationLatitude' name='locationLatitude'/><br />
-                    Longitude: <input type='text' id='txtLocationLongitude' name='locationLongitude'/><br />
+                    {{ trans('sensors.sensor_id') }} <br>
+                    <input type='text' id='txtSensorID' name='sensorID' /><br />
+                    {{ trans('sensors.location') }} <br>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            {{ csrf_field() }}
+                            <select class="fullwidth select_style ss_province" id="ss_province">
+                                @if(!empty($all_province))
+                                    <option value='0'> {{ trans('pages.select_province') }}</option>
+                                    @foreach($all_province as $each_province)
+                                        @if (App::getLocale()=='km')
+                                            <option value="{{ $each_province->PROCODE }}">{{ $each_province->PROVINCE_KH }}</option>
+                                        @else
+                                            <option value="{{ $each_province->PROCODE }}">{{ $each_province->PROVINCE }}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="fullwidth select_style ss_district ss_district_select" id="ss_district_select"></select>
+                        </div>
+                        <div class="col-lg-6 ss_commune_select_div" id="ss_commune_select_div">
+                            <select class="fullwidth select_style ss_commune_select" id="ss_commune_select" name="ss_communes_select"></select>
+                        </div>
+                    </div><br/>
+                    {{--Location: <input type='text' id='txtLocationCode' name='locationCode' /><br />--}}
+                    {{ trans('sensors.additional_Info') }} <br>
+                    <input type='text' id='txtAdditionalLocationInfo' name='additionalLocationInfo'  /><br />
+                    {{ trans('sensors.latitude') }} <br>
+                    <input type='text' id='txtLocationLatitude' name='locationLatitude'/><br />
+                    {{ trans('sensors.longitude') }} <br>
+                    <input type='text' id='txtLocationLongitude' name='locationLongitude'/><br />
                 </div>
                 <div class='modal-footer'>
                     <button class='btn btn-default' data-dismiss='modal'>
@@ -96,11 +131,9 @@
                         {{ trans('sensors.add_new')  }}
                     </button>
                 </div>
-
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
 
     <!-- Edit Sensor Info Modal -->
     <div class="modal fade" id="modal_sensor_record" tabindex="-1" role="dialog">
@@ -110,7 +143,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">{{ trans('sensors.modal_title_edit_sensor') }}</h4>
                 </div>
-                <span id='sensor_info_detail'></span>
+                <span id='sensor_info_detail'>
+                    {{ csrf_field() }}
+                </span>
 
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -142,9 +177,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-
     <script>
-
         $(function() {
             $.ajaxSetup({
                 headers: {
@@ -165,7 +198,7 @@
             {
                 var btn_val = $(this).attr('name');
                 //alert(btn_val);
-                console.log(token);
+                //console.log(token);
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/sensor_info') }}",
@@ -194,7 +227,8 @@
             {
 
                 var txtSensorID = $('#txtSensorID').val();
-                var txtLocationCode = $('#txtLocationCode').val();
+                //var txtLocationCode = $('#txtLocationCode').val();
+                var commune_code = $('#ss_commune_select').val();
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfo').val();
                 var txtLocationLatitude = $('#txtLocationLatitude').val();
                 var txtLocationLongitude = $('#txtLocationLongitude').val();
@@ -202,12 +236,12 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/add_new_sensor_info') }}",
-                    data: {_token: token, sensor_code: txtSensorID, loc_code: txtLocationCode, sensor_additional_info: txtAdditionalLocationInfo, sensor_lat: txtLocationLatitude, sensor_long: txtLocationLongitude},
+                    data: {_token: token, sensor_code: txtSensorID, commune_code: commune_code, sensor_additional_info: txtAdditionalLocationInfo, sensor_lat: txtLocationLatitude, sensor_long: txtLocationLongitude},
                     cache: false,
                     success: function(result)
                     {
                         location.reload();
-                        alert('New Sensor Already Added!');
+                        //alert('New Sensor Already Added!');
                     },
                     error: function(e)
                     {
@@ -220,7 +254,8 @@
             /* Save Edited data of a user */
             $(document).on('click', '#save_change_sensor', function()
             {
-                var txtLocationCode = $('#txtLocationCodeEdit').val();
+                //var txtLocationCode = $('#txtLocationCodeEdit').val();
+                var ccode = $('#ss_commune_option').val();
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfoEdit').val();
                 var txtLocationCoordinates = $('#txtLocationCoordinatesEdit').val();
                 var btn_val = $(this).attr('name');
@@ -230,7 +265,7 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/save_change_sensor_info') }}",
-                    data: {_token: token, id: btn_val, loc_code: txtLocationCode, additon_loc_info: txtAdditionalLocationInfo, sensor_coordinates: txtLocationCoordinates},
+                    data: {_token: token, id: btn_val, ccode: ccode, additon_loc_info: txtAdditionalLocationInfo, sensor_coordinates: txtLocationCoordinates},
                     cache: false,
                     success: function(result)
                     {
@@ -265,7 +300,6 @@
             });
 
         });
-
 
     </script>
 @endsection

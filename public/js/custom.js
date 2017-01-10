@@ -36,7 +36,7 @@ $(function() {
     $('.ss_district').change(function () {
         $('option:selected', this).attr('selected',true).siblings().removeAttr('selected');
         var distric_id = $(this).val();
-        console.log('district= ' + distric_id);
+        //console.log('district= ' + distric_id);
         if(distric_id != '')
         {
             $.ajax({
@@ -99,6 +99,26 @@ $(function() {
         }
     });
 
+    $('.ss_district_select').change(function () {
+        $('option:selected', this).attr('selected',true).siblings().removeAttr('selected');
+        var token = $('input[name=_token]').val();
+        var distric_id = $(this).val();
+        if(distric_id != '')
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/getSSCommunes',
+                data: {_token: token, distric_id: distric_id},
+                cache: false,
+                success: function(result)
+                {
+                    $('.ss_commune_select').html(result);
+                    $('.ss_commune_select_div').show();
+                }
+            });
+        }
+        return false;
+    });
 });
 
 function checkValidateEmail(email_list) {

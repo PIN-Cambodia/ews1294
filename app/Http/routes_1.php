@@ -25,121 +25,16 @@ Route::post('postPhonesFromReminderGroup', ['as' => 'phones.insert', 'uses' => '
 Route::get('getPhonesFromReminderGroup', ['uses' => 'GetPhonesFromCallLogCtrl@getPhoneCallLog']);
 // Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
 
-/** API User */
 Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
     //  Route::post('/short', 'UrlMapperController@store');
     // Route::get('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
     Route::post('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
+});
+
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
     Route::get('/register_new_contact_test', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContactTest']);
-
-    //Route::get('receivingcalllog/{calllog_data}', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
-    Route::post('/receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
-
-    Route::post('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
-    //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
-
 });
 
-/** user needs to log in in order to access the following routes */
-Route::group(['middleware' => ['auth']], function(){
-    // CallLog report
-    Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView']);
-    Route::post('/getCallLogReport', ['uses' => 'CallLogReportController@getCallLogReport']);
-    Route::post('/getSSCommunes', ['uses' => 'Sensor\SensorsController@getSSCommunesPerDistrict']);
-    Route::post('/getSSList', ['uses' => 'CallLogReportController@getSensorListInSelectedProvince']);
-
-    Route::get('/soundFile', function () {
-        if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
-        {
-            if (App::getLocale()=='km')
-                $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
-            else
-                $provinces = DB::table('province')->select('PROCODE','PROVINCE')->get();
-        }
-        if(Auth::user()->hasRole('PCDM'))
-        {
-            $pcdm_province=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
-
-            if (App::getLocale()=='km')
-                $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')
-                    -> where('PROCODE', $pcdm_province->province_code)
-                    ->get();
-            else
-                $provinces = DB::table('province')->select('PROCODE','PROVINCE')
-                    -> where('PROCODE', $pcdm_province->province_code)
-                    ->get();
-        }
-        return view('uploadSoundFile',['provinces' => $provinces]);
-    });
-
-    // get list of province for PCDM role in Registration view
-    Route::post('get_authorized_province', ['uses' => 'UserauthController@getAuthorizedProvince']);
-});
-
-/** Only Admin has rights to access the following routes */
-Route::group(['middleware' => ['auth', 'admin.auth']], function(){
-    // Register
-    Route::get('/register', function () {
-        return view('auth/register');
-    });
-    Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
-
-    // --- user management ----
-    // list of users
-    Route::get('/allusers', ['as' => 'allusers', 'uses' => 'UserauthController@userLists']);
-
-    // User Profile
-    Route::post('/userprofile', ['uses' => 'UserauthController@displayUserProfiles']);
-
-    // Save Edited User data
-    Route::post('/saveuserdata', ['uses' => 'UserauthController@saveUserProfile']);
-
-    // Enable/Disable User
-    Route::post('/enabledisable', ['uses' => 'UserauthController@enableDisable']);
-
-    // Delete User
-    Route::post('/deleteuser', ['uses' => 'UserauthController@deleteUser']);
-
-    // Display Wiki page of how to use API in EWS system.
-    Route::get('/wiki', function () {
-        return view('apiWiki');
-    });
-
-    Route::get('/sensors', function () {
-        $sensors = DB::table('sensors')->get();
-        $all_province = DB::table('province')->get();
-        return view('sensors',['sensors' => $sensors, 'all_province' => $all_province]);
-    });
-    // Display Sensor Info by Id
-    Route::post('sensor_info', ['uses' => 'Sensor\SensorsController@displaySensorInfoById']);
-    // Save Change Sensor Info
-    Route::post('save_change_sensor_info', ['uses' => 'Sensor\SensorsController@saveChangeSensorInfo']);
-    // Get All Sensors' Info
-    Route::get('getSensors', 'Sensor\SensorsController@getSensors');
-    // Delete Sensor Info
-    Route::post('delete_sensor_info', ['uses' => 'Sensor\SensorsController@deleteSensor']);
-    // Add Sensor Info
-    Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSensor']);
-
-    // Sensor Trigger
-    // Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
-    Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
-    Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
-
-    /** Sensor Trigger Report data display **/
-    Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
-
-    /** Sensor Trigger Add, Edit, and Delete **/
-    /** Add **/
-    // get all province to be displayed in add modal
-    Route::post('/getDistricts', ['uses' => 'Sensor\SensorTriggerController@getDistrictPerProvince']);
-    Route::post('/getCommunes', ['uses' => 'Sensor\SensorTriggerController@getCommunesPerDistrict']);
-    Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
-    Route::post('/geteditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@getEditSensorTrigger']);
-    Route::post('/saveeditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@saveEditSensorTrigger']);
-    Route::post('/deletesensortrigger', ['uses' => 'Sensor\SensorTriggerController@deleteSensorTrigger']);
-    Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces']);
-});
 
 Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);
 
@@ -149,20 +44,57 @@ Route::get('/extractTargetPhones', function () {
     return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 });
 
+Route::get('/soundFile', function () {
+
+    if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
+    {
+        if (App::getLocale()=='km')
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')->get();
+        else
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE')->get();
+    }
+    if(Auth::user()->hasRole('PCDM'))
+    {
+        $pcdm_province=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
+
+        if (App::getLocale()=='km')
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE_KH')
+                -> where('PROCODE', $pcdm_province->province_code)
+                ->get();
+        else
+            $provinces = DB::table('province')->select('PROCODE','PROVINCE')
+                -> where('PROCODE', $pcdm_province->province_code)
+                ->get();
+    }
+    return view('uploadSoundFile',['provinces' => $provinces]);
+})->middleware('auth');
+
+Route::get('/sensors', function () {
+    $sensors = DB::table('sensors')->get();
+    if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM')) $all_province = DB::table('province')->get();
+    elseif(Auth::user()->hasRole('PCDM'))
+    {
+        $pcdm_province=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
+        $all_province=DB::table('province')->where('PROCODE', $pcdm_province->province_code)->get();
+    }
+    //var_dump($sensors); die();
+    return view('sensors',['sensors' => $sensors, 'all_province' => $all_province]);
+})->middleware('auth');
+
 Route::get('/districts', function()
 {
-  $pro_id = Input::get('pro_id');
-  $districs = DB::table('district')->select('DCode','DName_kh')->where('PCode',$pro_id)->get();
+    $pro_id = Input::get('pro_id');
+    $districs = DB::table('district')->select('DCode','DName_kh')->where('PCode',$pro_id)->get();
     //var_dump($districs);
-  return Response::json($districs);
+    return Response::json($districs);
 });
 
 Route::get('/communes', function()
 {
-  $dis_id = Input::get('dis_id');
-  $communes = DB::table('commune')->select('CCode','CName_kh')->where('DCode',$dis_id)->get();
+    $dis_id = Input::get('dis_id');
+    $communes = DB::table('commune')->select('CCode','CName_kh')->where('DCode',$dis_id)->get();
     //var_dump($districs);
-  return Response::json($communes);
+    return Response::json($communes);
 });
 
 Route::get('/disNcom', function()
@@ -180,19 +112,21 @@ Route::get('/disNcom', function()
             ->join('commune','district.DCode','=','commune.DCode')
             ->select('district.DCode','DName_en AS DName','CCode','CName_en AS CName')->where('PCode',$pro_id)->where('district.status',1)->get();
     }
-  return Response::json($districs);
+
+    //var_dump($districs);
+    return Response::json($districs);
 });
 
 //Get the number of communes under which district.
 //***
 Route::get('/numberOfcommunes', function()
 {
-  $district_id = Input::get('district_id');
-  $districs = DB::table('district')
-  ->join('commune','district.DCode','=','commune.DCode')
-  ->select('district.DCode','DName_kh','CCode','CName_kh','CName_en')->where('district.DCode',$district_id)->where('district.status',1)->get();
+    $district_id = Input::get('district_id');
+    $districs = DB::table('district')
+        ->join('commune','district.DCode','=','commune.DCode')
+        ->select('district.DCode','DName_kh','CCode','CName_kh','CName_en')->where('district.DCode',$district_id)->where('district.status',1)->get();
     //var_dump($districs);
-  return Response::json($districs);
+    return Response::json($districs);
 });
 
 //***
@@ -200,10 +134,10 @@ Route::get('/numberOfcommunes', function()
 //***
 Route::get('/numberOfPhones', function()
 {
-  $commune_id = Input::get('commune_id');
-  $noOfPhones = DB::table('targetphones')
-  ->select('phone')->where('commune_code',$commune_id)->get();
-  return Response::json($noOfPhones);
+    $commune_id = Input::get('commune_id');
+    $noOfPhones = DB::table('targetphones')
+        ->select('phone')->where('commune_code',$commune_id)->get();
+    return Response::json($noOfPhones);
 });
 
 //***
@@ -221,6 +155,16 @@ Route::get('/numberOfPhonesUpdate', function()
 //Make a call to those phone numbers in which commune, district and/or province.
 //***
 Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtrl@callThem']);
+
+/** ----- User Registration, Login, Logout, Reset Password and User Management ------ **/
+// Register
+Route::get('/register', function () {
+    if(Auth::user()->hasRole('admin'))
+        return view('auth/register');
+    else return redirect()->intended('home');
+
+})->middleware('auth');
+Route::post('register', ['middleware' => 'auth', 'as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
 
 // Login
 Route::get('/login', function () {
@@ -247,6 +191,32 @@ Route::post('/password.reset', ['uses' => 'Auth\PasswordController@reset']);
 // Route::get('password.reset/{token?}', ['uses' => 'Auth\PasswordController@showResetForm']);
 Route::get('/password.reset/{token?}', ['uses' => 'Auth\PasswordController@getReset']);
 
+// list of users
+Route::get('/allusers', ['middleware' => 'auth', 'as' => 'allusers', 'uses' => 'UserauthController@userLists']);
+
+// User Profile
+Route::post('/userprofile', ['middleware' => 'auth', 'uses' => 'UserauthController@displayUserProfiles']);
+
+// Save Edited User data
+Route::post('/saveuserdata', ['middleware' => 'auth', 'uses' => 'UserauthController@saveUserProfile']);
+
+// Enable/Disable User
+Route::post('/enabledisable', ['middleware' => 'auth', 'uses' => 'UserauthController@enableDisable']);
+
+// Delete User
+Route::post('/deleteuser', ['middleware' => 'auth', 'uses' => 'UserauthController@deleteUser']);
+
+// Receiving Call Log API
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
+{
+    //Route::get('receivingcalllog/{calllog_data}', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+    Route::post('/receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+});
+
+// CallLog report
+Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView'])->middleware('auth');
+Route::post('/getCallLogReport', ['middleware' => 'auth', 'uses' => 'CallLogReportController@getCallLogReport']);
+
 //***
 //Get the phone numbers in which commune(s).
 //***
@@ -270,6 +240,7 @@ Route::get('/phoneNumbersSelectedByCommunesTest', function()
     {
         $phoneNumbersInCommunes->push(['phone'=> $splitArrayEach]);
     }
+
     return Response::json($phoneNumbersInCommunes);
 });
 
@@ -277,14 +248,41 @@ Route::get('/phoneNumbersSelectedByCommunesTest', function()
 // Insert new activity after sending sound file and contacts.
 //***
 Route::post('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
+//***
+// Display Wiki page of how to use API in EWS system.
+//***
+Route::get('/wiki', function () {
+    return view('apiWiki');
+})->middleware('auth');
 
 Route::get('/', function () {
-   return redirect('/home');
+    return redirect('/home');
 });
 
+// ------------ Sensor ---------------------------
+// Sensor API
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function()
+{
+    Route::post('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
+    //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
+});
+
+// get list of province for PCDM role in Registration view
+Route::post('get_authorized_province', ['middleware' => 'auth','uses' => 'UserauthController@getAuthorizedProvince']);
 // Change Language locale on click of flag icon
 Route::post('changelang', ['uses' => 'UserauthController@changeLanguage']);
 
+// Display Sensor Info by Id
+Route::post('sensor_info', ['uses' => 'Sensor\SensorsController@displaySensorInfoById']);
+// Save Change Sensor Info
+Route::post('save_change_sensor_info', ['uses' => 'Sensor\SensorsController@saveChangeSensorInfo']);
+// Get All Sensors' Info
+Route::get('getSensors', 'Sensor\SensorsController@getSensors');
+// Delete Sensor Info
+Route::post('delete_sensor_info', ['uses' => 'Sensor\SensorsController@deleteSensor']);
+
+// Add Sensor Info
+Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 // Display Sensor Map
 Route::post('sensors_map_old', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 
@@ -319,7 +317,7 @@ Route::get('/sensormapTest', function () {
         ->groupBy('sensor_id')
 //        ->max('sensorlogs.timestamp');
         ->get();
-    //var_dump($sensors); die();
+    var_dump($sensors); die();
     return view('sensorsMap',['sensors' => $sensors]);
 });
 
@@ -341,6 +339,12 @@ Route::get('/sensorsLog1thReadingOf30days', function () {
         ->orderBy('timestamp','desc')->limit(30)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
+
+
+/**** Sensor Trigger ***/
+// Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
+Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
+Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
 
 /*** Showing call log report for specific activity ID ***/
 //web url/calllogActivity?activID=3
@@ -370,17 +374,21 @@ Route::get('/sensormap', function () {
     return view('sensorsMap',['sensors' => $sensorIds, 'sensors24hrs' => $sensorlogsAll]);
 });
 
+/** Sensor Trigger Report data display **/
+Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
+
+
 // check all districts and communes in UploadSoundFile form
 Route::get('/checkall', function()
 {
     $pro_id = Input::get('pro_id');
-        $districs = DB::table('district')
-            ->join('commune','district.DCode','=','commune.DCode')
-            ->join('targetphones','targetphones.commune_code','=','commune.CCode')
-            ->select(DB::raw('COUNT(phone) as phone'))
+    $districs = DB::table('district')
+        ->join('commune','district.DCode','=','commune.DCode')
+        ->join('targetphones','targetphones.commune_code','=','commune.CCode')
+        ->select(DB::raw('COUNT(phone) as phone'))
 //          ->select(DB::raw('COUNT(phone) as phone,commune_code as com'))
 //            ->groupBy('commune_code')
-            ->where('PCode',$pro_id)->where('district.status',1)->get();
+        ->where('PCode',$pro_id)->where('district.status',1)->get();
 //    var_dump($districs);
     return $districs;
 });
@@ -392,12 +400,24 @@ Route::get('/checkallTest', function()
         ->join('commune','district.DCode','=','commune.DCode')
         ->join('targetphones','targetphones.commune_code','=','commune.CCode')
 //        ->select(DB::raw('COUNT(phone) as phone'))
-          ->select(DB::raw('COUNT(phone) as phone,commune_code as com'))
-            ->groupBy('commune_code')
+        ->select(DB::raw('COUNT(phone) as phone,commune_code as com'))
+        ->groupBy('commune_code')
         ->where('PCode',$pro_id)->where('district.status',1)->get();
     var_dump($districs);
 //    return $districs;
 });
+
+/** Sensor Trigger Add, Edit, and Delete **/
+/** Add **/
+// get all province to be displayed in add modal
+Route::post('/getDistricts', ['uses' => 'Sensor\SensorTriggerController@getDistrictPerProvince'])->middleware('auth');
+Route::post('/getCommunes', ['uses' => 'Sensor\SensorTriggerController@getCommunesPerDistrict'])->middleware('auth');
+Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger'])->middleware('auth');
+Route::post('/geteditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@getEditSensorTrigger'])->middleware('auth');
+Route::post('/saveeditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@saveEditSensorTrigger'])->middleware('auth');
+Route::post('/deletesensortrigger', ['uses' => 'Sensor\SensorTriggerController@deleteSensorTrigger'])->middleware('auth');
+
+Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces'])->middleware('auth');
 
 Route::get('/testAPI', function () {
     $findCommune = '0110203';
@@ -420,3 +440,6 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
 
 Route::get('/testGetPhoneNumbers', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@getPhoneNumbersToBeCalled']);
 
+Route::post('/getSSCommunes', ['uses' => 'Sensor\SensorsController@getSSCommunesPerDistrict'])->middleware('auth');
+
+Route::post('/getSSList', ['uses' => 'CallLogReportController@getSensorListInSelectedProvince'])->middleware('auth');

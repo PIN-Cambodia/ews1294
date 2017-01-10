@@ -34,8 +34,7 @@ class SensorTriggerController extends Controller
     public function sensorTriggerReport()
     {
         if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM')) $all_province = province::all();
-
-        if(Auth::user()->hasRole('PCDM'))
+        elseif(Auth::user()->hasRole('PCDM'))
         {
             $pcdm_province=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
             $all_province=DB::table('province')->where('PROCODE', $pcdm_province->province_code)->get();
@@ -169,112 +168,16 @@ class SensorTriggerController extends Controller
     {
         $edit_sensor_id = $request->edit_val;
 
-        $commune_checkbox=""; $prov_options=""; $dis_options=""; $province_substr_len=0; $district_substr_len=0;
-        $other_prov_options =""; $other_dis_options=""; $other_commune_checkbox="";
+//        $commune_checkbox=""; $prov_options=""; $dis_options=""; $province_substr_len=0; $district_substr_len=0;
+//        $other_prov_options =""; $other_dis_options=""; $other_commune_checkbox="";
 
         // select sensor trigger record
         $ss_trigger_record = sensortriggers::where('id', $edit_sensor_id)->get();
 
         // get existing record of province, district and checked the communes
         $affected_communes_arr = explode(",", $ss_trigger_record[0]->affected_communes);
-        /** Since affected list of communes is within a single district and province,
-        * so getting the province and district code from only 1st element of affected communes array
-         **/
-        // for province code from 1-> 9
-        if(strlen($affected_communes_arr[0]) == 5)
-        {
-            $province_substr_len = 1;
-            $district_substr_len = 3;
-        }
-        // for province code from 10 upward
-        elseif(strlen($affected_communes_arr[0]) == 6)
-        {
-            $province_substr_len = 2;
-            $district_substr_len = 4;
-        }
-        $province_str_code = substr($affected_communes_arr[0],0,$province_substr_len);
-        $district_str_code = substr($affected_communes_arr[0],0,$district_substr_len);
-        /** select Existed Province and District data record **/
-        if(!empty($province_str_code))
-        {
-            $province_query = DB::table('province')->where('PROCODE', $province_str_code)->get();
-            if(!empty($province_query))
-            {
-                if (App::getLocale()=='km')
-                    $prov_options = "<option value='". $province_query[0]->PROCODE . "' selected>" . $province_query[0]->PROVINCE_KH . "</option>";
-                else
-                    $prov_options = "<option value='". $province_query[0]->PROCODE . "' selected>" . $province_query[0]->PROVINCE . "</option>";
-            }
-            //else "<option value='0'>" . trans('pages.select_province') . "</option>";
-        }
-        else $prov_options = "<option value='0'>" . trans('pages.select_province') . "</option>";
 
-        if(!empty($district_str_code)) {
-            $district_query = DB::table('district')->where('DCode', $district_str_code)->get();
-            if (!empty($district_query)) {
-                if (App::getLocale() == 'km')
-                    $dis_options = "<option value='" . $district_query[0]->DCode . "' selected>" . $district_query[0]->DName_kh . "</option>";
-                else
-                    $dis_options = "<option value='" . $district_query[0]->DCode . "' selected>" . $district_query[0]->DName_en . "</option>";
-            }
-        }
-        /** select other Provinces and Districts data **/
-        //DB::enableQueryLog();
-        $other_province_queries = DB::table('province')->where('PROCODE','!=', $province_str_code)->get();
-        //dd(DB::getQueryLog());
-
-        if(!empty($other_province_queries))
-        {
-            foreach($other_province_queries as $other_province_query)
-            {
-                if (App::getLocale()=='km')
-                    $other_prov_options .= "<option value='". $other_province_query->PROCODE . "'>" . $other_province_query->PROVINCE_KH . "</option>";
-                else
-                    $other_prov_options .= "<option value='". $other_province_query->PROCODE . "'>" . $other_province_query->PROVINCE . "</option>";
-            }
-        }
-        //DB::enableQueryLog();
-        $other_district_queries = DB::table('district')->where('PCode', $province_str_code)
-                                    ->where('DCode', '!=', $district_str_code)
-                                    ->get();
-        //dd(DB::getQueryLog());
-        if(!empty($other_district_queries))
-        {
-            foreach($other_district_queries as $other_dis_option)
-            {
-                if (App::getLocale()=='km')
-                    $other_dis_options .= "<option value='". $other_dis_option->DCode . "'>" . $other_dis_option->DName_kh . "</option>";
-                else
-                    $other_dis_options .= "<option value='". $other_dis_option->DCode . "'>" . $other_dis_option->DName_en . "</option>";
-            }
-        }
-
-        // commune
-        $affected_commune_list = DB::table('commune')->whereIn('CCode', $affected_communes_arr)->get();
-        if(!empty($affected_commune_list))
-        {
-            foreach($affected_commune_list as $affected_commune )
-            {
-                if (\App::getLocale()=='km')
-                    $commune_checkbox .= "<input type='checkbox' name='communes[]' value='". $affected_commune->CCode . "' checked> " . $affected_commune->CName_kh . "<br/>";
-                else
-                    $commune_checkbox .= "<input type='checkbox' name='communes[]' value='". $affected_commune->CCode . "' checked> " . $affected_commune->CName_en . "<br/>";
-            }
-        }
-
-        $other_communes = DB::table('commune') -> where('DCode', $district_str_code)
-                            ->whereNotIn('CCode', $affected_communes_arr)
-                            ->get();
-        if(!empty($other_communes))
-        {
-            foreach($other_communes as $other_communes )
-            {
-                if (\App::getLocale()=='km')
-                    $other_commune_checkbox .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_kh . "<br/>";
-                else
-                    $other_commune_checkbox .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_en . "<br/>";
-            }
-        }
+        $get_location_val = $this->getExistingProvinceAndDistrict($affected_communes_arr[0],$affected_communes_arr,true);
 
         $modal_body = "<div class='modal-body'>"
                         . trans('sensors.sensor_id')
@@ -288,21 +191,21 @@ class SensorTriggerController extends Controller
                         . "<div class='row'>"
                             . "<div class='col-lg-3'>"
                                 . "<select class='fullwidth select_style ss_province' id='ss_province'>"
-                                    . $prov_options
-                                    . $other_prov_options
+                                    . $get_location_val['prov_options']
+                                    . $get_location_val['other_prov_options']
                                 . "</select>"
                             . "</div>"
                             . "<div class='col-lg-3'>"
                                 . "<select class='fullwidth select_style ss_district' id='ss_district'>"
-                                    . $dis_options
-                                    . $other_dis_options
+                                    . $get_location_val['dis_options']
+                                    . $get_location_val['other_dis_options']
                                 . "</select>"
                             . "</div>"
                             . "<div class='col-lg-6 ss_commune_div' id='ss_commune_div'>"
                                 . "<div class='row select_style_height'>"
                                     . "<div class='col-lg-12 ss_commune' id='ss_commune' name='ss_communes'>"
-                                    . $commune_checkbox
-                                    . $other_commune_checkbox
+                                    . $get_location_val['commune_val']
+                                    . $get_location_val['other_commune_val']
                                     . "</div>"
                                 . "</div>"
                             . "</div>"
@@ -474,5 +377,149 @@ class SensorTriggerController extends Controller
                 $this->logger->addError("Delete sensor trigger Erorr: " . $e->getMessage() . " in " . $e->getFile());
             }
         }
+    }
+
+    public static function getExistingProvinceAndDistrict($commune_code,$commune_data,$checkbox=false)
+    {
+        $commune_val=""; $prov_options=""; $dis_options=""; $province_substr_len=0; $district_substr_len=0;
+        $other_prov_options =""; $other_dis_options=""; $other_commune_val="";
+        /** Since affected list of communes is within a single district and province,
+         * so getting the province and district code from only 1st element of affected communes array
+         **/
+        // for province code from 1-> 9
+        if(strlen($commune_code) == 5)
+        {
+            $province_substr_len = 1;
+            $district_substr_len = 3;
+        }
+        // for province code from 10 upward
+        elseif(strlen($commune_code) == 6)
+        {
+            $province_substr_len = 2;
+            $district_substr_len = 4;
+        }
+        $province_str_code = substr($commune_code,0,$province_substr_len);
+        $district_str_code = substr($commune_code,0,$district_substr_len);
+        /** select Existed Province and District data record **/
+        if(!empty($province_str_code))
+        {
+            $province_query = DB::table('province')->where('PROCODE', $province_str_code)->get();
+            if(!empty($province_query))
+            {
+                if (App::getLocale()=='km')
+                    $prov_options = "<option value='". $province_query[0]->PROCODE . "' selected>" . $province_query[0]->PROVINCE_KH . "</option>";
+                else
+                    $prov_options = "<option value='". $province_query[0]->PROCODE . "' selected>" . $province_query[0]->PROVINCE . "</option>";
+            }
+            //else "<option value='0'>" . trans('pages.select_province') . "</option>";
+        }
+        else $prov_options = "<option value='0'>" . trans('pages.select_province') . "</option>";
+
+        if(!empty($district_str_code)) {
+            $district_query = DB::table('district')->where('DCode', $district_str_code)->get();
+            if (!empty($district_query)) {
+                if (App::getLocale() == 'km')
+                    $dis_options = "<option value='" . $district_query[0]->DCode . "' selected>" . $district_query[0]->DName_kh . "</option>";
+                else
+                    $dis_options = "<option value='" . $district_query[0]->DCode . "' selected>" . $district_query[0]->DName_en . "</option>";
+            }
+        }
+        /** select other Provinces and Districts data **/
+        //DB::enableQueryLog();
+        $other_province_queries = DB::table('province')->where('PROCODE','!=', $province_str_code)->get();
+        //dd(DB::getQueryLog());
+
+        if(!empty($other_province_queries))
+        {
+            foreach($other_province_queries as $other_province_query)
+            {
+                if (App::getLocale()=='km')
+                    $other_prov_options .= "<option value='". $other_province_query->PROCODE . "'>" . $other_province_query->PROVINCE_KH . "</option>";
+                else
+                    $other_prov_options .= "<option value='". $other_province_query->PROCODE . "'>" . $other_province_query->PROVINCE . "</option>";
+            }
+        }
+        //DB::enableQueryLog();
+        $other_district_queries = DB::table('district')->where('PCode', $province_str_code)
+            ->where('DCode', '!=', $district_str_code)
+            ->get();
+        //dd(DB::getQueryLog());
+        if(!empty($other_district_queries))
+        {
+            foreach($other_district_queries as $other_dis_option)
+            {
+                if (App::getLocale()=='km')
+                    $other_dis_options .= "<option value='". $other_dis_option->DCode . "'>" . $other_dis_option->DName_kh . "</option>";
+                else
+                    $other_dis_options .= "<option value='". $other_dis_option->DCode . "'>" . $other_dis_option->DName_en . "</option>";
+            }
+        }
+
+        // commune
+        if($checkbox == true)
+        {
+            $affected_commune_list = DB::table('commune')->whereIn('CCode', $commune_data)->get();
+            if(!empty($affected_commune_list))
+            {
+                foreach($affected_commune_list as $affected_commune )
+                {
+                    if (\App::getLocale()=='km')
+                        $commune_val .= "<input type='checkbox' name='communes[]' value='". $affected_commune->CCode . "' checked> " . $affected_commune->CName_kh . "<br/>";
+                    else
+                        $commune_val .= "<input type='checkbox' name='communes[]' value='". $affected_commune->CCode . "' checked> " . $affected_commune->CName_en . "<br/>";
+                }
+            }
+
+            $other_communes = DB::table('commune') -> where('DCode', $district_str_code)
+                ->whereNotIn('CCode', $commune_data)
+                ->get();
+            if(!empty($other_communes))
+            {
+                foreach($other_communes as $other_communes )
+                {
+                    if (\App::getLocale()=='km')
+                        $other_commune_val .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_kh . "<br/>";
+                    else
+                        $other_commune_val .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_en . "<br/>";
+                }
+            }
+        }
+        else
+        {
+            $a_commune = DB::table('commune')->where('CCode', $commune_data)->first();
+            //dd($a_commune);
+            if(!empty($a_commune))
+            {
+               if (\App::getLocale()=='km')
+                    $commune_val = "<option value='". $a_commune->CCode . "'>" . $a_commune->CName_kh . "</option>";
+                    //$commune_val = "<input type='checkbox' name='communes[]' value='". $a_commune->CCode . "' checked> " . $affected_commune->CName_kh . "<br/>";
+                else
+                    $commune_val = "<option value='". $a_commune->CCode . "'>" . $a_commune->CName_en . "</option>";
+                    //$commune_val = "<input type='checkbox' name='communes[]' value='". $a_commune->CCode . "' checked> " . $affected_commune->CName_en . "<br/>";
+            }
+            $other_communes = DB::table('commune') -> where('DCode', $district_str_code)
+                                ->where('CCode','!=', $commune_data)->get();
+            //dd($other_communes);
+            if(!empty($other_communes))
+            {
+                foreach($other_communes as $other_communes )
+                {
+                    if (\App::getLocale()=='km')
+                        $other_commune_val .= "<option value='". $other_communes->CCode . "'>" . $other_communes->CName_kh . "</option>";
+                        //$other_commune_val .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_kh . "<br/>";
+                    else
+                        $other_commune_val .= "<option value='". $other_communes->CCode . "'>" . $other_communes->CName_en . "</option>";
+                        //$other_commune_val .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_en . "<br/>";
+                }
+            }
+        }
+
+        $return_arr_val = ['prov_options'=> $prov_options,
+                                'other_prov_options'=> $other_prov_options,
+                                'dis_options'=> $dis_options,
+                                'other_dis_options'=> $other_dis_options,
+                                'commune_val'=> $commune_val,
+                                'other_commune_val'=>$other_commune_val];
+        return $return_arr_val;
     }
 }

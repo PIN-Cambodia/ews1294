@@ -9,7 +9,6 @@
     </div><!--/.row-->
     <div class="row" >
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <div class="fixed-panel">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
                         <div class="row">
@@ -93,7 +92,6 @@
                         </table>
                     </div><!-- /panel-body -->
                 </div><!-- /panel panel-default -->
-            </div><!-- /fixed-panel -->
         </div><!-- /col -->
     </div><!-- /row -->
 </div>	<!--/.main-->

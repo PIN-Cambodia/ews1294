@@ -67,7 +67,7 @@
                 </div>
               </form>
             </div><!-- \ panel panel-body -->
-          </div><!-- \ panel panel-default -->
+        </div><!-- \ panel panel-default -->
       </div>
     </div><!--/.row-->
   </div>	<!--/.main-->
