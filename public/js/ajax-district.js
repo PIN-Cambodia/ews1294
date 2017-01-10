@@ -305,7 +305,7 @@ $(document).ready(function(){
                             error: function(e)
                             {
                                 $('#modal_waiting').modal('hide');
-                                $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                                //$(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
                                 //console.log(e);
                             },
                             contentType: false,
