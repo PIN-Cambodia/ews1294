@@ -290,7 +290,7 @@ $(document).ready(function(){
                         // test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
                         formDataTwillioAPI.append('no_of_retry',3);
                         formDataTwillioAPI.append('retry_time', 10);
-                        console.log('twillio=' + formDataTwillioAPI);
+                        // console.log('twillio=' + formDataTwillioAPI);
                         // ** Trigger calls ** //
                         $.ajax({
                             url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
@@ -305,6 +305,7 @@ $(document).ready(function(){
                             error: function(e)
                             {
                                 $('#modal_waiting').modal('hide');
+                                $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
                                 //console.log(e);
                             },
                             contentType: false,
