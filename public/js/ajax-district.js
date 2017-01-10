@@ -300,7 +300,7 @@ $(document).ready(function(){
                             success: function(data) {
                                 $('#modal_waiting').modal('hide');
                                 //console.log(data);
-                                $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                                //$(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
                             },
                             error: function(e)
                             {
