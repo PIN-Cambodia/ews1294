@@ -277,10 +277,11 @@ $(document).ready(function(){
                     processData: false,
                     contentType: false,
                     success: function (activityId) {
-                        console.log(activityId);
+                        //console.log(activityId);
                         formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                        //formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
-                        //formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
+                         // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
+                        // formDataTwillioAPI.append('contacts','[{"phone":"0965537007"}]');
+                        // formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
                         formDataTwillioAPI.append('contacts',JSON.stringify(phones));
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
@@ -298,12 +299,13 @@ $(document).ready(function(){
                             async: false,
                             success: function(data) {
                                 $('#modal_waiting').modal('hide');
+                                //console.log(data);
                                 $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
                             },
                             error: function(e)
                             {
                                 $('#modal_waiting').modal('hide');
-                                console.log(e);
+                                //console.log(e);
                             },
                             contentType: false,
                             processData: false
@@ -312,14 +314,14 @@ $(document).ready(function(){
                     error: function(error) {
                         $('#modal_waiting').modal('hide');
                         alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
-                        console.log(error)
+                        //console.log(error)
                     },
                 });
             },
             error: function(e)
             {
                 $('#modal_waiting').modal('hide');
-                console.log(e);
+                //console.log(e);
             },
             contentType: false,
             processData: false

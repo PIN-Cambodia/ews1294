@@ -28,7 +28,7 @@ class sensorLogChartCtrl extends Controller
         if($graph_type==2)
         {
             $sensorlogs = DB::table('sensorlogs')
-                ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
+                ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
                 ->groupBy('time')
                 ->orderBy('timestamp')->limit(30)->get();
@@ -36,7 +36,7 @@ class sensorLogChartCtrl extends Controller
         else
         {
             $sensorlogs = DB::table('sensorlogs')
-                ->select(DB::raw("timestamp as time, stream_height"))
+                ->select(DB::raw("id, timestamp as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)->orderBy('timestamp')->limit(24)->get();
         }
 
@@ -47,17 +47,27 @@ class sensorLogChartCtrl extends Controller
             ->first();
 //        dd($sensorlogs);
 
-        foreach($sensorlogs as $sensorlog)
+        if(!empty($sensortrigger))
         {
-            $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
-        }
-        $chart = Lava::LineChart('SensorLogChart',$sensenlogTable)
-        ->setOptions(['pointSize' => 1,
-            'curveType' => 'function',
-            'height' => 350,
-            'axisTitlesPosition' => 'none'
-        ]);
+            foreach($sensorlogs as $v => $sensorlog)
+            {
+                $sensenlogTable->addRow([$sensorlog->time , $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+            }
+            $chart = Lava::LineChart('SensorLogChart',$sensenlogTable)
+                ->setOptions(['pointSize' => 1,
+                    'curveType' => 'function',
+                    'height' => 350
 
-        return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
+                ]);
+
+            return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
+        }
+        else
+        {
+
+            return '<p align="center" style="margin-top: 200;">Error: Sensor ID "' . $sensor_id . '" is not found in trigger management.<br><br><br><a href="/sensortrigger">Click here</a> to add new trigger for this sensor.</p>';
+        }
+
+
     }
 }

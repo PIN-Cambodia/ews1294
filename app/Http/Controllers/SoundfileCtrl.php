@@ -38,7 +38,9 @@ class SoundfileCtrl extends Controller
         }
         $communes = Input::get('communes');
         $noOfPhones = Input::get('noOfPhones');
-        $newfilename = 'soundFile_' . date('m_d_Y_hia') . '.' . $request->file('soundFile')->getClientOriginalExtension();
+//        $newfilename = 'soundFile_' . date('m_d_Y_hia') . '.' . $request->file('soundFile')->getClientOriginalExtension();
+        $newfilename = $request->file('soundFile')->getClientOriginalName();
+        dd($newfilename);
         //$request->file('soundFile')->move(public_path("/sounds"), $newfilename);
         // Upload sound file and contact as json to AWS s3 storage
         $storage = Storage::disk('s3');
