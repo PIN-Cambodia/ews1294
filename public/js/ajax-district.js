@@ -299,7 +299,7 @@ $(document).ready(function(){
                                 phone.push(phones[i]);
                                 startIndex = i; //9999
                                 if (startIndex === maxIndex-1) {
-                                    formDataTwillioAPI.append('contacts',JSON.stringify(phones));
+                                    formDataTwillioAPI.append('contacts',JSON.stringify(phone));
                                     // ** Trigger calls ** //
                                     $.ajax({
                                         url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
@@ -310,7 +310,8 @@ $(document).ready(function(){
                                             //$('#modal_waiting').modal('hide');
                                             sendSuccss = true;
                                             console.log(data);
-                                            $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                                            //$(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                                            push = [];
                                         },always: function (data1) {
                                             console.log('data1= ' + data1);
                                         },
