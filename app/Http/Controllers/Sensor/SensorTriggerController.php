@@ -107,11 +107,15 @@ class SensorTriggerController extends Controller
     public function addSensorTrigger(Request $request)
     {
         /** upload file to AWS S3 **/
+        // condition both warning and emergency file are required
         if ($request->hasFile('warning_sound_file') && $request->hasFile('emergency_sound_file')) {
             $warning_file = $request->file('warning_sound_file');
             $emergency_file = $request->file('emergency_sound_file');
-            $warning_file_name = substr($warning_file->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $warning_file->getClientOriginalExtension();
-            $emergency_file_name = substr($emergency_file->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $emergency_file->getClientOriginalExtension();
+            // $warning_file_name = substr($warning_file->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $warning_file->getClientOriginalExtension();
+            // $emergency_file_name = substr($emergency_file->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $emergency_file->getClientOriginalExtension();
+
+            $warning_file_name = $warning_file->getClientOriginalName();
+            $emergency_file_name = $emergency_file->getClientOriginalName();
 
             $storage = Storage::disk('s3');
             //$upload_wsf = $storage->put('sensor_sounds/' . $warning_file_name, file_get_contents($warning_file));
@@ -277,8 +281,8 @@ class SensorTriggerController extends Controller
         // user can either update warning or emergency or both
         if ($request->hasFile('warning_sound_file')) {
             $warning_file_new = $request->file('warning_sound_file');
-            $warning_file_nam = substr($warning_file_new->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $warning_file_new->getClientOriginalExtension();
-
+            // $warning_file_nam = substr($warning_file_new->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $warning_file_new->getClientOriginalExtension();
+            $warning_file_nam = $warning_file_new->getClientOriginalName();
             try{
                 // upload new warning sound file
                 $upload_wsf_new = $storage->put('sensor_sounds/' . $warning_file_nam, file_get_contents($warning_file_new));
@@ -296,7 +300,8 @@ class SensorTriggerController extends Controller
         if($request->hasFile('emergency_sound_file'))
         {
             $emergency_file_new = $request->file('emergency_sound_file');
-            $emergency_file_nam = substr($emergency_file_new->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $emergency_file_new->getClientOriginalExtension();
+//            $emergency_file_nam = substr($emergency_file_new->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $emergency_file_new->getClientOriginalExtension();
+            $emergency_file_nam = $emergency_file_new->getClientOriginalName();
             try{
                 // upload new emergency sound file
                 $upload_esf_new = $storage->put('sensor_sounds/' . $emergency_file_nam, file_get_contents($emergency_file_new));

@@ -244,12 +244,13 @@ $(document).ready(function(){
     
     $('form#uploadForm').on('submit',function(event){
         event.preventDefault();
-        /*$.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });*/
-        //$('#modal_waiting').modal('show');
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        //     }
+        // });
+
+        $('#modal_waiting').modal('show');
         var communes_selected = [];
         $.each($("input[class='commune']:checked"), function(){
             communes_selected.push($(this).val());
@@ -277,12 +278,11 @@ $(document).ready(function(){
                     processData: false,
                     contentType: false,
                     success: function (activityId) {
-                        console.log(activityId);
+                        //console.log(activityId);
                         formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
                          // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
                         // formDataTwillioAPI.append('contacts','[{"phone":"0965537007"}]');
                         // formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
-
                         // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
 
                         formDataTwillioAPI.append('activity_id',activityId[0]);
@@ -349,16 +349,38 @@ $(document).ready(function(){
                         // });
                         if(sendSuccss)
                             $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+/*=======
+                        // console.log('twillio=' + formDataTwillioAPI);
+                        // ** Trigger calls ** //
+                        $.ajax({
+                            url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
+                            method: 'POST',
+                            timeout: 600000,
+                            data: formDataTwillioAPI,
+                            success: function(data) {
+                                $('#modal_waiting').modal('hide');
+                                $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                            },
+                            error: function(e)
+                            {
+                                $('#modal_waiting').modal('hide');
+                            },
+                            contentType: false,
+                            processData: false
+                        });
+>>>>>>> f2128c2ddea489bf53f4617e394a7e8ff91a578c*/
                     },
                     error: function(error) {
+                        $('#modal_waiting').modal('hide');
                         alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
-                        console.log(error);
+                        //console.log(error)
                     },
                 });
             },
             error: function(e)
             {
-                console.log(e);
+                $('#modal_waiting').modal('hide');
+                //console.log(e);
             },
             contentType: false,
             processData: false
