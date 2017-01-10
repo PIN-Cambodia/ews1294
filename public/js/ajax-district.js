@@ -299,14 +299,14 @@ $(document).ready(function(){
                             data: formDataTwillioAPI,
                             success: function(data) {
                                 $('#modal_waiting').modal('hide');
-                                //console.log(data);
+                                console.log(data);
                                 //$(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
                             },
                             error: function(e)
                             {
                                 $('#modal_waiting').modal('hide');
                                 //$(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
-                                //console.log(e);
+                                console.log(e);
                             },
                             contentType: false,
                             processData: false
