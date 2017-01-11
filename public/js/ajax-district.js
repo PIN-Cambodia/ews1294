@@ -299,7 +299,7 @@ $(document).ready(function(){
                                 phone.push(phones[i]);
                                 startIndex = i; //4999
                                 if (startIndex === maxIndex-1) {
-                                    formDataTwillioAPI.append('contacts',JSON.stringify(phone));
+                                    formDataTwillioAPI.set('contacts',JSON.stringify(phone));
                                     // ** Trigger calls ** //
                                     $.ajax({
                                         url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
