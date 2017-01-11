@@ -324,7 +324,7 @@ $(document).ready(function(){
                                         contentType: false,
                                         processData: false
                                     });
-                                    console.log('sending with maxIndex= '+ maxIndex +' and startIndex = '+startIndex);
+                                    console.log('sending with maxIndex= '+ maxIndex +' and startIndex = '+startIndex +' and length = '+ phones.length);
                                     maxIndex+=lengthMax;
 
                                 }
