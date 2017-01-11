@@ -300,7 +300,7 @@ $(document).ready(function(){
                             if(startIndex < maxIndex){
                                 phone.push(phones[i]);
                                 startIndex = i; //4999
-                                if (startIndex === maxIndex-1 || startIndex === phones.length) {
+                                if (startIndex === maxIndex-1 || startIndex === phones.length-1) {
                                     formDataTwillioAPI.set('contacts', JSON.stringify(phone));
                                     // ** Trigger calls ** //
                                     $.ajax({
