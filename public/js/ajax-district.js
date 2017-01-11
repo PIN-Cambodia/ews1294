@@ -300,8 +300,8 @@ $(document).ready(function(){
                             if(startIndex < maxIndex){
                                 phone.push(phones[i]);
                                 startIndex = i; //4999
-                                if (startIndex === maxIndex-1) {
-                                    formDataTwillioAPI.set('contacts',JSON.stringify(phone));
+                                if (startIndex === maxIndex-1 || startIndex === phones.length) {
+                                    formDataTwillioAPI.set('contacts', JSON.stringify(phone));
                                     // ** Trigger calls ** //
                                     $.ajax({
                                         url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
