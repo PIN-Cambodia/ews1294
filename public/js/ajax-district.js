@@ -350,8 +350,8 @@ $(document).ready(function(){
                         //     contentType: false,
                         //     processData: false
                         // });
-                        if(sendSuccss)
-                            $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
+                        /*if(sendSuccss)
+                            $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);*/
 /*=======
                         // console.log('twillio=' + formDataTwillioAPI);
                         // ** Trigger calls ** //
