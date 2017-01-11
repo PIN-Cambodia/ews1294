@@ -324,11 +324,14 @@ $(document).ready(function(){
                                         contentType: false,
                                         processData: false
                                     });
+                                    console.log('sending with maxIndex= '+ maxIndex +' and startIndex = '+startIndex);
                                     maxIndex+=lengthMax;
-                                    console.log('send once with maxIndex= '+ maxIndex +' and startIndex = '+startIndex);
+
                                 }
 
                             } //10000 -> 19999
+                            else
+                                console.log('end with startIndex = '+startIndex);
                         }
                         // formDataTwillioAPI.append('contacts',JSON.stringify(phones));
                         // // ** Trigger calls ** //
