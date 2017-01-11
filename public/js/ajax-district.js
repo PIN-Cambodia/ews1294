@@ -245,154 +245,98 @@ $(document).ready(function(){
     $('form#uploadForm').on('submit',function(event){
         $('#modal_waiting').modal('show');
         event.preventDefault();
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-        //     }
-        // });
 
+        $('#modal_waiting').on('shown.bs.modal', function() {
+            var communes_selected = [];
+            $.each($("input[class='commune']:checked"), function(){
+                communes_selected.push($(this).val());
+            });
 
-        var communes_selected = [];
-        $.each($("input[class='commune']:checked"), function(){
-            communes_selected.push($(this).val());
-        });
-
-        // ** Pass commune codes to get phone numbers ** //
-        $.ajax({
-            url: '/phoneNumbersSelectedByCommunes?commune_ids=' + communes_selected,
-            method: 'GET',
-            async: false,
-            success: function(phones) {
-                // ** Pass commune codes and the number of phone numbers to get activity id ** //
-                var formData = new FormData($("#uploadForm")[0]);
-                var formDataTwillioAPI = new FormData();
-                var sendSuccss = false;
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    },
-                    url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
-                    data: formData,
-                    dataType: 'json',
-                    async: false,
-                    method: 'POST',
-                    processData: false,
-                    contentType: false,
-                    success: function (activityId) {
-                        //console.log(activityId);
-                        formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-                         // formDataTwillioAPI.append('contacts','[{"phone":"017696365"}]');
-                        // formDataTwillioAPI.append('contacts','[{"phone":"0965537007"}]');
-                        // formDataTwillioAPI.append('contacts','[{"phone":"089555127"}]');
-                        // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
-
-                        formDataTwillioAPI.append('activity_id',activityId[0]);
-                        formDataTwillioAPI.append('sound_url','https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/'+activityId[1]);
-                        // test.append('sound_url','http://ews1294.info/sounds/soundFile_11_24_2016_0953am.mp3');
-                        formDataTwillioAPI.append('no_of_retry',3);
-                        formDataTwillioAPI.append('retry_time', 10);
-                        console.log('twillio=' + formDataTwillioAPI);
-                        var phone = [];
-                        var startIndex = 0;
-
-                        var lengthMax = 5000;
-                        var maxIndex = lengthMax;
-                        for(var i = startIndex; i < phones.length; i++){
-                            if(startIndex < maxIndex){
-                                phone.push(phones[i]);
-                                startIndex = i; //4999
-                                if (startIndex === maxIndex-1 || startIndex === phones.length-1) {
-                                    formDataTwillioAPI.set('contacts', JSON.stringify(phone));
-                                    // ** Trigger calls ** //
-                                    $.ajax({
-                                        url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
-                                        method: 'POST',
-                                        data: formDataTwillioAPI,
-                                        async: false,
-                                        success: function(data) {
-                                            //$('#modal_waiting').modal('hide');
-                                            sendSuccss = true;
-                                            console.log(data);
-                                            //$(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
-                                            phone = [];
-                                        },always: function (data1) {
-                                            console.log('data1= ' + data1);
-                                        },
-                                        error: function(e)
-                                        {
-                                            console.log(e);
-                                        },
-                                        contentType: false,
-                                        processData: false
-                                    });
-                                    console.log('sending with maxIndex= '+ maxIndex +' and startIndex = '+startIndex +' and length = '+ phones.length);
-                                    maxIndex+=lengthMax;
-
+            // ** Pass commune codes to get phone numbers ** //
+            $.ajax({
+                url: '/phoneNumbersSelectedByCommunes?commune_ids=' + communes_selected,
+                method: 'GET',
+                async: false,
+                success: function(phones) {
+                    // ** Pass commune codes and the number of phone numbers to get activity id ** //
+                    var formData = new FormData($("#uploadForm")[0]);
+                    var formDataTwillioAPI = new FormData();
+                    var sendSuccss = false;
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        },
+                        url: "/add_new_activity?communes=" + communes_selected + "&noOfPhones=" + phones.length,
+                        data: formData,
+                        dataType: 'json',
+                        async: false,
+                        method: 'POST',
+                        processData: false,
+                        contentType: false,
+                        success: function (activityId) {
+                            formDataTwillioAPI.append('api_token','C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
+                            // formData.append('contacts', '[{"phone":"017696365"},{"phone":"012415734"},{"phone":"010567487"},{"phone":"089737630"},{"phone":"012628979"},{"phone":"011676331"},{"phone":"012959466"}]');
+                            formDataTwillioAPI.append('activity_id',activityId[0]);
+                            formDataTwillioAPI.append('sound_url','https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/'+activityId[1]);
+                            formDataTwillioAPI.append('no_of_retry',3);
+                            formDataTwillioAPI.append('retry_time', 10);
+                            // To avoid error timeout while sending more than 10000 phone contacts to Twillio server,
+                            // We splite array of phones into the small blocks of 5000 phones.
+                            // So each time, we send only 5000 phone numbers to ews-twilio.
+                            var phone = [];
+                            var startIndex = 0;
+                            var lengthMax = 5000;
+                            var maxIndex = lengthMax;
+                            for(var i = startIndex; i < phones.length; i++){
+                                if(startIndex < maxIndex){
+                                    phone.push(phones[i]);
+                                    startIndex = i; //4999
+                                    if (startIndex === maxIndex-1 || startIndex === phones.length-1) {
+                                        formDataTwillioAPI.set('contacts', JSON.stringify(phone));
+                                        // ** Trigger calls ** //
+                                        $.ajax({
+                                            url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
+                                            method: 'POST',
+                                            data: formDataTwillioAPI,
+                                            async: false,
+                                            success: function(data) {
+                                                sendSuccss = true;
+                                                phone = [];
+                                            },always: function (data1) {
+                                                console.log('data1= ' + data1);
+                                            },
+                                            error: function(e)
+                                            {
+                                                console.log(e);
+                                            },
+                                            contentType: false,
+                                            processData: false
+                                        });
+                                        console.log('sending with maxIndex= '+ maxIndex +' and startIndex = '+startIndex +' and length = '+ phones.length);
+                                        maxIndex+=lengthMax;
+                                    }
                                 }
+                                else
+                                    console.log('end with startIndex = '+startIndex);
+                            }
 
-                            } //10000 -> 19999
-                            else
-                                console.log('end with startIndex = '+startIndex);
-                        }
-                        // formDataTwillioAPI.append('contacts',JSON.stringify(phones));
-                        // // ** Trigger calls ** //
-                        // $.ajax({
-                        //     url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
-                        //     method: 'POST',
-                        //     data: formDataTwillioAPI,
-                        //     // async: false,
-                        //     success: function(data) {
-                        //         //$('#modal_waiting').modal('hide');
-                        //         sendSuccss = true;
-                        //         console.log(data);
-                        //         $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
-                        //     },always: function (data1) {
-                        //         console.log('data1= ' + data1);
-                        //     },
-                        //     error: function(e)
-                        //     {
-                        //         console.log(e);
-                        //     },
-                        //     contentType: false,
-                        //     processData: false
-                        // });
-                        /*if(sendSuccss)
-                            $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);*/
-/*=======
-                        // console.log('twillio=' + formDataTwillioAPI);
-                        // ** Trigger calls ** //
-                        $.ajax({
-                            url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
-                            method: 'POST',
-                            timeout: 600000,
-                            data: formDataTwillioAPI,
-                            success: function(data) {
-                                $('#modal_waiting').modal('hide');
+                            if(sendSuccss)
                                 $(location).attr("href", '/calllogActivity?activID=' + activityId[0]);
-                            },
-                            error: function(e)
-                            {
-                                $('#modal_waiting').modal('hide');
-                            },
-                            contentType: false,
-                            processData: false
-                        });
->>>>>>> f2128c2ddea489bf53f4617e394a7e8ff91a578c*/
-                    },
-                    error: function(error) {
-                        $('#modal_waiting').modal('hide');
-                        alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
-                        //console.log(error)
-                    },
-                });
-            },
-            error: function(e)
-            {
-                $('#modal_waiting').modal('hide');
-                //console.log(e);
-            },
-            contentType: false,
-            processData: false
+
+                        },
+                        error: function(error) {
+                            $('#modal_waiting').modal('hide');
+                            alert('sorry, new activity cannot be inserted (សំុទោស! ទិន្នន័យនេះមិនអាចបញ្ចូលបានទេ។)');
+                        },
+                    });
+                },
+                error: function(e)
+                {
+                    $('#modal_waiting').modal('hide');
+                },
+                contentType: false,
+                processData: false
+            });
         });
     });
 });
