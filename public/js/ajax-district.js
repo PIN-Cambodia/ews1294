@@ -293,7 +293,9 @@ $(document).ready(function(){
                         console.log('twillio=' + formDataTwillioAPI);
                         var phone = [];
                         var startIndex = 0;
-                        var maxIndex = 5000;
+
+                        var lengthMax = 5000;
+                        var maxIndex = lengthMax;
                         for(var i = startIndex; i < phones.length; i++){
                             if(startIndex < maxIndex){
                                 phone.push(phones[i]);
@@ -322,7 +324,7 @@ $(document).ready(function(){
                                         contentType: false,
                                         processData: false
                                     });
-                                    maxIndex+=maxIndex;
+                                    maxIndex+=lengthMax;
                                     console.log('send once with maxIndex= '+ maxIndex +' and startIndex = '+startIndex);
                                 }
 
