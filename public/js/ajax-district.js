@@ -293,11 +293,11 @@ $(document).ready(function(){
                         console.log('twillio=' + formDataTwillioAPI);
                         var phone = [];
                         var startIndex = 0;
-                        var maxIndex = 10000;
+                        var maxIndex = 5000;
                         for(var i = startIndex; i < phones.length; i++){
                             if(startIndex < maxIndex){
                                 phone.push(phones[i]);
-                                startIndex = i; //9999
+                                startIndex = i; //4999
                                 if (startIndex === maxIndex-1) {
                                     formDataTwillioAPI.append('contacts',JSON.stringify(phone));
                                     // ** Trigger calls ** //
@@ -305,7 +305,7 @@ $(document).ready(function(){
                                         url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
                                         method: 'POST',
                                         data: formDataTwillioAPI,
-                                        // async: false,
+                                        async: false,
                                         success: function(data) {
                                             //$('#modal_waiting').modal('hide');
                                             sendSuccss = true;
@@ -323,7 +323,9 @@ $(document).ready(function(){
                                         processData: false
                                     });
                                     maxIndex+=maxIndex;
+                                    console.log('send once'+ maxIndex);
                                 }
+
                             } //10000 -> 19999
                         }
                         // formDataTwillioAPI.append('contacts',JSON.stringify(phones));
