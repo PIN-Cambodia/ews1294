@@ -323,7 +323,7 @@ $(document).ready(function(){
                                         processData: false
                                     });
                                     maxIndex+=maxIndex;
-                                    console.log('send once'+ maxIndex);
+                                    console.log('send once with maxIndex= '+ maxIndex +' and startIndex = '+startIndex);
                                 }
 
                             } //10000 -> 19999
