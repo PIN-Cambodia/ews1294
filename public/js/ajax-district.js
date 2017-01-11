@@ -243,6 +243,7 @@ $(document).ready(function(){
     });
     
     $('form#uploadForm').on('submit',function(event){
+        $('#modal_waiting').modal('show');
         event.preventDefault();
         // $.ajaxSetup({
         //     headers: {
@@ -250,7 +251,7 @@ $(document).ready(function(){
         //     }
         // });
 
-        $('#modal_waiting').modal('show');
+
         var communes_selected = [];
         $.each($("input[class='commune']:checked"), function(){
             communes_selected.push($(this).val());
