@@ -14,13 +14,13 @@
           <div class="panel-heading">{{ trans('auth.register') }}</div>
             <br />
             <div class="row">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-5">
+                <div class="col-md-2 col-lg-3"></div>
+                <div class="col-md-8 col-lg-5">
                     <i><font color='#00008b'>
                         @if(!empty($successfully_register_new_user)) {{ $successfully_register_new_user }} @endif
                     </font></i>
                 </div>
-                <div class="col-lg-4"></div>
+                <div class="col-md-2 col-lg-4"></div>
             </div>
           <div class="panel-body">
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
