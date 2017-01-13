@@ -13,34 +13,34 @@
 use App\Models\Sensors;
 use Illuminate\Support\Facades\Input;
 
-    Route::get('/home', function () {
-        return view('index');
-    });
+Route::get('/home', function () {
+    return view('index');
+});
 
-    /*
-     * Route to post reminder group id to import phone numbers from Verboice.
-     */
-    Route::post('postPhonesFromReminderGroup', ['as' => 'phones.insert', 'uses' => 'GetPhonesFromCallLogCtrl@importPhoneContactsFromVerboice']);
+/**
+ * Route to post reminder group id to import phone numbers from Verboice.
+ */
+Route::post('postPhonesFromReminderGroup', ['as' => 'phones.insert', 'uses' => 'GetPhonesFromCallLogCtrl@importPhoneContactsFromVerboice']);
 
-    /*
-    * Route to get phone numbers from Verboice to be imported into EWS Server.
-    * Note: It will duplicate phone numbers that have already been inserted,
-    * So make sure that the selected reminder group's phone numbers have not been imported from Verboice before.
-    */
-    Route::get('getPhonesFromReminderGroup', ['uses' => 'GetPhonesFromCallLogCtrl@importPhoneContactsFromVerboice']);
+/**
+* Route to get phone numbers from Verboice to be imported into EWS Server.
+* Note: It will duplicate phone numbers that have already been inserted,
+* So make sure that the selected reminder group's phone numbers have not been imported from Verboice before.
+*/
+Route::get('getPhonesFromReminderGroup', ['uses' => 'GetPhonesFromCallLogCtrl@importPhoneContactsFromVerboice']);
 
-    /** API User */
-    Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
+/** A group of routing which requires API User account */
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
     // Register New Contact API
     Route::post('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
     // Call Logs API
     Route::post('/receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
     // Sensor Logs API
     Route::post('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
-});
+}); // .'middleware' => ['auth', 'auth:api']
 
-    /** user needs to log in in order to access the following routes */
-    Route::group(['middleware' => ['auth']], function(){
+/** user needs to log in in order to access the following routes */
+Route::group(['middleware' => ['auth']], function(){
     /** --- CallLog report ---  */
     Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView']);
     Route::post('/getCallLogReport', ['uses' => 'CallLogReportController@getCallLogReport']);
@@ -78,10 +78,10 @@ use Illuminate\Support\Facades\Input;
     /** --- Showing call log report for specific activity ID --- */
     // web url/call_logActivity?activID=3
     Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity');
-});
+}); // .'middleware' => ['auth']
 
-    /** Only Admin has rights to access the following routes */
-    Route::group(['middleware' => ['auth', 'admin.auth']], function(){
+/** Only Admin has rights to access the following routes */
+Route::group(['middleware' => ['auth', 'admin.auth']], function(){
 
     /** --- User Registration --- */
     Route::get('/register', function () {
@@ -106,7 +106,7 @@ use Illuminate\Support\Facades\Input;
         return view('apiWiki');
     });
 
-    /*
+    /**
      * Route to get all sensors.
      */
     Route::get('/sensors', function () {
@@ -140,7 +140,7 @@ use Illuminate\Support\Facades\Input;
     Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces']);
 }); // .'middleware' => ['auth', 'admin.auth']
 
-/*
+/**
  * Route to get districts of province $pro_id.
  */
 Route::get('/districts', function()
@@ -150,7 +150,7 @@ Route::get('/districts', function()
   return Response::json($districs);
 });
 
-/*
+/**
  * Route to get communes of district $dis_id.
  */
 Route::get('/communes', function()
@@ -160,7 +160,7 @@ Route::get('/communes', function()
   return Response::json($communes);
 });
 
-/*
+/**
  * Route to get districts and communes of province $pro_id.
  */
 Route::get('/disNcom', function()
@@ -180,7 +180,7 @@ Route::get('/disNcom', function()
     }
   return Response::json($districs);
 });
-/*
+/**
  * Route to get the number of communes under which district.
  */
 Route::get('/numberOfcommunes', function()
@@ -193,9 +193,9 @@ Route::get('/numberOfcommunes', function()
 });
 
 
-//***
-// Get the number of phones in which commune.
-//***
+/**
+ * Get the number of phones in which commune.
+*/
 Route::get('/numberOfPhones', function()
 {
     $commune_id = Input::get('commune_id');
@@ -204,16 +204,15 @@ Route::get('/numberOfPhones', function()
     return $noOfPhones;
 });
 
-//***
-// Make a call to those phone numbers in which commune, district and/or province.
-//***
+/**
+ * Make a call to those phone numbers in which commune, district and/or province.
+ */
 Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtrl@callThem']);
 
 /** --- Login, Logout --- */
 Route::get('/login', function () {
     return view('auth/login');
 });
-
 Route::post('/login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginAuth']);
 // Logout
 Route::get('/logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutAuth']);
@@ -230,9 +229,9 @@ Route::post('/password.reset', ['uses' => 'Auth\PasswordController@reset']);
 // Get value of token and email for reset password
 Route::get('/password.reset/{token?}', ['uses' => 'Auth\PasswordController@getReset']);
 
-//***
-//Get the phone numbers in which commune(s).
-//***
+/**
+* Get the phone numbers in which commune(s).
+*/
 Route::get('/phoneNumbersSelectedByCommunes', function()
 {
     $commune_ids = Input::get('commune_ids');
@@ -240,9 +239,9 @@ Route::get('/phoneNumbersSelectedByCommunes', function()
     return Response::json($phoneNumbersInCommunes);
 });
 
-//***
-// Route to insert new activity after sending sound file and contacts.
-//***
+/**
+ * Route to insert new activity after sending sound file and contacts.
+ */
 Route::post('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
 
 // Redirect to home when user type ews1294.info
@@ -253,12 +252,16 @@ Route::get('/', function () {
 // Change Language locale on click of flag icon
 Route::post('changelang', ['uses' => 'UserauthController@changeLanguage']);
 
+/**
+ * Route to display sensor report of first 24 readings for $sensor_id.
+ */
 Route::get('/sensorsLog20', function () {
     $sensor_id = Input::get('sensor_id');
     $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '1', 'sensorId' => $sensor_id]);
 });
-/*
+
+/**
  * Route to display sensor report of 30 days for $sensor_id.
  */
 Route::get('/sensorsLog1thReadingOf30days', function () {
@@ -271,7 +274,7 @@ Route::get('/sensorsLog1thReadingOf30days', function () {
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
 
-/*
+/**
  * Route to display Sensor Map
  */
 Route::get('/sensormap', function () {
@@ -298,7 +301,7 @@ Route::get('/sensormap', function () {
     return view('sensorsMap',['sensors' => $sensorIds, 'sensors24hrs' => $sensorlogsAll]);
 });
 
-/*
+/**
  * Route for retrieve all communes for one provice, then check all communes checkbox.
  */
 Route::get('/checkall', function()
@@ -312,10 +315,8 @@ Route::get('/checkall', function()
     return $districs;
 });
 
-/*
+/**
  * Route to display sensor data on Chart
  */
 Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart']);
-
-
 
