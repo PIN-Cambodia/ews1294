@@ -8,12 +8,9 @@ $(function() {
     $('#upload_warning_file').hide();
     $('#upload_emergency_file').hide();
 
-    // $('#ss_province_1').change(function () {
     $('.ss_province').change(function () {
         $('option:selected', this).attr('selected',true).siblings().removeAttr('selected');
-        //var province_id = $('#ss_province_1').val();
         var province_id = $(this).val();
-        console.log('province= ' + province_id);
         if(province_id !='')
         {
             $.ajax({
@@ -32,11 +29,9 @@ $(function() {
     });
 
     /* Show Communes select option */
-    // $('#ss_district_1').change(function () {
     $('.ss_district').change(function () {
         $('option:selected', this).attr('selected',true).siblings().removeAttr('selected');
         var distric_id = $(this).val();
-        //console.log('district= ' + distric_id);
         if(distric_id != '')
         {
             $.ajax({
@@ -122,17 +117,14 @@ $(function() {
 });
 
 function checkValidateEmail(email_list) {
-    //var emails = $(this).val().split(',');
     var emails = email_list.val().split(',');
     var invalidEmails = [];
     $('#error_email_format').html("");
     for (i = 0; i < emails.length; i++) {
-        console.log('email= ' + emails);
         if (!validateEmail(emails[i].trim())) {
             invalidEmails.push(emails[i].trim());
         }
     }
-    //console.log('2. invalidEmails()= ' + invalidEmails);
     return invalidEmails;
 }
 function validateEmail(email) {

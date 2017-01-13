@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Auth;
 use App;
 use DB;
@@ -14,13 +12,14 @@ use Illuminate\Support\Facades\Input;
 
 class CallLogReportController extends Controller
 {
-    // CallLog Report View
+    /**
+     * Function to display CallLog Report in View
+     * @return data into view
+     */
     public function CallLogReportView()
     {
         if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
-        {
             $all_province = province::all();
-        }
         if(Auth::user()->hasRole('PCDM'))
         {
             $pcdm_data=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
@@ -29,10 +28,13 @@ class CallLogReportController extends Controller
         return view('report/calllogreport', ['allprovince'=> $all_province]);
     }
 
-    // function to select call report of selected province
+    /**
+     * Function to select all calllog report of selected province
+     * @param Request $request
+     * @return result of call logs
+     */
     public function getCallLogReport(Request $request)
     {
-        //DB::enableQueryLog();
         // select activities data in a whole province based on activity, sensor_id sorted by activity id desc
         if(!empty($request->sensor_id))
         {
@@ -48,12 +50,14 @@ class CallLogReportController extends Controller
             else
                 $activity_data_query = DB::select(DB::raw("SELECT * FROM activities WHERE list_commune_codes like '$request->prov_id%' GROUP BY activity_id HAVING LENGTH(SUBSTRING_INDEX(`list_commune_codes`,',',1)) >= 6 ORDER BY activity_id desc "));
         }
-        //dd(DB::getQueryLog());
         $call_logs_result = $this->getCallLogBody($activity_data_query, false);
         return $call_logs_result;
     }
 
-    // function to select call report of selected province
+    /**
+     * Function to select calllog report per specific activity id
+     * @return data into view
+     */
     public function getCallLogReportPerActivity()
     {
         $activity_id = Input::get('activID');
@@ -66,10 +70,14 @@ class CallLogReportController extends Controller
 
     }
 
-    // function to select call_logs report to be displayed
+    /**
+     * Function to get call_logs
+     * @param $activity_data
+     * @param $single_array: true or false
+     * @return result of calllog
+     */
     public function getCallLogBody($activity_data, $single_array)
     {
-       // dd($activity_data);
         $i=0;
         $all_arr = array(); $arr_each="";
         // loop each activity record
@@ -95,10 +103,10 @@ class CallLogReportController extends Controller
                 }
                 // get all call logs data per activity id
                 $call_log_each_activity = DB::table('calllogs')
-                    ->select('*', DB::raw('count("result") as total_result'))
-                    ->where('activity_id', $activity->activity_id)
-                    ->groupBy('activity_id', 'result')
-                    ->get();
+                                            ->select('*', DB::raw('count("result") as total_result'))
+                                            ->where('activity_id', $activity->activity_id)
+                                            ->groupBy('activity_id', 'result')
+                                            ->get();
                 if(!empty($call_log_each_activity))
                 {
                     foreach($call_log_each_activity as $calllog_activity)
@@ -138,22 +146,21 @@ class CallLogReportController extends Controller
         if ($single_array==true) $return_result = $arr_each;
         else $return_result = array("data" => $all_arr);
         return $return_result;
-        //return array("data" => $all_arr);
     }
 
-    // show list of sensor based on selected province
+    /**
+     * Show list of sensor based on selected province
+     * @param Request $request
+     * @return sensor lists
+     */
     public function getSensorListInSelectedProvince(Request $request)
     {
-        //dd($request->province_id_val);
         // select sensor data
-        //DB::enableQueryLog();
         $sensor_list=""; $sensor_lists="";
         if($request->province_id_val <=9)
             $sensor_data_query = DB::select(DB::raw("SELECT * FROM sensors WHERE location_code  like '$request->province_id_val%' HAVING LENGTH(SUBSTRING_INDEX(`location_code`,',',1)) < 6"));
         else
             $sensor_data_query = DB::select(DB::raw("SELECT * FROM sensors WHERE location_code  like '$request->province_id_val%' HAVING LENGTH(SUBSTRING_INDEX(`location_code`,',',1)) >= 6"));
-        // dd(DB::getQueryLog());
-        // dd($sensor_data_query);
         if(!empty($sensor_data_query))
         {
             foreach($sensor_data_query as $sensor_data_query)

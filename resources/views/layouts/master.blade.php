@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> EWS - Emergency Warning System </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> EWS - Emergency Warning System </title>
 
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/datepicker3.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link href="css/pe-icon-7-stroke.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
-  <!-- datatable css -->
-  <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet"
-        xmlns="http://www.w3.org/1999/html"/>
-  <link href="//cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet" />
-  <link href="css/custom.css" rel="stylesheet">
-
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/datepicker3.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/pe-icon-7-stroke.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('js/sweetalert-master/dist/sweetalert.css')}}">
+    <!-- datatable css -->
+    <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet"
+          xmlns="http://www.w3.org/1999/html"/>
+    <link href="//cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet">
 
     @yield('datatable-css')
 
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/lumino.glyphs.js"></script>
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/lumino.glyphs.js"></script>
     <script src="/js/jquery-waiting.js"></script>
     <script src="/js/jquery.validate.js"></script>
 
@@ -38,11 +37,10 @@
     <script src="{{asset('js/ajax-district.js')}}"></script>
     <script src="{{asset('js/sweetalert-master/dist/sweetalert.min.js')}}"></script>
     <script src="/js/custom.js"></script>
-
   </head>
 
   <body id="page-top" class="index no-overflow">
-  @include('layouts._navigation')
+    @include('layouts._navigation')
     @include('layouts._header')
     @yield('content')
     @yield('datatable-js')

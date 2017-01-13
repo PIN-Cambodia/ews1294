@@ -248,7 +248,6 @@
         $('#modal_add_sensor_trigger_record').on('hidden.bs.modal', function () {
             $("#ss_district").hide();
             $("#ss_commune_div").hide();
-            //$(this).find("input,textarea,select, #ss_commune_div:input").val('').end();
             $(this)
                 .find("input, textarea, select")
                 .val('')
@@ -288,7 +287,6 @@
          $(document).on('click', '#edit_sensor_trigger_data', function ()
          {
              var check_invalid_email = checkValidateEmail($('#email_list_edit'));
-             //console.log("1. calling func= " + check_invalid_email);
              if (check_invalid_email != "")
                 $('#error_email_format-edit').html("<font color='red'>{{trans('sensors.error_email_validation')}}" + check_invalid_email + "</font>");
             else
@@ -318,7 +316,6 @@
                 //   alert('sorry, data cannot be fetch');
                 // }
             });
-            //$('#modal_edit_sensor_trigger_record').modal('show');
             return false;
         });
         /* Delete Sensor Trigger data */
@@ -348,6 +345,5 @@
             return false;
         });
     }); // ./$(function()
-
 </script>
 @endsection

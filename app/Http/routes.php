@@ -32,22 +32,21 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
     Route::post('/register_new_contact', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContact']);
     Route::get('/register_new_contact_test', ['uses' => 'GetPhonesFromCallLogCtrl@registerNewContactTest']);
 
-    //Route::get('receivingcalllog/{calllog_data}', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
+    // Call Logs API
     Route::post('/receivingcalllog', ['uses' => 'ReceivingCallLogAPIController@callLogAPI']);
-
+    // Sensor Logs API
     Route::post('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
-    //Route::get('sensorapi', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@sensorAPI']);
-
-});
+}); // .'prefix' => 'api/v1', 'middleware' => 'auth:api'
 
 /** user needs to log in in order to access the following routes */
 Route::group(['middleware' => ['auth']], function(){
-    // CallLog report
+    /** --- CallLog report ---  */
     Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView']);
     Route::post('/getCallLogReport', ['uses' => 'CallLogReportController@getCallLogReport']);
     Route::post('/getSSCommunes', ['uses' => 'Sensor\SensorsController@getSSCommunesPerDistrict']);
     Route::post('/getSSList', ['uses' => 'CallLogReportController@getSensorListInSelectedProvince']);
 
+    // Upload Sound File
     Route::get('/soundFile', function () {
         if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('NCDM'))
         {
@@ -72,31 +71,32 @@ Route::group(['middleware' => ['auth']], function(){
         return view('uploadSoundFile',['provinces' => $provinces]);
     });
 
-    // get list of province for PCDM role in Registration view
+    // Get list of province for PCDM role in Registration view
     Route::post('get_authorized_province', ['uses' => 'UserauthController@getAuthorizedProvince']);
-});
+
+    /** --- Showing call log report for specific activity ID --- */
+    //web url/calllogActivity?activID=3
+    Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity');
+}); // .'middleware' => ['auth']
 
 /** Only Admin has rights to access the following routes */
 Route::group(['middleware' => ['auth', 'admin.auth']], function(){
-    // Register
+
+    /** --- User Registration --- */
     Route::get('/register', function () {
         return view('auth/register');
     });
     Route::post('register', ['as' => 'auth.register', 'uses' => 'UserauthController@registerAuth']);
 
-    // --- user management ----
+    /** --- User Management --- */
     // list of users
     Route::get('/allusers', ['as' => 'allusers', 'uses' => 'UserauthController@userLists']);
-
     // User Profile
     Route::post('/userprofile', ['uses' => 'UserauthController@displayUserProfiles']);
-
     // Save Edited User data
     Route::post('/saveuserdata', ['uses' => 'UserauthController@saveUserProfile']);
-
     // Enable/Disable User
     Route::post('/enabledisable', ['uses' => 'UserauthController@enableDisable']);
-
     // Delete User
     Route::post('/deleteuser', ['uses' => 'UserauthController@deleteUser']);
 
@@ -121,17 +121,12 @@ Route::group(['middleware' => ['auth', 'admin.auth']], function(){
     // Add Sensor Info
     Route::post('add_new_sensor_info', ['uses' => 'Sensor\SensorsController@addNewSensor']);
 
-    // Sensor Trigger
-    // Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport'])->middleware('auth');
+    /** --- Sensor Trigger --- */
     Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
     Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
-
-    /** Sensor Trigger Report data display **/
+    // Sensor Trigger Report
     Route::get('/sensortrigger', ['uses' => 'Sensor\SensorTriggerController@sensorTriggerReport']);
-
-    /** Sensor Trigger Add, Edit, and Delete **/
-    /** Add **/
-    // get all province to be displayed in add modal
+    // Sensor Trigger Add, Edit, and Delete
     Route::post('/getDistricts', ['uses' => 'Sensor\SensorTriggerController@getDistrictPerProvince']);
     Route::post('/getCommunes', ['uses' => 'Sensor\SensorTriggerController@getCommunesPerDistrict']);
     Route::post('/addsensortrigger', ['uses' => 'Sensor\SensorTriggerController@addSensorTrigger']);
@@ -139,7 +134,7 @@ Route::group(['middleware' => ['auth', 'admin.auth']], function(){
     Route::post('/saveeditsensortrigger', ['uses' => 'Sensor\SensorTriggerController@saveEditSensorTrigger']);
     Route::post('/deletesensortrigger', ['uses' => 'Sensor\SensorTriggerController@deleteSensorTrigger']);
     Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces']);
-});
+}); // .'middleware' => ['auth', 'admin.auth']
 
 Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);
 
@@ -222,29 +217,24 @@ Route::get('/numberOfPhonesUpdate', function()
 //***
 Route::post('/callThem', ['as' => 'call.them','uses' => 'GetPhonesFromCallLogCtrl@callThem']);
 
-// Login
+/** --- Login, Logout --- */
 Route::get('/login', function () {
     return view('auth/login');
 });
 Route::post('/login', ['as' => 'auth.login', 'uses' => 'UserauthController@loginAuth']);
-
 // Logout
 Route::get('/logout', ['as' => 'auth.logout', 'uses' => 'UserauthController@logoutAuth']);
 
-// Reset Password
+/** --- Reset Password --- */
 // show reset password form
 Route::get('/password.email', function () {
     return view('auth/passwords/email');
 });
-
 // send email to reset password
 Route::post('/password.email', ['uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-
 // Reset Password
 Route::post('/password.reset', ['uses' => 'Auth\PasswordController@reset']);
-
 // Get value of token and email for reset password
-// Route::get('password.reset/{token?}', ['uses' => 'Auth\PasswordController@showResetForm']);
 Route::get('/password.reset/{token?}', ['uses' => 'Auth\PasswordController@getReset']);
 
 //***
@@ -278,6 +268,7 @@ Route::get('/phoneNumbersSelectedByCommunesTest', function()
 //***
 Route::post('/add_new_activity', ['uses' => 'SoundfileCtrl@insertNewActivity']);
 
+// Redirect to home when user type ews1294.info
 Route::get('/', function () {
    return redirect('/home');
 });
@@ -341,10 +332,6 @@ Route::get('/sensorsLog1thReadingOf30days', function () {
         ->orderBy('timestamp','desc')->limit(30)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
-
-/*** Showing call log report for specific activity ID ***/
-//web url/calllogActivity?activID=3
-Route::get('/calllogActivity', 'CallLogReportController@getCallLogReportPerActivity')->middleware('auth');
 
 Route::get('/sensormap', function () {
     $sensorIds=sensors::select('sensor_id','location_coordinates')->get()->toArray();

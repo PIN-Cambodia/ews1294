@@ -7,16 +7,8 @@ use Auth;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Session;
-/* Calling user model to be used */
-use App\User;
-use App\Role;
-use App\Permission;
 use App\Models\Calllogs;
-
-use App\Http\Requests;
 use Response;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ReceivingCallLogAPIController extends Controller
@@ -30,6 +22,11 @@ class ReceivingCallLogAPIController extends Controller
         $this->logger = new Logger('sensor_trigger_log');
         $this->logger->pushHandler(new StreamHandler(storage_path('logs/call_log.log')),Logger::INFO);
     }
+
+    /**
+     * API to get data from somleng server and insert into table calllogs
+     * @return whether inserting data is success or error
+     */
     public function callLogAPI()
     {
         /* json_decode($json_string, true)

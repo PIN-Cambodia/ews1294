@@ -17,8 +17,6 @@ class User extends Authenticatable
     within your User model
   */
     use EntrustUserTrait;
-
-
     /**
      * The attributes that are mass assignable.
      *
@@ -36,6 +34,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-
 }

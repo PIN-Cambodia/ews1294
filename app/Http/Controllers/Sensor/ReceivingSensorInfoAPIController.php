@@ -8,15 +8,11 @@ use App\Models\Sensorlogs;
 use App\Models\sensortriggers;
 use App\Models\targetphones;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Response;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Illuminate\Support\Facades\Config;
 
 class ReceivingSensorInfoAPIController extends Controller
 {
@@ -26,6 +22,12 @@ class ReceivingSensorInfoAPIController extends Controller
         $this->logger = new Logger('my_sensor_log');
         $this->logger->pushHandler(new StreamHandler(storage_path('logs/sensor_log.log')),Logger::INFO);
     }
+
+    /**
+     * API to automatically get data from sensor and insert into table sensorlogs
+     * Check if the stream height reaches warning or emergency level or not
+     * If yes then take action such as sending email and call to officers and/or relevant people in the affected communes
+     */
     public function sensorAPI()
     {
         /** Insert data into Table Sensor Logs **/
@@ -40,11 +42,11 @@ class ReceivingSensorInfoAPIController extends Controller
             echo "Successfully inserted data: " . Input::get('data');
 
             /** Check for automatically call or send E-mail to relevant people **/
-             //$this->checkForAutomaticCallOrEmailAction($return_inserted_val); // samak
+            $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
         }
     }
     /**
-     * Function to insert sensor data into tbl sensorlogs
+     * Function to insert sensor data into table sensorlogs
      * @param $inputData
      * @return mixed
      */
@@ -81,7 +83,6 @@ class ReceivingSensorInfoAPIController extends Controller
         $sensor_trigger = new sensortriggers();
         // get data from table sensortriggers (sensor_id,level_warning,level_emergency...etc)
         $sensor_trigger_result = $sensor_trigger->where('sensor_id',$current_sensor_value->sensor_id)->first();
-        // dd($sensor_trigger_result);
 
         /** if the received streamHeight of sensor is between the defined warning level value
         *      and the emergency level value then
@@ -92,7 +93,7 @@ class ReceivingSensorInfoAPIController extends Controller
             && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
         {
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
-//            phyrum $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
+            $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
 
             /** automatically call **/
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
@@ -106,7 +107,7 @@ class ReceivingSensorInfoAPIController extends Controller
         elseif($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
         {
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
-//            phyrum $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Emergency");
+            $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Emergency");
 
             /** automatically call **/
 
@@ -118,6 +119,7 @@ class ReceivingSensorInfoAPIController extends Controller
     }
 
     /**
+     * function to send email to officers
      * @param $email_lists is list of PCDM and/or NCDM officers that we need to send email to
      * @param $alert_level can be either Warning_level or Emergency_level
      *
@@ -238,6 +240,14 @@ class ReceivingSensorInfoAPIController extends Controller
         }
     }
 
+    /**
+     * Function for automatically call to affected people in affected communes
+     * @param $url_sound
+     * @param $phone_tobe_called
+     * @param $affected_communes
+     * @param $sensor_id
+     * @return $response or 0
+     */
     public function automaticCallToAffectedPeople($url_sound,$phone_tobe_called, $affected_communes,$sensor_id)
     {
         // Create new activity //
@@ -245,13 +255,9 @@ class ReceivingSensorInfoAPIController extends Controller
 
         if($activity_created > 0)
         {
-            echo "start calling<br>";
             $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
             $data = array(
                 "api_token" => "C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h",
-//                "contacts" => "[{\"phone\":\"017696365\"}]",
-//                "contacts" => '[{"phone":"017696365"}]',
-
                 "contacts" => $phone_tobe_called,
                 "activity_id" => $activity_created,
                 "sound_url" => "https://s3-ap-southeast-1.amazonaws.com/ews-dashboard-resources/sounds/".$url_sound,
@@ -265,13 +271,17 @@ class ReceivingSensorInfoAPIController extends Controller
             return $response;
         }
         else
-        {
-            echo "error";
             return 0;
-        }
     }
 
-    // Function to insert New Activity //
+    /**
+     * Function to insert New Activity
+     * @param $noOfPhones
+     * @param $soundFile
+     * @param $affected_commune
+     * @param $sensor
+     * @return activity id
+     */
     public function insertNewActivity($noOfPhones,$soundFile,$affected_commune,$sensor)
     {
         $activities = new activities;
@@ -282,10 +292,15 @@ class ReceivingSensorInfoAPIController extends Controller
         $activities->no_of_phones_called = $noOfPhones;
         $activities->sound_file = $soundFile;
         $activities->save();
-
         return $activities->id;
     }
 
+    /**
+     * Function to get phone numbers
+     * @param $officerPhones
+     * @param $affectedCommunes
+     * @return json string
+     */
     public function getPhoneNumbersToBeCalled($officerPhones,$affectedCommunes)
     {
         $targetphones_tbl = new targetphones;

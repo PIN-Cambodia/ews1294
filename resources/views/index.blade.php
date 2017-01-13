@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 <!-- Services Section -->
 <section id="services">
@@ -15,20 +14,19 @@
         <iframe src="http://cambodiameteo.com/map?menu=3&lang=en" frameborder="0" allowfullscreen class="iframe-resp"></iframe>
       </div>
     </div><!--/.row-->
-
-  </div>	<!--/.main-->
+  </div><!--/.main-->
 </section>
 
-  <script>
-    $(document).ready(function() {
+<script>
+  $(document).ready(function() {
+    fitIframe();
+    $(window).resize(function() {
       fitIframe();
-      $(window).resize(function() {
-        fitIframe();
-      });
     });
-    function fitIframe() {
-      /* $('#sidebar-collapse').height()-90 : means take height of sidebar-collapse - the height of header and footer  */
-      $('iframe').css("min-height", $('#sidebar-collapse').height()-(50+$('#footer').height()));
-    }
-  </script>
+  });
+  function fitIframe() {
+    /* $('#sidebar-collapse').height()-90 : means take height of sidebar-collapse - the height of header and footer  */
+    $('iframe').css("min-height", $('#sidebar-collapse').height()-(50+$('#footer').height()));
+  }
+</script>
 @endsection

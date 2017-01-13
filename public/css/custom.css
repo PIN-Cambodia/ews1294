@@ -39,8 +39,6 @@ box-shadow: none;
 
 .districts {
   border:2px solid #ccc;
-  /*width:300px;*/
-  /*height:500px;*/
     width: 70%;
     max-height: 500px;
   overflow-y: scroll;
@@ -113,7 +111,6 @@ box-shadow: none;
 }
 
 /* override classes on style.css file */
-
 .user-menu a {
     color: #364A65;
 }
@@ -155,7 +152,6 @@ box-shadow: none;
 }
 
 /*Breadcrumbs*/
-
 .breadcrumb {
     border-radius: 0;
     padding: 10px 10px;
@@ -279,7 +275,6 @@ fieldset[disabled] .btn-primary.active {
     overflow: hidden;
 }
 .fixed-panel {
-    /*max-height: 85vh;*/
     height: 1000px;
     overflow-y: scroll !important;
     overflow-x: hidden;

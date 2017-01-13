@@ -28,7 +28,7 @@
                             @if($userlist->is_delete == 1)
                               <i class="fa fa-trash-o fa-lg" aria-hidden="true" style="color: #914854;"></i>
                             @endif
-                            {{ $userlist->name }}
+                              {{ $userlist->name }}
                           </div>
                         </div>
                         <div class="row">
@@ -39,8 +39,6 @@
                               {{ trans('auth.edit') }} </button>
 
                             <!-- Enable or Disable user Button -->
-                            <!-- <form class="form-horizontal" role="form" method="POST" action="{{ url('/enabledisable') }}">
-                            {{ csrf_field() }} -->
                               @if($userlist->is_disable == 1)
                                 <button class="btn btn-primary" id="enable_disble_user" name="enable_user" value="{{ $userlist->id }}" >
                                   <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
@@ -51,8 +49,7 @@
                                   <i class="fa fa-eye-slash fa-lg" aria-hidden="true"></i>
                                   {{ trans('auth.disable') }}
                                 </button>
-                            @endif
-                            <!-- </form> -->
+                              @endif
                               <!-- Delete a user Button -->
                               <button class="btn btn-danger" id="delete_user" name="{{ $userlist->id }}">
                                 <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
@@ -88,7 +85,6 @@
           <h4 class="modal-title" id="myModalLabel">{{ trans('auth.user_profile') }}</h4>
         </div>
         <span id='profile_content'></span>
-
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
@@ -119,7 +115,7 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
-  <script>
+<script>
   // global csrf token variable
   var token = $('input[name=_token]').val();
 
@@ -130,11 +126,10 @@
     $.ajax({
   		type: "POST",
   		url: "{{ url('/userprofile') }}",
-      data: {_token: token, uid: btn_val},
+        data: {_token: token, uid: btn_val},
   		cache: false,
   		success: function(result)
   		{
-        // alert("success= " + result[0].id);
   			$("#profile_content").html(result).show();
   			$('#modal_user_profile').modal('show');
   		},
@@ -144,83 +139,71 @@
   	});
   	return false;
   });
+
   /* Save Edited data of a user */
   $(document).on('click', '#save_user_data', function()
   {
     var txt_user_name = $('#txt_user_name').val();
     var txt_user_email = $('#txt_user_email').val();
     var btn_val = $(this).attr('name');
-    //$('#modal_user_profile').modal('hide');
-    //alert('save= ' + btn_user_val + " name= " + txt_user_name + " email= " + txt_user_email);
     $.ajax({
   		type: "POST",
   		url: "{{ url('/saveuserdata') }}",
-      data: {_token: token, uid: btn_val, uname: txt_user_name, uemail: txt_user_email},
+        data: {_token: token, uid: btn_val, uname: txt_user_name, uemail: txt_user_email},
   		cache: false,
   		success: function(result)
   		{
-          // alert("success= " + result[0].id);
-  			$("#profile_content").html(result).show();
-            location.reload();
-  			//$('#modal_user_profile').modal('show');
+          $("#profile_content").html(result).show();
+          location.reload();
   		},
       // error: function() {
       //   alert('sorry, data cannot be fetch');
       // }
   	});
   	return false;
-
   });
+
   /* Enable or Disable a User */
   $(document).on('click', '#enable_disble_user', function()
   {
       var btn_name = $(this).attr('name');
       var btn_value = $(this).attr('value');
       $.ajax({
-    		type: "POST",
-    		url: "{{ url('/enabledisable') }}",
+        type: "POST",
+        url: "{{ url('/enabledisable') }}",
         data: {_token: token, btn_name: btn_name, btn_value: btn_value },
-    		cache: false,
-    		success: function(result)
-    		{
-                location.reload();
-    		},
+        cache: false,
+        success: function(result)
+        {
+            location.reload();
+        },
         // error: function() {
         //   alert('sorry, data cannot be fetch');
         // }
     	});
     	return false;
-
   });
 
   /* Delete User */
   $(document).on('click', '#delete_user', function()
   {
-      // alert("delete");
       var btn_delete_val = $(this).attr('name');
       $('#modal_delete_user').modal('show');
       $('#btn_delete_yes').click(function(e){
-        //alert('delete=yes=> ' + btn_delete_val);
         $.ajax({
-    			type: "POST",
-    			url: "{{ url('/deleteuser') }}",
-    			data: {_token: token, delete_val: btn_delete_val},
-    			cache: false,
-    			success: function(result)
-    			{
-    				//$('#modal_DeleteEach').modal('hide');
-    				// reload page
-    				location.reload();
-    			}
-    		});
-    		return false;
-    	});
-    	return false;
+          type: "POST",
+          url: "{{ url('/deleteuser') }}",
+          data: {_token: token, delete_val: btn_delete_val},
+          cache: false,
+          success: function(result)
+          {
+              location.reload();
+          }
+        });
+        return false;
+      });
+      return false;
   });
-
-
-  </script>
+</script>
 </section>
-
-
 @endsection

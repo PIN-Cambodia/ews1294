@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Sensor;
 
 use App\Models\province;
-use App\Models\Sensors;
 use App\Models\sensortriggers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +28,7 @@ class SensorTriggerController extends Controller
 
     /**
      * Display all sensor trigger data in dataTable
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return data into view
      */
     public function sensorTriggerReport()
     {
@@ -39,7 +38,6 @@ class SensorTriggerController extends Controller
             $pcdm_province=DB::table('role_user')->where('user_id', Auth::user()->id)->first();
             $all_province=DB::table('province')->where('PROCODE', $pcdm_province->province_code)->get();
         }
-
         // No duplicate sensor id record allows to be added in sensortriggers
         $sensor_list_add_new = DB::table('sensors')
                                 -> select('sensors.sensor_id')
@@ -54,7 +52,7 @@ class SensorTriggerController extends Controller
     /**
      * Select Districts of a province
      * @param Request $request
-     * @return string
+     * @return list of districts
      */
     public function getDistrictPerProvince(Request $request)
     {
@@ -77,13 +75,11 @@ class SensorTriggerController extends Controller
     /**
      * Select Communes of a district
      * @param Request $request
-     * @return string
+     * @return list of communes
      */
     public function getCommunesPerDistrict(Request $request)
     {
-        // DB::enableQueryLog();
         $communes=DB::table('commune')->where('DCode', $request->distric_id)->get();
-        // dd(DB::getQueryLog());
         $commune_options = "";
         if(!empty($communes))
         {
@@ -111,15 +107,11 @@ class SensorTriggerController extends Controller
         if ($request->hasFile('warning_sound_file') && $request->hasFile('emergency_sound_file')) {
             $warning_file = $request->file('warning_sound_file');
             $emergency_file = $request->file('emergency_sound_file');
-            // $warning_file_name = substr($warning_file->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $warning_file->getClientOriginalExtension();
-            // $emergency_file_name = substr($emergency_file->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $emergency_file->getClientOriginalExtension();
 
             $warning_file_name = $warning_file->getClientOriginalName();
             $emergency_file_name = $emergency_file->getClientOriginalName();
 
             $storage = Storage::disk('s3');
-            //$upload_wsf = $storage->put('sensor_sounds/' . $warning_file_name, file_get_contents($warning_file));
-            //$upload_esf = $storage->put('sensor_sounds/' . $emergency_file_name, file_get_contents($emergency_file));
             try{
                 $upload_wsf = $storage->put('sensor_sounds/' . $warning_file_name, file_get_contents($warning_file));
                 $upload_esf = $storage->put('sensor_sounds/' . $emergency_file_name, file_get_contents($emergency_file));
@@ -171,13 +163,8 @@ class SensorTriggerController extends Controller
     public function getEditSensorTrigger(Request $request)
     {
         $edit_sensor_id = $request->edit_val;
-
-//        $commune_checkbox=""; $prov_options=""; $dis_options=""; $province_substr_len=0; $district_substr_len=0;
-//        $other_prov_options =""; $other_dis_options=""; $other_commune_checkbox="";
-
         // select sensor trigger record
         $ss_trigger_record = sensortriggers::where('id', $edit_sensor_id)->get();
-
         // get existing record of province, district and checked the communes
         $affected_communes_arr = explode(",", $ss_trigger_record[0]->affected_communes);
 
@@ -215,7 +202,6 @@ class SensorTriggerController extends Controller
                             . "</div>"
                         . "</div><br />" // /. affected_communes div
                         . trans('sensors.phone_numbers')
-                        // . "<input type='text' id='phone_numbers' name='phone_numbers' value='" . $ss_trigger_record[0]->phone_numbers . "'/><br />"
                         . "<textarea class='multinumbers' rows='4' cols='50' id='phone_numbers' name='phone_numbers' placeholder='"
                             . trans('sensors.enter_multiple_phone_numbers') . "'>" . $ss_trigger_record[0]->phone_numbers . " </textarea><br />"
                         . trans('sensors.sound_file_warning')
@@ -252,7 +238,6 @@ class SensorTriggerController extends Controller
                                 . "<input type='file' id='emergency_sound_file' name='emergency_sound_file' accept='audio/*'/><br />"
                             . "</div>" // /.col-lg-12
                         . "</div>" // /.row
-                        //. "<input type='text' value='" . $ss_trigger_record[0]->emergency_sound_file  . "' disabled/><br />"
                         . trans('sensors.emails')
                         . "<textarea rows='4' cols='50' id='email_list_edit' name='email_list'>" . $ss_trigger_record[0]->emails_list . "</textarea><br />"
                         . "<span id='error_email_format-edit'></span>"
@@ -270,18 +255,12 @@ class SensorTriggerController extends Controller
      */
     public function saveEditSensorTrigger(Request $request)
     {
-
         // select sensor trigger record
-       // DB::enableQueryLog();
         $ss_trigger_data = sensortriggers::where('sensor_id', $request->sensor_id)->first();
-        //dd(DB::getQueryLog());
-        //dd($ss_trigger_data);
-
         $storage = Storage::disk('s3');
         // user can either update warning or emergency or both
         if ($request->hasFile('warning_sound_file')) {
             $warning_file_new = $request->file('warning_sound_file');
-            // $warning_file_nam = substr($warning_file_new->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $warning_file_new->getClientOriginalExtension();
             $warning_file_nam = $warning_file_new->getClientOriginalName();
             try{
                 // upload new warning sound file
@@ -300,7 +279,6 @@ class SensorTriggerController extends Controller
         if($request->hasFile('emergency_sound_file'))
         {
             $emergency_file_new = $request->file('emergency_sound_file');
-//            $emergency_file_nam = substr($emergency_file_new->getClientOriginalName(),0,-4) . '_' . date('m-d-Y_h:ia') . '.' . $emergency_file_new->getClientOriginalExtension();
             $emergency_file_nam = $emergency_file_new->getClientOriginalName();
             try{
                 // upload new emergency sound file
@@ -330,7 +308,6 @@ class SensorTriggerController extends Controller
                 else $communes_list_new .= $commune . ",";
             }
         }
-        //dd($communes_list_new);
         // insert data
         try {
             $ss_trigger_data->level_warning = $request -> warning_level;
@@ -384,6 +361,13 @@ class SensorTriggerController extends Controller
         }
     }
 
+    /**
+     * Function to get the existing provinces, districts and communes
+     * @param $commune_code
+     * @param $commune_data
+     * @param bool $checkbox
+     * @return array
+     */
     public static function getExistingProvinceAndDistrict($commune_code,$commune_data,$checkbox=false)
     {
         $commune_val=""; $prov_options=""; $dis_options=""; $province_substr_len=0; $district_substr_len=0;
@@ -416,7 +400,6 @@ class SensorTriggerController extends Controller
                 else
                     $prov_options = "<option value='". $province_query[0]->PROCODE . "' selected>" . $province_query[0]->PROVINCE . "</option>";
             }
-            //else "<option value='0'>" . trans('pages.select_province') . "</option>";
         }
         else $prov_options = "<option value='0'>" . trans('pages.select_province') . "</option>";
 
@@ -430,10 +413,7 @@ class SensorTriggerController extends Controller
             }
         }
         /** select other Provinces and Districts data **/
-        //DB::enableQueryLog();
         $other_province_queries = DB::table('province')->where('PROCODE','!=', $province_str_code)->get();
-        //dd(DB::getQueryLog());
-
         if(!empty($other_province_queries))
         {
             foreach($other_province_queries as $other_province_query)
@@ -444,11 +424,9 @@ class SensorTriggerController extends Controller
                     $other_prov_options .= "<option value='". $other_province_query->PROCODE . "'>" . $other_province_query->PROVINCE . "</option>";
             }
         }
-        //DB::enableQueryLog();
         $other_district_queries = DB::table('district')->where('PCode', $province_str_code)
-            ->where('DCode', '!=', $district_str_code)
-            ->get();
-        //dd(DB::getQueryLog());
+                                    ->where('DCode', '!=', $district_str_code)
+                                    ->get();
         if(!empty($other_district_queries))
         {
             foreach($other_district_queries as $other_dis_option)
@@ -476,8 +454,8 @@ class SensorTriggerController extends Controller
             }
 
             $other_communes = DB::table('commune') -> where('DCode', $district_str_code)
-                ->whereNotIn('CCode', $commune_data)
-                ->get();
+                                ->whereNotIn('CCode', $commune_data)
+                                ->get();
             if(!empty($other_communes))
             {
                 foreach($other_communes as $other_communes )
@@ -492,29 +470,23 @@ class SensorTriggerController extends Controller
         else
         {
             $a_commune = DB::table('commune')->where('CCode', $commune_data)->first();
-            //dd($a_commune);
             if(!empty($a_commune))
             {
                if (\App::getLocale()=='km')
                     $commune_val = "<option value='". $a_commune->CCode . "'>" . $a_commune->CName_kh . "</option>";
-                    //$commune_val = "<input type='checkbox' name='communes[]' value='". $a_commune->CCode . "' checked> " . $affected_commune->CName_kh . "<br/>";
                 else
                     $commune_val = "<option value='". $a_commune->CCode . "'>" . $a_commune->CName_en . "</option>";
-                    //$commune_val = "<input type='checkbox' name='communes[]' value='". $a_commune->CCode . "' checked> " . $affected_commune->CName_en . "<br/>";
             }
             $other_communes = DB::table('commune') -> where('DCode', $district_str_code)
                                 ->where('CCode','!=', $commune_data)->get();
-            //dd($other_communes);
             if(!empty($other_communes))
             {
                 foreach($other_communes as $other_communes )
                 {
                     if (\App::getLocale()=='km')
                         $other_commune_val .= "<option value='". $other_communes->CCode . "'>" . $other_communes->CName_kh . "</option>";
-                        //$other_commune_val .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_kh . "<br/>";
                     else
                         $other_commune_val .= "<option value='". $other_communes->CCode . "'>" . $other_communes->CName_en . "</option>";
-                        //$other_commune_val .= "<input type='checkbox' name='communes[]' value='". $other_communes->CCode . "'> " . $other_communes->CName_en . "<br/>";
                 }
             }
         }

@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'ព័ត៌មាន​សម្ងាត់​នេះ​មិន​ដូច​នឹង​កំណត់​ត្រា​របស់​យើង​ទេ។',
+    'throttle' => 'មាន​ការ​ព្យាយាម​ចូល​ច្រើន​ដង​ពេក។ សូម​ព្យាយាម​ម្ដង​ទៀត​ក្នុង​រយៈពេល :seconds វិនាទី។',
     'username' => 'ឈ្មោះ​អ្នក​ប្រើ',
     'password' => 'ពាក្យ​សម្ងាត់',
     'confirm_password' => 'បញ្ជាក់​ពាក្យ​សម្ងាត់',
@@ -44,21 +44,7 @@ return [
     'action_confirmation_no' => 'ចុច "បោះបង់" ដើម្បី​ចាកចេញ​។',
     'authorized_province' => 'គ្រប់គ្រងខេត្ត',
     'select_province' => 'ជ្រើស​ខេត្ត',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-
+    'incorrect_username_password' => 'ឈ្មោះ​ឬ​​ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​ទេ។ សូម​សាកល្បង​ម្តង​ទៀត។',
+    'successfully_register_new_user' => 'ចុះឈ្មោះបានជោគជ័យ',
 
 ];

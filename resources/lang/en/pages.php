@@ -34,12 +34,5 @@ return [
     'tbl_title_error' => 'Error',
     'disable_user' => 'Your account is disabled. Please contact EWS1294 system administrator.',
     'delete_user' => 'Cannot log in. There might be problem with your account.',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
 
 ];

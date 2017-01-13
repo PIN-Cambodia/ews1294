@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-<!-- Services Section -->
 <section id="register">
   <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -13,6 +12,16 @@
       <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">{{ trans('auth.register') }}</div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-5">
+                    <i><font color='#00008b'>
+                        @if(!empty($successfully_register_new_user)) {{ $successfully_register_new_user }} @endif
+                    </font></i>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
           <div class="panel-body">
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                   {{ csrf_field() }}
@@ -126,7 +135,6 @@
                     }
                 });
             }
-
             return false;
         });
     </script>

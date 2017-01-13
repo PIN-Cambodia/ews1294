@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 <!-- Services Section -->
 <section id="services">
@@ -14,7 +13,6 @@
           <li class="active"> EWS API</li>
         </ol>
       </div><!--/.row-->
-
         <div class="panel panel-default">
             <div class="panel-body">
               <div class="row">

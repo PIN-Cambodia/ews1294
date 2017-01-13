@@ -69,25 +69,5 @@ return [
     'longitude' => 'Longitude',
     'location_coordinates' => 'Location Coordinates',
     'select_sensor_id' => 'Select Sensor ID',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-
-
 
 ];

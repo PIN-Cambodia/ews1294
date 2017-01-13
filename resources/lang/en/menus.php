@@ -23,10 +23,5 @@ return [
     'ews_header_str2' => 'ប្រព័ន្ធប្រកាសឲ្យដឹងមុន',
     'sensors_mgt' => 'Sensor Management',
     'sensors_map' => 'Sensor Map',
-    '' => '',
-    '' => '',
-    '' => '',
-
-
 
 ];
