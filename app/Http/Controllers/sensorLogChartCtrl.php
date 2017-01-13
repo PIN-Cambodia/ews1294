@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use Khill\Lavacharts\Configs\HorizontalAxis;
-use Khill\Lavacharts\Configs\VerticalAxis;
 use Khill\Lavacharts\Laravel\LavachartsFacade as Lava;
 
 class sensorLogChartCtrl extends Controller
 {
-    public function createChart30Days()
+    /**
+     * Function to retrieve data of sensor and create Chart.
+     * @return Chart to sensorLogChart view with sensor id and graph type (1=first 24 readings; 2= first reading within 30 days)
+     */
+    public function createChart()
     {
         $sensenlogTable = \Lava::DataTable();
+        // configure Chart columns
         $sensenlogTable
                 ->addStringColumn('')
                 ->addNumberColumn('Water Level')
                 ->addNumberColumn('Emergency Level')
                 ->addNumberColumn('Warning Level');
 
-
         $sensor_id = Input::get('sensor_id');
         $graph_type = Input::get('type');
         if($graph_type==2)
         {
+            // retrieve first reading within last 30 days for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
                 ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
@@ -35,25 +35,26 @@ class sensorLogChartCtrl extends Controller
         }
         else
         {
+            // retrieve first 24 readings for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
                 ->select(DB::raw("id, timestamp as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)->orderBy('timestamp')->limit(24)->get();
         }
-
-
+        // select sensortrigger info from database
         $sensortrigger = DB::table('sensortriggers')
             ->select(DB::raw("level_warning, level_emergency"))
             ->where('sensor_id','=',$sensor_id)
             ->first();
-//        dd($sensorlogs);
 
         if(!empty($sensortrigger))
         {
+            // add row data into datatable for Chart
             foreach($sensorlogs as $v => $sensorlog)
             {
                 $sensenlogTable->addRow([$sensorlog->time , $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
             }
-            $chart = Lava::LineChart('SensorLogChart',$sensenlogTable)
+            // generate Chart as a LineChart
+            Lava::LineChart('SensorLogChart',$sensenlogTable)
                 ->setOptions(['pointSize' => 1,
                     'curveType' => 'function',
                     'height' => 350
@@ -64,10 +65,9 @@ class sensorLogChartCtrl extends Controller
         }
         else
         {
-
-            return '<p align="center" style="margin-top: 200;">Error: Sensor ID "' . $sensor_id . '" is not found in trigger management.<br><br><br><a href="/sensortrigger">Click here</a> to add new trigger for this sensor.</p>';
+            // if no trigger info of $sensor_id, display error message.
+            return '<p align="center" style="margin-top: 200;">' . trans('sensors.sensorChartErrorID'). $sensor_id . trans('sensors.sensorChartErrorID').
+            '<br><br><br><a href="/sensortrigger">' . trans('sensors.sensorChartErrorClickHere').'</a>'. trans('sensors.sensorChartErrorToAdd').'</p>';
         }
-
-
     }
 }

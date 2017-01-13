@@ -7,7 +7,7 @@
                 <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
                 <li class="active"> {{ trans('menus.upload_sound_file') }} </li>
             </ol>
-        </div><!--/.row-->
+        </div>
         <div class="row">
             <div class="col-xs-12 col-md-12 col-lg-12 ">
                 <div class="panel panel-default">
@@ -46,33 +46,32 @@
                                             <div class="col-xs-8 col-md-8 col-lg-8">
                                                 <input type="file" name="soundFile" id="soundFile" accept="audio/*"><br />
                                             </div>
-                                        </div><!-- /.row -->
-                                </div><!-- /.col6 -->
+                                        </div>
+                                </div>
                                 <div class="col-xs-6 col-md-6 col-lg-6">
                                     <div class="row topspace">
                                         <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: left">
                                             {{trans('pages.districts_and_communes_:') }}
                                         </div>
-                                    </div><!-- /.row -->
+                                    </div>
                                     <div class="row topspace">
                                         <div class="col-xs-12 col-md-12 col-lg-12" style="text-align: left" id="divcheckall">
-                                            {{--<input type="checkbox" value="Check All" id="checkAll" class="checkall"/>&nbsp;{{trans('pages.checkAll') }}<br />--}}
                                         </div>
-                                    </div><!-- /.row -->
+                                    </div>
 
                                     <div class="row topspace districts">
                                         <div class="col-xs-12 col-md-12 col-lg-12" id="divdistricts"></div>
-                                    </div><!-- /.row -->
+                                    </div>
                                     <div class="row topspace">
                                         <div class="row">
                                             <div class="col-xs-12 col-md-12 col-lg-12 text-left">
                                                 {{ trans('pages.total_no_phones_:') }}
                                             </div>
-                                        </div><!-- /.row -->
+                                        </div>
                                         <div class="col-xs-12 col-md-12 col-lg-12" id="numberOfPhones"></div>
-                                    </div><!-- /.row -->
-                                </div><!-- /.col6 -->
-                                </div><!-- /.row -->
+                                    </div>
+                                </div>
+                                </div>
                                 <div class="row topspace" style="text-align:center">
                                     <div class="col-xs-12 col-md-12 col-lg-12" >
                                         <button type="submit" class="btn btn-primary bigsizebtn sendFile" id="sendFile" name="sendFile">
@@ -87,46 +86,21 @@
                                 </div>
                             <!-- closing form -->
                             {!! Form::close() !!}
-                        </div> <!-- /fixed-panel -->
-                    </div><!-- /panel-body -->
-                </div><!-- /panel-default -->
-            </div> <!-- / col -->
-        </div><!--/.row-->
-    </div>	<!--/.main-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--show waiting loading dialog -->
     <div class="modal fade fixed-dialog-center" id="modal_waiting" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div><h3>{{ trans('sensors.waiting_dialog') }}</h3></div><br/>
             <div class="spinner"></div>
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
+        </div>
+    </div>
 
 </section>
 <meta name="_token" content="{!! csrf_token() !!}" />
-{{--<script src="js/jquery-1.11.1.min.js"></script>--}}
-{{-- <script type="text/javascript">
-    $(document).ready(function(){
-        alert("TEST");
-        var formData = new FormData();
-        formData.append('api_token', 'C5hMvKeegj3l4vDhdLpgLChTucL9Xgl8tvtpKEjSdgfP433aNft0kbYlt77h');
-        formData.append('contacts', '[{"phone":"086234665"}]');
-        formData.append('sound_url', 'https://s3-ap-southeast-1.amazonaws.com/twilio-ews-resources/sounds/2016-11-10:15:43:45_Pursat_02.mp3');
-        formData.append('activity_id',3);
-        formData.append('no_of_retry',3);
-        formData.append('retry_time', 10);
-        $.ajax({
-            url: 'http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload',
-            data: formData,
-            dataType: 'json',
-            async: false,
-            method: 'POST',
-            processData: false,
-            contentType: false,
-            success: function (response) {console.log(response);},});
-    });
-</script>--}}
-
-
 @endsection

@@ -8,20 +8,18 @@ use App\Models\targetphones;
 use Auth;
 use Redirect;
 use Illuminate\Support\Facades\Input;
-// use Request;
 use Response;
-// use App\Http\Controllers\Session;
 use Session;
-use Illuminate\Support\Facades\Log;
-
-// http://blog.damirmiladinov.com/laravel/laravel-5.2-socialite-facebook-login.html#.VxQyc5N96fU
 
 class GetPhonesFromCallLogCtrl extends Controller {
 
+    /**
+    * Function to select phone contacts under effected communes then make a call
+    * @param $request
+    * @return array of phone numbers
+    */
     public function callThem(Request $request)
-  {
-    // dump the given variable and end execution of the script
-        dd($request->request);
+    {
 		$communes_selected = "";
 		foreach ($request->request as $key => $item) {
 			$communes_selected = $communes_selected . "," . $item;
@@ -29,144 +27,73 @@ class GetPhonesFromCallLogCtrl extends Controller {
 		$phoneNumbers = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$communes_selected))->count();
 
 		Session::flash('message',$phoneNumbers);
-  }
-
-	// public function registerNewContact()
-	// {
-	// 		$phone = Input::get('phone');
-    // 		$commune = Input::get('commune');
-    // 		if($phone != "" && $commune != "")
-    // 		{
-	// 				// INSERT addresses INTO TARGET PHONE TABLE
-	// 				$targetphones = new targetphones;
-	// 				// Query existing phone in given commune
-	// 				// $itemExist = App\Models::where('phone',)
-	// 				$itemExist = $targetphones::select('id')
-	// 										->where('phone',$phone)
-	// 										->where('commune_code',$commune)
-	// 										->first();
-	// 				//dd($itemExist->id);
-	// 				// dd(isset($itemExist));
-	// 				if(!isset($itemExist))
-	// 				{
-	// 					$targetphones->commune_code = $commune;
-	// 					$targetphones->phone = $phone;
-	// 					$res = $targetphones->save();
-	// 					if($res)
-	// 							$res_sms = "Successfully inserted";
-	// 					else
-	// 							$res_sms = "Fail to insert";
-	// 				}
-	// 				else {
-	// 					$res_sms = "This contact in this commune is already exist!";
-	// 				}
-	//
-	//
-	//
-	// 		}
-	// 		else
-	// 				$res_sms = "Fail to insert because some avariables are null.";
-	// 		echo $res_sms;
-	// 		// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
-	// }
-
-    public function registerNewContactTest()
-    {
-        //var_dump(Input::json());
-//			$test = Input::all();
-
-
-        // Log::info('Object Register: ' . Response::json($test));
-        //$jsonStr = Input::get('values');
-        //Log::info('Values: ' . Response::json($val_pass));
-//        Log::info('Values: ' . $val_pass);
-        // Test fix string of json
-        $category = '[{"category": {"base": "0102"}, "node": "271a2112-60b6-456c-9ff0-45ea56fb2135", "time": "2016-10-19T02:39:51.394175Z", "text": "1", "rule_value": "1", "value": "1.00000000", "label": "BanteayMeancheyProvince"}, {"category": {"base": "010202"}, "node": "cff53191-db4e-48fe-8399-5d607481955a", "time": "2016-10-19T02:40:04.841054Z", "text": "2", "rule_value": "2", "value": "2.00000000", "label": "MongkolBoreiDistrict"}]';
-        $cateDecode = json_decode($category);
-        //dd($cateDecode);
-        //echo $cateDecode['category'].'<br/>';
-        $commune_code = "";
-        foreach($cateDecode as $i => $v)
-        {
-//            Log::info('category: ' . $v['category']);
-//            dd($v->category->base);
-
-            if(strlen($v->category->base)==6)
-            {
-                $commune_code = $v->category->base;
-                //echo '1-'.$commune_code.'<br/>';
-                break;
-            }
-        }
-        echo '2-'.$commune_code.'<br/>';
-
     }
 
+    /**
+     * Function to add new contact from RapidPro into ews1294.info
+     * this function to be called in WebHook in RapidPro.
+     * @return array of phone numbers
+     */
 	public function registerNewContact()
 	{
-			$jsonStr = Input::get('values');
-            $cateDecode = json_decode($jsonStr);
-            foreach($cateDecode as $i => $v)
+        $jsonStr = Input::get('values');
+        $cateDecode = json_decode($jsonStr);
+        foreach($cateDecode as $i => $v)
+        {
+            $findCommune = $v->category->base;
+            // *** If category->base is NUMERICAL CHARACTERS *** //
+            if(preg_match('/^[0-9]/',$findCommune))
             {
-                $findCommune = $v->category->base;
-                // *** If category->base is NUMERICAL CHARACTERS *** //
-                if(preg_match('/^[0-9]/',$findCommune))
-                {
-                    // *** AND If category->base starting with 0 character, THEN cut it out. *** //
-                    if(substr($findCommune,0,1) === "0")
-                        $findCommune = substr($findCommune,1);
+                // *** AND If category->base starting with 0 character, THEN cut it out. *** //
+                if(substr($findCommune,0,1) === "0")
+                    $findCommune = substr($findCommune,1);
 
-                    // *** AND IF len($findCommune) is between 5 (ex:10205)and 6(ex:120204) *** //
-                    if(strlen($findCommune)==5 || strlen($findCommune)==6){
-                        $commune_code = $findCommune;
-                        echo $commune_code."=> correct commune code; ";
-                        break;
-                    }
+                // *** AND IF len($findCommune) is between 5 (ex:10205)and 6(ex:120204) *** //
+                if(strlen($findCommune)==5 || strlen($findCommune)==6){
+                    $commune_code = $findCommune;
+                    echo $commune_code."=> correct commune code; ";
+                    break;
                 }
             }
+        }
 
-			$phone = Input::get('phone');
-
-
-			if($phone != "" && $commune_code != "")
-			{
-					// INSERT addresses INTO TARGET PHONE TABLE
-					$targetphones = new targetphones;
-					// Query existing phone in given commune
-					// $itemExist = App\Models::where('phone',)
-					$itemExist = $targetphones::select('id')
-											->where('phone',$phone)
-											->where('commune_code',$commune_code)
-											->first();
-					//dd($itemExist->id);
-					// dd(isset($itemExist));
-					if(!isset($itemExist))
-					{
-						$targetphones->commune_code = $commune_code;
-						$targetphones->phone = $phone;
-						$res = $targetphones->save();
-						if($res)
-								$res_sms = "Successfully inserted";
-						else
-								$res_sms = "Fail to insert";
-					}
-					else {
-						$res_sms = "This contact in this commune is already exist!";
-					}
-
-			}
-			else
-					$res_sms = "Fail to insert because some avariables are null.";
-			echo "phone number: ".$phone;
-//        echo $cateDecode;
-			// return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
+        $phone = Input::get('phone');
+        if($phone != "" && $commune_code != "")
+        {
+                // INSERT addresses INTO TARGET PHONE TABLE
+                $targetphones = new targetphones;
+                // Query existing phone in given commune
+                $itemExist = $targetphones::select('id')
+                                        ->where('phone',$phone)
+                                        ->where('commune_code',$commune_code)
+                                        ->first();
+                if(!isset($itemExist))
+                {
+                    $targetphones->commune_code = $commune_code;
+                    $targetphones->phone = $phone;
+                    $res = $targetphones->save();
+                    if($res)
+                            $res_sms = "Successfully inserted";
+                    else
+                            $res_sms = "Fail to insert";
+                }
+                else {
+                    $res_sms = "This contact in this commune is already exist!";
+                }
+        }
+        else
+                $res_sms = "Fail to insert because some avariables are null.";
+        echo "phone number: ".$phone;
 	}
 
 	// currently used
+    /**
+     * Function to get phone contacts from Verboice to insert into Database
+     * @param $request reminder group id (to be selected by user on Form)
+     * @return $reminderGroups
+     */
 	public function getPhoneCallLog(Request $request)
 	{
-				// dd($request);
-				// $verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/call_logs.json?name=' . $id;
         $verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/projects/359/reminder_groups.json?id[]=1';
         $curlCallLog = curl_init($verboiceCallLogAPI);
         curl_setopt($curlCallLog, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -176,76 +103,34 @@ class GetPhonesFromCallLogCtrl extends Controller {
         curl_setopt($curlCallLog, CURLOPT_HEADER, 0);
         $callLogResponse = curl_exec($curlCallLog);
         $callLogArray = json_decode($callLogResponse, true);
-        // Find call log record with $callId
-				$reminderGroups = "";
-				$request_split = explode("#;",$request->rg_name);
-				//var_dump($request_split);
-				$reminderGroups = \DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->where('CCode',$request_split[0])->get();
-
-				foreach ($reminderGroups as $key => $reminderGroup) {
-					# code...
-					//var_dump($reminderGroup->CReminderGroup);
-                    for ($i = count($callLogArray) - 1; $i >= 0; $i--) {
-                         if ($callLogArray[$i]['name'] == $reminderGroup->CReminderGroup) {
-                             if ($callLogArray[$i]['name'] == $request_split[1]) {
-                                 // $result = json_encode($callLogArray[$i]);
-                                 // $result = json_encode($callLogArray[$i]['addresses']);
-                                 $phone = $callLogArray[$i]['addresses'];
-                                 // INSERT addresses INTO TARGET PHONE TABLE
-                                 foreach ($phone as $key => $eachPhone) {
-                                     $new_eachPhone = preg_replace('/^(\+855|855)/', '0', $eachPhone);
-                                     $targetphones = new targetphones;
-                                     $targetphones->commune_code = $request_split[0];
-                                     $targetphones->phone = $new_eachPhone;
-                                     $targetphones->save();
-                                 }
-                             }
+        $reminderGroups = "";
+        $request_split = explode("#;",$request->rg_name);
+        $reminderGroups = \DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->where('CCode',$request_split[0])->get();
+        foreach ($reminderGroups as $key => $reminderGroup) {
+            for ($i = count($callLogArray) - 1; $i >= 0; $i--) {
+                 if ($callLogArray[$i]['name'] == $reminderGroup->CReminderGroup) {
+                     if ($callLogArray[$i]['name'] == $request_split[1]) {
+                         $phone = $callLogArray[$i]['addresses'];
+                         // INSERT addresses INTO TARGET PHONE TABLE
+                         foreach ($phone as $key => $eachPhone) {
+                             $new_eachPhone = preg_replace('/^(\+855|855)/', '0', $eachPhone);
+                             $targetphones = new targetphones;
+                             $targetphones->commune_code = $request_split[0];
+                             $targetphones->phone = $new_eachPhone;
+                             $targetphones->save();
                          }
-                    }
-			}
-
-				// var_dump($reminderGroups);
-				// $reminderGroupsResult = Response::json($reminderGroups);
-		//return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroupsResult]);
-		$reminderGroups = \DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->get();
-		return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
-		// return view('ReadPhonesFromCallLog');
-	}
-
-	public function getPhones()
-	{
-				$rg_name = Input::get('rg_name');
-				// $verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/call_logs.json?name=' . $id;
-				$verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/projects/359/reminder_groups.json?id[]=1';
-        $curlCallLog = curl_init($verboiceCallLogAPI);
-				//$curlCallLog = curl_init();
-        curl_setopt($curlCallLog, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curlCallLog, CURLOPT_USERPWD, Config::get('constants.VERBOICE_AUTH_USER').":".Config::get('constants.VERBOICE_AUTH_PASS'));
-        curl_setopt($curlCallLog, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlCallLog, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($curlCallLog, CURLOPT_HEADER, 0);
-        $callLogResponse = curl_exec($curlCallLog);
-        $callLogArray = json_decode($callLogResponse, true);
-        // Find call log record with $callId
-				$reminderGroups = "";
-        for ($i = count($callLogArray) - 1; $i >= 0; $i--) {
-            if ($callLogArray[$i]['name'] == $rg_name) {
-                // $result = json_encode($callLogArray[$i]);
-								// $result = json_encode($callLogArray[$i]['addresses']);
-								$reminderGroups = $callLogArray[$i]['addresses'];
-								// INSERT addresses INTO TARGET PHONE TABLE
-
+                     }
+                 }
             }
         }
-				var_dump($reminderGroups);
-				// $reminderGroupsResult = Response::json($reminderGroups);
-				$reminderGroupsResult = $reminderGroups;
-				$messageReturn = "Success";
-		//return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroupsResult]);
-		return view('ReadPhonesFromCallLog',['$messageReturn' => $messageReturn]);
-		// return view('ReadPhonesFromCallLog');
+		$reminderGroups = \DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->get();
+		return view('ReadPhonesFromCallLog',['reminderGroups' => $reminderGroups]);
 	}
 
+    /**
+     * Function to get all reminder groups from Database
+     * @return $reminderGroups to view ReadPhonesFromCallLog
+     */
 	public function getReminderGroups()
 	{
 			$reminderGroups = DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->get();
