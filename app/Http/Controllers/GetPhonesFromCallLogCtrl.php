@@ -92,7 +92,7 @@ class GetPhonesFromCallLogCtrl extends Controller {
      * @param $request reminder group id (to be selected by user on Form)
      * @return $reminderGroups
      */
-	public function getPhoneCallLog(Request $request)
+	public function importPhoneContactsFromVerboice(Request $request)
 	{
         $verboiceCallLogAPI = 'http://verboice-cambodia.instedd.org/api/projects/359/reminder_groups.json?id[]=1';
         $curlCallLog = curl_init($verboiceCallLogAPI);
