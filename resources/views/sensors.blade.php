@@ -21,7 +21,6 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        {{--<table class="table table-bordered" id="province-table">--}}
                         <table class='table responsive cell-border table-bordered' id='province-table' cellspacing='0' width='100%'>
                             <thead>
                             <tr>
@@ -113,7 +112,6 @@
                             <select class="fullwidth select_style ss_commune_select" id="ss_commune_select" name="ss_communes_select"></select>
                         </div>
                     </div><br/>
-                    {{--Location: <input type='text' id='txtLocationCode' name='locationCode' /><br />--}}
                     {{ trans('sensors.additional_Info') }} <br>
                     <input type='text' id='txtAdditionalLocationInfo' name='additionalLocationInfo'  /><br />
                     {{ trans('sensors.latitude') }} <br>
@@ -193,12 +191,9 @@
             // global csrf token variable
             var token = "{{ csrf_token() }}";
 
-            //$('#edit_sensor_info1').click(function(e){
             $(document).on('click', '#edit_sensor_info', function()
             {
                 var btn_val = $(this).attr('name');
-                //alert(btn_val);
-                //console.log(token);
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/sensor_info') }}",
@@ -206,7 +201,6 @@
                     cache: false,
                     success: function(result)
                     {
-                        // alert("success= " + result[0].id);
                         $("#sensor_info_detail").html(result).show();
                         $('#modal_sensor_record').modal('show');
                     }
@@ -217,22 +211,19 @@
             /* Display Modal Add Sensor Data */
             $(document).on('click', '#add_sensor', function()
             {
-                //alert(token);
                 $('#modal_add_sensor_record').modal('show');
                 return false;
             });
 
-            /* Add Sensor Data */
+            /* Add New Sensor */
             $(document).on('click', '#add_sensor_data', function()
             {
-
                 var txtSensorID = $('#txtSensorID').val();
-                //var txtLocationCode = $('#txtLocationCode').val();
                 var commune_code = $('#ss_commune_select').val();
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfo').val();
                 var txtLocationLatitude = $('#txtLocationLatitude').val();
                 var txtLocationLongitude = $('#txtLocationLongitude').val();
-
+                // post data to server using ajax
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/add_new_sensor_info') }}",
@@ -241,7 +232,6 @@
                     success: function(result)
                     {
                         location.reload();
-                        //alert('New Sensor Already Added!');
                     },
                     error: function(e)
                     {
@@ -251,17 +241,13 @@
                 return false;
             });
 
-            /* Save Edited data of a user */
+            /* Save Edited data of a sensor */
             $(document).on('click', '#save_change_sensor', function()
             {
-                //var txtLocationCode = $('#txtLocationCodeEdit').val();
                 var ccode = $('#ss_commune_option').val();
                 var txtAdditionalLocationInfo = $('#txtAdditionalLocationInfoEdit').val();
                 var txtLocationCoordinates = $('#txtLocationCoordinatesEdit').val();
                 var btn_val = $(this).attr('name');
-//                alert(btn_val);
-                //$('#modal_user_profile').modal('hide');
-                //alert('save= ' + btn_user_val + " name= " + txt_user_name + " email= " + txt_user_email);
                 $.ajax({
                     type: "POST",
                     url: "{{ url('/save_change_sensor_info') }}",
@@ -276,14 +262,12 @@
 
             });
 
-            /* Delete User */
+            /* Delete Sensor Info */
             $(document).on('click', '#delete_sensor_info', function()
             {
-                // alert("delete");
                 var btn_delete_val = $(this).attr('name');
                 $('#modal_delete_sensor_info').modal('show');
                 $('#btn_delete_yes').click(function(e){
-                    //alert('delete=yes=> ' + btn_delete_val);
                     $.ajax({
                         type: "POST",
                         url: "{{ url('/delete_sensor_info') }}",

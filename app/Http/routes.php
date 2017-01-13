@@ -136,8 +136,6 @@ Route::group(['middleware' => ['auth', 'admin.auth']], function(){
     Route::get('/getAllProvinces', ['uses' => 'Sensor\SensorTriggerController@getAllProvinces']);
 }); // .'middleware' => ['auth', 'admin.auth']
 
-Route::get('/getPhones', ['uses' => 'GetPhonesFromCallLogCtrl@getPhones']);
-
 Route::get('/extractTargetPhones', function () {
     $reminderGroups = DB::table('commune')->select('CCode','CReminderGroup')->whereNotNull('CReminderGroup')->get();
     //var_dump($provinces);
@@ -403,7 +401,7 @@ Route::get('/testAPI', function () {
     }
 });
 
-Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart30Days']);
+Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart']);
 
 Route::get('/testGetPhoneNumbers', ['uses' => 'Sensor\ReceivingSensorInfoAPIController@getPhoneNumbersToBeCalled']);
 

@@ -68,6 +68,10 @@ return [
     'latitude' => 'រយៈ​ទទឹង',
     'longitude' => 'រយៈ​បណ្ដោយ',
     'location_coordinates' => 'កូអរដោណេ​ទីតាំង',
-    'select_sensor_id' => 'ជ្រើស​រើស​លេខ​សម្គាល់​ឧបករណ៍​ចាប់​សញ្ញា',
+    'select_sensor_id' => 'ជ្រើស​លេខ​សម្គាល់​ឧបករណ៍​ចាប់​សញ្ញា',
+    'sensorChartErrorID' => 'មានបញ្ហា: ​​ឧបករណ៍​ចាប់​សញ្ញាលេខ ',
+    'sensorChartErrorNot' => 'គ្មានព័ត៌មាននៅក្នុង​ការ​ចាប់ផ្ដើម​ឧបករណ៍​ចាប់ស​ញ្ញាទេ',
+    'sensorChartErrorClickHere' => 'សូមចុចត្រង់នេះ ',
+    'sensorChartErrorToAdd' => 'ដើម្បីបញ្ចូលពត៌មានថ្មីសម្រាប់​​ឧបករណ៍​ចាប់​សញ្ញានេះ។',
 
 ];

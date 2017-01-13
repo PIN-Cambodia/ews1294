@@ -4,51 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Socialite;
-
 use App\Models\activities;
 use Auth;
 use Redirect;
-use App\Role;
-use App\Permission;
 use Illuminate\Support\Facades\Input;
 use Response;
-use Illuminate\Contracts\Filesystem\Filesystem;
-
-//use Illuminate\Support\Facades\Storage;
-
-// http://blog.damirmiladinov.com/laravel/laravel-5.2-socialite-facebook-login.html#.VxQyc5N96fU
 
 class SoundfileCtrl extends Controller
 {
 
+    /**
+     * Function to retrieve a list of provinces from database
+     * @param Request $request
+     * @return array of provinces to view, named "uploadSoundFile"
+     */
     public function getProvinces()
     {
         $provinces = DB::table('province')->select('PROVINCE_KH')->get();
         return view('uploadSoundFile', ['provinces' => $provinces]);
     }
 
+    /**
+     * Function to create activity before making calls to villagers
+     * @param Request $request
+     * @return array of activity id and filename of sound file
+     */
     public function insertNewActivity(Request $request)
     {
-//        echo  $request->input('_token');
         if (Session::token() != $request->input('_token')) {
             return response()->json(array('msg' => 'Unauthorized attempt to create setting'));
         }
         $communes = Input::get('communes');
         $noOfPhones = Input::get('noOfPhones');
-//        $newfilename = 'soundFile_' . date('m_d_Y_hia') . '.' . $request->file('soundFile')->getClientOriginalExtension();
         $newfilename = $request->file('soundFile')->getClientOriginalName();
-//        dd($newfilename);
-        //$request->file('soundFile')->move(public_path("/sounds"), $newfilename);
-        // Upload sound file and contact as json to AWS s3 storage
+        // Upload sound file to AWS s3 storage
         $storage = Storage::disk('s3');
-        $uploadedSound = $storage->put('sounds/' . $newfilename, fopen($request->file('soundFile')->getRealPath(), 'r+'), 'public');
-
-//        dd($uploadedSound);
-
+        $storage->put('sounds/' . $newfilename, fopen($request->file('soundFile')->getRealPath(), 'r+'), 'public');
+        // Create new record in activities table
         $activities = new activities;
         $activities->manual_auto = 1;
         $activities->user_id = Auth::user()->id;

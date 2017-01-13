@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Auth;
 use App;
 use DB;
@@ -67,7 +66,6 @@ class CallLogReportController extends Controller
                             ->get();
         $result = $this->getCallLogBody($activity_record, true);
         return view('report/calllogreport_per_activity', ['result'=> $result]);
-
     }
 
     /**

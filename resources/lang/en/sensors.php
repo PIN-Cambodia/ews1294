@@ -69,5 +69,9 @@ return [
     'longitude' => 'Longitude',
     'location_coordinates' => 'Location Coordinates',
     'select_sensor_id' => 'Select Sensor ID',
+    'sensorChartErrorID' => 'Error: Sensor ID ',
+    'sensorChartErrorNot' => 'is not found in trigger management.',
+    'sensorChartErrorClickHere' => 'Click here',
+    'sensorChartErrorToAdd' => 'to add new trigger for this sensor.',
 
 ];

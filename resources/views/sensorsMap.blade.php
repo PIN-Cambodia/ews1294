@@ -1,8 +1,5 @@
 @extends('layouts.master')
 
-{{--@section('testmap')--}}
-  <!-- Services Section -->
-  {{--<section id="services">--}}
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
       <div class="row">
         <ol class="breadcrumb">
@@ -12,27 +9,26 @@
       </div><!--/.row-->
       <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-12" id="mapdiv">
-          {{--<iframe src="http://cambodiameteo.com/map?menu=3&lang=en" frameborder="0" allowfullscreen class="iframe-resp"></iframe>--}}
         </div>
       </div><!--/.row-->
-
     </div>	<!--/.main-->
-  {{--</section>--}}
 
 {{--@endsection--}}
 <link rel="stylesheet" href="http://dev.openlayers.org/theme/default/style.css" type="text/css">
 <link rel="stylesheet" href="http://dev.openlayers.org/examples/style.css" type="text/css">
 <script src="/js/OpenLayers.js"></script>
 <script>
+  // Use OpenLayers library to display Map
   map = new OpenLayers.Map("mapdiv");
   map.addLayer(new OpenLayers.Layer.OSM());
   epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
   projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
-  /*var lonLat = new OpenLayers.LonLat( 104.9167,11.5500 ).transform(epsg4326, projectTo);*/
   var lonLat = new OpenLayers.LonLat( 106.00,11.9000 ).transform(epsg4326, projectTo);
   var zoom=8;
   map.setCenter (lonLat, zoom);
   var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+  // Foreach sensor, display marker on Map
+  // and allow user to click on sensor to display its sensor log data (stream height).
   @foreach($sensors as $sensor)
     var imgSensor="img/marker_black.png";
     var feature = new OpenLayers.Feature.Vector(
@@ -42,6 +38,8 @@
               externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
     );
     vectorLayer.addFeatures(feature);
+  // Display marker with different colors according to stream height getting from each sensor.
+  // yellow is warning; red is emergency; green is normal; and black is not getting data within 24 hrs.
     @if(!empty($sensors24hrs))
         @foreach($sensors24hrs as $sensor24)
           @if($sensor['sensor_id'] == $sensor24->sensor_id)
@@ -69,6 +67,7 @@
     selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })
   };
 
+  // Function to create popup on Map
   function createPopup(feature) {
     feature.popup = new OpenLayers.Popup.FramedCloud("pop",
             feature.geometry.getBounds().getCenterLonLat(),
@@ -78,10 +77,10 @@
             true,
             function() { controls['selector'].unselectAll(); }
     );
-    //feature.popup.closeOnMove = true;
     map.addPopup(feature.popup);
   }
 
+  // Function to destroy popup on Map
   function destroyPopup(feature) {
     feature.popup.destroy();
     feature.popup = null;

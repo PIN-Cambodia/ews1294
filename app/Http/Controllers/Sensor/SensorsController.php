@@ -3,25 +3,23 @@ namespace App\Http\Controllers\Sensor;
 
 use App\Models\Sensors;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Session;
-use App\Http\Controllers\Sensor\SensorTriggerController;
 
 class SensorsController extends Controller
 {
-    /*
-  * Display users available in system based on user role
-  */
+    /**
+     * Function to display sensor info
+     * @param $request sensor id to select its data.
+     * @return string HTML code.
+     */
     public function displaySensorInfoById(Request $request)
     {
         $this->checkCsrfTokenFromAjax($request->input('_token'));
         $sensor_by_id = Sensors::where('id','=', $request->id)->first();
-
         $get_existing_location = SensorTriggerController::getExistingProvinceAndDistrict($sensor_by_id->location_code,$sensor_by_id->location_code,false);
-
         // Data to be displayed in body and footer of modal
         $sensor_data = "<div class='modal-body'>"
             . trans('sensors.location')
@@ -45,7 +43,6 @@ class SensorsController extends Controller
                     . "</select>"
                 . "</div>"
             . "</div><br />" // /. affected_communes div
-            //. ": <input type='text' id='txtLocationCodeEdit' name='locationCode' value='" . $sensor_by_id->location_code . "' /><br />"
             . trans('sensors.additional_Info')
             .": <input type='text' id='txtAdditionalLocationInfoEdit' name='additionalLocationInfo' value='" . $sensor_by_id->additional_location_info . "' /><br />"
             . trans('sensors.location_coordinates')
@@ -66,9 +63,11 @@ class SensorsController extends Controller
         return $sensor_data;
     }
 
-    /*
- * Function to verify csrf token when Ajax post data to controller
- */
+    /**
+     * Function to verify csrf token when Ajax post form data to controller.
+     * @param $token token to be verified.
+     * @return json message as unauthorized if token is invalid.
+     */
     public function checkCsrfTokenFromAjax($token)
     {
         if(Session::token() !== $token)
@@ -79,16 +78,17 @@ class SensorsController extends Controller
         }
     }
 
-    /*
-  * Function to Save
-  */
+    /**
+     * Function to Save Sensor Info.
+     * @param  $request is sent from Form.
+     * @return json message as unauthorized if token is invalid.
+     */
     public function saveChangeSensorInfo(Request $request)
     {
         $this->checkCsrfTokenFromAjax($request->input('_token'));
         $sensor_info = Sensors::where('id','=', $request->id)->first();
 
         $sensor_info->location_code  = $request->ccode;
-        //$sensor_info->location_code = $request->loc_code;
         $sensor_info->additional_location_info = $request->additon_loc_info;
         $sensor_info->location_coordinates = $request->sensor_coordinates;
         $sensor_info->save();
@@ -96,7 +96,6 @@ class SensorsController extends Controller
             . "<input type='text' id='txt_location_code' name='location_code' value='" . $sensor_info->location_code . "' /><br />"
             . "<input type='text' id='txt_additional_location_info' name='additional_location_info' value='" . $sensor_info->additional_location_info . "' /><br />"
             . "<input type='text' id='txt_location_coordinates' name='location_coordinates' value='" . $sensor_info->location_coordinates . "' /><br />"
-            //. "<button class='btn buttonAsLink'> Change Password </button>"
             . "</div>"
             . "<div class='modal-footer'>"
             . "<button class='btn btn-default' data-dismiss='modal' >
@@ -109,14 +108,22 @@ class SensorsController extends Controller
             ."</button>"
             . "</div>";
         return $saved_sensor_info;
-
     }
 
+    /**
+     * Function to get all sensors from Database.
+     * @return A collection of sensors
+     */
     public function getSensors(){
         $sensors = Sensors::all();
         return $sensors;
     }
 
+    /**
+     * Function to delete sensor from Database.
+     * @param $request sensor id to be deleted.
+     * @return deleted sensor id
+     */
     public function deleteSensor(Request $request)
     {
         $this->checkCsrfTokenFromAjax($request->input('_token'));
@@ -125,6 +132,11 @@ class SensorsController extends Controller
         return $delete_sensor_info;
     }
 
+    /**
+     * Function to add new sensor into Database.
+     * @param $request: sensor id and sensor info to be added.
+     * @return $sensors->id: new sensor id that has been added
+     */
     public function addNewSensor(Request $request)
     {
         $this->checkCsrfTokenFromAjax($request->input('_token'));
@@ -134,22 +146,19 @@ class SensorsController extends Controller
         $sensors->additional_location_info = $request->sensor_additional_info;
         $coordidates = $request->sensor_lat .', '. $request->sensor_long;
         $sensors->location_coordinates = $coordidates;
-
         $sensors->save();
 
         return $sensors->id;
     }
 
     /**
-     * Select Communes of a district
-     * @param Request $request
-     * @return string
+     * Function to select all communes of one specific district.
+     * @param $request: district id for retrieving its communes.
+     * @return string of html code to display a drop down list.
      */
     public function getSSCommunesPerDistrict(Request $request)
     {
-        // DB::enableQueryLog();
         $communes=DB::table('commune')->where('DCode', $request->distric_id)->get();
-        // dd(DB::getQueryLog());
         $commune_options = "";
         if(!empty($communes))
         {
@@ -164,5 +173,4 @@ class SensorsController extends Controller
         $commune_selection = "<option value='0'>" . trans('pages.select_communes') . "</option>" . $commune_options;
         return $commune_selection;
     }
-
 }
