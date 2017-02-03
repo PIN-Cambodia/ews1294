@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="{{ url('/') }}">
         <div class="row">
           <div class="col-sm-3 col-md-3 col-lg-3">
-            <img src="/logo.png">
+            <img src="/logo.png" width="100">
           </div>
           <div class="col-sm-9 col-md-9 col-lg-9" style="margin-top: 5px; text-align: center">
               <h4><b> {{ trans('menus.ews_header_str') }} </b></h4>
