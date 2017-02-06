@@ -6,11 +6,9 @@
           <div class="col-sm-3 col-md-3 col-lg-3">
             <img src="/logo.png" width="80">
           </div>
-          <div class="col-sm-9 col-md-9 col-lg-9" style="margin-top: 4px; text-align: center">
+          <div class="col-sm-9 col-md-9 col-lg-9" style="margin-top: 4px; text-align: center;float: right;">
               <h4><b>EARLY<br>WARNING<br> SYSTEM</b> </h4>
-                <h4><b> ប្រព័ន្ធ<br>ប្រកាស<br>ឲ្យដឹងមុន </b></h4>
-              
-             
+                <h4><b> ប្រព័ន្ធ<br>ប្រកាស<br>ឲ្យដឹងមុន </b></h4>             
           </div>
         </div>
       </a>
