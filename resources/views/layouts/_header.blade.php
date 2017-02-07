@@ -7,9 +7,9 @@
             <img src="/logo.png" width="80">
           </div>
           <div class="col-sm-9 col-md-9 col-lg-9">
-              <h4 style="text-align: center; margin-left: 4%; font-size: 15px; font-family: Lato"><b>EARLY<br>WARNING<br> SYSTEM</b> 
+              <h4 style="text-align: center; margin-left: 10px; font-size: 15px; font-family: Lato"><b>EARLY<br>WARNING<br> SYSTEM</b> 
               </h4>
-              <h4 style="margin-left: 70%; margin-top: -32% ; position: absolute; font-size: 14px; text-align: center;" >
+              <h4 style="margin-left: 123px; margin-top: -56px; position: absolute; font-size: 14px; text-align: center;" >
                 <b> ប្រព័ន្ធ<br>ប្រកាស<br>ឲ្យដឹងមុន </b>
               </h4>             
              <!--  <h4><b>{{trans('menus.ews_header_str')}}</b></h4>
