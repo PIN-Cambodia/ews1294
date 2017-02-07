@@ -20,6 +20,7 @@ return [
     'get_phones_from_call_log_registration' => 'Get Phone number from CallLog registration',
     'api_wiki' => 'API Wiki',
     'ews_header_str' => 'Early Warning System',
+    
     'sensors_mgt' => 'Sensor Management',
     'sensors_map' => 'Sensor Map',
 
