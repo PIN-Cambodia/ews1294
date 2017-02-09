@@ -14,6 +14,7 @@
               </h4>  -->            
               <h4><b>{{trans('menus.ews_header_str')}}</b></h4>
               <h4><b>{{trans('menus.ews_header_str2')}}</b></h4>
+              <h4><b>{{trans('menus.ews_header_str3')}}</b></h4>
           </div>
         </div>
       </a>
