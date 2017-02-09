@@ -6,15 +6,16 @@
           <div class="col-sm-3 col-md-3 col-lg-3">
             <img src="/logo.png" width="80">
           </div>
-          <div class="col-sm-9 col-md-9 col-lg-9" style="text-align: center; font-family: Lato">
+          <div class="col-sm-9 col-md-9 col-lg-9" style="text-align: center; font-family: Lato,Roboto,Arial,sans-serf; ">
           <!--     <h4 style="text-align: center; margin-left: 10px; font-size: 15px; font-family: Lato"><b>EARLY<br>WARNING<br> SYSTEM</b> 
               </h4>
               <h4 style="margin-left: 65px; width: 100%; margin-top: -56px; position: absolute; font-size: 14px; text-align: center;" >
                 <b> ប្រព័ន្ធ<br>ប្រកាស<br>ឲ្យដឹងមុន </b>
               </h4>  -->            
-              <h4><b>{{trans('menus.ews_header_str')}}</b></h4>
-              <h4><b>{{trans('menus.ews_header_str2')}}</b></h4>
-              <h4><b>{{trans('menus.ews_header_str3')}}</b></h4>
+              <h4 style="font-size: 14px"><b>{{trans('menus.ews_header_str')}} <br>
+              {{trans('menus.ews_header_str2')}}<br>
+              {{trans('menus.ews_header_str3')}}</b></h4>
+            
           </div>
         </div>
       </a>
