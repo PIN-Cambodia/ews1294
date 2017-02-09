@@ -6,7 +6,7 @@
           <div class="col-sm-3 col-md-3 col-lg-3">
             <img src="/logo.png" width="80">
           </div>
-          <div class="col-sm-9 col-md-9 col-lg-9" style="text-align: center; font-family: Lato,Roboto,Arial,sans-serf; ">
+          <div class="col-sm-9 col-md-9 col-lg-9" style="text-align: center; font-family: Roboto,Arial,sans-serf; ">
           <!--     <h4 style="text-align: center; margin-left: 10px; font-size: 15px; font-family: Lato"><b>EARLY<br>WARNING<br> SYSTEM</b> 
               </h4>
               <h4 style="margin-left: 65px; width: 100%; margin-top: -56px; position: absolute; font-size: 14px; text-align: center;" >
