@@ -21,7 +21,7 @@ return [
     'api_wiki' => 'API វីគី',
     'ews_header_str' => 'ប្រព័ន្ធ',
     'ews_header_str2' => 'ប្រកាស',
-    'ews_header_str3' =>'ឲ្យដឹងមុន'
+    'ews_header_str3' =>'ឲ្យដឹងមុន',
     'sensors_mgt' => 'ការ​គ្រប់គ្រង​ឧបករណ៌​ចាប់​សញ្ញា',
     'sensors_map' => 'ផែនទី​ឧបករណ៌​ចាប់​សញ្ញា',
 

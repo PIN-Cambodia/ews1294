@@ -21,7 +21,7 @@ return [
     'api_wiki' => 'API Wiki',
     'ews_header_str' => 'Early ',
     'ews_header_str2' => ' Warning',
-    'ews_header_str3' =>'System'
+    'ews_header_str3' =>'System',
     'sensors_mgt' => 'Sensor Management',
     'sensors_map' => 'Sensor Map',
 
