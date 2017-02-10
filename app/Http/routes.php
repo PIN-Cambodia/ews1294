@@ -322,8 +322,8 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
 
 // Route to display about us
 
-// Route::get('/about', function(){
-//     return view('/about');
-// })
+Route::get('/about', function(){
+    return view('/aboutUs');
+})
 
 
