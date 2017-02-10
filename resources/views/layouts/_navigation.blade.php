@@ -84,7 +84,7 @@
     <!-- about us -->
 
     <li>
-      <a href="about">
+      <a href="#">
         <i class="pe-7s-users pe-lg"></i> {{ trans('menus.about_us') }}
        </a>
     </li>
