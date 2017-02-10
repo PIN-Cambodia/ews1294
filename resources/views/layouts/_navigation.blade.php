@@ -85,7 +85,7 @@
 
     <li>
       <a href="#">
-        <i class="pe-7s-home pe-lg"></i> {{ trans('menus.about_us') }}
+        <i class="pe-7s-users pe-lg"></i> {{ trans('menus.about_us') }}
        </a>
     </li>
   </ul>
