@@ -320,11 +320,13 @@ Route::get('/checkall', function()
  */
 Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart']);
 
-// Route to display about us
+/*
+****Route to display about EWS
+*/
 
-// Route::get('/about', function(){
-//     return view('/aboutUs');
-// })
+ Route::get('/about', function(){
+    return view('/aboutUs');
+ });
 
 
 

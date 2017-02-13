@@ -83,7 +83,7 @@
     @endrole
     <!-- about us -->
 
-    <li>
+    <li class="<?php  if (preg_match("/about/i", Request::url())) echo "active"; else echo ""; ?>">
       <a href="about">
         <i class="pe-7s-users pe-lg"></i> {{ trans('menus.about_us') }}
        </a>
