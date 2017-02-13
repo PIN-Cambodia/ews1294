@@ -327,3 +327,4 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
 // })
 
 
+
