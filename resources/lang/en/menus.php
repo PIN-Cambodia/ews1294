@@ -24,6 +24,6 @@ return [
     'ews_header_str3' =>'System',
     'sensors_mgt' => 'Sensor Management',
     'sensors_map' => 'Sensor Map',
-    'about_us'=>'About Us',
+    'about_us'=>'About EWS',
 
 ];
