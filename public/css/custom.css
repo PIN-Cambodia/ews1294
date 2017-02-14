@@ -134,7 +134,7 @@ box-shadow: none;
     .sidebar {
         display: block;
         position: fixed;
-        top: 130px;
+        top: 100px;
         bottom: 0;
         left: 0;
         z-index: 1000;
@@ -157,7 +157,7 @@ box-shadow: none;
     padding: 10px 10px;
     background: #e9ecf2;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 /* override classes on bootstrap.css file */
