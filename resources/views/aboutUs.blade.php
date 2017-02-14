@@ -11,15 +11,16 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
-          <div class="panel-heading"> {{ trans('menus.about_us') }} </div>
+          <div class="panel-heading"> </div>
             <br />
             <div class="row">
-                <div class="col-md-2 col-lg-4"></div>
-                <div class="col-md-8 col-lg-5">
+            <marquee behavior="scroll" direction="left" scrollamount="7"></marquee>
+                <div class="col-md-2 col-lg-3"></div>
+                <div class="col-md-8 col-lg-8">
                 	{{ trans('pages.about_ews')}}
                 </div>
                
-                <div class="col-md-2 col-lg-3"></div>
+                <div class="col-md-2 col-lg-2"></div>
    
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
@@ -27,4 +28,5 @@
     </div><!--/.row-->
   </div>	<!--/.main-->
 </section>
+
 @endsection
