@@ -28,7 +28,7 @@
                 </div>
                
                 <div class="col-md-2 col-lg-2"></div>
-                <img src="/about_ews.jpg" height="50px">
+                <!-- <img src="/about_ews.jpg" height="50px"> -->
    
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
