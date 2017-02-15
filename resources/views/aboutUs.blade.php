@@ -17,9 +17,9 @@
          
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
-                <p>{{ trans('pages.content1')}}</p> 
-                <p>{{ trans('pages.content2')}}</p> 
-                <p>{{ trans('pages.content3')}}</p> 
+                <p style="text-align: justify;" >{{ trans('pages.content1')}}</p> 
+                <p style="text-align: justify;" >{{ trans('pages.content2')}}</p> 
+                <p style="text-align: justify;" >{{ trans('pages.content3')}}</p> 
                 </div>
                
                 <div class="col-md-2 col-lg-2"></div>
