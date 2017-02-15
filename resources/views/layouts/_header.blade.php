@@ -8,9 +8,9 @@
           </div>
           <div class="col-sm-9 col-md-9 col-lg-9" style="text-align: center; font-family: Roboto,Arial,sans-serf; ">          
               <h4 style="font-size: 14px; margin-top: 2px; margin-left: 5px;">
-              <p> {{trans('menus.ews_header_str')}} </p>
-              <p> {{trans('menus.ews_header_str2')}} </p>
-              <p> {{trans('menus.ews_header_str3')}} </p>
+              <p><b> {{trans('menus.ews_header_str')}} </b></p>
+              <p><b> {{trans('menus.ews_header_str2')}} </b></p>
+              <p><b> {{trans('menus.ews_header_str3')}} </b></p>
               </h4>
             
           </div>
