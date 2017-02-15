@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<section id="login">
+<section>
   <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
       <ol class="breadcrumb">
@@ -17,7 +17,9 @@
          
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
-                	{{ trans('pages.about_ews')}}
+                <p>{{ trans('pages.content1')}}</p> 
+                <p>{{ trans('pages.content2')}}</p> 
+                <p>{{ trans('pages.content3')}}</p> 
                 </div>
                
                 <div class="col-md-2 col-lg-2"></div>
