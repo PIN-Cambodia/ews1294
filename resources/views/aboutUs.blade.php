@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
-          <div class="panel-heading"><center>{{ trans('menus.about_us') }} </center> </div>
+          <div class="panel-heading" style="background: lightblue;"><center><b>{{ trans('menus.about_us') }} </b></center> </div>
             <br />
             <div class="row">
          
