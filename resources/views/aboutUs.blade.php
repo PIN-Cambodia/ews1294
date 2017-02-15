@@ -4,8 +4,8 @@
   <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
       <ol class="breadcrumb">
-        <li><a href="#"><svg class="pe-7s-users pe-lg"><use xlink:href="#stroked-home"></use></svg></a></li>
-        <li class="active"> {{ trans('menus.about_us') }} </li>
+        
+         <i class="pe-7s-users pe-lg"></i> {{ trans('menus.about_us') }}
       </ol>
     </div><!--/.row-->
     <div class="row">
