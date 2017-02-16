@@ -50,7 +50,7 @@ return [
     'modal_title_add_sensor_trigger' => 'Add Sensor Trigger Information',
     'sensorLogReport' => 'Sensor Log Report',
     'select_sensor' => 'Select Sensor',
-    'date' => 'Time',
+    'date' => '',
     'waiting_dialog' => 'Please wait ...',
     'sensorlog24_graph' => 'Last 24 Readings (Date)',
     'sensorlog1threadingOf30days_graph' => '30 days Water Level Readings (Graph)',
