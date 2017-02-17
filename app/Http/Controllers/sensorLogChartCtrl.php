@@ -30,7 +30,7 @@ class sensorLogChartCtrl extends Controller
             // $sensorlogs = DB::table('sensorlogs')
             //     ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
              $sensorlogs = DB::table('sensorlogs')
-                ->select(DB::raw("id, date_format(timestamp,interval 0 hour),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
+                ->select(DB::raw("id, date_format(timestamp,interval 0 hour),GET_FORMAT('H:i:s')) as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
                 ->groupBy('time')
                 ->orderBy('timestamp')->limit(30)->get();
