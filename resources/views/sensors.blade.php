@@ -259,7 +259,7 @@
                     }
                 });
                 return false;
-
+ 
             });
 
             /* Delete Sensor Info */
