@@ -32,7 +32,7 @@
                                     <a href="sensorsLog1thReadingOf30days?sensor_id={{$sensorId}}">
                                 @endif
                                         <button class="btn btn-info" id="add_sensor">
-                                            <i class="fa fa-tablfe  fa-lg" aria-hidden="true"></i>
+                                            <i class="fa fa-table  fa-lg" aria-hidden="true"></i>
                                             {{ trans('sensors.sensor_log_table_link') }}
                                         </button>
                                     </a>
@@ -41,10 +41,9 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                       <div id="div_chart"></div>
+                            <div id="div_chart"></div>
                             <?= Lava::render('LineChart','SensorLogChart','div_chart') ?>
-                        </div> 
-
+                        </div>
                     </div>
                 </div>
             </div>
