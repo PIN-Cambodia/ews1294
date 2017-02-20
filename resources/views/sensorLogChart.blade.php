@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
                 <li class="active"> {{ trans('sensors.sensor_mgmt') }}
-                {{ date('y-m-d')}} </li>
+                 </li>
             </ol>
         </div><!--/.row-->
         <div class="row" >
@@ -18,7 +18,7 @@
                                 <b>
                                     @if($graph_type=='1')
                                         {{ trans('sensors.sensorlog24_graph')}}
-                                        
+                                        {{ date('d-m-Y')}}
 
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
