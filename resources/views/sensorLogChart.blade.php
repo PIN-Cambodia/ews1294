@@ -18,7 +18,7 @@
                                 <b>
                                     @if($graph_type=='1')
                                         {{ trans('sensors.sensorlog24_graph')}}
-                                        {{ date('d-m-Y')}}
+                                        {{ date('( d-M-Y )')}}
 
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
