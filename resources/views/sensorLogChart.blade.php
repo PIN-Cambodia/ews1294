@@ -5,7 +5,8 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li class="active"> {{ trans('sensors.sensor_mgmt') }} </li>
+                <li class="active"> {{ trans('sensors.sensor_mgmt') }}
+                {{ date('y-m-d')}} </li>
             </ol>
         </div><!--/.row-->
         <div class="row" >

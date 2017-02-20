@@ -72,7 +72,7 @@ class sensorLogChartCtrl extends Controller
     }
     function currentTime(){
         $now =DateTime();
-        $timestamp= $now->timestamp();
+        $timestamp= $now->gettimestamp();
 
     }
 }
