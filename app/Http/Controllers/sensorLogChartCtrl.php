@@ -37,7 +37,7 @@ class sensorLogChartCtrl extends Controller
         {
             // retrieve first 24 readings for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
-                ->select(DB::raw("id, date_format(timestamp,'%H:%i:%s') as time, stream_height"))
+                ->select(DB::raw("id, date_format(timestamp,'%H:%i') as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)->orderBy('timestamp')->limit(24)->get();
         }
         // select sensortrigger info from database
@@ -69,5 +69,10 @@ class sensorLogChartCtrl extends Controller
             return '<p align="center" style="margin-top: 200;">' . trans('sensors.sensorChartErrorID'). $sensor_id . trans('sensors.sensorChartErrorID').
             '<br><br><br><a href="/sensortrigger">' . trans('sensors.sensorChartErrorClickHere').'</a>'. trans('sensors.sensorChartErrorToAdd').'</p>';
         }
+    }
+    function currentTime(){
+        $now =DateTime();
+        $timestamp= $now->timestamp();
+
     }
 }
