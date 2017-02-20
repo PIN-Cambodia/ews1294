@@ -43,7 +43,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div id="div_chart"></div>
-                            <?= Lava::render('LineChart','SensorLogChart','div_chart') ?>
+                            <?= Lava::render('LineChart','','SensorLogChart','div_chart') ?>
                         </div>
                     </div>
                 </div>
