@@ -30,7 +30,7 @@ return [
     'modal_title_add_sensor' => 'បន្ថែម​ព័ត៌មាន​ឧបករណ៍​ចាប់​សញ្ញា',
     'modal_title_edit_sensor_table' => 'តារាង​ព័ត៌មាន​ឧបករណ៍​ចាប់សញ្ញា',
     'add_new' => 'បន្ថែម​ថ្មី',
-    'sensorlog24' => 'កា​រអាន​ 24 ចុងក្រោយ',
+    'sensorlog24' => 'កា​រអាន​ 6 ចុងក្រោយ',
     'sensorlog24Btn' => 'ការ​អាន 24 ចុងក្រោយ',
     'sensorlog1threadingOf30days' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 30 ថ្ងៃ',
     'sensorlog1threadingOf30daysBtn' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 30 ថ្ងៃ',
