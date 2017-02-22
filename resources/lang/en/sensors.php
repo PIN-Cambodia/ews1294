@@ -53,6 +53,7 @@ return [
     'date' => 'Date',
     'waiting_dialog' => 'Please wait ...',
     'sensorlog24_graph' => 'Last 24 Readings',
+    'alert_header'=> 'Automatic Water Gauge',
     'sensorlog1threadingOf30days_graph' => '30 days Water Level Readings (Graph)',
     'sensor_log_table_link' => 'Show Table',
     'sensor_log_graph_link' => 'Show Graph',
