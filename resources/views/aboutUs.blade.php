@@ -12,6 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div>
             <br />
+            <div class="infinitescroll" id="myInfiniteScroll1" style="height: 300px;"></div>
             <div class="row">
          
                 <div class="col-md-2 col-lg-2"></div>
