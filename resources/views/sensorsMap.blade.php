@@ -33,7 +33,7 @@
     var imgSensor="img/marker_black.png";
     var feature = new OpenLayers.Feature.Vector(
           new OpenLayers.Geometry.Point( {{$sensor['location_coordinates'] }} ).transform(epsg4326, projectTo),
-          {description:'<center><b>{{trans('sensors.alert_header')}}</b></center><b>{{ trans('sensors.popup_label') }} {{$sensor['sensor_id']}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor['sensor_id']}}"><b>{{ trans('sensors.sensorlog24') }}</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor['sensor_id']}}"><b>{{ trans('sensors.sensorlog1threadingOf30days') }} </a>'} ,
+          {description:'<center><b>{{trans('sensors.alert_header')}}</b><br></center><b>{{ trans('sensors.popup_label') }} {{$sensor['sensor_id']}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor['sensor_id']}}"><b>{{ trans('sensors.sensorlog24') }}</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor['sensor_id']}}"><b>{{ trans('sensors.sensorlog1threadingOf30days') }} </a>'} ,
           {
               externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
     );
