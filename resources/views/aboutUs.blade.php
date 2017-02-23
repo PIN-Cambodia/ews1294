@@ -12,18 +12,18 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div>
             <br />
-           <div class="infinitescroll" id="myInfiniteScroll1" style="height: 400px; overflow: scroll;">
+           <div class="infinitescroll" id="myInfiniteScroll1" style="height: 455px; overflow: scroll;">
          
             <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
-                <p style="text-align: justify;" >
+                <p style="text-align: justify;font-family: Lato; font-size: 17px;" >
                     {{ trans('pages.content1')}}
                 </p> 
-                <p style="text-align: justify;" >
+                <p style="text-align: justify; font-family: Lato; font-size: 17px;" >
                     {{ trans('pages.content2')}}
                 </p> 
-                <p style="text-align: justify;" >
+                <p style="text-align: justify; font-family: Lato; font-size: 17px;" >
                     {{ trans('pages.content3')}}
                 </p> 
                 </div>
