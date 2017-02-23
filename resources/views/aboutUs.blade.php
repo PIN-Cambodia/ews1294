@@ -12,7 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div>
             <br />
-           <div class="infinitescroll" id="myInfiniteScroll1" style="height: 250px; overflow: scroll;">
+           <div class="infinitescroll" id="myInfiniteScroll1" style="height: 400px; overflow: scroll;">
          
             <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
@@ -29,7 +29,7 @@
                 </div>
                
                 <div class="col-md-2 col-lg-2"></div>
-               <img src="/about_ews.jpg" style="height:100px; width:100px"> 
+              <center><img src="/about_ews.jpg" style="height:60%; width:60%"></center>  
               </div>
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
