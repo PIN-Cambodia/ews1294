@@ -17,7 +17,7 @@
             <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
-                <center><p style="font-family: Lato; font-size: 17px;" >
+                <p style="font-family: Lato; font-size: 17px;" >
                     {{ trans('pages.content1')}}
                 </p> 
                 <p style=" font-family: Lato; font-size: 17px;" >
@@ -26,7 +26,7 @@
                 <p style="font-family: Lato; font-size: 17px;" >
                     {{ trans('pages.content3')}}
                 </p> 
-                </center>
+                
                 </div>
                
                 <div class="col-md-2 col-lg-2"></div>
