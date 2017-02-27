@@ -19,7 +19,9 @@ body
   width: 100% !important;
   border: none;
 }
-
+.main{
+    background: white;
+}
 .padingtop {
   margin-top: 5px;
   padding-top: 100px;
