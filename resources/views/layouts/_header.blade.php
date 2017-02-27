@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{{ url('/') }}">
-        <div class="row">
+        <div class="row" style="background: white;">
           <div class="col-sm-3 col-md-3 col-lg-3">
             <img src="/logo.png" width="80">
           </div>
