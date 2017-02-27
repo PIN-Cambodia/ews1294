@@ -19,10 +19,7 @@ body
   width: 100% !important;
   border: none;
 }
-/*add backgroup in header*/
-.header{
-    background: white;
-}
+
 .padingtop {
   margin-top: 5px;
   padding-top: 100px;
