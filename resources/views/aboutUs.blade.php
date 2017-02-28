@@ -29,7 +29,7 @@
                 </div>
                
                 <div class="col-md-2 col-lg-2"></div>
-              <center><img src="/about_ews.jpg" style="height:50%; width:60%"></center>  
+              <center><img src="/about_EWS.jpg" style="height:50%; width:60%"></center>  
               </div>
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
