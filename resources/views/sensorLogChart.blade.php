@@ -22,6 +22,7 @@
 
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
+                                          
                                     @endif
 
                                 </b>
