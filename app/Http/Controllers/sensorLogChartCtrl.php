@@ -28,7 +28,7 @@ class sensorLogChartCtrl extends Controller
         {
             // retrieve first reading within last 30 days for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
-                ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
+                ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),DATE() as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
                 ->groupBy('time')
                 ->orderBy('timestamp')->limit(30)->get();
