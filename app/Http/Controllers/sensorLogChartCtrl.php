@@ -36,10 +36,16 @@ class sensorLogChartCtrl extends Controller
         else
         {
             // retrieve first 24 readings for $sensor_id
+            $sensorlogs = DB::table('sensorlogs')
+                ->select (DB::raw("id, timestamp, stream_height"))
+                ->where('sensor_id','=',$sensor_id)
+                ->orderBy('timestamp','desc')
+                ->limit(24)->get();
             // $sensorlogs = DB::table('sensorlogs')
 
             //     ->select (DB::raw("id, timestamp, stream_height"))
             //     ->where('sensor_id','=',$sensor_id)
+<<<<<<< HEAD
             //     ->orderBy('timestamp','desc')
             //     ->limit(24)->get();
             $sensorlogs = DB::table('sensorlogs')
@@ -48,6 +54,10 @@ class sensorLogChartCtrl extends Controller
                 ->where('sensor_id','=',$sensor_id)
                 ->orderBy('timestamp','desc')
                 ->limit(24)->get();
+=======
+            //     ->orderBy('timestamp','asc')
+            //     ->last();
+>>>>>>> parent of afe505b... undo
 
         }
         // select sensortrigger info from database
@@ -61,7 +71,7 @@ class sensorLogChartCtrl extends Controller
             // add row data into datatable for Chart
             foreach($sensorlogs as $v => $sensorlog)
             {
-                $sensenlogTable->addRow([$sensorlog->timestamp, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+                $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
             }
             // generate Chart as a LineChart
             Lava::LineChart('SensorLogChart',$sensenlogTable)
