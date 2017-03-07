@@ -44,10 +44,10 @@ class sensorLogChartCtrl extends Controller
             //     ->limit(24)->get();
             $sensorlogs = DB::table('sensorlogs')
 
-                ->select (DB::raw("id, timestamp,GET_FORMAT(DATE,'ISO')) as time stream_height"))
+                ->select (DB::raw("id, timestamp, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
-                ->orderBy('timestamp')
-                ->take(24<='time')->get();
+                ->orderBy('timestamp','desc')
+                ->take(24<= date())->get();
 
         }
         // select sensortrigger info from database
