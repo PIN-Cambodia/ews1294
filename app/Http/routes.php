@@ -291,6 +291,7 @@ Route::get('/sensormap', function () {
             ->orderBy('sensorlogs.timestamp','desc')
             ->orderBy('sensorlogs.sensor_id')
             ->where(DB::raw("timestampdiff(HOUR, timestamp, NOW())"),'<=','24')
+            ->orderBy('sensorlogs.timestamp','desc')
             ->limit(1)
             ->get();
         if(sizeof($sensorlogs)>0)
