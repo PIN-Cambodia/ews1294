@@ -36,17 +36,17 @@ class sensorLogChartCtrl extends Controller
         else
         {
             // retrieve first 24 readings for $sensor_id
-            // $sensorlogs = DB::table('sensorlogs')
-            //     ->select (DB::raw("id, timestamp, stream_height"))
-            //     ->where('sensor_id','=',$sensor_id)
-            //     ->orderBy('timestamp','desc')
-            //     ->limit(24)->get();
             $sensorlogs = DB::table('sensorlogs')
-
                 ->select (DB::raw("id, timestamp, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
-                ->orderBy('timestamp','asc')
-                ->last();
+                ->orderBy('timestamp','desc')
+                ->limit(24)->get();
+            // $sensorlogs = DB::table('sensorlogs')
+
+            //     ->select (DB::raw("id, timestamp, stream_height"))
+            //     ->where('sensor_id','=',$sensor_id)
+            //     ->orderBy('timestamp','asc')
+            //     ->last();
 
         }
         // select sensortrigger info from database
