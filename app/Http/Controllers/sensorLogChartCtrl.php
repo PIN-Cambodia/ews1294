@@ -61,7 +61,7 @@ class sensorLogChartCtrl extends Controller
             // add row data into datatable for Chart
             foreach($sensorlogs as $v => $sensorlog)
             {
-                $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+                $sensenlogTable->addRow([$sensorlog->timestamp, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
             }
             // generate Chart as a LineChart
             Lava::LineChart('SensorLogChart',$sensenlogTable)
