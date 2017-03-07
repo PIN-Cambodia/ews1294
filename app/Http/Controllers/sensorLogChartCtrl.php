@@ -41,23 +41,8 @@ class sensorLogChartCtrl extends Controller
                 ->where('sensor_id','=',$sensor_id)
                 ->orderBy('timestamp','desc')
                 ->limit(24)->get();
-            // $sensorlogs = DB::table('sensorlogs')
+     
 
-            //     ->select (DB::raw("id, timestamp, stream_height"))
-            //     ->where('sensor_id','=',$sensor_id)
-<<<<<<< HEAD
-            //     ->orderBy('timestamp','desc')
-            //     ->limit(24)->get();
-            $sensorlogs = DB::table('sensorlogs')
-
-                ->select (DB::raw("id, timestamp as time, stream_height"))
-                ->where('sensor_id','=',$sensor_id)
-                ->orderBy('timestamp','desc')
-                ->limit(24)->get();
-=======
-            //     ->orderBy('timestamp','asc')
-            //     ->last();
->>>>>>> parent of afe505b... undo
 
         }
         // select sensortrigger info from database
