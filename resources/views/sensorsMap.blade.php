@@ -33,7 +33,11 @@
     var imgSensor="img/marker_black.png";
     var feature = new OpenLayers.Feature.Vector(
           new OpenLayers.Geometry.Point( {{$sensor['location_coordinates'] }} ).transform(epsg4326, projectTo),
+<<<<<<< HEAD
           {description:'<b>{{trans('sensors.alert_header')}}</b><br><b>{{ trans('sensors.popup_label') }} {{$sensor['sensor_id']}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor['sensor_id']}}"><b>{{ trans('sensors.sensorlog24') }}</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor['sensor_id']}}"><b>{{ trans('sensors.sensorlog1threadingOf30days') }} </a>'} ,
+=======
+          {description:'<b>{{ trans('sensors.popup_label') }} {{$sensor['sensor_id']}}</b><br><p><a href ="/sensorsLog20?sensor_id={{$sensor['sensor_id']}}"><i class="fa fa-btn fa-arrow-right "></i> <b>{{ trans('sensors.sensorlog24') }}</b> </a><br><a href ="/sensorsLog1thReadingOf30days?sensor_id={{$sensor['sensor_id']}}"><i class="fa fa-btn fa-arrow-right "></i> <b>{{ trans('sensors.sensorlog1threadingOf30days') }} </a>'} ,
+>>>>>>> parent of 9418ed1... update popup
           {
               externalGraphic: imgSensor, graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25}
     );
