@@ -46,7 +46,7 @@ class sensorLogChartCtrl extends Controller
 
                 ->select (DB::raw("id, timestamp, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
-                ->orderBy(max('timestamp'))
+                ->orderBy('timestamp','desc')
                 ->limit(24)->get();
 
         }
