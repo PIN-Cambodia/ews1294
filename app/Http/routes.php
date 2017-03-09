@@ -257,7 +257,7 @@ Route::post('changelang', ['uses' => 'UserauthController@changeLanguage']);
  */
 Route::get('/sensorsLog20', function () {
     $sensor_id = Input::get('sensor_id');
-    $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','asc')->limit(24)->get();
+    $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
     return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '1', 'sensorId' => $sensor_id]);
 });
 
@@ -290,7 +290,7 @@ Route::get('/sensormap', function () {
             ->where('sensorlogs.sensor_id','=',$sensorId['sensor_id'])
             ->orderBy('sensorlogs.timestamp','desc')
             ->orderBy('sensorlogs.sensor_id')
-            ->where(DB::raw("timestampdiff(HOUR, timestamp, NOW())"),'<=','24')
+            ->where (DB::raw("timestampdiff(HOUR, timestamp, NOW())"),'<=','24')
             ->limit(1)
             ->get();
         if(sizeof($sensorlogs)>0)
