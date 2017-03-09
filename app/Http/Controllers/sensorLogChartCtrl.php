@@ -40,11 +40,9 @@ class sensorLogChartCtrl extends Controller
             $sensorlogs = DB::table('sensorlogs')
                 ->select (DB::raw("id,timestamp,stream_height"))
                 ->where('sensor_id','=',$sensor_id)
-<<<<<<< HEAD
+
                 ->orderBy('timestamp','asc')
-=======
-                ->orderBy('timestamp')
->>>>>>> parent of eb88b52... updo coding
+
                 ->limit(24)->get();
 
         }
@@ -54,7 +52,7 @@ class sensorLogChartCtrl extends Controller
             ->where('sensor_id','=',$sensor_id)
             ->first();
 
-<<<<<<< HEAD
+
         if(!empty($sensortrigger))
         {
             // add row data into datatable for Chart
@@ -73,18 +71,8 @@ class sensorLogChartCtrl extends Controller
 //                     $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
 //                 }
             }
-=======
-        // if(!empty($sensortrigger))
-        // {
-        //     // add row data into datatable for Chart
-        //     if ($graph_type==1) {
-              
-            
-        //     for($i= count($sensorlogs)-1; $i >=0; $i--;)
-        //     {
-        //         $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
-        //     }
-        //     }
+
+     
 
    if(!empty($sensortrigger))
         {
@@ -96,7 +84,7 @@ class sensorLogChartCtrl extends Controller
                     $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
                 }
             }
->>>>>>> parent of eb88b52... updo coding
+
             // generate Chart as a LineChart
             Lava::LineChart('SensorLogChart',$sensenlogTable)
                 ->setOptions(['pointSize' => 1,
