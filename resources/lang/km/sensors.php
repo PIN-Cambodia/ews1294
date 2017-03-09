@@ -30,15 +30,12 @@ return [
     'modal_title_add_sensor' => 'បន្ថែម​ព័ត៌មាន​ឧបករណ៍​ចាប់​សញ្ញា',
     'modal_title_edit_sensor_table' => 'តារាង​ព័ត៌មាន​ឧបករណ៍​ចាប់សញ្ញា',
     'add_new' => 'បន្ថែម​ថ្មី',
-<<<<<<< HEAD
+
     'alert_header' => 'រង្វាស់ទឹកដោយស្វ័យប្រវត្តិ',
     'sensorlog24' => 'កា​រអាន​ 6 ចុងក្រោយ',
-=======
-    'sensorlog24' => 'កា​រអាន​ 24 ចុងក្រោយ',
->>>>>>> parent of 9418ed1... update popup
-    'sensorlog24Btn' => 'ការ​អាន 24 ចុងក្រោយ',
-    'sensorlog1threadingOf30days' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 30 ថ្ងៃ',
-    'sensorlog1threadingOf30daysBtn' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 30 ថ្ងៃ',
+    'sensorlog24Btn' => 'ការ​អាន 6 ចុងក្រោយ',
+    'sensorlog1threadingOf30days' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 6 ថ្ងៃ',
+    'sensorlog1threadingOf30daysBtn' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 6 ថ្ងៃ',
     'sensor_mgmt' => 'ការ​គ្រប់គ្រង​ឧបករណ៍​ចាប់​សញ្ញា',
     'sensor_trigger_mgmt' => 'ការ​គ្រប់គ្រង​ការ​ចាប់ផ្ដើម​ឧបករណ៍​ចាប់សញ្ញា',
     'sensor_map' => 'ផែនទី​ឧបករណ៍​ចាប់​សញ្ញា',
@@ -57,8 +54,8 @@ return [
     'select_sensor' => 'ជ្រើសរើស​ឧបករណ៍​ចាប់​សញ្ញា',
     'date' => 'កាលបរិច្ឆេទ',
     'waiting_dialog' => 'សូម​រង់ចាំ ...',
-    'sensorlog24_graph' => 'ការ​អាន 24 ចុងក្រោយ (ក្រាហ្វ)',
-    'sensorlog1threadingOf30days_graph' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 30 ថ្ងៃ​ (ក្រាហ្វ)',
+    'sensorlog6_graph' => 'ការ​អាន 6 ចុងក្រោយ (ក្រាហ្វ)',
+    'sensorlog1threadingOf6days_graph' => 'ការ​អាន​កម្រិត​ទឹក​រយៈពេល 6 ថ្ងៃ​ (ក្រាហ្វ)',
     'sensor_log_table_link' => 'បង្ហាញ​តារាង',
     'sensor_log_graph_link' => 'បង្ហាញក្រាហ្វ',
     'modal_title_edit_sensor_trigger' => 'កែសម្រួល​ព័ត៌មាន​ចាប់ផ្ដើម​ឧបករណ៍​ចាប់​សញ្ញា',
