@@ -40,6 +40,7 @@ class sensorLogChartCtrl extends Controller
             $sensorlogs = DB::table('sensorlogs')
                 ->select (DB::raw("id, timestamp as time,  stream_height"))
                 ->where('sensor_id','=',$sensor_id)
+                ->groupBy('timestamp')
                 ->orderBy('timestamp','desc')
                 ->limit(24)->get();
      
