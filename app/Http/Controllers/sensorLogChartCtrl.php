@@ -17,7 +17,7 @@ class sensorLogChartCtrl extends Controller
         $sensenlogTable = \Lava::DataTable();
         // configure Chart columns
         $sensenlogTable
-                ->addStringColumn('cm')
+                ->addStringColumn('')
                 ->addNumberColumn('Water Level')
                 ->addNumberColumn('Emergency Level')
                 ->addNumberColumn('Warning Level');
@@ -68,13 +68,11 @@ class sensorLogChartCtrl extends Controller
                 for ($i = count($sensorlogs) - 1; $i >= 0; $i--) {
                     $sensorlog = $sensorlogs[$i];
                     $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
-
                 }
             }else{
                 foreach($sensorlogs as $v => $sensorlog)
             {
                 $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
-
             }
         }
 
