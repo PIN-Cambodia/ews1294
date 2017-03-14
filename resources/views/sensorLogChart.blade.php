@@ -19,12 +19,12 @@
                                     @if($graph_type=='1')
                                         {{ trans('sensors.sensorlog6_graph')}}
                                         {{ date('( d-M-Y )')}}
-                                        {{ Kompotfffffff }}
+                                        {{ trans('sensors.kompot')}}
                                         
 
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
-                                        {{ Phnom }}
+                                         {{ trans('sensors.phnom_penh')}}
                                           
                                     @endif
                                         }

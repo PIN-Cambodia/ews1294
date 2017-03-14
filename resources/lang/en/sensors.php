@@ -74,5 +74,6 @@ return [
     'sensorChartErrorNot' => 'is not found in trigger management.',
     'sensorChartErrorClickHere' => 'Click here',
     'sensorChartErrorToAdd' => 'to add new trigger for this sensor.',
-
+    'kompot'=>'kompot',
+    'phnom_penh'=>'Phnom Penh',
 ];
