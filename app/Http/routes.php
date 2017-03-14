@@ -267,7 +267,7 @@ Route::get('/sensorsLog20', function () {
 Route::get('/sensorsLog1thReadingOf30days', function () {
     $sensor_id = Input::get('sensor_id');
     $sensorlogs = DB::table('sensorlogs')
-        ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
+        ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, id, sensor_id, concat(stream_height,'cm') as stream_height, charging, voltage ,timestamp"))
         ->where('sensor_id','=',$sensor_id)
         ->groupBy('time')
         ->orderBy('timestamp','desc')->limit(30)->get();
