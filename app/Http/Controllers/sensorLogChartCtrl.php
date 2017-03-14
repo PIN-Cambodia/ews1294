@@ -17,7 +17,7 @@ class sensorLogChartCtrl extends Controller
         $sensenlogTable = \Lava::DataTable();
         // configure Chart columns
         $sensenlogTable
-                ->addStringColumn('')
+                ->addStringColumn('cm')
                 ->addNumberColumn('Water Level')
                 ->addNumberColumn('Emergency Level')
                 ->addNumberColumn('Warning Level');
