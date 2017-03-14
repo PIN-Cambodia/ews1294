@@ -28,7 +28,7 @@ class sensorLogChartCtrl extends Controller
         {
             // retrieve first reading within last 30 days for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
-                ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
+                ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, concat(stream_height,'cm') as stream_height"))
                 ->where('sensor_id','=',$sensor_id)
                 ->groupBy('time')
                 ->orderBy('timestamp')
@@ -38,7 +38,7 @@ class sensorLogChartCtrl extends Controller
         {
             // retrieve first 24 readings for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
-                ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time"))
+                ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time,concat(stream_height,'cm') as stream_height"))
                 ->where('sensor_id','=',$sensor_id)
 
                 ->orderBy('timestamp','desc')
@@ -67,12 +67,12 @@ class sensorLogChartCtrl extends Controller
             if($graph_type==1) {
                 for ($i = count($sensorlogs) - 1; $i >= 0; $i--) {
                     $sensorlog = $sensorlogs[$i];
-                    $sensenlogTable->addRow([$sensorlog->time, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+                    $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
                 }
             }else{
                 foreach($sensorlogs as $v => $sensorlog)
             {
-                $sensenlogTable->addRow([$sensorlog->time, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+                $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
             }
         }
 
