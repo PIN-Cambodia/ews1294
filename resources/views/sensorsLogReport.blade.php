@@ -25,8 +25,10 @@
                             <div class="col-xs-4 col-md-5 col-lg-7 "><b>
                                     @if($reportPage=='1')
                                         {{ trans('sensors.sensorlog24') }}
+                                        {{ trans('sensors.kompot') }}
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days') }}
+                                         {{ trans('sensors.phnom_penh') }}
                                     @endif
                                 </b></div>
                             <div class="col-xs-8 col-md-7 col-lg-5 ">
@@ -45,10 +47,10 @@
                                             <i class="fa fa-table  fa-lg" aria-hidden="true"></i>
                                             @if($reportPage=='1')
                                                 {{ trans('sensors.sensorlog1threadingOf30daysBtn') }}
-                                                {{ trans('sensors.kompot') }}
+                                                
                                             @else
                                                 {{ trans('sensors.sensorlog24Btn') }}
-                                                {{ trans('sensors.phnom_penh') }}
+                                               
                                             @endif
                                         </button>
                                     </a>
