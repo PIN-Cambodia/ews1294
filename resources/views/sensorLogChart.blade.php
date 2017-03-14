@@ -17,10 +17,10 @@
                             <div class="col-xs-8 col-md-9 col-lg-10 ">
                                 <b>
                                     @if($graph_type=='1')
+
                                         {{ trans('sensors.sensorlog6_graph')}}
                                         {{ date('( d-M-Y )')}}
                                         
-
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
