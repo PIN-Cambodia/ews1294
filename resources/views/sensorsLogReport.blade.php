@@ -45,8 +45,10 @@
                                             <i class="fa fa-table  fa-lg" aria-hidden="true"></i>
                                             @if($reportPage=='1')
                                                 {{ trans('sensors.sensorlog1threadingOf30daysBtn') }}
+                                                {{ trans('sensors.kompot') }}
                                             @else
                                                 {{ trans('sensors.sensorlog24Btn') }}
+                                                {{ trans('sensors.phnom_penh') }}
                                             @endif
                                         </button>
                                     </a>
