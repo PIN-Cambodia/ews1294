@@ -68,6 +68,7 @@ class sensorLogChartCtrl extends Controller
                 for ($i = count($sensorlogs) - 1; $i >= 0; $i--) {
                     $sensorlog = $sensorlogs[$i];
                     $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+                  
                 }
             }else{
                 foreach($sensorlogs as $v => $sensorlog)

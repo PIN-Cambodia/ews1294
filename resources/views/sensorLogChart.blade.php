@@ -19,12 +19,16 @@
                                     @if($graph_type=='1')
                                         {{ trans('sensors.sensorlog6_graph')}}
                                         {{ date('( d-M-Y )')}}
+                                        {{ Kompot }}
                                         
 
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
+                                        {{ Phnom penh }}
                                           
                                     @endif
+                                        }
+                                        }
 
                                 </b>
                             </div>
