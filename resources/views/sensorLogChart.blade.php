@@ -24,7 +24,7 @@
 
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
-                                        {{ Phnom penh }}
+                                        {{ Phnom }}
                                           
                                     @endif
                                         }
