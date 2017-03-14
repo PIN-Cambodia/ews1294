@@ -286,7 +286,7 @@ Route::get('/sensormap', function () {
         $sensorlogs = DB::table('sensorlogs')
             ->join('sensors','sensorlogs.sensor_id','=','sensors.sensor_id')
             ->join('sensortriggers','sensortriggers.sensor_id','=','sensorlogs.sensor_id')
-            ->select('sensorlogs.id as id','sensortriggers.sensor_id as sensor_id', 'concat(stream_height,"cm") as stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates',DB::raw("timestampdiff(HOUR, timestamp, NOW())"),DB::raw("NOW()"))
+            ->select('sensorlogs.id as id','sensortriggers.sensor_id as sensor_id', 'stream_height', 'charging', 'voltage' ,'timestamp', 'sensortriggers.level_warning as warning_level', 'sensortriggers.level_emergency as emergency_level','sensors.location_coordinates',DB::raw("timestampdiff(HOUR, timestamp, NOW())"),DB::raw("NOW()"))
             ->where('sensorlogs.sensor_id','=',$sensorId['sensor_id'])
             ->orderBy('sensorlogs.timestamp','desc')
             ->orderBy('sensorlogs.sensor_id')
