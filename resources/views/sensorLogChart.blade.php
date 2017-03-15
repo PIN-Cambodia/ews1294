@@ -16,17 +16,7 @@
                         <div class="row">
                             <div class="col-xs-8 col-md-9 col-lg-10 ">
                                 <b>
-                          <!--    @foreach($sensors as $sensor)
-                                <?php
-                                    $location= "";
-                                    $location_name = \DB::table('commune')->where('CCode', $sensor->location_code)->first();
-                                    // if(!empty($location_name)){
-                                    //     if (\App::getLocale()=='km')
-                                    //         $location = $location_name->CName_kh;
-                                    //     else $location = $location_name->CName_en;
-                                    // }
-                                ?>
- -->
+          
                                     @if($graph_type=='1')
 
                                         {{ trans('sensors.sensorlog6_graph')}}
@@ -38,7 +28,7 @@
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
                                     @endif
-                              <!--   @endforeach -->
+                             
 
                                 </b>
                             </div>
