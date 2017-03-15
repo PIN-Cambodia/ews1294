@@ -16,9 +16,9 @@
                         <div class="row">
                             <div class="col-xs-8 col-md-9 col-lg-10 ">
                                 <b>
-                                   <!--  @foreach($sensorsChart as $sensorChart)
+                                    @foreach($sensorsChart as $sensorChart)
                                      {{$sensorChart['sensor_id']}}
-                                    @endforeach -->
+                                    @endforeach 
                                     @if($graph_type=='1')
 
                                         {{ trans('sensors.sensorlog6_graph')}}
