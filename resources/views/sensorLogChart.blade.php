@@ -18,20 +18,12 @@
                                 <b>
 
                                 
-                               <?php
-                                    $location= "";
-                                    $location_name = \DB::table('commune')->where('CCode', $sensor->location_code)->first();
-                                    if(!empty($location_name)){
-                                        if (\App::getLocale()=='km')
-                                            $location = $location_name->CName_kh;
-                                        else $location = $location_name->CName_en;
-                                    }
-                                ?> 
+                            
                                     @if($graph_type=='1')
 
                                         {{ trans('sensors.sensorlog6_graph')}}
                                         {{ date('( d-M-Y )')}}
-                                  {{ $sensor->additional_location_info }}
+                                
                                         
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
