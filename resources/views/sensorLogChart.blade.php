@@ -21,9 +21,7 @@
 
                                         {{ trans('sensors.sensorlog6_graph')}}
                                         {{ date('( d-M-Y )')}}
-                                       <!--  {{ $sensor->additional_location_info }} -->
-                                       
-                                        
+                                     
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
