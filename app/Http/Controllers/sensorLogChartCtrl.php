@@ -94,5 +94,5 @@ class sensorLogChartCtrl extends Controller
             '<br><br><br><a href="/sensortrigger">' . trans('sensors.sensorChartErrorClickHere').'</a>'. trans('sensors.sensorChartErrorToAdd').'</p>';
         }
     }
-    
+  
 }
