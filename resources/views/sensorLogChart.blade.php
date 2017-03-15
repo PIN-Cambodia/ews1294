@@ -20,11 +20,11 @@
                                 <?php
                                     $location= "";
                                     $location_name = \DB::table('commune')->where('CCode', $sensor->location_code)->first();
-                                    if(!empty($location_name)){
-                                        if (\App::getLocale()=='km')
-                                            $location = $location_name->CName_kh;
-                                        else $location = $location_name->CName_en;
-                                    }
+                                    // if(!empty($location_name)){
+                                    //     if (\App::getLocale()=='km')
+                                    //         $location = $location_name->CName_kh;
+                                    //     else $location = $location_name->CName_en;
+                                    // }
                                 ?>
 
                                     @if($graph_type=='1')
