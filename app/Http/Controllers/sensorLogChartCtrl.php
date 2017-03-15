@@ -94,9 +94,5 @@ class sensorLogChartCtrl extends Controller
             '<br><br><br><a href="/sensortrigger">' . trans('sensors.sensorChartErrorClickHere').'</a>'. trans('sensors.sensorChartErrorToAdd').'</p>';
         }
     }
-     public function getSensorsChart(){
-        $SensorsChart = Sensors::select('sensor_id','additional_location_info')->get();
-        return view('sensorLogChart');
-    }
-  
+   
 }

@@ -329,6 +329,4 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
  });
 
 
-    // Route::get('/sensorLogChart', 'Sensor\SensorsController@getSensors');
  
-Route::get('/sensorLogChart','sensorLogChartCtrl@getSensorsChart');
