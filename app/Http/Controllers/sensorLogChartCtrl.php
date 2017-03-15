@@ -95,8 +95,8 @@ class sensorLogChartCtrl extends Controller
         }
     }
      public function getSensorsChart(){
-        $sensors = Sensors::select('sensor_id','additional_location_info')->get();
-        return $sensors;
+        $SensorsChart = Sensors::select('sensor_id','additional_location_info')->get();
+        return $SensorsChart;
     }
   
 }
