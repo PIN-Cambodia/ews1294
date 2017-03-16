@@ -17,7 +17,7 @@
                             <div class="col-xs-8 col-md-9 col-lg-10 ">
                                 <b>
 
-                                @if($sensor_id=='1020301'){
+                                @if($sensorId =='1020301'){
                                 {{ trans('sensors.kompot') }}
 
                                 }
