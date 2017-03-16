@@ -17,14 +17,6 @@
                             <div class="col-xs-8 col-md-9 col-lg-10 ">
                                 <b>
 
-                                @if($sensorId =='1020301'){
-                                {{ trans('sensors.kompot') }}
-
-                                }
-                                @else
-
-                                {{ trans('sensors.phnom_penh') }}
-                                @endif
                             
                                     @if($graph_type=='1')
 
@@ -36,6 +28,14 @@
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
                                     @endif
+
+                                @if($sensorId =='1020301')
+                                {{ trans('sensors.kompot') }}
+                                
+                                @else
+
+                                {{ trans('sensors.phnom_penh') }}
+                                @endif
 
                                 </b>
                             </div>
