@@ -84,8 +84,8 @@ class sensorLogChartCtrl extends Controller
                     'height' => 350
 
                 ]);
-               Lava::NumberFormat('SensorLogChart',$sensenlogTable)
-               ->setStringOptions(["prefix" => "cm"]);
+               // Lava::NumberFormat('SensorLogChart',$sensenlogTable)
+               // ->setStringOptions(["prefix" => "cm"]);
 
             return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
         }
