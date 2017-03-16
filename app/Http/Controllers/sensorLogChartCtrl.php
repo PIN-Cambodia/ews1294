@@ -80,12 +80,13 @@ class sensorLogChartCtrl extends Controller
             // generate Chart as a LineChart
             Lava::LineChart('SensorLogChart',$sensenlogTable)
                 ->setOptions(['pointSize' => 1,
+                    'prefix' => 'cm',
                     'curveType' => 'function',
                     'height' => 350
 
                 ]);
-               Lava::NumberFormat('SensorLogChart',$sensenlogTable)
-               ->setOptions(["prefix" => "cm"]);
+               // Lava::NumberFormat('SensorLogChart',$sensenlogTable)
+               // ->setOptions(["prefix" => "cm"]);
 
             return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
         }
