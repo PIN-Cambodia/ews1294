@@ -75,7 +75,7 @@ return [
     'sensorChartErrorNot' => 'គ្មានព័ត៌មាននៅក្នុង​ការ​ចាប់ផ្ដើម​ឧបករណ៍​ចាប់ស​ញ្ញាទេ',
     'sensorChartErrorClickHere' => 'សូមចុចត្រង់នេះ ',
     'sensorChartErrorToAdd' => 'ដើម្បីបញ្ចូលពត៌មានថ្មីសម្រាប់​​ឧបករណ៍​ចាប់​សញ្ញានេះ។',
-    'kompot'=>'kompot',
-    'phnom_penh'=>'Phnom Penh',
+    'kompot'=>'កំពត 01',
+    'phnom_penh'=>'ភ្នំពេញ 02',
 
 ];
