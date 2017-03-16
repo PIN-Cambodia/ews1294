@@ -81,10 +81,12 @@ class sensorLogChartCtrl extends Controller
             Lava::LineChart('SensorLogChart',$sensenlogTable)
                 ->setOptions(['pointSize' => 1,
                     'curveType' => 'function',
-                    'height' => 350
+                    'height' => 350,
 
                 ]);
 
+                Lava::NumberFormat(["prefix" => "cm"]);
+)
             return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
         }
         else
