@@ -85,7 +85,7 @@ class sensorLogChartCtrl extends Controller
 
                 ]);
                Lava::NumberFormat('SensorLogChart',$sensenlogTable)
-               ->setOptions(['prefix' => 'cm']);
+               ->setOptions(["prefix" => "cm"]);
 
             return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
         }
