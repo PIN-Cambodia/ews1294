@@ -193,31 +193,32 @@ class ReceivingSensorInfoAPIController extends Controller
 
         if($alert_level == "Warning")
         {
-            $content = "Our flood detection unit located in <font color='#666600'> " . $commune_list ." <b>commune</b>, "
+            $content = "<p>The automated water level gauge located in <font color='#666600'> " . $commune_list ." <b>commune</b>, "
                         . $distric_val . " <b>district</b>, " . $prov_val . " <b>province</b> 
-                         </font> has detected a warning elevation in water levels. 
-                         As a result an WARNING message has been sent via our mobile phone messaging 
-                         system to registered EWS1294 users in the surrounding areas. 
-                         This messages asks the users to take precautionary measures during this 
-                         time in order to protect their families and their livelihoods.";
-            $content_kh = "បង្គោល​វាស់កម្ពស់​ទឹកជំនន់​ដែល​មាន​ទីតាំង​ស្ថិត​នៅ​ក្នុង <font color='#666600'><b>​ឃុំ </b> " . $commune_list_kh
-                            . " <b>ស្រុក </b> " . $distric_val_kh . " <b>ខេត្ត </b>" . $prov_val_kh . "</font> បាន​ឡើង​ដល់កម្រិត​ប្រុងប្រយ័ត្ន។ 
-                            ដូច្នេះ​យើង​នឹង​ផ្ញើ​សារបង្ការ​ទុក​ជា​មុន​​​ទៅ​តាម​រយៈ​ប្រព័ន្ធ​ផ្ញើ​សារ​ទៅ​កាន់​ទូរស័ព្ទ​ដៃ​របស់​អ្នក​នៅ​ពេល​ដែល​អ្នក​បាន​ចុះឈ្មោះ​ប្រើប្រាស់ 
-                            EWS1294 អំពី​ព័ត៌មាន​នៅ​ជុំវិញ​តំបន់​របស់​អ្នក​។ សារ​នេះ​នឹង​ប្រាប់​ឲ្យ​អ្នក​ចាត់​វិធានការ​ត្រៀម​បង្ការ​ទុក​ជា​មុន​​ដើម្បី​ការពារ​គ្រួសារនិង​ទ្រព្យ​សម្បត្តិ​របស់​អ្នក​។";
+                         </font> has detected a potentially dangerous water level reading. As a result a WARNING message has been sent via the EWS1294 mobile phone messaging system to registered users in the affected areas.</p>
+                         <p>This mobile phone message directs recipients to take the necessary precautionary measures to respond to this water level alert.</p>
+                         <p>As a member of the Early Warning System team, we ask that you carry out any necessary actions to respond to these elevated water level readings as well. You cooperation is greatly appreciated.</p>
+                         ";
+            $content_kh = "<p>រង្វាស់កម្រិតទឹកដោយស្វ័យប្រវត្តិដែលមានទីតាំងស្ថិតក្នុង <font color='#666600'><b>​ឃុំ </b> " . $commune_list_kh
+                            . " <b>ស្រុក </b> " . $distric_val_kh . " <b>ខេត្ត </b>" . $prov_val_kh . "</font> បានរកឲ្យឃើញថា កម្រិតកំពស់ទឹកកើនឡើងដល់ចំនុចគ្រោះថ្នាក់។ ដូច្នេះ លេខទូរស័ព្ទលោកអ្នក ដែលបានចុះឈ្មោះជាមួយនឹងប្រព័ន្ធប្រកាសឲ្យដឹងមុន១២៩៤ នៅតំបន់ដែលរងផលប៉ះពាល់ នឹងទទួលបានសារក្រើនរំលឹកឲ្យប្រុងប្រយ័ត្ន។ </p>
+                            <p>សារទូរស័ព្ទដៃនេះនឹងធ្វើឲ្យអ្នកដែលបានទទួលសារ ចាត់វិធានការបង្ការចាំបាច់ទុកជាមុន ដើម្បីឆ្លើយតបទៅនឹងការជូនដំណឹងកម្រិតទឹកនេះ។
+                                ក្នុងនាមជាសមាជិកនៃក្រុមប្រព័ន្ធប្រកាសឲ្យដឹងមុនមួយរូប, យើងសុំឱ្យអ្នកអនុវត្តសកម្មភាពដែលចាំបាច់ដើម្បីឆ្លើយតបទៅនឹងកម្រិតទឹក កើនឡើងទាំងនេះ ។ កិច្ចសហប្រតិបត្តិការដែលអ្នកបានធ្វើត្រូវបានកោតសរសើរយ៉ាងខ្លាំង។
+                            </p>";
         }
         elseif($alert_level == "Emergency")
         {
-            $content = "Our flood detection unit located in <font color='red'> " . $commune_list ." <b>commune</b>, "
+            $content = "<p>The automated water level gauge located in  <font color='red'> " . $commune_list ." <b>commune</b>, "
                         . $distric_val . " <b>district</b>, " . $prov_val . " <b>province</b> 
-                         </font> has detected another dangerous elevation in water levels. 
-                         As a result an EMERGENCY message has been sent via our mobile phone messaging system 
-                         to registered EWS1294 users in the surrounding areas. 
-                         This messages asks the users to take evacuation measures during this time 
-                         in order to protect their families and their livelihoods.";
+                         </font> has detected a potentially dangerous water level reading. As a result an EMERGENCY message has been sent via the EWS1294 mobile phone messaging system to registered users in the affected areas.</p> 
+                         <p>This mobile phone message directs recipients to take the necessary precautionary measures to respond to this water level alert.
+                         </p>
+                         <p>As a member of the Early Warning System team, we ask that you carry out any necessary actions to respond to these elevated water level readings as well. You cooperation is greatly appreciated.
+                         </p>";
             $content_kh = "បង្គោល​វាស់កម្ពស់​ទឹកជំនន់​ដែល​មាន​ទីតាំង​ស្ថិត​នៅ​ក្នុង <font color='red'><b>​ឃុំ </b> " . $commune_list_kh
-                            . " <b>ស្រុក </b> " . $distric_val_kh . " <b>ខេត្ត </b>" . $prov_val_kh . "</font> បាន​ឡើង​ដល់កម្រិត​ប្រកាស​អាសន្ន។ 
-                            ដូច្នេះ​យើង​នឹង​ផ្ញើ​សារ​ប្រកាស​អាសន្ន​ទៅ​តាម​រយៈ​ប្រព័ន្ធ​ផ្ញើ​សារ​ទៅ​កាន់​ទូរស័ព្ទ​ដៃ​របស់​អ្នក​នៅ​ពេល​ដែល​អ្នក​បាន​ចុះឈ្មោះ​ប្រើប្រាស់ 
-                            EWS1294 អំពី​ព័ត៌មាន​នៅ​ជុំវិញ​តំបន់​របស់​អ្នក​។ សារ​នេះ​នឹង​ប្រាប់​ឲ្យ​អ្នក​ចាត់​វិធានការ​ជម្លៀស​ចេញ​ដើម្បី​ការពារ​គ្រួសារនិង​ទ្រព្យ​សម្បត្តិ​របស់​អ្នក​។";
+                            . " <b>ស្រុក </b> " . $distric_val_kh . " <b>ខេត្ត </b>" . $prov_val_kh . "</font> ដូច្នេះ លេខទូរស័ព្ទលោកអ្នក ដែលបានចុះឈ្មោះជាមួយនឹងប្រព័ន្ធប្រកាសឲ្យដឹងមុន១២៩៤ នៅតំបន់ដែលរងផលប៉ះពាល់ នឹងទទួលបានសារប្រកាសអាសន្ន។
+                                សារទូរស័ព្ទដៃនេះនឹងធ្វើឲ្យអ្នកដែលបានទទួលសារ ចាត់វិធានការបង្ការចាំបាច់ទុកជាមុន ដើម្បីឆ្លើយតបទៅនឹងការជូនដំណឹងកម្រិតទឹកនេះ។
+                                ក្នុងនាមជាសមាជិកនៃក្រុមប្រព័ន្ធប្រកាសឲ្យដឹងមុនមួយរូប, យើងសុំឱ្យអ្នកអនុវត្តសកម្មភាពដែលចាំបាច់ដើម្បីឆ្លើយតបទៅនឹងកម្រិតទឹក កើនឡើងទាំងនេះ ។ កិច្ចសហប្រតិបត្តិការដែលអ្នកបានធ្វើត្រូវបានកោតសរសើរយ៉ាងខ្លាំង។
+                                ";
         }
 
         // send email to every relevant officers in the list

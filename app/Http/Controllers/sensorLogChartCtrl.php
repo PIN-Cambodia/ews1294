@@ -21,7 +21,7 @@ class sensorLogChartCtrl extends Controller
                 ->addNumberColumn('Water Level')
                 ->addNumberColumn('Emergency Level')
                 ->addNumberColumn('Warning Level')
-                ->addNumberColumn('Height of water is cm');
+                ->addNumberColumn('Height of water is centimeter');
 
         $sensor_id = Input::get('sensor_id');
         $graph_type = Input::get('type');
