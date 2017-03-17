@@ -84,8 +84,8 @@ class sensorLogChartCtrl extends Controller
                     'curveType' => 'function',
                     'height' => 350
 
-                ])
-                ->NumberFormat(['suffix' => 'cm']);
+                ]);
+                // ->NumberFormat(['suffix' => 'cm']);
                // Lava::NumberFormat('SensorLogChart',$sensenlogTable)
                // ->setStringOptions(["prefix" => "cm"]);
 
