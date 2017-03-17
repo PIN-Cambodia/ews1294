@@ -38,7 +38,7 @@ class sensorLogChartCtrl extends Controller
         {
             // retrieve first 24 readings for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
-                ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time,stream_height"))
+                ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time,concat(stream_height,'cm') as stream_height"))
                 ->where('sensor_id','=',$sensor_id)
 
                 ->orderBy('timestamp','desc')
@@ -48,7 +48,7 @@ class sensorLogChartCtrl extends Controller
         }
         // select sensortrigger info from database
         $sensortrigger = DB::table('sensortriggers')
-            ->select(DB::raw("level_warning, level_emergency"))
+            ->select(DB::raw("concat(level_warning,'cm') as level_warning, concat(level_emergency,'cm') as level_emergency"))
             ->where('sensor_id','=',$sensor_id)
             ->first();
 
