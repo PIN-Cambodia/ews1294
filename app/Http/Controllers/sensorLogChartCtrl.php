@@ -84,12 +84,10 @@ class sensorLogChartCtrl extends Controller
                 ->setOptions(['pointSize' => 1,
                     'curveType' => 'function',
                     'height' => 350,
-                    'vAxis' =>['title' => 'Level of water is "cm" ']
+                    'vAxis' =>['title' => 'Level of water is " cm " ']
 
                 ]);
-                // ->NumberFormat(['suffix' => 'cm']);
-               // Lava::NumberFormat('SensorLogChart',$sensenlogTable)
-               // ->setStringOptions(["prefix" => "cm"]);
+                
 
             return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
         }
