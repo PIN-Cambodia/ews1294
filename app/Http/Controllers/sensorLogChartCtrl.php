@@ -17,11 +17,12 @@ class sensorLogChartCtrl extends Controller
         $sensenlogTable = \Lava::DataTable();
         // configure Chart columns
         $sensenlogTable
-                ->addStringColumn('cm')
+                ->addStringColumn('')
                 ->addNumberColumn('Water Level')
                 ->addNumberColumn('Emergency Level')
-                ->addNumberColumn('Warning Level')
-                ->addNumberColumn('Height of water is centimeter');
+                ->addNumberColumn('Warning Level');
+          
+
 
         $sensor_id = Input::get('sensor_id');
         $graph_type = Input::get('type');
@@ -82,7 +83,8 @@ class sensorLogChartCtrl extends Controller
             Lava::LineChart('SensorLogChart',$sensenlogTable)
                 ->setOptions(['pointSize' => 1,
                     'curveType' => 'function',
-                    'height' => 350
+                    'height' => 350,
+                    'vAxis' =>['title' => 'test']
 
                 ]);
                 // ->NumberFormat(['suffix' => 'cm']);
