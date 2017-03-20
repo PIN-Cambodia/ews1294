@@ -84,7 +84,7 @@ class sensorLogChartCtrl extends Controller
                 ->setOptions(['pointSize' => 1,
                     'curveType' => 'function',
                     'height' => 350,
-                    'vAxes' =>['title' => 'cm']
+                    'hAxis' =>['title' => 'cm']
 
                 ]);
                 // ->NumberFormat(['suffix' => 'cm']);
