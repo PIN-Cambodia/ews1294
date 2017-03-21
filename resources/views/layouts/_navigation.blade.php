@@ -91,7 +91,7 @@
 <!-- contact us page  -->
     <li class="<?php  if (preg_match("/contact/i", Request::url())) echo "active"; else echo ""; ?>">
       <a href="contact">
-        <i class="pe-7s-users pe-lg"></i> {{ trans('menus.contact_us') }}
+        <i class="pe-7s-mail-open pe-lg"></i> {{ trans('menus.contact_us') }}
        </a>
     </li>
   </ul>
