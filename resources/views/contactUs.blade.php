@@ -12,12 +12,8 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br />
-           <div style="height:670px; overflow-y: scroll; overflow-x: hidden;">
-            <div class="row"> 
-                <div class="col-md-2 col-lg-2"></div>
-                <div class="col-md-8 col-lg-8">
-                	<!-- {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!} -->
-                <!-- 	{!! Form::open() !!}
+            <!-- {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!} -->
+             {!! Form::open() !!}
 
 						<div class="form-group">
 						    {!! Form::label('Your Name') !!}
@@ -48,8 +44,9 @@
 						      array('class'=>'btn btn-primary')) !!}
 						</div>
 					{!! Form::close() !!}
- -->
-   </div><!-- \ panel panel-body -->
+
+               
+            </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
       </div>
     </div><!--/.row-->
