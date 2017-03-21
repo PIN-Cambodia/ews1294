@@ -12,7 +12,9 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br />
-            	<div  style="height:670px; overflow-y: scroll; overflow-x: hidden;">
+            	 <div class="row"> 
+                <div class="col-md-2 col-lg-2"></div>
+                <div class="col-md-8 col-lg-8">
 				<ul>
 				    @foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
@@ -50,6 +52,8 @@
 				      array('class'=>'btn btn-primary')) !!}
 				</div>
 				{!! Form::close() !!}
+				</div>
+				<div class="col-md-2 col-lg-2" ></div>
 				</div> <!--  close div content form -->
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
