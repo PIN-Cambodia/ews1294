@@ -329,4 +329,9 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
  });
 
 
- 
+ // contact us
+
+ Routs::get('/contact',function(){
+    return view('/contactUs');
+
+ })

@@ -1,0 +1,62 @@
+@extends('layouts.master')
+@section('content')
+<section>
+  <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+      <ol class="breadcrumb">
+         <i class="pe-7s-users pe-lg"></i> {{ trans('menus.about_us') }}
+      </ol>
+    </div><!--/.row-->
+    <div class="row">
+      <div class="col-xs-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div>
+            <br />
+           <div style="height:670px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row"> 
+                <div class="col-md-2 col-lg-2"></div>
+                <div class="col-md-8 col-lg-8">
+                	<!-- {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!} -->
+                	{!! Form::open() !!}
+
+						<div class="form-group">
+						    {!! Form::label('Your Name') !!}
+						    {!! Form::text('name', null, 
+						        array('required', 
+						              'class'=>'form-control', 
+						              'placeholder'=>'Your name')) !!}
+						</div>
+
+						<div class="form-group">
+						    {!! Form::label('Your E-mail Address') !!}
+						    {!! Form::text('email', null, 
+						        array('required', 
+						              'class'=>'form-control', 
+						              'placeholder'=>'Your e-mail address')) !!}
+						</div>
+
+						<div class="form-group">
+						    {!! Form::label('Your Message') !!}
+						    {!! Form::textarea('message', null, 
+						        array('required', 
+						              'class'=>'form-control', 
+						              'placeholder'=>'Your message')) !!}
+						</div>
+
+						<div class="form-group">
+						    {!! Form::submit('Contact Us!', 
+						      array('class'=>'btn btn-primary')) !!}
+						</div>
+					{!! Form::close() !!}
+
+
+
+
+                </div><!-- \ panel panel-body -->
+        </div><!-- \ panel panel-default -->
+      </div>
+    </div><!--/.row-->
+  </div>	<!--/.main-->
+</section>
+
+@endsection

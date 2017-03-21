@@ -88,5 +88,11 @@
         <i class="pe-7s-users pe-lg"></i> {{ trans('menus.about_us') }}
        </a>
     </li>
+<!-- contact us page  -->
+    <li class="<?php  if (preg_match("/contact/i", Request::url())) echo "active"; else echo ""; ?>">
+      <a href="contact">
+        <i class="pe-7s-users pe-lg"></i> {{ trans('menus.contact_us') }}
+       </a>
+    </li>
   </ul>
 </div><!--/.sidebar-->

@@ -25,6 +25,7 @@ return [
     'sensors_mgt' => 'Sensor Management',
     'sensors_map' => 'Sensor Map',
     'about_us'=>'About EWS',
+    'contact_us'=>'Contact EWS',
 
     
 
