@@ -12,8 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br />
-				          <h1>Contact TODOParrot</h1>
-
+            	<div  style="height:670px; overflow-y: scroll; overflow-x: hidden;">
 				<ul>
 				    @foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
@@ -51,6 +50,7 @@
 				      array('class'=>'btn btn-primary')) !!}
 				</div>
 				{!! Form::close() !!}
+				</div> <!--  close div content form -->
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
       </div>
