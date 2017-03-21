@@ -329,6 +329,6 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
  });
 
 
-  Route::get('/contact', function(){
-    return view('/contactUs');
- });
+ //  Route::get('/contact', function(){
+ //    return view('/contactUs');
+ // });
