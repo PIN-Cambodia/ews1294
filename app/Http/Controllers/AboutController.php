@@ -8,8 +8,11 @@ class AboutController extends Controller {
         return view('/contactUs');
     }
 
-    public function store()
+    
+  public function store(ContactFormRequest $request)
     {
+    	return \Redirect::route('contact')
+      ->with('message', 'Thanks for contacting us!');
     }
 
 }
