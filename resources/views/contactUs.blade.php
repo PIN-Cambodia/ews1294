@@ -13,7 +13,7 @@
           <div class="panel-heading" ><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br />
             <!-- {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!} -->
-             {!! Form::open() !!}
+            <!--  {!! Form::open() !!}
 
 						<div class="form-group">
 						    {!! Form::label('Your Name') !!}
@@ -44,7 +44,7 @@
 						      array('class'=>'btn btn-primary')) !!}
 						</div>
 					{!! Form::close() !!}
-
+ -->
                
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
