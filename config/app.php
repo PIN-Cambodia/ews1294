@@ -218,6 +218,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         //'Entrust' => Zizaco\Entrust\EntrustServiceProvider::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        
     ],
 
 ];

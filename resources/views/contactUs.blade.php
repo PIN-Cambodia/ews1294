@@ -12,40 +12,45 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br />
-            <!-- {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!} -->
-            {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!}
+				          <h1>Contact TODOParrot</h1>
 
-						<div class="form-group">
-						    {!! Form::label('Your Name') !!}
-						    {!! Form::text('name', null, 
-						        array('required', 
-						              'class'=>'form-control', 
-						              'placeholder'=>'Your name')) !!}
-						</div>
+				<ul>
+				    @foreach($errors->all() as $error)
+				        <li>{{ $error }}</li>
+				    @endforeach
+				</ul>
 
-						<div class="form-group">
-						    {!! Form::label('Your E-mail Address') !!}
-						    {!! Form::text('email', null, 
-						        array('required', 
-						              'class'=>'form-control', 
-						              'placeholder'=>'Your e-mail address')) !!}
-						</div>
+				{!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!}
 
-						<div class="form-group">
-						    {!! Form::label('Your Message') !!}
-						    {!! Form::textarea('message', null, 
-						        array('required', 
-						              'class'=>'form-control', 
-						              'placeholder'=>'Your message')) !!}
-						</div>
+				<div class="form-group">
+				    {!! Form::label('Your Name') !!}
+				    {!! Form::text('name', null, 
+				        array('required', 
+				              'class'=>'form-control', 
+				              'placeholder'=>'Your name')) !!}
+				</div>
 
-						<div class="form-group">
-						    {!! Form::submit('Contact Us!', 
-						      array('class'=>'btn btn-primary')) !!}
-						</div>
-					{!! Form::close() !!}
+				<div class="form-group">
+				    {!! Form::label('Your E-mail Address') !!}
+				    {!! Form::text('email', null, 
+				        array('required', 
+				              'class'=>'form-control', 
+				              'placeholder'=>'Your e-mail address')) !!}
+				</div>
 
-               
+				<div class="form-group">
+				    {!! Form::label('Your Message') !!}
+				    {!! Form::textarea('message', null, 
+				        array('required', 
+				              'class'=>'form-control', 
+				              'placeholder'=>'Your message')) !!}
+				</div>
+
+				<div class="form-group">
+				    {!! Form::submit('Contact Us!', 
+				      array('class'=>'btn btn-primary')) !!}
+				</div>
+				{!! Form::close() !!}
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
       </div>
