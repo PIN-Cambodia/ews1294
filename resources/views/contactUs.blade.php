@@ -13,7 +13,7 @@
           <div class="panel-heading" ><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br />
             <!-- {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!} -->
-             {!! Form::open() !!}
+            {!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!}
 
 						<div class="form-group">
 						    {!! Form::label('Your Name') !!}
