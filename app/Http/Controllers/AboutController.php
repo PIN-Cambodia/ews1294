@@ -1,5 +1,5 @@
-<?php 
-	namespace todoparrot\Http\Controllers;
+<?php
+ namespace App\Http\Controllers;
 
 class AboutController extends Controller {
 
