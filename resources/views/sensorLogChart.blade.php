@@ -15,7 +15,7 @@
                     <div class="panel-heading text-center ">
                         <div class="row">
                             <div class="col-xs-8 col-md-9 col-lg-10 ">
-                                <b>
+                               <p><b>
 
                             
                                     @if($graph_type=='1')
@@ -28,8 +28,12 @@
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
                                     @endif
+                                   
                                      </b>
+                                      </p>
+                                      <p>
                                      <b>
+
 
                                     <!-- add update next time with database (show location header) -->
                                     @if($sensorId =='1020301')
@@ -41,6 +45,7 @@
                                     @endif
                                 <!-- end if -->
                                 </b>
+                                </p>
 
                                
                             </div>
