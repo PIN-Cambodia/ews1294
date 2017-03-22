@@ -35,4 +35,5 @@ Class ContactController extends Controller{
 
 
 }
+}
  ?>
