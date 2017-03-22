@@ -30,7 +30,7 @@
                                     @endif
 
                                     <!-- add update next time with database (show location header) -->
-                                    <br>
+                                   </br>
                                     @if($sensorId =='1020301')
                                     {{ trans('sensors.kompot') }}
 
