@@ -28,14 +28,13 @@
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
                                     @endif
-                                     </br>
+                                    
 
                                    <!-- add update next time with database (show location header) -->
                                    
                                     @if($sensorId =='1020301')
                                     {{ trans('sensors.kompot') }}
-                                    <br>
-
+                                    
                                     @else
 
                                     {{ trans('sensors.phnom_penh') }}
