@@ -16,7 +16,12 @@
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
 				<ul>
-				    @foreach($errors->all() as $error)
+				@if(Session::has('message'))
+				    <div class="alert alert-info">
+				      {{Session::get('message')}}
+				    </div>
+				@endif
+				@foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
 				    @endforeach
 				</ul>
