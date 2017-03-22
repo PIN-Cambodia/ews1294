@@ -23,7 +23,6 @@ Class ContactController extends Controller{
 
 			);
 
-	}
 	 Mail::send('contact', $data, function($messages) use ($data){
 	 	$messages->from($data['email']);
 	 	$messages->to('vcgroup3laravel@gmail.com');
