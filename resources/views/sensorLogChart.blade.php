@@ -21,14 +21,14 @@
                                     @if($graph_type=='1')
 
                                         {{ trans('sensors.sensorlog6_graph')}}
-                                        {{ date('( d-M-Y )')}}
+                                        {{ date('( d-M-Y )')}}<br/>
                                 
                                         
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
                                     @endif
-                                    <br/>
+                                    
                                     <!-- add update next time with database (show location header) -->
                                     @if($sensorId =='1020301')
                                     {{ trans('sensors.kompot') }}
