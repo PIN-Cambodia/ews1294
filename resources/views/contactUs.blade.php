@@ -52,6 +52,9 @@
 				      array('class'=>'btn btn-primary')) !!}
 				</div>
 				{!! Form::close() !!}
+
+
+					
 				</div>
 				<div class="col-md-2 col-lg-2" ></div>
 				</div> <!--  close div content form -->

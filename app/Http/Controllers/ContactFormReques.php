@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ContactFormRequest extends Request {
+class ContactFormRequest extends FormRequest {
 
   public function authorize()
   {
