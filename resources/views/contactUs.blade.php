@@ -16,17 +16,13 @@
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
 				<ul>
-				@if(Session::has('message'))
-				    <div class="alert alert-info">
-				      {{Session::get('message')}}
-				    </div>
-				@endif
+				
 				@foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
 				    @endforeach
 				</ul>
 
-				{!! Form::open(array('route' => 'contact_store', 'class' => 'form')) !!}
+				{!! Form::open(array('method'=>'post','action'=>'ContactController@postContact','class' => 'form' )) !!}
 
 				<div class="form-group">
 				    {!! Form::label('Your Name') !!}
