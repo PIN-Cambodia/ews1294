@@ -332,3 +332,4 @@ Route::get('contact',
   ['as' => 'contact', 'uses' => 'AboutController@create']);
 Route::post('contact', 
   ['as' => 'contact_store', 'uses' => 'AboutController@store']);
+Route::get('contact_request',['uses' => 'ContactFormReques@rules']);
