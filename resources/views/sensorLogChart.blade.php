@@ -28,9 +28,14 @@
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
                                           
                                     @endif
+                                     </b>
 
-                                    <!-- add update next time with database (show location header) -->
-                                   </br>
+                                   
+
+                               
+                            </div>
+                             <!-- add update next time with database (show location header) -->
+                                   
                                     @if($sensorId =='1020301')
                                     {{ trans('sensors.kompot') }}
 
@@ -39,11 +44,8 @@
                                     {{ trans('sensors.phnom_penh') }}
                                     @endif
                                 <!-- end if -->
-                                </b>
-                                </p>
-
                                
-                            </div>
+                               
                             <div class="col-xs-6 col-md-3 col-lg-2 ">
                                 @if($graph_type=='1')
                                     <a href="sensorsLog20?sensor_id={{$sensorId}}">
