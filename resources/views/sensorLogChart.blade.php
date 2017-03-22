@@ -34,6 +34,7 @@
                                    
                                     @if($sensorId =='1020301')
                                     {{ trans('sensors.kompot') }}
+                                    <br>
 
                                     @else
 
