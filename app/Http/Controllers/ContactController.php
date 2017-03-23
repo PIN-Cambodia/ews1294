@@ -30,8 +30,8 @@ Class ContactController extends Controller {
 	 	$messages->message($data['message']);
 
 	 });
-	Session::flash('success','Your Email was Sent!');
-	return redirect('contactUs');
+	// Session::flash('success','Your Email was Sent!');
+	// return redirect('contactUs');
 
 
 
