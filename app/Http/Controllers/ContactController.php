@@ -30,7 +30,7 @@ Class ContactController extends Controller
      Mail::send('contactUs', $data, function($messages) use ($data){
         $messages->from($data['email']);
         $messages->to('vcgroup3laravel@gmail.com');
-        $messages->message($data['message']);
+        $messages->Swift_Message($data['message']);
 
      });
     Session::flash('success','Your Email was Sent!');
