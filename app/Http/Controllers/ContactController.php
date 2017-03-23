@@ -5,7 +5,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
-Class ContactController extends Controller{
+Class ContactController extends Controller {
 
 	Public function getContact(){
 		return view('contactUs');
@@ -37,4 +37,3 @@ Class ContactController extends Controller{
 
 }
 }
- ?>

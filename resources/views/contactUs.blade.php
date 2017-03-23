@@ -17,9 +17,9 @@
                 <div class="col-md-8 col-lg-8">
 				<ul>
 				
-				@foreach($errors->all() as $error)
+			<!-- 	@foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
-				    @endforeach
+				    @endforeach -->
 				</ul>
 
 				{!! Form::open(array(class' => 'form' )) !!}
