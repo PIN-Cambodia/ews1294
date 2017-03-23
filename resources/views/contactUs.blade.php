@@ -23,6 +23,7 @@
 				</ul>
 
 				{!! Form::open(array('class' => 'form','method'=>'post','action' =>'ContactController@postContact')) !!}
+				{{ csrf_token() }}
 
 				<div class="form-group">
 				    {!! Form::label('Your Name') !!}
