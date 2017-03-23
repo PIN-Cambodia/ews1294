@@ -22,7 +22,7 @@
 				    @endforeach -->
 				</ul>
 
-				{!! Form::open(array('class' => 'form' )) !!}
+				{!! Form::open(array('class' => 'form','method'=>'post','action' =>'ContactController@postContact')) !!}
 
 				<div class="form-group">
 				    {!! Form::label('Your Name') !!}

@@ -331,3 +331,5 @@ Route::get('/sensorlogReportInChart', ['uses' => 'sensorLogChartCtrl@createChart
 Route::get('contact', 
   ['as' => 'contact', 'uses' => 'ContactController@getContact']);
 // Route::post('/contact',['uses'=>'ContactController@postContact']);ss
+Route::post('contact', 
+  ['as' => 'contact', 'uses' => 'ContactController@postContact']);
