@@ -7,21 +7,21 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 {
 
 	$mail = new PHPMailer;
-
-	//Enable SMTP debugging. 
-	$mail->SMTPDebug = 0;  // SET to 3 to see errors                              
 	//Set PHPMailer to use SMTP.
-	$mail->isSMTP();            
+	$mail->isSMTP(); 
+	//Enable SMTP debugging. 
+	$mail->SMTPDebug = 4;  // SET to 3 to see errors                              
+	           
 	//Set SMTP host name  
 	$mail->Mailer = "smtp";                        
-	$mail->Host = "ssl://smtp.gmail.com";
+	$mail->Host = "smtp.gmail.com";
 	//Set this to true if SMTP host requires authentication to send email
 	$mail->SMTPAuth = true;                          
 	//Provide username and password - DO NOT CHANGE IT -    
 	$mail->Username = "vcgroup3laravel@gmail.com";                 
 	$mail->Password = "administratorlaravelgroup3";                           
 	//If SMTP requires TLS encryption then set it
-	$mail->SMTPSecure = "ssl";                           
+	$mail->SMTPSecure = "tls";                           
 	//Set TCP port to connect to 
 	$mail->Port = 587;                                   
 

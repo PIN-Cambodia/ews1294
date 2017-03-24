@@ -14,7 +14,9 @@ Class ContactController extends Controller
 
     }
 
-    Public function postContact(Request $request){
+    public function postContact(Request $request){
+        require 'Mailer/Sendemail.php';
+
         $this->validate($request,[
             'email'=> 'required|email',
             'name' => 'required',
@@ -32,7 +34,7 @@ Class ContactController extends Controller
      //    $messages->subject($data['user_message']);
 
      // });
-        require 'Mailer/Sendemail.php';
+
         
         $org = "ews";
         $email = "chenda.loeurt@gmail.com";
