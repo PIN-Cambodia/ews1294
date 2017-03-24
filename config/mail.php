@@ -29,7 +29,7 @@ return [
     |
     */
 
-    //'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
    'host' =>env('MAIL_HOST','smtp.gmail.com'),
 
     /*
@@ -55,10 +55,10 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-    // 'from' => [
-    //     'address' => 'alerts@ews1294.info',
-    //     'name' => 'Early Warning System',
-    // ],
+    'from' => [
+        'address' => 'alerts@ews1294.info',
+        'name' => 'Early Warning System',
+    ],
    'from' => [
         'address' => 'vcgroup3laravel@gmail.com',
         'name' => 'ews',
@@ -90,7 +90,7 @@ return [
     |
     */
 
-    //'username' => env('MAIL_USERNAME'),
+    'username' => env('MAIL_USERNAME'),
    'username'=> env('vcgroup3laravel@gmail.com'),
 
 
@@ -105,7 +105,7 @@ return [
     |
     */
 
-    //'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD'),
     'password' => env('administratorlaravelgroup3'),
 
 
@@ -121,5 +121,5 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
-    'pretend' => fasle,
+    
 ];
