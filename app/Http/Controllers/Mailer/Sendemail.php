@@ -14,7 +14,7 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	           
 	//Set SMTP host name  
 	$mail->Mailer = "smtp";                        
-	$mail->Host = "smtp.gmail.com";
+	$mail->Host = "smtp.mailgun.org";
 	//Set this to true if SMTP host requires authentication to send email
 	$mail->SMTPAuth = true;                          
 	//Provide username and password - DO NOT CHANGE IT -    
