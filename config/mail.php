@@ -60,7 +60,7 @@ return [
         'name' => 'Early Warning System',
     ],
    'from' => [
-        'address' => 'vcgroup3laravel@gmail.com',
+        'address' => 'chenda.loeurt@gmail.com',
         'name' => 'ews',
     ],
     

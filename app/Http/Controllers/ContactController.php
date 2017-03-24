@@ -51,7 +51,7 @@ public function postContact(Request $request)
             'user_message' => $request->get('message')
         ), function($message)
     {
-        $message->from('wj@wjgilmore.com');
+        $message->from('chenda.loeurt@gmail.com');
         $message->to('vcgroup3laravel@gmail.com', 'Admin')->subject('TODOParrot Feedback');
     });
 
