@@ -1,7 +1,5 @@
 <?php
 require 'phpmailer/PHPMailerAutoload.php';
-require 'phpmailer/class.phpmailer.php';
-require 'phpmailer/class.smtp.php';
 
 function Sendemail($fromname, $to, $namereciever, $subject, $body)
 {
@@ -10,11 +8,11 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	//Set PHPMailer to use SMTP.
 	$mail->isSMTP(); 
 	//Enable SMTP debugging. 
-	$mail->SMTPDebug = 4;  // SET to 3 to see errors                              
+	$mail->SMTPDebug = 2;  // SET to 3 to see errors                              
 	           
 	//Set SMTP host name  
 	$mail->Mailer = "smtp";                        
-	$mail->Host = "smtp.mailgun.org";
+	$mail->Host = "smtp.gmail.com";
 	//Set this to true if SMTP host requires authentication to send email
 	$mail->SMTPAuth = true;                          
 	//Provide username and password - DO NOT CHANGE IT -    
