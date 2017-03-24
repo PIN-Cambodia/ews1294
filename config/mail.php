@@ -30,7 +30,7 @@ return [
     */
 
     'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-    'host' =>env('MAIL_HOST','smtp.gmail.com'),
+   'host' =>env('MAIL_HOST','smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,7 +60,7 @@ return [
         'name' => 'Early Warning System',
     ],
    'from' => [
-        'address' => 'chenda.loeurt@gmail.com',
+        'address' => 'vcgroup3laravel@gmail.com',
         'name' => 'ews',
     ],
     
