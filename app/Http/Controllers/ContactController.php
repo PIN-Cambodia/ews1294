@@ -23,14 +23,14 @@ Class ContactController extends Controller
         $data = array(
             'email'=> $request->email,
             'name'=> $request->name,
-            'message'=> $request->message
+            'user_message'=> $request->message
 
             );
 
      Mail::send('contactUs', $data, function($messages) use ($data){
-        $messages->from('vcgroup3laravel@gmail.com');
-        $messages->to($data['email']);
-        $messages->subject($data['message']);
+        $messages->from($data['email']);
+        $messages->to('vcgroup3laravel@gmail.com');
+        $messages->subject($data['user_message']);
 
      });
    // Session::flash('success','Your Email was Sent!');
