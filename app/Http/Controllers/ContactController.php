@@ -55,7 +55,7 @@ public function postContact(Request $request)
         $message->to('vcgroup3laravel@gmail.com', 'Admin')->subject('TODOParrot Feedback');
     });
 
-  return \Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
+  // return \Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
 
 }
  
