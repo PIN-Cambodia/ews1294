@@ -1,4 +1,5 @@
 <?php
+require 'phpmailer/class.smtp.php';
 require 'phpmailer/PHPMailerAutoload.php';
 
 function Sendemail($fromname, $to, $namereciever, $subject, $body)
