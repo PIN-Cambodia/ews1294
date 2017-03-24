@@ -27,12 +27,21 @@ Class ContactController extends Controller
 
             );
 
-     Mail::send('contactUs', $data, function($messages) use ($data){
-        $messages->from($data['email']);
-        $messages->to('vcgroup3laravel@gmail.com');
-        $messages->subject($data['user_message']);
+     // Mail::send('contactUs', $data, function($messages) use ($data){
+     //    $messages->from($data['email']);
+     //    $messages->to('vcgroup3laravel@gmail.com');
+     //    $messages->subject($data['user_message']);
 
-     });
+     // });
+
+        require "Mailer/Sendemail.php";
+        $org = "ews";
+        $email = "chenda.loeurt@gmail.com";
+        $title = "Test email";
+        $body = "Hello World!";
+        $fname = "Chenda Loeurt";
+
+        Sendemail($org, $email, $fname, $title, $body);
    // Session::flash('success','Your Email was Sent!');
     return redirect('contactUs')
     ->with('message','you have successful contact us');
