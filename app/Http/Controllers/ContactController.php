@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-//use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-require 'Mailer/Sendemail.php';
 
 Class ContactController extends Controller
 {
@@ -33,7 +32,7 @@ Class ContactController extends Controller
      //    $messages->subject($data['user_message']);
 
      // });
-
+        require 'Mailer/Sendemail.php';
         
         $org = "ews";
         $email = "chenda.loeurt@gmail.com";
