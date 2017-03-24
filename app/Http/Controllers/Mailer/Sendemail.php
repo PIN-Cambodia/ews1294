@@ -42,8 +42,9 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	} 
 	else 
 	{
-		\Session::flash('message_required_activate','Result has been Sent!');
-	    \Session::flash('message_success_send','Result has been Sent!');
+		// \Session::flash('message_required_activate','Result has been Sent!');
+	 //    \Session::flash('message_success_send','Result has been Sent!');
+		echo "Email has been Sent Success!";
 	}
 }
 ?>

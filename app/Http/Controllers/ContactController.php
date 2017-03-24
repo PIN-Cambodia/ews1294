@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-
+require 'Mailer/Sendemail.php';
 
 Class ContactController extends Controller
 {
@@ -34,22 +34,20 @@ Class ContactController extends Controller
 
      // });
 
-        require "Mailer/Sendemail.php";
+        
         $org = "ews";
         $email = "chenda.loeurt@gmail.com";
         $title = "Test email";
         $body = "Hello World!";
         $fname = "Chenda Loeurt";
 
-        Sendemail($org, $email, $fname, $title, $body);
+        $send = Sendemail($org, $email, $fname, $title, $body);
+        if ($send) {
+            return redirect('contactUs')->with('message','you have successful contact us');
+        }else{
+            echo "Email could not send!";
+        }
    // Session::flash('success','Your Email was Sent!');
-    return redirect('contactUs')
-    ->with('message','you have successful contact us');
-
-
-
+    
 }
-
-
- 
 }
