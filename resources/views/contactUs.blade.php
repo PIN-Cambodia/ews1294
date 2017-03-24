@@ -24,6 +24,7 @@
 				</ul>
 
 				{!! Form::open(array('class' => 'form','method'=>'post','action' =>'ContactController@postContact')) !!}
+				
 				{{ csrf_field() }}
 
 				<div class="form-group">
