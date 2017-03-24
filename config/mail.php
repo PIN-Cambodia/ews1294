@@ -59,11 +59,7 @@ return [
         'address' => 'alerts@ews1294.info',
         'name' => 'Early Warning System',
     ],
-     'from' => [
-        'address' => 'vcgroup3laravel@gmail.com',
-        'name' => 'test',
-    ],
-
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -90,7 +86,7 @@ return [
     */
 
     'username' => env('MAIL_USERNAME'),
-    'username'=> env('vcgroup3laravel@gmail.com'),
+    // 'username'=> env('vcgroup3laravel@gmail.com'),
 
 
     /*
@@ -105,7 +101,7 @@ return [
     */
 
     'password' => env('MAIL_PASSWORD'),
-    'password' => env('administratorlaravelgroup3'),
+    // 'password' => env('administratorlaravelgroup3'),
 
 
     /*
