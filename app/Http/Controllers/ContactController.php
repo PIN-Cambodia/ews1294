@@ -44,7 +44,7 @@ Class ContactController extends Controller
 public function postContact(Request $request)
 {
 
-    Mail::send('emails.contactUs',
+    Mail::send('contactUs',
         array(
             'name' => $request->get('name'),
             'email' => $request->get('email'),
