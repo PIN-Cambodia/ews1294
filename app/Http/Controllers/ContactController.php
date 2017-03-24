@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Mail;
+use Config;
 
 Class ContactController extends Controller
 {
