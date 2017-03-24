@@ -106,7 +106,7 @@ return [
     */
 
     'password' => env('MAIL_PASSWORD'),
-   // 'password' => env('administratorlaravelgroup3'),
+   //'password' => env('administratorlaravelgroup3'),
 
 
     /*
