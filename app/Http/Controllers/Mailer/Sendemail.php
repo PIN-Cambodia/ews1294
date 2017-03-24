@@ -1,4 +1,5 @@
 <?php
+require 'phpmailer/PHPMailerAutoload.php';
 require 'phpmailer/class.phpmailer.php';
 require 'phpmailer/class.smtp.php';
 
@@ -12,7 +13,6 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	//Set PHPMailer to use SMTP.
 	$mail->isSMTP();            
 	//Set SMTP host name  
-	$mail->SMTPDebug = 2;
 	$mail->Mailer = "smtp";                        
 	$mail->Host = "ssl://smtp.gmail.com";
 	//Set this to true if SMTP host requires authentication to send email
