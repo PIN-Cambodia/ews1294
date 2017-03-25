@@ -19,9 +19,9 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	$mail->Username = "vcgroup3laravel@gmail.com";                 
 	$mail->Password = "administratorlaravelgroup3";                           
 	//If SMTP requires TLS encryption then set it
-	$mail->SMTPSecure = "tls";                           
+	$mail->SMTPSecure = "ssl";                           
 	//Set TCP port to connect to 
-	$mail->Port = 587;                                   
+	$mail->Port = 465;                                   
 
 	$mail->From = "vcgroup3laravel@gmail.com";
 
