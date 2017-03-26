@@ -3,12 +3,11 @@ require 'phpmailer/PHPMailerAutoload.php';
 
 function Sendemail($fromname, $to, $namereciever, $subject, $body)
 {
-
-	$mail = new PHPMailer;
-	//Set PHPMailer to use SMTP.
+	$mail->SMTPDebug = 2;  // SET to 3 to see errors    
+	
 	$mail->isSMTP(); 
 	//Enable SMTP debugging. 
-	//$mail->SMTPDebug = 2;  // SET to 3 to see errors                              
+	                          
 	           
 	//Set SMTP host name  
 	$mail->Mailer = "smtp";                        
@@ -19,9 +18,9 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	$mail->Username = "vcgroup3laravel@gmail.com";                 
 	$mail->Password = "administratorlaravelgroup3";                           
 	//If SMTP requires TLS encryption then set it
-	$mail->SMTPSecure = "ssl";                           
+	$mail->SMTPSecure = "tls";                           
 	//Set TCP port to connect to 
-	$mail->Port = 465;                                   
+	$mail->Port = 587;                                   
 
 	$mail->From = "vcgroup3laravel@gmail.com";
 
