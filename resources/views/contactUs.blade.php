@@ -16,7 +16,8 @@
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
 				<ul>
-				 <?php  require 'Mailer/Sendemail.php';?>
+
+				 
 				
 				@foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
