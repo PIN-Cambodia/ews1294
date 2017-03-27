@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ContactFormRequest;
 use App\Post;
 use Illuminate\Support\Facades\Session;
 use Config;
@@ -16,7 +17,7 @@ Class ContactController extends Controller
 
     }
 
-    public function postContact(Request $request){
+    public function postContact(ContactFormRequest $request){
         require 'Mailer/Sendemail.php';
 
         $this->validate($request,[
@@ -31,14 +32,14 @@ Class ContactController extends Controller
             );
 
      Mail::send('contactUs', $data, function($messages) use ($data){
-        $messages->from($data['email']);
+        $messages->from($data['email'],$data['name']);
         $messages->to('vcgroup3laravel@gmail.com');
         $messages->subject('hello world');
 
      });
 
 
-  return \Redirect::route('contact')->with('message', 'Thanks for contacting us!');
+  return \Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
 
 
 
