@@ -48,4 +48,3 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 		echo "Email has been Sent Success!";
 	}
 }
-?>
