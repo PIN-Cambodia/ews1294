@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\ContactFormRequest;
+
 use App\Post;
 use Illuminate\Support\Facades\Session;
 use Config;
@@ -17,7 +17,7 @@ Class ContactController extends Controller
 
     }
 
-    public function postContact(ContactFormRequest $request){
+    public function postContact(Request $request){
         require 'Mailer/Sendemail.php';
 
         $this->validate($request,[
