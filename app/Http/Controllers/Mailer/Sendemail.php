@@ -14,7 +14,8 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	$mail->Mailer = "smtp";                        
 	$mail->Host = "smtp.gmail.com";
 	//Set this to true if SMTP host requires authentication to send email
-	$mail->SMTPAuth = true;                          
+	$mail->SMTPAuth = true;         
+
 	//Provide username and password - DO NOT CHANGE IT -    
 	$mail->Username = "vcgroup3laravel@gmail.com";                 
 	$mail->Password = "administratorlaravelgroup3";                           
