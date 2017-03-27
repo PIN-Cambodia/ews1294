@@ -30,7 +30,7 @@ return [
     */
 
     'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-   //'host' =>env('MAIL_HOST','smtp.gmail.com'),
+   'host' =>env('MAIL_HOST','ssl://smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
     ],
    'from' => [
         'address' => 'chenda.loeurt@gmail.com',
-        'name' => 'chenda',
+        'name' => 'ews',
     ],
     
     
@@ -91,7 +91,7 @@ return [
     */
 
     'username' => env('MAIL_USERNAME'),
-'username'=> env('chenda.loeurt@gmail.com'),
+     'username'=> env('chenda.louert@gmail.com'),
 
 
     /*
@@ -106,7 +106,7 @@ return [
     */
 
     'password' => env('MAIL_PASSWORD'),
-  'password' => env('chendapnc'),
+   'password' => env('chendapnc'),
 
 
     /*
