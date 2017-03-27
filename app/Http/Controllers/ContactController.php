@@ -17,18 +17,18 @@ Class ContactController extends Controller
     }
 
     public function postContact(Request $request){
-        require 'Mailer/Sendemail.php';
+       
 
         $this->validate($request,[
             'email'=> 'required|email',
             'name' => 'required',
             'message' => 'required']);
-        $data = array(
-            'email'=> $request->email,
-            'name'=> $request->name,
-            'user_message'=> $request->message
+        // $data = array(
+        //     'email'=> $request->email,
+        //     'name'=> $request->name,
+        //     'user_message'=> $request->message
 
-            );
+        //     );
 
      // Mail::send('contactUs', $data, function($messages) use ($data){
      //    $messages->from($data['email']);
@@ -36,6 +36,21 @@ Class ContactController extends Controller
      //    $messages->subject($data['user_message']);
 
      // });
+//          \Mail::send('contactUs',
+//         array(
+//             'name' => $request->get('name'),
+//             'email' => $request->get('email'),
+//             'user_message' => $request->get('message')
+//         ), function($messages)
+//     {
+//         $messages->from('chenda.loeurt@gmail.com');
+//         $messages->to('.com', 'Admin')->subject('TODOParrot Feedback');
+//     });
+
+//   return \Redirect::route('contact')->with('message', 'Thanks for contacting us!');
+
+// }
+
 
         
         $org = "ews";
