@@ -18,7 +18,7 @@ Class ContactController extends Controller
     }
 
     public function postContact(Request $request){
-        require 'Mailer/Sendemail.php';
+       // require 'Mailer/Sendemail.php';
 
         $this->validate($request,[
             'email'=> 'required|email',
