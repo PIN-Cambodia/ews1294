@@ -35,8 +35,9 @@
                                     @if($sensorId =='1020301')
                                     {{ trans('sensors.kompot') }}
                                     
+                                    @elseif($sensorId == '15040701')
+                                    {{ trans('sensors.pursat') }}
                                     @else
-
                                     {{ trans('sensors.phnom_penh') }}
                                     @endif
                                 <!-- end if --></b>

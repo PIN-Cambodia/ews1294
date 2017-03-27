@@ -75,5 +75,6 @@ return [
     'sensorChartErrorClickHere' => 'Click here',
     'sensorChartErrorToAdd' => 'to add new trigger for this sensor.',
     'kompot' => 'kompot 01',
-    'phnom_penh' => 'Phnom Penh 02',
+    'phnom_penh' => 'Phnom Penh 03',
+    'pursat' => 'Pursat 02',
 ];

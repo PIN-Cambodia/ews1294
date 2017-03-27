@@ -76,6 +76,7 @@ return [
     'sensorChartErrorClickHere' => 'សូមចុចត្រង់នេះ ',
     'sensorChartErrorToAdd' => 'ដើម្បីបញ្ចូលពត៌មានថ្មីសម្រាប់​​ឧបករណ៍​ចាប់​សញ្ញានេះ។',
     'kompot'=>'កំពត 01',
-    'phnom_penh'=>'ភ្នំពេញ 02',
+    'phnom_penh'=>'ភ្នំពេញ 03',
+    'pursate' => 'Pursat',
 
 ];
