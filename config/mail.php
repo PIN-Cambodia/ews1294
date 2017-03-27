@@ -30,7 +30,7 @@ return [
     */
 
     'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-    //'host' =>env('MAIL_HOST','smtp.gmail.com'),
+    'host' =>env('MAIL_HOST','smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -59,10 +59,10 @@ return [
         'address' => 'alerts@ews1294.info',
         'name' => 'Early Warning System',
     ],
-   // 'from' => [
-   //      'address' => 'chenda.loeurt@gmail.com',
-   //      'name' => 'ews',
-   //  ],
+   'from' => [
+        'address' => 'chenda.loeurt@gmail.com',
+        'name' => 'ews',
+    ],
     
     
 
