@@ -16,10 +16,7 @@ Class ContactController extends Controller
         return view('contactUs');
 
     }
-    public function authorize(){
-        return false;
-    }
-
+    
     public function postContact(Request $request){
        // require 'Mailer/Sendemail.php';
 
