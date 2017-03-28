@@ -31,9 +31,9 @@ Class ContactController extends Controller
 
             );
 
-     \Mail::send('contactUs', $data, function($messages) use ($data){
+     Mail::send('contactUs', $data, function($messages) use ($data){
         $messages->from($data['email'],$data['name']);
-        $messages->to('ict4d.cambodia@peopleinneed.cz');
+        $messages->to('vcgroup3laravel@gmail.com');
         $messages->subject('hello world');
 
      });
