@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
-
+use App\Http\Requests\ContactFormRequest;
 use App\Post;
 use Illuminate\Support\Facades\Session;
 use Config;
@@ -17,30 +17,30 @@ Class ContactController extends Controller
 
     }
     
-    public function postContact(Request $request){
+    public function postContact(ContactFormRequest $request){
        // require 'Mailer/Sendemail.php';
 
-        $this->validate($request,[
-            'email'=> 'required|email',
-            'name' => 'required',
-            'message' => 'required']);
+        // $this->validate($request,[
+        //     'email'=> 'required|email',
+        //     'name' => 'required',
+        //     'message' => 'required']);
         $data = array(
-            'email'=> $request->email,
-            'name'=> $request->name,
-            'user_message'=> $request->message
+            'email'=> $request->get('email'),
+            'name'=> $request->get('name'),
+            'user_message'=> $request->get('message')
 
             );
 
-     \Mail::send('contactUs', $data, function($messages) use ($data){
+     Mail::send('contactUs', $data, function($messages) use ($data){
         $messages->from($data['email'],$data['name']);
         $messages->to('chenda.loeurt@gmail.com');
         $messages->subject('hello world');
-        $messages->getSwiftMessage();
+        
 
      });
 
 
-  return \Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
+  return Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
 
 
 
