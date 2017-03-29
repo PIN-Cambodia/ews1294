@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                    <div style="height:870px; overflow-y: scroll; overflow-x: hidden;">
+                    <div style="height:770px; overflow-y: scroll; overflow-x: hidden;">
                         <table class="table table-bordered" id="sensorlogs-table">
                             <thead>
                             <tr>

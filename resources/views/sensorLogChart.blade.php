@@ -12,7 +12,7 @@
         <div class="row" >
             <div class="col-xs-12 col-md-12 col-lg-12" >
                 <div class="panel panel-default"  style="padding-bottom: 30px;">
-                    <div class="panel-heading text-center ">
+                    <div class="panel-heading text-center " style="height: 10%;">
                         <div class="row">
                             <div class="col-xs-8 col-md-9 col-lg-10 ">
                               <b>
@@ -41,8 +41,6 @@
                                     {{ trans('sensors.phnom_penh') }}
                                     @endif
                                 <!-- end if --></b>
-
-                               
                             </div>
 
                                
