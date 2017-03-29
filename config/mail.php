@@ -60,7 +60,7 @@ return [
         'name' => 'Early Warning System',
     ],
    'from' => [
-        'address' => 'chenda.loeurt@gmail.com',
+        'address' => 'vcgroup3laravel@gmail.com',
         'name' => 'ews',
     ],
     
@@ -122,4 +122,6 @@ return [
 
     'sendmail' => '/usr/sbin/sendmail -bs',
     
+    'pretend' => 'false',
+
 ];
