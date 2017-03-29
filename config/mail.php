@@ -60,7 +60,7 @@ return [
         'name' => 'Early Warning System',
     ],
    'from' => [
-        'address' => 'vcgroup3laravel@gmail.com',
+        'address' => 'chenda.loeurt@gmail.com',
         'name' => 'admin',
     ],
     
@@ -91,7 +91,7 @@ return [
     */
 
     'username' => env('MAIL_USERNAME'),
-    'username'=> env('vcgroup3laravel@gmail.com'),
+    'username'=> env('chenda.loeurt@gmail.com'),
 
 
     /*
@@ -106,7 +106,7 @@ return [
     */
 
     'password' => env('MAIL_PASSWORD'),
-    'password' => env('administratorlaravelgroup3'),
+    'password' => env('chendapnc'),
 
 
     /*
