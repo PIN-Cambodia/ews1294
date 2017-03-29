@@ -29,7 +29,7 @@
                                           
                                     @endif
                                     
-
+                                        <br/>
                                    <!-- add update next time with database (show location header) -->
                                    
                                     @if($sensorId =='1020301')

@@ -59,6 +59,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                    <div style="height:870px; overflow-y: scroll; overflow-x: hidden;">
                         <table class="table table-bordered" id="sensorlogs-table">
                             <thead>
                             <tr>
@@ -90,6 +91,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        </div> <!-- dive scroll -->
                     </div><!-- /panel-body -->
                 </div><!-- /panel panel-default -->
         </div><!--/.cold-->
