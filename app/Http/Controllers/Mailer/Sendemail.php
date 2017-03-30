@@ -1,7 +1,7 @@
 <?php
 require 'phpmailer/PHPMailerAutoload.php';
 
-function Sendemail($fromname, $to, $namereciever, $subject, $body,$email)
+function Sendemail($fromname, $to, $namereciever, $subject, $body)
 {
 
 	$mail = new PHPMailer;
