@@ -91,7 +91,7 @@ return [
     */
 
     'username' => env('MAIL_USERNAME'),
-    'username'=> env('alerts@ews1294.info'),
+    //'username'=> env('alerts@ews1294.info'),
 
 
     /*
@@ -106,7 +106,7 @@ return [
     */
 
     'password' => env('MAIL_PASSWORD'),
-    'password' => env('Vinea000'),
+    //'password' => env('Vinea000'),
 
 
     /*

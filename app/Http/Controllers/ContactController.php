@@ -18,7 +18,7 @@ Class ContactController extends Controller
     }
     
     public function postContact(ContactFormRequest $request){
-       // require 'Mailer/Sendemail.php';
+      require 'Mailer/Sendemail.php';
 
         // $this->validate($request,[
         //     'email'=> 'required|email',
@@ -31,32 +31,32 @@ Class ContactController extends Controller
 
             );
 
-     Mail::send('contactUs', $data, function($messages) use ($data){
-        $messages->from($data['email'],$data['name']);
-        $messages->to('chenda.loeurt@gmail.com');
-        $messages->subject('hello world');
+  //    Mail::send('contactUs', $data, function($messages) use ($data){
+  //       $messages->from($data['email'],$data['name']);
+  //       $messages->to('chenda.loeurt@gmail.com');
+  //       $messages->subject('hello world');
         
 
-     });
+  //    });
 
 
-  return Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
+  // return Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
 
 
 
         
-   //      $org = "ews";
-   //      $email = "chenda.loeurt@gmail.com";
-   //      $title = "Test email";
-   //      $body = "Hello World!";
-   //      $fname = "Chenda Loeurt";
+        $org = "ews";
+        $email = "chenda.loeurt@gmail.com";
+        $title = "Test email";
+        $body = "Hello World!";
+        $fname = "Chenda Loeurt";
 
-   //      $send = Sendemail($org, $email, $fname, $title, $body);
-   //      if ($send) {
-   //          return redirect('contactUs')->with('message','you have successful contact us');
-   //      }else{
-   //          echo "Email could not send!";
-   //      }
+        $send = Sendemail($org, $email, $fname, $title, $body);
+        if ($send) {
+            return redirect('contactUs')->with('message','you have successful contact us');
+        }else{
+            echo "Email could not send!";
+        }
    // // Session::flash('success','Your Email was Sent!');
     
 }

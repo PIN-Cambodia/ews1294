@@ -12,19 +12,19 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	           
 	//Set SMTP host name  
 	$mail->Mailer = "smtp";                        
-	$mail->Host = "smtp.gmail.com";
+	$mail->Host = "smtpout.secureserver.net";
 	//Set this to true if SMTP host requires authentication to send email
 	$mail->SMTPAuth = true;         
 
 	//Provide username and password - DO NOT CHANGE IT -    
-	$mail->Username = "vcgroup3laravel@gmail.com";                 
-	$mail->Password = "administratorlaravelgroup3";                           
+	$mail->Username = "alerts@ews1294.info";                 
+	$mail->Password = "Vinea000";                           
 	//If SMTP requires TLS encryption then set it
-	$mail->SMTPSecure = "tls";                           
+	$mail->SMTPSecure = "ssl";                           
 	//Set TCP port to connect to 
-	$mail->Port = 587;                                   
+	$mail->Port = 465;                                   
 
-	$mail->From = "vcgroup3laravel@gmail.com";
+	$mail->From = "alerts@ews1294.info";
 
 
 	// HERE YOU CAN CUSTOMIZE DEPENDING YOUR GROUP/PROJECT
