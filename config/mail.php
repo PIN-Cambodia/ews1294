@@ -90,8 +90,8 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
-    //'username'=> env('vcgroup3laravel@gmail.com'),
+   // 'username' => env('MAIL_USERNAME'),
+  'username'=> env('alerts@ews1294.info'),
 
 
     /*
@@ -105,8 +105,8 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD'),
-    //'password' => env('administratorlaravelgroup3'),
+   // 'password' => env('MAIL_PASSWORD'),
+    'password' => env('Lundi12345'),
 
 
     /*
