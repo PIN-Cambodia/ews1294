@@ -47,9 +47,9 @@ Class ContactController extends Controller
         
         $org = "ews";
         $email = "chenda.loeurt@gmail.com";
-        $title = "Test email";
-        $body = "Hello World!";
-        $fname = "Chenda Loeurt";
+        $title = "Contact from EWS";
+        $body = $data['user_message'];
+        $fname = $data['name'];
 
         $send = Sendemail($org, $email, $fname, $title, $body);
         if ($send) {
