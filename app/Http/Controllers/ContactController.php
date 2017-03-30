@@ -39,12 +39,7 @@ Class ContactController extends Controller
 
   //    });
 
-
-  // return Redirect::route('contactUs')->with('message', 'Thanks for contacting us!');
-
-
-
-        
+      
         $org = "ews";
         $email = "chenda.loeurt@gmail.com";
         $title = "Contact from EWS";
@@ -56,7 +51,7 @@ Class ContactController extends Controller
         if ($send) {
             return redirect('contactUs')->with('message','you have successful contact us');
         }else{
-           return redirect('contactUs')->with('message','you have successful contact us')
+           return redirect('contactUs')->with('message','you have successful contact us');
         }
    // // Session::flash('success','Your Email was Sent!');
     
