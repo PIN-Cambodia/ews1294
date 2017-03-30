@@ -17,12 +17,12 @@
                 <div class="col-md-8 col-lg-8">
 				<ul>
 
-				@if(session('message'))
+				<!-- @if(session('message'))
 				<div class="alert alert-success ">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close" &time;></a>
 				{{ session('message') }}
 				</div>
-				@endif
+				@endif -->
 				
 				@foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
