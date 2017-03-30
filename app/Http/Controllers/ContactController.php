@@ -39,7 +39,7 @@ Class ContactController extends Controller
 
   //    });
 
-      
+   
         $org =$data['email'];
         $email = "chenda.loeurt@gmail.com";
         $title = "Contact from EWS";
