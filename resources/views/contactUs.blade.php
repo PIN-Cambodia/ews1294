@@ -18,7 +18,7 @@
 				<ul>
 
 				@if(session('message'))
-				<div class="alert alert-success">
+				<div class="alert alert-success alert-dismissable">
 				{{session('message')}}
 				</div>
 				@endif
@@ -61,10 +61,8 @@
 				    {!! Form::submit('Contact Us!', 
 				      array('class'=>'btn btn-primary')) !!}
 				</div>
-				{!! Form::close() !!}
+			{!! Form::close() !!}
 
-
-					
 				</div>
 				<div class="col-md-2 col-lg-2" ></div>
 				</div> <!--  close div content form -->
