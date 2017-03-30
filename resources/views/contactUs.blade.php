@@ -18,8 +18,9 @@
 				<ul>
 
 				@if(session('message'))
-				<div class="alert alert-success alert-dismissable">
-				{{session('message')}}
+				<div class="alert alert-success ">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close" &time;></a>
+				{{ session('message') }}
 				</div>
 				@endif
 				
