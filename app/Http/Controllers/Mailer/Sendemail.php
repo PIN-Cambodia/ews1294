@@ -1,7 +1,7 @@
 <?php
 require 'phpmailer/PHPMailerAutoload.php';
 
-function Sendemail($fromname, $to, $namereciever, $subject, $body,$email_from)
+function Sendemail($fromname, $to, $namereciever, $subject, $body)
 {
 
 	$mail = new PHPMailer;
@@ -24,7 +24,7 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body,$email_from)
 	//Set TCP port to connect to 
 	$mail->Port = 465;                                   
 
-	$mail->From = $email_from;
+	$mail->From = "alerts@ews1294.info";
 
 
 	// HERE YOU CAN CUSTOMIZE DEPENDING YOUR GROUP/PROJECT
