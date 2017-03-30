@@ -51,7 +51,7 @@ Class ContactController extends Controller
         if ($send) {
             return redirect('contact')->with('message','you have successful contact us');
         }else{
-           // return redirect('contact')->with('message','you have successful contact us');
+           return redirect('contact')->with('message','you have successful contact us');
         }
    // // Session::flash('success','Your Email was Sent!');
     
