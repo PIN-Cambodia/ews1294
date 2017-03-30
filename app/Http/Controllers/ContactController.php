@@ -50,12 +50,13 @@ Class ContactController extends Controller
         $title = "Contact from EWS";
         $body = $data['user_message'];
         $fname = $data['name'];
+        $email_from=$date['email'];
 
-        $send = Sendemail($org, $email, $fname, $title, $body);
+        $send = Sendemail($org, $email, $fname, $title, $body,$email_from);
         if ($send) {
             return redirect('contactUs')->with('message','you have successful contact us');
         }else{
-            echo "Email could not send!";
+           return redirect('contactUs')->with('message','you have successful contact us')
         }
    // // Session::flash('success','Your Email was Sent!');
     
