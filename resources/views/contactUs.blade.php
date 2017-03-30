@@ -17,6 +17,11 @@
                 <div class="col-md-8 col-lg-8">
 				<ul>
 
+				@if(session('message'))
+				<div class="alert alert-success">
+				{{session('message')}
+				</div>
+				@endif
 				
 				@foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
