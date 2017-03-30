@@ -17,7 +17,6 @@
                 <div class="col-md-8 col-lg-8">
 				<ul>
 
-				 {{ message }}
 				
 				@foreach($errors->all() as $error)
 				        <li>{{ $error }}</li>
