@@ -41,7 +41,7 @@ Class ContactController extends Controller
 
    
         $org =$data['email'];
-        $email = "chenda.loeurt@peopleinneed.cz";
+        $email = "vcgroup3laravel@gmail.com";
         $title = "Contact from EWS";
         $body = $data['user_message'];
         $fname = $data['name'];
