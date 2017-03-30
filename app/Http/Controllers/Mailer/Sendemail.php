@@ -8,7 +8,7 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	//Set PHPMailer to use SMTP.
 	$mail->isSMTP(); 
 	//Enable SMTP debugging. 
-	$mail->SMTPDebug = 2;  // SET to 3 to see errors                              
+	//$mail->SMTPDebug = 2;  // SET to 3 to see errors                              
 	           
 	//Set SMTP host name  
 	$mail->Mailer = "smtp";                        
