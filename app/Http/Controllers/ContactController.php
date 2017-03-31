@@ -41,7 +41,7 @@ Class ContactController extends Controller
 
    
         $org =$data['email'];
-        $email = "james.happell@peopleinneed.cz";
+        $email = "chenda.loeurt@peopleinneed.cz";
         $title = "Contact from EWS";
         $body = $data['user_message'];
         $fname = $data['name'];
@@ -51,7 +51,7 @@ Class ContactController extends Controller
         if ($send) {
             return redirect('contact')->with('message','you have successful contact us');
         }else{
-           return redirect('contact')->with('message','you have successful contact us Thanks!');
+           return redirect('contact')->with('message','Your message has been sent successful. Thank you.');
         }
  
     
