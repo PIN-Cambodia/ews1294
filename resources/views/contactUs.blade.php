@@ -17,10 +17,10 @@
                 <div class="col-md-8 col-lg-8">
 				<ul>
 
-				@if(session('message_success_send'))
+				@if(session('message'))
 				<div class="alert alert-success ">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close" &time;></a>
-				{{ session('message_success_send') }}
+				{{ session('message') }}
 				</div>
 				@endif
 				
