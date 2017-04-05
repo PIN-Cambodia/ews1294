@@ -25,7 +25,7 @@ Class ContactController extends Controller
         //     'name' => 'required',
         //     'message' => 'required']);
         $data = array(
-            'emails'=> $request->get('email'),
+            'email'=> $request->get('email'),
             'name'=> $request->get('name'),
             'user_message'=> $request->get('message')
 
@@ -40,7 +40,7 @@ Class ContactController extends Controller
   //    });
 
    
-        $org =$data['emails'];
+        $org =$data['email'];
         $email = "chenda.loeurt@peoplinneed.cz";
         $title = "Contact from EWS";
         $body = $data['user_message'];
