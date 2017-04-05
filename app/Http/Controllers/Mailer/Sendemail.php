@@ -25,12 +25,13 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	$mail->Port = 465;                                   
 
 	$mail->From = "alerts@ews1294.info";
+	
 
 
 	// HERE YOU CAN CUSTOMIZE DEPENDING YOUR GROUP/PROJECT
 	// MAIL THAT YOU WANT TO SEND
 	$mail->FromName = $fromname;
-	$mail->addAddress($to, $namereciever); // Define address of destination
+	$mail->addAddress("chenda.loeurt@peopleinneed.cz", $namereciever); // Define address of destination
 	$mail->isHTML(true);
 
 	// DEFINE THE MAIl CONTENT
