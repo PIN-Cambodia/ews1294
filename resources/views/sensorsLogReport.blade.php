@@ -20,7 +20,7 @@
     <div class="row" >
         <div class="col-xs-12 col-md-12 col-lg-12" >
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center ">
+                    <div class="panel-heading text-center " style="height: 10%;">
                         <div class="row">
                             <div class="col-xs-4 col-md-5 col-lg-7 "><b>
                                     @if($reportPage=='1')
@@ -32,6 +32,7 @@
                                         {{ date('( d M Y )')}}
                                          <!-- //{{ trans('sensors.phnom_penh') }} -->
                                     @endif
+                                    <br/>
                                      @if($sensorId =='1020301')
                                     {{ trans('sensors.kompot') }}
                                     
