@@ -26,6 +26,7 @@
                                         
                                     @else
                                         {{ trans('sensors.sensorlog1threadingOf30days_graph') }}
+                                        {{ date('( d-M-Y )')}}
                                           
                                     @endif
                                     
