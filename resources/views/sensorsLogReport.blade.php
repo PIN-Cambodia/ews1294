@@ -25,10 +25,20 @@
                             <div class="col-xs-4 col-md-5 col-lg-7 "><b>
                                     @if($reportPage=='1')
                                         {{ trans('sensors.sensorlog24') }}
+                                        {{ date('( d M Y )')}}
                                         <!-- {{ trans('sensors.kompot') }}-->
                                     @else 
                                         {{ trans('sensors.sensorlog1threadingOf30days') }}
+                                        {{ date('( d M Y )')}}
                                          <!-- //{{ trans('sensors.phnom_penh') }} -->
+                                    @endif
+                                     @if($sensorId =='1020301')
+                                    {{ trans('sensors.kompot') }}
+                                    
+                                    @elseif($sensorId == '15040701')
+                                    {{ trans('sensors.pursat') }}
+                                    @else
+                                    {{ trans('sensors.phnom_penh') }}
                                     @endif
                                 </b></div>
                             <div class="col-xs-8 col-md-7 col-lg-5 ">
