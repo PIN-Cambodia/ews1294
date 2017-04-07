@@ -10,8 +10,9 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
-          <div class="panel-heading" ><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
+          <div class="panel-heading"><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br/>
+             <div style="height:40%; overflow-y: scroll; overflow-x: hidden;">
             	 <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
@@ -29,7 +30,7 @@
 				    @endforeach
 
 				</ul>
-				<div style="height:40%; overflow-y: scroll; overflow-x: hidden;">
+				
 				{!! Form::open(array('class' => 'form','method'=>'post','action' =>'ContactController@postContact')) !!}
 				
 				{{ csrf_field() }}
