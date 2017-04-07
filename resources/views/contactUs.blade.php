@@ -63,10 +63,11 @@
 				      array('class'=>'btn btn-primary')) !!}
 				</div>
 			{!! Form::close() !!}
-				</div>
+
 				</div>
 				<div class="col-md-2 col-lg-2" ></div>
 				</div> <!--  close div content form -->
+				</div>
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
       </div>
