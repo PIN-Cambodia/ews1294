@@ -12,7 +12,7 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	           
 	//Set SMTP host name  
 	$mail->Mailer = "smtp";                        
-	$mail->Host = "smtpout.secureserver.net";
+	$mail->Host = "smtpout.asia.secureserver.net";
 	//Set this to true if SMTP host requires authentication to send email
 	$mail->SMTPAuth = true;         
 
