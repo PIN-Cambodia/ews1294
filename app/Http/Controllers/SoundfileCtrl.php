@@ -55,4 +55,27 @@ class SoundfileCtrl extends Controller
         return array($activities->id, $newfilename);
     }
 
+    // test sending email testing
+
+     // public function sendEmailAutomatichly(){
+     //  require 'Mailer/Sendemail.php';
+
+   
+     //    $org ="ews";
+     //    $email = "chenda.loeurt@gmail.com";
+     //    $title = "email automatich when select commune that effictive";
+     //    $body = "Hello world";
+     //    $fname = "chenda";
+       
+
+     //    $send = Sendemail($org, $email, $fname, $title, $body);
+     //    if ($send) {
+     //        return redirect('uploadSoundFile')->with('message','you have successful contact us');
+     //    }else{
+     //       return redirect('uploadSoundFile')->with('message','Your message has been sent successful. Thank you.');
+     //    }
+ 
+    
+}
+
 }
