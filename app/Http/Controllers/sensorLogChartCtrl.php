@@ -42,7 +42,7 @@ class sensorLogChartCtrl extends Controller
             $sensorlogs = DB::table('sensorlogs')
                 ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
-                ->groupBy('time')
+                ->orderBy('timestamp','desc')               
                 ->limit(24)->get();
 
         }
@@ -70,10 +70,10 @@ class sensorLogChartCtrl extends Controller
                      $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
                 }
             }else{
-                foreach($sensorlogs as $v => $sensorlog)
-            {
-                $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
-            }
+               for ($i = count($sensorlogs) - 1; $i >= 0; $i--) {
+                    $sensorlog = $sensorlogs[$i];
+                     $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+                }
         }
 
      
