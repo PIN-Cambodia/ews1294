@@ -12,7 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div>
             <br />
-           <div style="height:37%; overflow-y: scroll; overflow-x: hidden;">
+           <div style="height:70%; overflow-y: scroll; overflow-x: hidden;">
             <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
@@ -32,6 +32,7 @@
               <center><img src="/about_EWS.jpg" style="height:50%; width:60%"></center>  
               </div>
             </div><!-- \ panel panel-body -->
+            </div>
         </div><!-- \ panel panel-default -->
       </div>
     </div><!--/.row-->
