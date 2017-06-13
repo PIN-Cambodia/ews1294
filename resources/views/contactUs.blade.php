@@ -12,7 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading"><center><b>{{ trans('menus.contact_us') }} </b></center> </div>
             <br/>
-             <div style="height:37%; overflow-y: scroll; overflow-x: hidden;">
+             <div style="height:50%; overflow-y: scroll; overflow-x: hidden;">
             	 <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
