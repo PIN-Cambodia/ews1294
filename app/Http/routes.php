@@ -333,3 +333,9 @@ Route::get('contact',
 // Route::post('/contact',['uses'=>'ContactController@postContact']);ss
 Route::post('contact', 
   ['as' => 'contact', 'uses' => 'ContactController@postContact']);
+
+// add register new user for choose province district commune view
+//get all provinces
+Route::get('registation','Registationcontroller@getAllProvinces');
+ //insert phone into database
+Route::post('postPhoneNumber','Registationcontroller@postPhoneNumber');

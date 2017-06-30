@@ -94,5 +94,11 @@
         <i class="pe-7s-mail-open pe-lg"></i> {{ trans('menus.contact_us') }}
        </a>
     </li>
+    <!-- register user province commune district -->
+     <li class="<?php  if (preg_match("/registation/i", Request::url())) echo "active"; else echo ""; ?>">
+      <a href="registation">
+        <i class="pe-7s-add-user pe-lg"></i> {{ trans('menus.register') }}
+       </a>
+    </li>
   </ul>
 </div><!--/.sidebar-->

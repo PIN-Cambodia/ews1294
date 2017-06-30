@@ -42,6 +42,7 @@ class sensorLogChartCtrl extends Controller
             $sensorlogs = DB::table('sensorlogs')
                 ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
+                ->groupBy('time')
                 ->orderBy('timestamp','desc')               
                 ->limit(24)->get();
 
@@ -64,7 +65,7 @@ class sensorLogChartCtrl extends Controller
    if(!empty($sensortrigger))
         {
             // add row data into datatable for Chart
-            if($graph_type=1) {
+            if($graph_type==2) {
                 for ($i = count($sensorlogs) - 1; $i >= 0; $i--) {
                     $sensorlog = $sensorlogs[$i];
                      $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);

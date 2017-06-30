@@ -26,6 +26,7 @@ return [
     'sensors_map' => 'Sensor Map',
     'about_us'=>'About EWS',
     'contact_us'=>'Contact Us ',
+    'register'=>'Register',
 
     
 

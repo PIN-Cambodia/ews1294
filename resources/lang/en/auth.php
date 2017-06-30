@@ -46,5 +46,5 @@ return [
     'select_province' => 'Select Province',
     'incorrect_username_password' => 'Incorrect username or password. Please try again.',
     'successfully_register_new_user' => 'Successful registered',
-
+    'phone' =>'Phone Number',
 ];

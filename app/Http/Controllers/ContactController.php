@@ -17,44 +17,70 @@ Class ContactController extends Controller
 
     }
     
-    public function postContact(ContactFormRequest $request){
-      require 'Mailer/Sendemail.php';
+//     public function postContact(ContactFormRequest $request){
+//       require 'Mailer/Sendemail.php';
 
-        // $this->validate($request,[
-        //     'email'=> 'required|email',
-        //     'name' => 'required',
-        //     'message' => 'required']);
+//         // $this->validate($request,[
+//         //     'email'=> 'required|email',
+//         //     'name' => 'required',
+//         //     'message' => 'required']);
+//         $data = array(
+//             'email'=> $request->get('email'),
+//             'name'=> $request->get('name'),
+//             'user_message'=> $request->get('message')
+
+//             );
+
+//   //    Mail::send('contactUs', $data, function($messages) use ($data){
+//   //       $messages->from($data['email'],$data['name']);
+//   //       $messages->to('chenda.loeurt@gmail.com');
+//   //       $messages->subject('hello world');
+        
+
+//   //    });
+
+   
+//         $org =$data['email'];
+//         $email = "chenda.loeurt@gmail.com";
+//         $title = "Contact from EWS";
+//         $body = $data['user_message'];
+//         $fname = $data['name'];
+       
+
+//         $send = Sendemail($org, $email, $fname, $title, $body);
+//         if ($send) {
+//             return redirect('contact')->with('message','you have successful contact us');
+//         }else{
+//            return redirect('contact')->with('message','Your message has been sent successful. Thank you.');
+//         }
+ 
+
+
+
+     public function postContact(Request $request){
+      
+
+        $this->validate($request,[
+            'email'=> 'required|email',
+            'name' => 'required',
+            'message' => 'required']);
         $data = array(
-            'email'=> $request->get('email'),
-            'name'=> $request->get('name'),
-            'user_message'=> $request->get('message')
+            'email'=> $request->email,
+            'name'=> $request->name,
+            'bodyMessage'=> $request->message
 
             );
 
-  //    Mail::send('contactUs', $data, function($messages) use ($data){
-  //       $messages->from($data['email'],$data['name']);
-  //       $messages->to('chenda.loeurt@gmail.com');
-  //       $messages->subject('hello world');
+     Mail::send('emails.contact', $data, function($message) use ($data){
+        $message->from($data['email']);
+        $message->to('chenda.loeurt@gmail.com');
+        $message->subject('Contact from EWS');
         
 
-  //    });
-
-   
-        $org =$data['email'];
-        $email = "chenda.loeurt@peopleinneed.cz";
-        $title = "Contact from EWS";
-        $body = $data['user_message'];
-        $fname = $data['name'];
-       
-
-        $send = Sendemail($org, $email, $fname, $title, $body);
-        if ($send) {
-            return redirect('contact')->with('message','you have successful contact us');
-        }else{
-           return redirect('contact')->with('message','Your message has been sent successful. Thank you.');
-        }
- 
+     });
+     echo "successful";
+}
     
-}
-}
+ }
+// }
 

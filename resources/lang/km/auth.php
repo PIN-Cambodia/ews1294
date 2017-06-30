@@ -46,5 +46,5 @@ return [
     'select_province' => 'ជ្រើស​ខេត្ត',
     'incorrect_username_password' => 'ឈ្មោះ​ឬ​​ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​ទេ។ សូម​សាកល្បង​ម្តង​ទៀត។',
     'successfully_register_new_user' => 'ចុះឈ្មោះបានជោគជ័យ',
-
+    'phone' => 'លេខទូរសព្ទ',
 ];

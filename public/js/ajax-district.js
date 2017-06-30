@@ -346,4 +346,3 @@ $(document).ready(function(){
         } // .if
     }); // .form upload submission
 });
-
