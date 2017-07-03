@@ -23,7 +23,7 @@ class sensorLogChartCtrl extends Controller
                 ->addNumberColumn('Warning Level');
           
 
-        // test command
+        // test commands
         $sensor_id = Input::get('sensor_id');
         $graph_type = Input::get('type');
         if($graph_type==2)
