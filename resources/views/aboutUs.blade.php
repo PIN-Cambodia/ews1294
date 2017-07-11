@@ -10,15 +10,12 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
-          <!-- <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div> -->
+          <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div>
             <br />
-           <div style="height:67%; overflow-y: scroll; overflow-x: hidden;">
-           <div><center><img src="/about_EWS.jpg" style="height:0%; width:90%"></centerb></div>
-           <br>
-
+           <div style="height:37%; overflow-y: scroll; overflow-x: hidden;">
             <div class="row"> 
-                <div class="col-md-1 col-lg-1"></div>
-                <div class="col-md-10 col-lg-10">
+                <div class="col-md-2 col-lg-2"></div>
+                <div class="col-md-8 col-lg-8">
                 <p style="font-family: Lato; font-size: 17px;" >
                     {{ trans('pages.content1')}}
                 </p> 
@@ -31,8 +28,8 @@
                 
                 </div>
                
-                <div class="col-md-1 col-lg-1"></div>
-                
+                <div class="col-md-2 col-lg-2"></div>
+              <center><img src="/about_EWS.jpg" style="height:50%; width:60%"></center>  
               </div>
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
