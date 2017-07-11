@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Khill\Lavacharts\Laravel\LavachartsFacade as Lava;
-
 class sensorLogChartCtrl extends Controller
 {
     /**
@@ -22,8 +19,7 @@ class sensorLogChartCtrl extends Controller
                 ->addNumberColumn('Emergency Level')
                 ->addNumberColumn('Warning Level');
           
-
-
+        // test command
         $sensor_id = Input::get('sensor_id');
         $graph_type = Input::get('type');
         if($graph_type==2)
@@ -33,7 +29,7 @@ class sensorLogChartCtrl extends Controller
                 ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
                 ->groupBy('time')
-                ->orderBy('timestamp')
+                ->orderBy('id','desc')
                 ->limit(30)->get();
         }
         else
@@ -42,19 +38,14 @@ class sensorLogChartCtrl extends Controller
             $sensorlogs = DB::table('sensorlogs')
                 ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
-
-                ->orderBy('timestamp','desc')
-
+                ->orderBy('timestamp','desc')               
                 ->limit(24)->get();
-
         }
         // select sensortrigger info from database
         $sensortrigger = DB::table('sensortriggers')
             ->select(DB::raw("level_warning ,level_emergency"))
             ->where('sensor_id','=',$sensor_id)
             ->first();
-
-
         // if(!empty($sensortrigger))
         // {
         //     // add row data into datatable for Chart
@@ -65,19 +56,18 @@ class sensorLogChartCtrl extends Controller
             
    if(!empty($sensortrigger))
         {
-            // add row data into datatable for Chartss
-            if($graph_type==1) {
+            // add row data into datatable for Chart
+            if($graph_type=1) {
                 for ($i = count($sensorlogs) - 1; $i >= 0; $i--) {
                     $sensorlog = $sensorlogs[$i];
                      $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
                 }
             }else{
-                foreach($sensorlogs as $v => $sensorlog)
-            {
-                $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
-            }
+               for ($i = count($sensorlogs) - 1; $i >= 0; $i--) {
+                    $sensorlog = $sensorlogs[$i];
+                     $sensenlogTable->addRow([$sensorlog->time, $sensorlog->stream_height, $sensortrigger->level_emergency, $sensortrigger->level_warning]);
+                }
         }
-
      
             // generate Chart as a LineChart
             Lava::LineChart('SensorLogChart',$sensenlogTable)
@@ -85,15 +75,13 @@ class sensorLogChartCtrl extends Controller
                     'curveType' => 'function',
                     'height' => 350,
                     'vAxis' =>['title' => 'Level of water in " cm " ']
-
                 ]);
                 
-
             return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
         }
         else
         {
-            // if no trigger info of $sensor_id, display error messagesss.
+            // if no trigger info of $sensor_id, display error message.
             return '<p align="center" style="margin-top: 200;">' . trans('sensors.sensorChartErrorID'). $sensor_id . trans('sensors.sensorChartErrorID').
             '<br><br><br><a href="/sensortrigger">' . trans('sensors.sensorChartErrorClickHere').'</a>'. trans('sensors.sensorChartErrorToAdd').'</p>';
         }
