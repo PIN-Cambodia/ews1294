@@ -18,7 +18,7 @@
                               <b>
 
                             
-                                    @if($graph_type=='1')
+                                    @if($graph_type =='1')
 
                                         {{ trans('sensors.sensorlog6_graph')}}
                                         {{ date('( d M Y )')}}
