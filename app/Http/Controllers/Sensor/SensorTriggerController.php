@@ -470,3 +470,6 @@ class SensorTriggerController extends Controller
                                 'other_dis_options'=> $other_dis_options,
                                 'commune_val'=> $commune_val,
                                 'other_commune_val'=>$other_commune_val];
+        return $return_arr_val;
+    }
+}
