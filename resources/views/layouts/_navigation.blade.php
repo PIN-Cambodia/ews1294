@@ -67,7 +67,7 @@
     </li>
 
   @role(['admin'])
-    <!-- ------- sensor ----- -->
+    <!--  sensor  -->
     <!-- sensor management -->
     <li class="<?php if (preg_match("/sensors/i", Request::url())) echo "active"; else echo "";?>">
       <a href="sensors">

@@ -94,7 +94,7 @@
                 </div><!-- /panel panel-default -->
         </div><!-- /col -->
     </div><!-- /row -->
-</div>	<!--/.main-->
+</div>  <!--/.main-->
 
 <!-- Add New Sensor trigger Info Modal -->
 <div class="modal fade" id="modal_add_sensor_trigger_record" tabindex="-1" role="dialog">
@@ -234,16 +234,13 @@
     $(function() {
         // global csrf token variable
         var token = $('input[name=_token]').val();
-
         $('#trigger-tbl').DataTable({
             scrollY: '50vh',
             deferRender:    true,
             scroller:       true
         });
-
         $("#ss_district").hide();
         $("#ss_commune_div").hide();
-
         /* clear all data when modal onClose or dismiss */
         $('#modal_add_sensor_trigger_record').on('hidden.bs.modal', function () {
             $("#ss_district").hide();
@@ -262,7 +259,6 @@
             $('#modal_add_sensor_trigger_record').modal('show');
             return false;
         });
-
         // add sensor trigger data is submitted
         $(document).on('click', '#add_sensor_trigger_data', function ()
         {
@@ -280,9 +276,7 @@
                 }
                 return false;
             }
-
         });
-
         // edit sensor trigger data is submitted
          $(document).on('click', '#edit_sensor_trigger_data', function ()
          {
@@ -297,7 +291,6 @@
              }
              return false;
          });
-
         /* Show Modal Edit Sensor Trigger */
         $(document).on('click', '#edit_sensor_trigger_info', function ()
         {
@@ -335,7 +328,6 @@
                     {
                         $('#modal_waiting').modal('hide');
                         location.reload();
-
                     },
                     // error: function() {
                     //   alert('sorry, data cannot be fetch');

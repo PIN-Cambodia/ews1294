@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/calllogreport', ['uses' => 'CallLogReportController@CallLogReportView']);
     Route::post('/getCallLogReport', ['uses' => 'CallLogReportController@getCallLogReport']);
     Route::post('/getSSCommunes', ['uses' => 'Sensor\SensorsController@getSSCommunesPerDistrict']);
+    Route::post('/getSSDistrict', ['uses' => 'Sensor\SensorsController@getSSDistrictPerProvince']);
+
     Route::post('/getSSList', ['uses' => 'CallLogReportController@getSensorListInSelectedProvince']);
 
     // Upload Sound File

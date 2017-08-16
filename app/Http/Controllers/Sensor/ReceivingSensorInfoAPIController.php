@@ -88,10 +88,14 @@ class ReceivingSensorInfoAPIController extends Controller
         *      and the emergency level value then
         *   Trigger call and Send mail to relevant officers in the defined list
         **/
+        $warning=$current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
+            && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency;
 
-        if($current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
-            && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
+        // if($current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
+        //     && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
+            for($warning=0;$warning<=1;$warning++)
         {
+         
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
             $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
 
@@ -104,7 +108,8 @@ class ReceivingSensorInfoAPIController extends Controller
         *   1. Trigger call and send mail to relevant officers in the defined list
         *   2. Trigger call to phone numbers in all affected_communes list
         **/
-        elseif($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
+        $emergency=$current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency;
+        for ($emergency=0; $emergency <=1 ; $emergency++)         
         {
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
             $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Emergency");
