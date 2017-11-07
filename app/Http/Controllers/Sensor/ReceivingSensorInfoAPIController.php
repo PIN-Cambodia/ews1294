@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Sensor;
-
 use App\Http\Controllers\Controller;
 use App\Models\activities;
 use App\Models\Sensorlogs;
@@ -13,7 +11,6 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-
 class ReceivingSensorInfoAPIController extends Controller
 {
     public function __construct()
@@ -22,7 +19,6 @@ class ReceivingSensorInfoAPIController extends Controller
         $this->logger = new Logger('my_sensor_log');
         $this->logger->pushHandler(new StreamHandler(storage_path('logs/sensor_log.log')),Logger::INFO);
     }
-
     /**
      * API to automatically get data from sensor and insert into table sensorlogs
      * Check if the stream height reaches warning or emergency level or not
@@ -32,7 +28,6 @@ class ReceivingSensorInfoAPIController extends Controller
     {
         /** Insert data into Table Sensor Logs **/
         $return_inserted_val=$this->insertDataIntoSensorLogTable(Input::get('data'));
-
         /** Write to Log file and Automatically Check data for Automatic Call or/and send Email */
         // Display and write to log whether data is successfully inserted or not
         if (!empty($return_inserted_val))
@@ -40,7 +35,6 @@ class ReceivingSensorInfoAPIController extends Controller
             // write to log
             $this->logger->addInfo(nl2br("Successfully inserted data: " . Input::get('data')));
             echo "Successfully inserted data: " . Input::get('data');
-
             /** Check for automatically call or send E-mail to relevant people **/
             $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
         }
@@ -73,7 +67,6 @@ class ReceivingSensorInfoAPIController extends Controller
                 . " in " . $e->getFile());
         }
     }
-
     /**
     * Function to insert sensor data into tbl sensorlogs
     */
@@ -83,46 +76,33 @@ class ReceivingSensorInfoAPIController extends Controller
         $sensor_trigger = new sensortriggers();
         // get data from table sensortriggers (sensor_id,level_warning,level_emergency...etc)
         $sensor_trigger_result = $sensor_trigger->where('sensor_id',$current_sensor_value->sensor_id)->first();
-
         /** if the received streamHeight of sensor is between the defined warning level value
         *      and the emergency level value then
         *   Trigger call and Send mail to relevant officers in the defined list
         **/
-        $warning=$current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
-            && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency;
-
-        // if($current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
-        //     && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
-            for($warning=0;$warning<=1;$warning++)
+        if($current_sensor_value->stream_height >= $sensor_trigger_result->level_warning
+            && $current_sensor_value->stream_height < $sensor_trigger_result->level_emergency)
         {
-         
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
             $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Warning");
-
             /** automatically call **/
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,"");
             $this->automaticCallToAffectedPeople($sensor_trigger_result->warning_sound_file, $phone_json, "", $current_sensor_value->sensor_id);
         }
-
         /** if (the sensor received streamHeight >= defined Emergency level value) then
         *   1. Trigger call and send mail to relevant officers in the defined list
         *   2. Trigger call to phone numbers in all affected_communes list
         **/
-        $emergency=$current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency;
-        for ($emergency=0; $emergency <=1 ; $emergency++)         
+        elseif($current_sensor_value->stream_height >= $sensor_trigger_result->level_emergency)
         {
             /** send email to relevant officers (PCDM, NCDM, PIN staff) **/
             $this->sendMailToOfficers($sensor_trigger_result->affected_communes, $sensor_trigger_result->emails_list, "Emergency");
-
             /** automatically call **/
-
             // list of Officers' and Villagers' phone numbers
             $phone_json = $this->getPhoneNumbersToBeCalled($sensor_trigger_result->phone_numbers,$sensor_trigger_result->affected_communes);
             $this->automaticCallToAffectedPeople($sensor_trigger_result->emergency_sound_file, $phone_json, $sensor_trigger_result->affected_communes, $current_sensor_value->sensor_id);
         }
-
     }
-
     /**
      * function to send email to officers
      * @param $email_lists is list of PCDM and/or NCDM officers that we need to send email to
@@ -186,16 +166,13 @@ class ReceivingSensorInfoAPIController extends Controller
                     $end_with_comma = ", ";
                     $end_in_kh = " ";
                 }
-
                 $commune_list_kh .= $and_clause_kh . $affected_commune->CName_kh . $end_in_kh;
                 $commune_list .= $and_clause . $affected_commune->CName_en . $end_with_comma;
             }
         }
-
         // list of emails of relevant officers
         $officer_email =explode(",", $email_lists);
         $subject_title = "EWS1294: The Early Warning System Alert";
-
         if($alert_level == "Warning")
         {
             $content = "<p>The automated water level gauge located in <font color='#666600'> " . $commune_list ." <b>commune</b>, "
@@ -225,7 +202,6 @@ class ReceivingSensorInfoAPIController extends Controller
                                 ក្នុងនាមជាសមាជិកនៃក្រុមប្រព័ន្ធប្រកាសឲ្យដឹងមុនមួយរូប, យើងសុំឱ្យអ្នកអនុវត្តសកម្មភាពដែលចាំបាច់ដើម្បីឆ្លើយតបទៅនឹងកម្រិតទឹក កើនឡើងទាំងនេះ ។ កិច្ចសហប្រតិបត្តិការដែលអ្នកបានធ្វើត្រូវបានកោតសរសើរយ៉ាងខ្លាំង។
                                 ";
         }
-
         // send email to every relevant officers in the list
         foreach ($officer_email as $officer_email)
         {
@@ -245,7 +221,6 @@ class ReceivingSensorInfoAPIController extends Controller
             }
         }
     }
-
     /**
      * Function for automatically call to affected people in affected communes
      * @param $url_sound
@@ -258,7 +233,6 @@ class ReceivingSensorInfoAPIController extends Controller
     {
         // Create new activity //
         $activity_created = $this->insertNewActivity(sizeof($phone_tobe_called),$url_sound,$affected_communes,$sensor_id);
-
         if($activity_created > 0)
         {
             $twillioCallApi = "http://ews-twilio.ap-southeast-1.elasticbeanstalk.com/api/v1/processDataUpload";
@@ -270,7 +244,6 @@ class ReceivingSensorInfoAPIController extends Controller
                 "no_of_retry" => "3",
                 "retry_time" => "10"
             );
-
             // Using laravel php library GuzzleHttp for execute external API(Eg: Bong Pheak API)
             $client = new Client();
             $response = $client->request('POST', $twillioCallApi, ['json' => $data]);
@@ -279,7 +252,6 @@ class ReceivingSensorInfoAPIController extends Controller
         else
             return 0;
     }
-
     /**
      * Function to insert New Activity
      * @param $noOfPhones
@@ -300,7 +272,6 @@ class ReceivingSensorInfoAPIController extends Controller
         $activities->save();
         return $activities->id;
     }
-
     /**
      * Function to get phone numbers
      * @param $officerPhones
@@ -311,7 +282,6 @@ class ReceivingSensorInfoAPIController extends Controller
     {
         $targetphones_tbl = new targetphones;
         $phoneNumbersInCommunes = $targetphones_tbl->select('phone')->whereIn('commune_code',explode(",",$affectedCommunes))->get();
-
         $splitArray = explode(",",$officerPhones);
         foreach ($splitArray as $splitArrayEach)
         {

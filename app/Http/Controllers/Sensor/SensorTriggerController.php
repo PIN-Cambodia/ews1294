@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Sensor;
-
 use App\Models\province;
 use App\Models\sensortriggers;
 use Illuminate\Http\Request;
@@ -13,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Validator;
-
 class SensorTriggerController extends Controller
 {
     /**
@@ -25,7 +22,6 @@ class SensorTriggerController extends Controller
         $this->logger = new Logger('sensor_trigger_log');
         $this->logger->pushHandler(new StreamHandler(storage_path('logs/sensor_trigger_log.log')),Logger::INFO);
     }
-
     /**
      * Display all sensor trigger data in dataTable
      * @return data into view
@@ -48,7 +44,6 @@ class SensorTriggerController extends Controller
         $sensor_trigger = sensortriggers::orderBy('id', 'desc')->get();
         return view('sensor/sensortrigger', ['all_province' => $all_province, 'sensor_list_add_new' => $sensor_list_add_new, 'sensor_trigger_data' => $sensor_trigger]);
     }
-
     /**
      * Select Districts of a province
      * @param Request $request
@@ -71,7 +66,6 @@ class SensorTriggerController extends Controller
         $district_selection = "<option value='0'>" . trans('pages.select_district') . "</option>" . $district_options;
         return $district_selection;
     }
-
     /**
      * Select Communes of a district
      * @param Request $request
@@ -93,7 +87,6 @@ class SensorTriggerController extends Controller
         }
         return $commune_options;
     }
-
     /**
      * Add new sensor trigger into table sensortriggers
      * Upload sound file into AWS S3
@@ -107,10 +100,8 @@ class SensorTriggerController extends Controller
         if ($request->hasFile('warning_sound_file') && $request->hasFile('emergency_sound_file')) {
             $warning_file = $request->file('warning_sound_file');
             $emergency_file = $request->file('emergency_sound_file');
-
             $warning_file_name = $warning_file->getClientOriginalName();
             $emergency_file_name = $emergency_file->getClientOriginalName();
-
             $storage = Storage::disk('s3');
             try{
                 $upload_wsf = $storage->put('sensor_sounds/' . $warning_file_name, file_get_contents($warning_file));
@@ -120,7 +111,6 @@ class SensorTriggerController extends Controller
                 $this->logger->addError("Upload Sound file Error: " . $e->getMessage() . " in " . $e->getFile());
             }
         }
-
         /** insert data into table **/
         // Affected Communes list
         $communes_list="";
@@ -143,10 +133,8 @@ class SensorTriggerController extends Controller
             $sensor_trigger_tbl->level_emergency = $request -> emergency_level;
             $sensor_trigger_tbl->affected_communes = $communes_list;
             $sensor_trigger_tbl->phone_numbers = $request -> phone_numbers;
-
             if(!empty($upload_wsf)== true) $sensor_trigger_tbl->warning_sound_file = $warning_file_name;
             if(!empty($upload_esf)== true) $sensor_trigger_tbl->emergency_sound_file = $emergency_file_name;
-
             $sensor_trigger_tbl->emails_list = $request -> email_list;
             $sensor_trigger_tbl->save();
         }
@@ -155,7 +143,6 @@ class SensorTriggerController extends Controller
         }
         return redirect()->intended('/sensortrigger');
     }
-
     /**
      * Get Edit Sensor triggers record
      * Allow admin user to change sound file
@@ -167,9 +154,7 @@ class SensorTriggerController extends Controller
         $ss_trigger_record = sensortriggers::where('id', $edit_sensor_id)->get();
         // get existing record of province, district and checked the communes
         $affected_communes_arr = explode(",", $ss_trigger_record[0]->affected_communes);
-
         $get_location_val = $this->getExistingProvinceAndDistrict($affected_communes_arr[0],$affected_communes_arr,true);
-
         $modal_body = "<div class='modal-body'>"
                         . trans('sensors.sensor_id')
                         . "<input type='text' value='" . $ss_trigger_record[0]->sensor_id . "' disabled/><br />"
@@ -246,7 +231,6 @@ class SensorTriggerController extends Controller
                     ;
         return $modal_body;
     }
-
     /**
      * Save Edit Sensor triggers record
      * Allow admin user to change sound file
@@ -265,7 +249,6 @@ class SensorTriggerController extends Controller
             try{
                 // upload new warning sound file
                 $upload_wsf_new = $storage->put('sensor_sounds/' . $warning_file_nam, file_get_contents($warning_file_new));
-
                 // delete old existing sound file
                 if($storage->has('sensor_sounds/'. $ss_trigger_data->warning_sound_file) == true)
                     $storage->delete('sensor_sounds/' . $ss_trigger_data->warning_sound_file);
@@ -293,7 +276,6 @@ class SensorTriggerController extends Controller
                                         . $e->getMessage() . " in " . $e->getFile());
             }
         }
-
         /** insert data into table **/
         // Affected Communes list
         $communes_list_new="";
@@ -314,13 +296,10 @@ class SensorTriggerController extends Controller
             $ss_trigger_data->level_emergency = $request -> emergency_level;
             $ss_trigger_data->affected_communes = $communes_list_new;
             $ss_trigger_data->phone_numbers = $request -> phone_numbers;
-
             if(!empty($upload_wsf_new)== true) $ss_trigger_data->warning_sound_file = $warning_file_nam;
             if(!empty($upload_esf_new)== true) $ss_trigger_data->emergency_sound_file = $emergency_file_nam;
-
             $ss_trigger_data->emails_list = $request -> email_list;
             $ss_trigger_data->save();
-
         }
         catch (\Exception $e) {
             $this->logger->addError("UPDATE DATA INTO TABLE ERROR: " . $e->getMessage() . " in " . $e->getFile());
@@ -328,7 +307,6 @@ class SensorTriggerController extends Controller
         // return $ss_trigger_data;
         return redirect()->intended('/sensortrigger');
     }
-
     /**
      * Delete selected records from Table sensortriggers
      * Delete related sound files from AWS S3
@@ -360,7 +338,6 @@ class SensorTriggerController extends Controller
             }
         }
     }
-
     /**
      * Function to get the existing provinces, districts and communes
      * @param $commune_code
@@ -402,7 +379,6 @@ class SensorTriggerController extends Controller
             }
         }
         else $prov_options = "<option value='0'>" . trans('pages.select_province') . "</option>";
-
         if(!empty($district_str_code)) {
             $district_query = DB::table('district')->where('DCode', $district_str_code)->get();
             if (!empty($district_query)) {
@@ -437,7 +413,6 @@ class SensorTriggerController extends Controller
                     $other_dis_options .= "<option value='". $other_dis_option->DCode . "'>" . $other_dis_option->DName_en . "</option>";
             }
         }
-
         // commune
         if($checkbox == true)
         {
@@ -452,7 +427,6 @@ class SensorTriggerController extends Controller
                         $commune_val .= "<input type='checkbox' name='communes[]' value='". $affected_commune->CCode . "' checked> " . $affected_commune->CName_en . "<br/>";
                 }
             }
-
             $other_communes = DB::table('commune') -> where('DCode', $district_str_code)
                                 ->whereNotIn('CCode', $commune_data)
                                 ->get();
@@ -490,7 +464,6 @@ class SensorTriggerController extends Controller
                 }
             }
         }
-
         $return_arr_val = ['prov_options'=> $prov_options,
                                 'other_prov_options'=> $other_prov_options,
                                 'dis_options'=> $dis_options,

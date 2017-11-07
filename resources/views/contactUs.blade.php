@@ -16,7 +16,8 @@
             	 <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
-				<ul>
+           
+                <ul>
 
 				@if(session('message'))
 				<div class="alert alert-success ">

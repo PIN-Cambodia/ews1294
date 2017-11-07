@@ -18,6 +18,7 @@ body
   height: 700px; /*for IE*/
   width: 100% !important;
   border: none;
+
 }
 .main{
     background: white;
