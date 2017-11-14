@@ -1,3 +1,4 @@
+
 <?php
 namespace App\Http\Controllers\Sensor;
 use App\Http\Controllers\Controller;
@@ -105,11 +106,11 @@ class ReceivingSensorInfoAPIController extends Controller
     }
     /**
      * function to send email to officers
-     * @param $email_lists is list of PCDM and/or NCDM officers that we need to send email to
+     * @param $emails_list is list of PCDM and/or NCDM officers that we need to send email to
      * @param $alert_level can be either Warning_level or Emergency_level
      *
      */
-    public function sendMailToOfficers($affected_place, $email_lists, $alert_level)
+    public function sendMailToOfficers($affected_place, $emails_list, $alert_level)
     {
         /** get location of affected place */
         $affected_place_arr = explode(",", $affected_place);
@@ -171,7 +172,7 @@ class ReceivingSensorInfoAPIController extends Controller
             }
         }
         // list of emails of relevant officers
-        $officer_email =explode(",", $email_lists);
+        $officer_email =explode(",", $emails_list);
         $subject_title = "EWS1294: The Early Warning System Alert";
         if($alert_level == "Warning")
         {

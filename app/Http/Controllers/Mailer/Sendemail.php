@@ -20,8 +20,10 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	$mail->Username = "alerts@ews1294.info";                 
 	$mail->Password = "Vinea000";                           
 	//If SMTP requires TLS encryption then set it
+	$mail->SMTPSecure ="tls";
 	$mail->SMTPSecure = "ssl";                           
 	//Set TCP port to connect to 
+	$mail->Port =587;
 	$mail->Port = 465;                                   
 
 	$mail->From = "alerts@ews1294.info";
@@ -32,6 +34,7 @@ function Sendemail($fromname, $to, $namereciever, $subject, $body)
 	$mail->FromName = $fromname;
 	$mail->addAddress($to, $namereciever); // Define address of destination
 	$mail->isHTML(true);
+
 
 	// DEFINE THE MAIl CONTENT
 	$mail->Subject = $subject;
