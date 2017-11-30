@@ -3,7 +3,7 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="{{ url('/') }}">
         <div class="row" style="background: white;">
-          <div class="col-sm-3 col-md-3 col-lg-3" style="padding-bottom:10px;margin-top:-10px;">
+          <div class="col-sm-3 col-md-3 col-lg-3" style="padding-bottom:10px;margin-top: 3px;">
             <img src="/EWS1294b.gif" width="35%">
           </div>
         <!--   <div class="col-sm-9 col-md-9 col-lg-9" style="text-align: center; font-family: Roboto,Arial,sans-serf; ">          
