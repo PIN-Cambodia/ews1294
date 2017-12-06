@@ -1,4 +1,3 @@
-
 <?php
 namespace App\Http\Controllers\Sensor;
 use App\Http\Controllers\Controller;

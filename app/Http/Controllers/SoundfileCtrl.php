@@ -34,12 +34,24 @@ class SoundfileCtrl extends Controller
      */
     public function insertNewActivity(Request $request)
     {
+         // $activities=DB::table('activities')->select('sound_file','list_commune_codes')->get();
+         // foreach ($activities as  $value) {
+         //    $filename=$value->sound_file;
+         //    $commune=$value->list_commune_codes;
+         //     # code...
+         // }
         if (Session::token() != $request->input('_token')) {
             return response()->json(array('msg' => 'Unauthorized attempt to create setting'));
         }
         $communes = Input::get('communes');
         $noOfPhones = Input::get('noOfPhones');
         $newfilename = $request->file('soundFile')->getClientOriginalName();
+        // use condition not allow send the same file name in the same commune
+        // if ($communes == $commune && $newfilename == $filename) {
+        //     # code...
+        //     echo "you can't send the record in the same commune";
+        // }
+        // else{
         // Upload sound file to AWS s3 storage
         $storage = Storage::disk('s3');
         $storage->put('sounds/' . $newfilename, fopen($request->file('soundFile')->getRealPath(), 'r+'), 'public');
@@ -53,6 +65,7 @@ class SoundfileCtrl extends Controller
         $activities->save();
 
         return array($activities->id, $newfilename);
+        // }//end condition send the same file name
     }
 
 }
