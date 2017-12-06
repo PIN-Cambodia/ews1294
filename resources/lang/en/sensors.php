@@ -79,6 +79,6 @@ return [
     'pursat' => 'Sensor-Pursat 02',
     'complaint' => 'Email',
     'phone_number' => ' Phone ',
-    'complaint_content' => ' If you have any feedback or complaints, please contact us via email or phone.'
+    'complaint_content' => ' If you have any feedback or complaints, please contact us via email or phone'
 
 ];

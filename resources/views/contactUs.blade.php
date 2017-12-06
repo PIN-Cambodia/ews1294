@@ -75,9 +75,7 @@
 				</div>
             </div><!-- \ panel panel-body -->
         </div><!-- \ panel panel-default -->
-   </div>
-
-   
+   		</div>
     </div><!--/.row-->
   </div>	<!--/.main-->
 </section>
