@@ -359,3 +359,13 @@ fieldset[disabled] .btn-primary.active {
     border-color: #ddd;
     height: 1000px;
 }
+
+#scoll{
+   
+    width: 100%;
+    /*max-height: 500px;*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 500px ;
+  
+}
