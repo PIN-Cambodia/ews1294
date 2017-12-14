@@ -280,7 +280,7 @@ Route::get('/sensorsLog1thReadingOf30days', function () {
  * Route to display Sensor Map
  */
 Route::get('/sensormap', function () {
-    $sensorIds=sensors::select('sensor_id','location_coordinates')->get()->toArray();
+    $sensorIds=sensors::select('sensor_id','location_coordinates','additional_location_info')->get()->toArray();
     $sensorlogsAll = array();
     $i=0;
     foreach($sensorIds as $sensorId)
