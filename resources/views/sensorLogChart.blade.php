@@ -32,15 +32,10 @@
                                     
                                         <br/>
                                    <!-- add update next time with database (show location header) -->
-                                   
-                                    @if($sensorId =='1020301')
-                                    {{ trans('sensors.kompot') }}
-                                    
-                                    @elseif($sensorId == '15040701')
-                                    {{ trans('sensors.pursat') }}
-                                    @else
-                                    {{ trans('sensors.phnom_penh') }}
-                                    @endif
+                                     @foreach($sensors as $sensor)
+                                       <p> {{ $sensor->additional_location_info }}</p>
+                               
+                                     @endforeach
                                 <!-- end if --></b>
                             </div>
 

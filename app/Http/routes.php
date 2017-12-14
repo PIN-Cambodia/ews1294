@@ -257,8 +257,9 @@ Route::post('changelang', ['uses' => 'UserauthController@changeLanguage']);
  */
 Route::get('/sensorsLog20', function () {
     $sensor_id = Input::get('sensor_id');
+    $sensor_name=DB::table('sensors')->select('additional_location_info')->where('sensor_id','=',$sensor_id)->get();
     $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
-    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '1', 'sensorId' => $sensor_id]);
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'sensors' => $sensor_name, 'reportPage' => '1', 'sensorId' => $sensor_id]);
 });
 
 /**
@@ -266,12 +267,13 @@ Route::get('/sensorsLog20', function () {
  */
 Route::get('/sensorsLog1thReadingOf30days', function () {
     $sensor_id = Input::get('sensor_id');
+    $sensor_name=DB::table('sensors')->select('additional_location_info')->where('sensor_id','=',$sensor_id)->get();
     $sensorlogs = DB::table('sensorlogs')
         ->select(DB::raw("date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, id, sensor_id, stream_height, charging, voltage ,timestamp"))
         ->where('sensor_id','=',$sensor_id)
         ->groupBy('time')
         ->orderBy('timestamp','desc')->limit(30)->get();
-    return view('sensorsLogReport',['sensorlogs' => $sensorlogs, 'reportPage' => '2', 'sensorId' => $sensor_id]);
+    return view('sensorsLogReport',['sensorlogs' => $sensorlogs,'sensors' => $sensor_name,'reportPage' => '2', 'sensorId' => $sensor_id]);
 });
 
 /**

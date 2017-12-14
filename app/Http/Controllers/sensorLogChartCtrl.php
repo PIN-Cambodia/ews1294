@@ -24,6 +24,7 @@ class sensorLogChartCtrl extends Controller
         $graph_type = Input::get('type');
         if($graph_type==2)
         {
+            $sensors=DB::table('sensors')->select('additional_location_info')->where('sensor_id','=',$sensor_id)->get();
             // retrieve first reading within last 30 days for $sensor_id
             $sensorlogs = DB::table('sensorlogs')
                 ->select(DB::raw("id, date_format(date(date_sub(timestamp,interval 0 hour)),GET_FORMAT(DATE,'ISO')) as time, stream_height"))
@@ -35,6 +36,7 @@ class sensorLogChartCtrl extends Controller
         else
         {
             // retrieve first 24 readings for $sensor_id
+            $sensors=DB::table('sensors')->select('additional_location_info')->where('sensor_id','=',$sensor_id)->get();
             $sensorlogs = DB::table('sensorlogs')
                 ->select (DB::raw("id,date_format(timestamp,'%H:%i') as time, stream_height"))
                 ->where('sensor_id','=',$sensor_id)
@@ -77,7 +79,7 @@ class sensorLogChartCtrl extends Controller
                     'vAxis' =>['title' => 'Level of water in " cm " ']
                 ]);
                 
-            return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type]);
+            return view('sensorLogChart',['sensorId'=>$sensor_id, 'graph_type'=>$graph_type ,'sensors'=>$sensors]);
         }
         else
         {

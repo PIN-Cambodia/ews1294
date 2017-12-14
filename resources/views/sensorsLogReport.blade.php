@@ -33,14 +33,11 @@
                                          <!-- //{{ trans('sensors.phnom_penh') }} -->
                                     @endif
                                     <br/>
-                                     @if($sensorId =='1020301')
-                                    {{ trans('sensors.kompot') }}
-                                    
-                                    @elseif($sensorId == '15040701')
-                                    {{ trans('sensors.pursat') }}
-                                    @else
-                                    {{ trans('sensors.phnom_penh') }}
-                                    @endif
+                                     @foreach($sensors as $sensor)
+                                       <p> {{ $sensor->additional_location_info }}</p>
+                               
+                                     @endforeach
+
                                 </b></div>
                             <div class="col-xs-8 col-md-7 col-lg-5 ">
                                 <a href="sensorlogReportInChart?sensor_id={{$sensorId}}&type={{$reportPage}}">
