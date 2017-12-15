@@ -18,8 +18,9 @@
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
                 <h4>{{ trans('sensors.complaint_content') }}</h4>
-              	<h4> <b> {{ trans('sensors.complaint') }}: </b> crm.cambodia@peopleinneed.cz </h4>
-                <h4> <b> {{ trans('sensors.phone_number') }}: </b> 092939169 </h4><br>
+              	<h4> <b> {{ trans('sensors.complaint') }}: </b> 
+              		complaints@ews1294.info</h4>
+                <h4> <b> {{ trans('sensors.phone_number') }}: </b> (+855)92939169 </h4><br>
                 <ul>
 
 				@if(session('message'))
