@@ -17,6 +17,7 @@
             	 <div class="row"> 
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8">
+                <p>hello world</p>
                 <h4>{{ trans('sensors.complaint_content') }}</h4>
               	<h4> <b> {{ trans('sensors.complaint') }}: </b> 
               		complaints@ews1294.info</h4>
