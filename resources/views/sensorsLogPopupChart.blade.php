@@ -93,7 +93,7 @@ option = {
     title: {
         left: 'center',
         text: graphTitle,
-        textStyle: {fontSize: 12}
+        textStyle: {fontSize: 15}
     },
     toolbox: {
         feature: {
@@ -130,9 +130,9 @@ option = {
 }},
     yAxis: {
         type: 'value',
-        boundaryGap: ['10%', '10%'],
-        //max: ymaxVal,
-        //min: yminVal
+        //boundaryGap: ['10%', '10%'],
+        max: ymaxVal,
+        min: yminVal
     },
    // dataZoom: [{
    //     type: 'inside',
