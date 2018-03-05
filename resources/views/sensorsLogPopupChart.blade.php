@@ -69,11 +69,11 @@ yminVal = precisionRound(yminVal, -1);
 //ensure alert levels are within the Y axis range.
 //as these are dynamic
 if (yminVal > warningThreshold ) {
-    yminVal = (parseInt(warningThreshold) - 50);
+    yminVal = (parseInt(warningThreshold) - total);
   }
 
 if (ymaxVal < alertThreshold ) {
-    ymaxVal = (parseInt(alertThreshold) + 50);
+    ymaxVal = (parseInt(alertThreshold) + total);
   }  
 
 //reshuffle. echart needs data in correct order..
