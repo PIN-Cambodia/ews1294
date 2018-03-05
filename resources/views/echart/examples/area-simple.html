@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+
+var date = ['2018/02/01','2018/02/02','2018/02/03','2018/02/04','2018/02/05','2018/02/06','2018/02/07','2018/02/08','2018/02/09','2018/02/10','2018/02/11','2018/02/12'];
+var data = [330,335,333,333,345,355,344,365,378,399,400,401];
+var sensorThresholds = [330,360];
+//Set two variables for min-max date ranges - used to set length of Marker lines (Alert/Warning levels)
+var dateRangeStart = date[0];
+var dateRangeEnd = date[date.length - 1];
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        position: function (pt) {
+            return [pt[0], '10%'];
+        }
+    },
+    title: {
+        left: 'center',
+        text: 'EWS Sensor Water Height - Siem Reap',
+    },
+    toolbox: {
+        feature: {
+            dataZoom: {
+				show : false,
+                yAxisIndex: 'none'
+            },
+            restore: {
+			 show : false},
+            saveAsImage: {
+			 title : 'Save Image'}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: date
+    },
+    yAxis: {
+        type: 'value',
+        boundaryGap: [0, '100%']
+    },
+    dataZoom: [{
+        type: 'inside',
+        start: 0,
+        end: 100 //this is percentage of total data retrieval to show as zooomed in/out.
+    }, {
+        start: 0,
+        end: 30,
+        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+        handleSize: '100%',
+        handleStyle: {
+            color: '#fff',
+            shadowBlur: 3,
+            shadowColor: 'rgba(0, 0, 0, 0.6)',
+            shadowOffsetX: 2,
+            shadowOffsetY: 2
+        }
+    }],
+    series: [
+        {
+            name:'Water Level',
+            type:'line',
+            smooth:true,
+            symbol: 'none',
+            sampling: 'average',
+            itemStyle: {
+                normal: {
+                    color: 'rgb(240,248,255)'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(0, 191, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(0, 0, 128)'
+                    }])
+                }
+            },
+            data: data,
+			
+			markLine: {
+			name:'Warning',
+            type:'line',
+            smooth:true,
+			data: [[                 
+           { // start point of the line
+            xAxis: dateRangeStart, // we have to defined line attributes only here (not in the end point)
+            yAxis: sensorThresholds[0],
+            lineStyle: {
+              normal: {
+                color: "#ffb200"
+              }
+            },
+            label: {
+              normal: {
+                show: true,
+                position: 'end',
+                formatter: 'Warning'
+              }
+            }
+          },
+          // end point of the line
+          {
+            xAxis: dateRangeEnd,
+            yAxis: sensorThresholds[0],
+            
+				  }	  
+				  
+				  
+				  
+				],
+		
+		[                 
+           { // start point of the Alert line
+            xAxis: dateRangeStart, // we have to defined line attributes only here (not in the end point)
+            yAxis: sensorThresholds[1],
+            lineStyle: {
+              normal: {
+                color: "#ff2323"
+              }
+            },
+            label: {
+              normal: {
+                show: true,
+                position: 'end',
+                formatter: 'Alert'
+              }
+            }
+          },
+          // end point of the alert line
+          {
+            xAxis: dateRangeEnd,
+            yAxis: sensorThresholds[1],
+            
+				  }	  
+				  
+				  
+				  
+				]	
+				
+				
+				
+			  ]
+			}	
+
+
+			
+        }
+		 
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

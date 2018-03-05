@@ -263,6 +263,17 @@ Route::get('/sensorsLog20', function () {
 });
 
 /**
+ * Route to display sensor report of first 24 readings for $sensor_id.
+ * modified to work with echarts
+ */
+Route::get('/sensorsEChartPopup', function () {
+    $sensor_id = Input::get('sensor_id');
+    $sensor_name=DB::table('sensors')->select('additional_location_info')->where('sensor_id','=',$sensor_id)->get();
+    $sensor_triggers=DB::table('sensortriggers')->where('sensor_id','=',$sensor_id)->get();
+    $sensorlogs = DB::table('sensorlogs')->where('sensor_id','=',$sensor_id)->orderBy('timestamp','desc')->limit(24)->get();
+    return view('sensorsLogPopupChart',['sensorlogs' => $sensorlogs, 'sensors' => $sensor_name, 'reportPage' => '1', 'sensorId' => $sensor_id, 'triggers' => $sensor_triggers]);
+});
+/**
  * Route to display sensor report of 30 days for $sensor_id.
  */
 Route::get('/sensorsLog1thReadingOf30days', function () {
