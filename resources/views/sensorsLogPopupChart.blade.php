@@ -132,7 +132,8 @@ option = {
         type: 'value',
         //boundaryGap: ['10%', '10%'],
         max: ymaxVal,
-        min: yminVal
+        min: 0,
+        
     },
    // dataZoom: [{
    //     type: 'inside',
