@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html style="height: 100%">
+<html style="height:100%;width:100%;">
    <head>
-       <meta charset="utf-8">
+      <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
    </head>
-   <body style="height: 100%;width: 100%; margin: 0">
-       <div id="container" style="height: 100%;width: 100%" ></div>
+<body style="height:100%;width:100%;">
+<content style="height:100%;width:100%;">
+       <div id="container" style="min-height:230px;width:100%;">
+       </div>
+
+
+ </content>
+</body>
+</html>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -14,7 +22,8 @@
        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-       <script type="text/javascript">
+ 
+ <script type="text/javascript">
        
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
@@ -93,7 +102,7 @@ option = {
     title: {
         left: 'center',
         text: graphTitle,
-        textStyle: {fontSize: 15}
+        textStyle: {fontSize: 10}
     },
     toolbox: {
         feature: {
@@ -124,7 +133,7 @@ option = {
                   }
 
                   var sendback = h + ":" + m;
-                  return sendback; 
+                  return sendback.toString(); 
                 }
 
 }},
@@ -238,7 +247,9 @@ option = {
 ;
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
-}
+};
+
+window.onresize = function() {
+  myChart.resize();
+};
        </script>
-   </body>
-</html>
