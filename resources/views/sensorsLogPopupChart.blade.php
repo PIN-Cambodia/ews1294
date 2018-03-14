@@ -119,11 +119,14 @@ option = {
                   var m = value.getMinutes();
                   var s = value.getSeconds();
                   // add a zero in front of numbers<10
+                  var newM = "";
                   if (parseInt(m) < 10) {
-                    m = "0" + m.toString();
-                  }
-
-                  var sendback = h.toString() + ":" + m.toString() ;
+                    newM = "0" + String(m);}
+                  else 
+                    newM = String(m);
+                  
+                  var sendback = "";
+                  sendback = String(h) + ":" + String(newM) ;
                   return sendback; 
                 }
 
