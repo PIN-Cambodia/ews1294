@@ -19,7 +19,7 @@
     .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; opacity: 1 } .info h4 { margin: 0 0 5px; color: #777; }
     .legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
       #iframe {
-      width:600px;
+      width:620px;
       height: 340px;
     }
   </style>
@@ -193,7 +193,7 @@ var popup = L.popup()
     .setContent("No popup info :(");
     
 function showPopUp(e) {
-   popup.setContent("<iframe id='iframe'  frameBorder='none' scrolling='yes' src='sensorsEChartPopup?sensor_id=" + e.target.feature.properties.sensorID + "&type=1'></iframe><br><a href ='/sensorsLog20?sensor_id=" + e.target.feature.properties.sensorID + "'><b>View Table - Last 6 hours</b></a><br><a href ='/sensorsLog1thReadingOf30days?sensor_id=" + e.target.feature.properties.sensorID + "'><b>View Table -  Last 30 Days</a>" );
+   popup.setContent("<iframe id='iframe'  frameBorder='none' scrolling='no' src='sensorsEChartPopup?sensor_id=" + e.target.feature.properties.sensorID + "&type=1'></iframe><br><a href ='/sensorsLog20?sensor_id=" + e.target.feature.properties.sensorID + "'><b>View Table - Last 6 hours</b></a><br><a href ='/sensorsLog1thReadingOf30days?sensor_id=" + e.target.feature.properties.sensorID + "'><b>View Table -  Last 30 Days</a>" );
 
     // + "<iframe id='iframe'  frameBorder='0' scrolling='yes' src='sensors6hrs?sensor_id=" + e.target.feature.properties.sensorID + "&type=1'></iframe>");  //"You clicked on " + e.target.feature.properties.name.toString() + 
    popup.setLatLng(e.target.getLatLng)
@@ -203,7 +203,9 @@ function showPopUp(e) {
    e.target.bindPopup(popup, {}).openPopup();
    info._div.style.opacity = 0;
    legend._container.style.opacity = 0;
+   mapSwitcher._container.style.opacity = 0;
    map.zoomControl.remove(true);
+   mapSwitcher._container.style.opacity = 0
 }
 
 // control that shows state info on hover
@@ -214,6 +216,7 @@ popup.on('remove', function(e) {
                      info._div.style.opacity = 1;
                      map.zoomControl.addTo(map)
                      legend._container.style.opacity = 1;
+                     mapSwitcher._container.style.opacity = 1
                      });
 
 info.onAdd = function (map) {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="height: 100%">
    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+    
    </head>
    <body style="height: 100%;width: 100%; margin: 0">
        <div id="container" style="height: 100%;width: 50%" ></div>
@@ -81,7 +81,7 @@ data.reverse();
 date.reverse();
 var dateRangeStart = date[0];
 var dateRangeEnd = date[date.length - 1];
-var graphTitle = "Last 6 hours - " + sensor_description;
+var graphTitle = sensor_description;
 
 option = {
     tooltip: {
