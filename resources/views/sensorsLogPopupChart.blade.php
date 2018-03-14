@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html style="height: 100%">
    <head>
-       <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
    </head>
    <body style="height: 100%;width: 100%; margin: 0">
-       <div id="container" style="height: 100%;width: 100%" ></div>
+       <div id="container" style="height: 100%;width: 50%" ></div>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
