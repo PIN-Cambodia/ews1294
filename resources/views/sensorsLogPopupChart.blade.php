@@ -34,7 +34,7 @@ var yminVal = 0
 //populate the data and date arrays with records from JSON response file.
  @foreach($sensorlogs as $sensorlog) 
    data.push(parseInt("{{$sensorlog->stream_height}}"))
-   date.push("{{$sensorlog->timestamp}}")
+   date.push(new Date("{{$sensorlog->timestamp}}"))
  @endforeach
 
 //pull sensor name
@@ -93,7 +93,7 @@ option = {
     title: {
         left: 'center',
         text: graphTitle,
-        textStyle: {fontSize: 15}
+        textStyle: {fontSize: 13}
     },
     toolbox: {
         feature: {
@@ -104,6 +104,7 @@ option = {
             restore: {
              show : false},
             saveAsImage: {
+              show: false,
              title : 'Save Image'}
         }
     },
@@ -195,7 +196,7 @@ option = {
             },
             label: {
               normal: {
-                show: true,
+                show: false,
                 position: 'end',
                 formatter: 'Warning'
               }
@@ -220,7 +221,7 @@ option = {
             },
             label: {
               normal: {
-                show: true,
+                show: false,
                 position: 'end',
                 formatter: 'Alert'
               }
