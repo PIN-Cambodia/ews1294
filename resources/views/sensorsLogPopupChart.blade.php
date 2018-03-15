@@ -35,10 +35,10 @@ var yminVal = 0
  @foreach($sensorlogs as $sensorlog) 
    data.push(parseInt("{{$sensorlog->stream_height}}"))
    var tempdate = "{{$sensorlog->timestamp}}"
-   tempdate.replace(' ', 'T')
+   //tempdate.replace(' ', 'T')
    //replace spaces so iOS recognises date format on mobile devices.
-   //date.push(new Date(tempdate.replace(' ', 'T')))
-   date.push(tempdate)
+   date.push(new Date(tempdate.replace(' ', 'T')))
+   //date.push(tempdate)
    //date.push("{{$sensorlog->timestamp}}")
  @endforeach
 
@@ -84,6 +84,7 @@ if (ymaxVal < alertThreshold ) {
 //reshuffle. echart needs data in correct order..
 data.reverse();
 date.reverse();
+var recordCount = date.length - 1;
 var graphTitle = sensor_description;
 
 option = {
@@ -118,10 +119,10 @@ option = {
         axisLabel: {  //FORMAT the lables to show just hours.           
                 show: true,
                 formatter: function startTime(value) {
-                  var value = new Date(value);
-                  var h = value.getHours();
-                  var m = value.getMinutes();
-                  var s = value.getSeconds();
+                  var valuex = new Date(value);
+                  var h = valuex.getHours();
+                  var m = valuex.getMinutes();
+                  var s = valuex.getSeconds();
                   // add a zero in front of numbers<10
                   var newM = "";
                   if (parseInt(m) < 10) {
@@ -173,7 +174,7 @@ option = {
             smooth:true,
             data: [[                 
            { // start point of the line
-            xAxis: date[0], // we have to defined line attributes only here (not in the end point)
+            xAxis: 0, // we have to defined line attributes only here (not in the end point)
             yAxis: warningThreshold,
             lineStyle: {
               normal: {
@@ -190,7 +191,7 @@ option = {
           },
           // end point of the line
           {
-            xAxis: date[date.length - 1],
+            xAxis: recordCount,
             yAxis: warningThreshold,
             
                   }   
@@ -198,7 +199,7 @@ option = {
         
         [                 
            { // start point of the Alert line
-            xAxis: date[0], // we have to defined line attributes only here (not in the end point)
+            xAxis: 0, // we have to defined line attributes only here (not in the end point)
             yAxis: alertThreshold,
             lineStyle: {
               normal: {
@@ -215,7 +216,7 @@ option = {
           },
           // end point of the alert line
           {
-            xAxis: date[date.length - 1],
+            xAxis: recordCount,
             yAxis: alertThreshold,
             
                   }   
