@@ -34,7 +34,11 @@ var yminVal = 0
 //populate the data and date arrays with records from JSON response file.
  @foreach($sensorlogs as $sensorlog) 
    data.push(parseInt("{{$sensorlog->stream_height}}"))
-   date.push(new Date("{{$sensorlog->timestamp}}"))
+   var tempdate = "{{$sensorlog->timestamp}}"
+   //replace spaces so iOS recognises date format on mobile devices.
+   date.push(new Date(tempdate.replace(' ', 'T')))
+
+   console.log(("{{$sensorlog->timestamp}}"))
  @endforeach
 
 //pull sensor name
