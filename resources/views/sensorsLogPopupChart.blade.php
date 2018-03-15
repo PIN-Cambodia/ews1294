@@ -29,7 +29,6 @@ var sensor_description = ""
 var alertThreshold = ""
 var warningThreshold = ""
 var ymaxVal = 0
-var yminVal = 0
 
 //populate the data and date arrays with records from JSON response file.
  @foreach($sensorlogs as $sensorlog) 
@@ -54,31 +53,22 @@ var yminVal = 0
  @endforeach
 
 //-- Neaten the graph --
-//TO adjust the y axis minimum and maxium extents...
+//TO adjust the y axis maxium extents...
 //ADD 10% of delta Y to each value, to padd the graph
 //for visual effect.
 //ROUND the Y axis to the nearst value tenth.
 ymaxVal = Math.max(...data);
-yminVal = Math.min(...data);
-var total = Math.abs(ymaxVal - yminVal);
-total = (total * 0.1);
 function precisionRound(number, precision) {
   var factor = Math.pow(10, precision);
   return Math.round(number * factor) / factor;
 }
-ymaxVal = (ymaxVal + total);
-yminVal =(yminVal- total);
+ymaxVal = (ymaxVal * 1.1);
 ymaxVal = precisionRound(ymaxVal, -1);
-yminVal = precisionRound(yminVal, -1);
 
 //ensure alert levels are within the Y axis range.
 //as these are dynamic
-if (yminVal > warningThreshold ) {
-    yminVal = (parseInt(warningThreshold) - total);
-  }
-
 if (ymaxVal < alertThreshold ) {
-    ymaxVal = (parseInt(alertThreshold) + total);
+    ymaxVal = (parseInt(alertThreshold) * 1.1);
   }  
 
 //reshuffle. echart needs data in correct order..
@@ -139,7 +129,7 @@ option = {
     yAxis: {
         type: 'value',
         boundaryGap: ['0%', '5%'],
-        //max: ymaxVal,
+        max: ymaxVal,
         min: 0,
         
     },
