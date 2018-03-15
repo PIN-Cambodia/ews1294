@@ -35,10 +35,11 @@ var yminVal = 0
  @foreach($sensorlogs as $sensorlog) 
    data.push(parseInt("{{$sensorlog->stream_height}}"))
    var tempdate = "{{$sensorlog->timestamp}}"
+   tempdate.replace(' ', 'T')
    //replace spaces so iOS recognises date format on mobile devices.
-   date.push(new Date(tempdate.replace(' ', 'T')))
-
-   console.log(("{{$sensorlog->timestamp}}"))
+   //date.push(new Date(tempdate.replace(' ', 'T')))
+   date.push(tempdate)
+   //date.push("{{$sensorlog->timestamp}}")
  @endforeach
 
 //pull sensor name
@@ -83,8 +84,6 @@ if (ymaxVal < alertThreshold ) {
 //reshuffle. echart needs data in correct order..
 data.reverse();
 date.reverse();
-var dateRangeStart = date[0];
-var dateRangeEnd = date[date.length - 1];
 var graphTitle = sensor_description;
 
 option = {
@@ -138,28 +137,11 @@ option = {
 }},
     yAxis: {
         type: 'value',
-        //boundaryGap: ['10%', '10%'],
-        max: ymaxVal,
+        boundaryGap: ['0%', '5%'],
+        //max: ymaxVal,
         min: 0,
         
     },
-   // dataZoom: [{
-   //     type: 'inside',
-   //     start: 0,
-   //     end: 100 //this is percentage of total data retrieval to show as zooomed in/out.
-   // },   {
-   //     start: 0,
-   //     end: 30,
-   //     handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-   //     handleSize: '100%',
-   //     handleStyle: {
-   //         color: '#fff',
-   //         shadowBlur: 3,
-    //        shadowColor: 'rgba(0, 0, 0, 0.6)',
-    //        shadowOffsetX: 2,
-    //        shadowOffsetY: 2
-    //    }
-    //}],
     series: [
         {
             name:'Water Level',
@@ -191,7 +173,7 @@ option = {
             smooth:true,
             data: [[                 
            { // start point of the line
-            xAxis: dateRangeStart, // we have to defined line attributes only here (not in the end point)
+            xAxis: date[0], // we have to defined line attributes only here (not in the end point)
             yAxis: warningThreshold,
             lineStyle: {
               normal: {
@@ -208,7 +190,7 @@ option = {
           },
           // end point of the line
           {
-            xAxis: dateRangeEnd,
+            xAxis: date[date.length - 1],
             yAxis: warningThreshold,
             
                   }   
@@ -216,7 +198,7 @@ option = {
         
         [                 
            { // start point of the Alert line
-            xAxis: dateRangeStart, // we have to defined line attributes only here (not in the end point)
+            xAxis: date[0], // we have to defined line attributes only here (not in the end point)
             yAxis: alertThreshold,
             lineStyle: {
               normal: {
@@ -233,7 +215,7 @@ option = {
           },
           // end point of the alert line
           {
-            xAxis: dateRangeEnd,
+            xAxis: date[date.length - 1],
             yAxis: alertThreshold,
             
                   }   
