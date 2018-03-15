@@ -34,11 +34,8 @@ var ymaxVal = 0
  @foreach($sensorlogs as $sensorlog) 
    data.push(parseInt("{{$sensorlog->stream_height}}"))
    var tempdate = "{{$sensorlog->timestamp}}"
-   //tempdate.replace(' ', 'T')
    //replace spaces so iOS recognises date format on mobile devices.
    date.push(new Date(tempdate.replace(' ', 'T')))
-   //date.push(tempdate)
-   //date.push("{{$sensorlog->timestamp}}")
  @endforeach
 
 //pull sensor name
@@ -131,6 +128,11 @@ option = {
         boundaryGap: ['0%', '5%'],
         max: ymaxVal,
         min: 0,
+        axisLabel: {
+          showMaxLabel: false,
+          inside: false,
+          rotate: 45,
+        }
         
     },
     series: [
