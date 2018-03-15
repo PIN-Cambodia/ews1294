@@ -236,7 +236,7 @@ info.addTo(map);
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = ["Inactive", "Normal", "Warning", "Alert"],
+        grades = ["Alert", "Warning", "Normal", "Inactive"],
         labels = [];
    
    for (var i = 0; i < grades.length; i++) {
