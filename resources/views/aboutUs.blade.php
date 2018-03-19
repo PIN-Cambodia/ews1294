@@ -12,20 +12,22 @@
         <div class="panel panel-default">
           <!-- <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div> -->
             <br />
-           <div style="height:67%; overflow-y: scroll; overflow-x: hidden;">
-           <div><center><img src="/about_EWS.jpg" style="height:0%; width:90%"></centerb></div>
+           <div style="overflow-x: hidden; overflow-y:auto;
+   height:auto;
+   max-height:500px;">
+           <div><center><img src="/about_EWS.jpg" style="height:50%; width:100%"></centerb></div>
            <br>
 
             <div class="row"> 
                 <div class="col-md-1 col-lg-1"></div>
                 <div class="col-md-10 col-lg-10">
-                <p style="font-family: Lato; font-size: 17px;" >
+                <p style="font-family: Lato; font-size: 17px; text-align: justify;" >
                     {{ trans('pages.content1')}}
                 </p> 
-                <p style=" font-family: Lato; font-size: 17px;" >
+                <p style=" font-family: Lato; font-size: 17px; text-align: justify;" >
                     {{ trans('pages.content2')}}
                 </p> 
-                <p style="font-family: Lato; font-size: 17px;" >
+                <p style="font-family: Lato; font-size: 17px; text-align: justify;" >
                     {{ trans('pages.content3')}}
                 </p> 
                 
