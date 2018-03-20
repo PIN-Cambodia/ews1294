@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <section>
+
   <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
       <ol class="breadcrumb">
@@ -9,12 +10,11 @@
     </div><!--/.row-->
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
-        <div class="panel panel-default">
-          <!-- <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div> -->
-            <br />
-           <div style="overflow-x: hidden; overflow-y:auto;
-   height:auto;
-   max-height:500px;">
+        <div class="panel panel-default" >
+         <!--  <div class="panel-heading" ><center><b>{{ trans('menus.about_us') }} </b></center> </div> -->
+         <!-- <div style="height: 66px;"></div> -->
+        <!--     <br /> -->
+           <div id="div" style="overflow-x: hidden; overflow-y:auto;height:auto;max-height:500px;">
            <div><center><img src="/about_EWS.jpg" style="height:50%; width:100%"></centerb></div>
            <br>
 
@@ -41,6 +41,19 @@
       </div>
     </div><!--/.row-->
   </div>  <!--/.main-->
+<script>
+  $(document).ready(function() {
+    fitIframe();
+    $(window).resize(function() {
+      fitIframe();
+    });
+    
+  });
+  function fitIframe() {
+    /* $('#sidebar-collapse').height()-90 : means take height of sidebar-collapse - the height of header and footer  */
+    $('#div').css("min-height", $('#sidebar-collapse').height()-(50+$('#footer').height()));
+  }
+</script>
 </section>
 
 @endsection
