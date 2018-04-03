@@ -4,7 +4,7 @@
    
    </head>
    <body style="height: 100%;width: 100%; margin: 0">
-       <div id="container" style="height: 100%;width: 65%" ></div>
+       <div id="container" style="height: 100%;width:100%" ></div>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -77,9 +77,11 @@ var graphTitle = sensor_description;
 option = {
     tooltip: {
         trigger: 'axis',
-        position: function (pt) {
-            return [pt[0], '10%'];
-        }
+         position: function (pos, params, el, elRect, size) {
+                var obj = {top: 10};
+                obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                return obj;
+            }
     },
     title: {
         left: 'center',
