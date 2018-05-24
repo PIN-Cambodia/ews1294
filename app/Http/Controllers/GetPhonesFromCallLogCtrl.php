@@ -10,6 +10,8 @@ use Redirect;
 use Illuminate\Support\Facades\Input;
 use Response;
 use Session;
+use Illuminate\Support\Facades\Log;
+
 
 class GetPhonesFromCallLogCtrl extends Controller {
 
@@ -38,6 +40,7 @@ class GetPhonesFromCallLogCtrl extends Controller {
 	{
         $jsonStr = Input::get('values');
         $cateDecode = json_decode($jsonStr);
+        Log::info($jsonStr);
         foreach($cateDecode as $i => $v)
         {
             $findCommune = $v->category->base;
