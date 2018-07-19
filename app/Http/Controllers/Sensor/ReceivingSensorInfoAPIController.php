@@ -55,6 +55,14 @@ class ReceivingSensorInfoAPIController extends Controller
             $sensor_log_tbl->charging = $parsing_json_data['charging'];
             $sensor_log_tbl->voltage = $parsing_json_data['voltage'];
             $sensor_log_tbl->timestamp = $parsing_json_data['timestamp'];
+
+            // correct the sensor time in case what we got doesnt make sense
+            if(strtotime($sensor_log_tbl->timestamp) == false) {
+              date_default_timezone_set('Asia/Bangkok');
+              $sensor_log_tbl->timestamp = date('Y-m-d\TH:m:0.000\Z');
+              $this->logger->addWarning('Date submitted by sensor is not valid. Replacing with ' . $sensor_log_tbl->timestamp)
+            }
+
             $sensor_log_tbl->save();
             if(!empty($sensor_log_tbl->id)) {
                 // return an inserted record in DB
@@ -176,7 +184,7 @@ class ReceivingSensorInfoAPIController extends Controller
         if($alert_level == "Warning")
         {
             $content = "<p>The automated water level gauge located in <font color='#666600'> " . $commune_list ." <b>commune</b>, "
-                        . $distric_val . " <b>district</b>, " . $prov_val . " <b>province</b> 
+                        . $distric_val . " <b>district</b>, " . $prov_val . " <b>province</b>
                          </font> has detected a potentially dangerous water level reading. As a result a WARNING message has been sent via the EWS1294 mobile phone messaging system to registered users in the affected areas.</p>
                          <p>This mobile phone message directs recipients to take the necessary precautionary measures to respond to this water level alert.</p>
                          <p>As a member of the Early Warning System team, we ask that you carry out any necessary actions to respond to these elevated water level readings as well. You cooperation is greatly appreciated.</p>
@@ -190,8 +198,8 @@ class ReceivingSensorInfoAPIController extends Controller
         elseif($alert_level == "Emergency")
         {
             $content = "<p>The automated water level gauge located in  <font color='red'> " . $commune_list ." <b>commune</b>, "
-                        . $distric_val . " <b>district</b>, " . $prov_val . " <b>province</b> 
-                         </font> has detected a potentially dangerous water level reading. As a result an EMERGENCY message has been sent via the EWS1294 mobile phone messaging system to registered users in the affected areas.</p> 
+                        . $distric_val . " <b>district</b>, " . $prov_val . " <b>province</b>
+                         </font> has detected a potentially dangerous water level reading. As a result an EMERGENCY message has been sent via the EWS1294 mobile phone messaging system to registered users in the affected areas.</p>
                          <p>This mobile phone message directs recipients to take the necessary precautionary measures to respond to this water level alert.
                          </p>
                          <p>As a member of the Early Warning System team, we ask that you carry out any necessary actions to respond to these elevated water level readings as well. You cooperation is greatly appreciated.
