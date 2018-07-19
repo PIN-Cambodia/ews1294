@@ -57,9 +57,9 @@ class ReceivingSensorInfoAPIController extends Controller
             $sensor_log_tbl->timestamp = $parsing_json_data['timestamp'];
 
             // correct the sensor time in case what we got doesnt make sense
-            if(strtotime($sensor_log_tbl->timestamp) == false) {
+            if(strtotime(str_replace(':0.000Z', '', $sensor_log_tbl->timestamp)) == false) {
               date_default_timezone_set('Asia/Bangkok');
-              $sensor_log_tbl->timestamp = date('Y-m-d\TH:m:0.000\Z');
+              $sensor_log_tbl->timestamp = date('Y-m-d\TH:i:0.000\Z');
               $this->logger->addWarning('Date submitted by sensor is not valid. Replacing with ' . $sensor_log_tbl->timestamp);
             }
 
