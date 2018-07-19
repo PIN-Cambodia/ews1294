@@ -33,10 +33,45 @@ class ReceivingSensorInfoAPIController extends Controller
         if (!empty($return_inserted_val))
         {
             // write to log
-            $this->logger->addInfo(nl2br("Successfully inserted data: " . Input::get('data')));
+            $this->logger->addInfo("Successfully inserted data: " . Input::get('data'));
             echo "Successfully inserted data: " . Input::get('data');
             /** Check for automatically call or send E-mail to relevant people **/
-            $this->checkForAutomaticCallOrEmailAction($return_inserted_val);
+            // Note that this is not working as expected, so it's been disabled from Jul 19th 2018 onwards
+            //$this->checkForAutomaticCallOrEmailAction($return_inserted_val);
+
+            // Send this data to the new EWS system through the lambda endpoint
+            $data = json_decode(Input::get('data'), true);
+            $curl = curl_init();
+
+            // Our two first generation sensors are not correctly named, so let's give them proper IDs
+            if($data['sensorId'] == '1020301') { //Kampot
+              $data['sensorId'] = '0707030201';
+            } elseif ($data['sensorId'] == '15040701') { //Pursat
+              $data['sensorId'] = '1504020301';
+            }
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://api.iot.ews1294.info/v1/data-point",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "POST",
+              CURLOPT_POSTFIELDS => "{\"apiKey\": \"wfYGuHWTJ4XscdNVgogeoQtp\", \"source\": \"bridge-".$data['sensorId']."\", \"payload\": ".Input::get('data')."}",
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+              $this->logger->addWarning("Could not send data to new system: " . $err);
+            }
+        }
+        else {
+
         }
     }
     /**
