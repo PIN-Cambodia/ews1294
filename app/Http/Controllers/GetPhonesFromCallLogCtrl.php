@@ -26,6 +26,9 @@ class GetPhonesFromCallLogCtrl extends Controller {
 		foreach ($request->request as $key => $item) {
 			$communes_selected = $communes_selected . "," . $item;
 		}
+
+
+
 		$phoneNumbers = \DB::table('targetphones')->select('phone')->whereIn('commune_code',explode(",",$communes_selected))->count();
 
 		Session::flash('message',$phoneNumbers);
@@ -38,6 +41,8 @@ class GetPhonesFromCallLogCtrl extends Controller {
      */
 	public function registerNewContact()
 	{
+        // Note that due to some issues with the webhook in Push, we've disabled this code
+        return "OK";
         $jsonStr = Input::get('values');
         $cateDecode = json_decode($jsonStr);
         Log::info($jsonStr);
